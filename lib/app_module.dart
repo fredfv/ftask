@@ -16,5 +16,7 @@ class AppModule extends Module{
     ChildRoute('/', child: (context, args) => const SplashPage()),
     ModuleRoute('/auth', module: AuthModule()),
     ModuleRoute('/task', module: TaskModule(), guards: [AuthGuard()]),
+    //WildcardRoute(child: child)
+    //RedirectRoute('/redir', to: '/auth/')
   ];
 }
