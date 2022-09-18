@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 3)).then((_) => {
-      Modular.to.navigate('/auth/')
+      Modular.to.navigate('/task/')
     });
   }
 
