@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:task/models/request_method.dart';
-import 'package:task/services/request_handler.dart';
+
+import '../models/request_method.dart';
+import 'request_handler.dart';
 
 class RequestService {
   final _requestHandler = RequestHandler();

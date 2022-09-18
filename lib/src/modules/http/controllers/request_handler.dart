@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:task/helpers/logger.dart';
-import 'package:task/infra/app_config.dart';
-import 'package:task/models/request_method.dart';
+import '../../../../core/logger.dart';
+import '../models/request_config.dart';
+import '../models/request_method.dart';
 
 class RequestHandler {
   Dio? _dio;
@@ -25,8 +25,8 @@ class RequestHandler {
     _dio = Dio(BaseOptions(
         baseUrl: baseUrl,
         headers: header,
-        connectTimeout: connectTimeout ?? AppConfig.connectTimeout,
-        receiveTimeout: receiveTimeout ?? AppConfig.receiveTimeout));
+        connectTimeout: connectTimeout ?? RequestConfig.connectTimeout,
+        receiveTimeout: receiveTimeout ?? RequestConfig.receiveTimeout));
   }
 
   void configureInterceptors() {
