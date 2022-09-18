@@ -33,7 +33,7 @@ class TaskPage extends StatelessWidget {
                       ListTile(title: const Text('Yellow'),
                       selected: Modular.to.path.endsWith('/yellow'),
                         onTap: (){
-                          Modular.to.navigate('./yellow');
+                          Modular.to.pushNamed('./yellow', forRoot: true);
                         },
                       )
                     ],
