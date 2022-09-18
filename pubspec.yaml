@@ -42,6 +42,8 @@ dependencies:
   path_provider: ^2.0.11
   jwt_decoder: ^2.0.1
   flutter_modular: ^5.0.3
+  auth_module:
+    path: modules/auth_module
 
 dev_dependencies:
   flutter_test:
