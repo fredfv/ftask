@@ -1,3 +1,5 @@
+import 'package:auth_module/src/views/widgets/login_button.dart';
+import 'package:auth_module/src/views/widgets/login_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,9 +15,10 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-//class _LoginPageState extends ModularState<LoginPage, LoginBloc>{
 class _LoginPageState extends State<LoginPage> {
   final bloc = Modular.get<LoginBloc>();
+  final TextEditingController loginController = TextEditingController();
+  final TextEditingController secretController = TextEditingController();
 
   @override
   void initState() {
@@ -23,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     bloc.stream.listen((state) async {
       if (state is LoginSucces) {
         await Future.delayed(const Duration(milliseconds: 500));
-        Modular.to.navigate('/task/red');
+        Modular.to.navigate('/task/');
       }
 
       if (state is LoginFailure) {
@@ -38,9 +41,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home page'),
-      ),
       body: BlocBuilder<LoginBloc, LoginState>(
           bloc: bloc,
           builder: (context, state) {
@@ -54,12 +54,41 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Entrou'),
               );
             }
-            return Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  bloc.add(LoginWithEmail(secret: '123', email: 'adm'));
-                },
-                child: const Text('Entrar'),
+            return Container(
+              color: Colors.white70,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        LoginEntry(
+                          controller: loginController,
+                          obscureText: false,
+                          icon: const Icon(Icons.alternate_email),
+                          hintText: 'Login com email',
+                          labeltext: 'Login',
+                        ),
+                        LoginEntry(
+                          controller: secretController,
+                          obscureText: true,
+                          icon: const Icon(Icons.password),
+                          hintText: 'Senha',
+                          labeltext: 'Senha',
+                        ),
+                        LoginButton(onPressed: () {
+                          bloc.add(LoginWithEmail(
+                              email: loginController.text,
+                              secret: secretController.text));
+                        })
+                      ],
+                    ),
+                  ),
+                ],
               ),
             );
           }),

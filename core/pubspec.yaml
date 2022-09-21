@@ -1,4 +1,4 @@
-name: auth_module
+name: core
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -11,19 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: ^5.0.3
-  flutter_bloc: ^8.1.1
-  shared_preferences: ^2.0.15
-  local_storage_hive:
-    path: ../local_storage_hive
-  core:
-    path: ../../core
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

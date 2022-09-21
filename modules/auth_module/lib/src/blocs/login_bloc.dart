@@ -1,13 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../repositories/login_repository.dart';
+import '../repositories/login_repository_impl.dart';
 import 'events/login_event.dart';
 import 'states/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginRepository loginRepository;
+  final LoginRepositoryImpl loginRepository;
   final SharedPreferences sharedPreferences;
+
 
   LoginBloc(this.loginRepository, this.sharedPreferences) : super(LoginIdle()) {
     on<LoginWithEmail>(loginEmail);

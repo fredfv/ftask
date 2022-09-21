@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/modules/task/controllers/task_controller.dart';
 
 class TaskPage extends StatelessWidget {
-  const TaskPage({Key? key}) : super(key: key);
+  TaskPage({Key? key}) : super(key: key);
+  final TaskController controller = Modular.get<TaskController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,13 @@ class TaskPage extends StatelessWidget {
                       title: const Text('Red'),
                       selected: Modular.to.path.endsWith('/red'),
                       onTap: (){
+                        controller.get();
                         Modular.to.navigate('./red');
                       },),
                       ListTile(title: const Text('Blue'),
                       selected: Modular.to.path.endsWith('/blue'),
                       onTap: (){
+                        controller.set();
                         Modular.to.navigate('./blue');
                       },),
                       ListTile(title: const Text('Yellow'),

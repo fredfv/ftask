@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  core:
+    dependency: "direct main"
+    description:
+      path: core
+      relative: true
+    source: path
+    version: "0.0.1"
   crypto:
     dependency: transitive
     description:
@@ -143,7 +150,7 @@ packages:
     source: hosted
     version: "2.2.3"
   hive_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: hive_flutter
       url: "https://pub.dartlang.org"
@@ -177,6 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  local_storage_hive:
+    dependency: "direct main"
+    description:
+      path: "modules/local_storage_hive"
+      relative: true
+    source: path
+    version: "0.0.1"
   logger:
     dependency: "direct main"
     description:
@@ -234,7 +248,7 @@ packages:
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider
       url: "https://pub.dartlang.org"

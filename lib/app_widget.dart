@@ -6,13 +6,14 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp.router(
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
+      debugShowCheckedModeBanner: false,
+
     );
   }
 }

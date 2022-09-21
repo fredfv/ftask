@@ -38,12 +38,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   logger: ^1.1.0
-  hive_flutter: ^1.1.0
-  path_provider: ^2.0.11
   jwt_decoder: ^2.0.1
   flutter_modular: ^5.0.3
   auth_module:
     path: modules/auth_module
+  core:
+    path: core
+  local_storage_hive:
+    path: modules/local_storage_hive
+
 
 dev_dependencies:
   flutter_test:
