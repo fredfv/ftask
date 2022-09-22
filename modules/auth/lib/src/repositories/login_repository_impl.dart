@@ -12,7 +12,7 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements UserRepository {
   @override
   Future login(String email, String secret) async {
     await init('path');
-    try{
+    try {
       var response = await httpService.request(
           baseUrl: 'http://192.168.15.3:5001',
           endPoint: '/Person/auth',
@@ -20,8 +20,22 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements UserRepository {
           params: {'password': secret, 'username': email},
           receiveTimeout: 50000,
           connectTimeout: 100000);
-      print(response);
-    }catch(e){
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future createAccount(String login, String secret, String name) async {
+    try {
+      await httpService.request(
+          baseUrl: 'http://192.168.15.3:5001',
+          endPoint: '/Person/createaccount',
+          method: HttpRequestMethods.post,
+          params: {"userName": login, "password": secret, "name": name},
+          receiveTimeout: 50000,
+          connectTimeout: 100000);
+    } catch (e) {
       throw Exception(e);
     }
   }

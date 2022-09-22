@@ -2,6 +2,7 @@ import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../blocs/events/login_event.dart';
@@ -19,12 +20,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final bloc = Modular.get<LoginBloc>();
-  final TextEditingController loginController = TextEditingController();
-  final TextEditingController secretController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+
     bloc.stream.listen((state) async {
       if (state is LoginSucces) {
         await Future.delayed(const Duration(milliseconds: 500));
@@ -35,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
         const snack = SnackBar(
           content: Text('Error login'),
         );
-        ScaffoldMessenger.of(context).showSnackBar(snack);
+
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(snack);
       }
     });
   }
@@ -43,60 +44,85 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: ColorRepository.primary,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  LoginEntry(
-                    controller: loginController,
-                    obscureText: false,
-                    icon: Icons.alternate_email,
-                    hintText: 'Login com email',
-                    labeltext: 'Login',
-                  ),
-                  LoginEntry(
-                    controller: secretController,
-                    obscureText: true,
-                    icon: Icons.password,
-                    hintText: 'Senha',
-                    labeltext: 'Password',
-                  ),
-                  BlocBuilder<LoginBloc, LoginState>(
-                      bloc: bloc,
-                      builder: (context, state) {
-                        if (state is LoginLoading) {
-                          return Center(
-                            child: LoadingAnimationWidget.staggeredDotsWave(
-                                color: ColorRepository.secondary,
-                                size: MediaQuery.of(context).size.width / MediaQuery.of(context).size.height * 70,
-                            ),
-                          );
-                        }
-                        if (state is LoginSucces) {
-                          return const Center(
-                            child: Text('Entrou'),
-                          );
-                        }
-
-                        return LoginButton(onPressed: () {
-                          bloc.add(LoginWithEmail(
-                              email: loginController.text,
-                              secret: secretController.text));
-                        });
-                      }
-                  )
-                ],
+      backgroundColor: ColorRepository.primary,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              MediaQuery.of(context).size.height * 0.07,
+              MediaQuery.of(context).size.width * 0.05,
+              MediaQuery.of(context).size.height * 0.05),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                'assets/ttlogo.svg',
+                color: ColorRepository.secondary,
+                width: MediaQuery.of(context).size.width * 0.7,
               ),
-            ),
-          ],
+              LoginEntry(
+                controller: bloc.loginController,
+                onFieldSubmitted: bloc.loginSubmitted,
+                obscureText: false,
+                icon: Icons.alternate_email,
+                hintText: 'Login com email',
+                labeltext: 'Login',
+              ),
+              LoginEntry(
+                focusNode: bloc.secretFocus,
+                controller: bloc.secretController,
+                onFieldSubmitted: bloc.secretSubmitted,
+                obscureText: true,
+                icon: Icons.password,
+                hintText: 'Senha',
+                labeltext: 'Password',
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.03),
+                child: BlocBuilder<LoginBloc, LoginState>(
+                    bloc: bloc,
+                    builder: (context, state) {
+                      if (state is LoginLoading) {
+                        return Center(
+                          child: LoadingAnimationWidget.dotsTriangle(
+                            color: ColorRepository.secondary,
+                            size: MediaQuery.of(context).size.width /
+                                MediaQuery.of(context).size.height *
+                                70,
+                          ),
+                        );
+                      }
+                      if (state is LoginSucces) {
+                        return const Center(
+                          child: Text('Entrou'),
+                        );
+                      }
+                      return LoginButton(onPressed: () {
+                        bloc.add(LoginWithEmail(
+                            email: bloc.loginController.text,
+                            secret: bloc.secretController.text));
+                      });
+                    }),
+              ),
+              InkWell(
+                onTap: () async {
+                  await Modular.to.pushNamed('./createaccount');
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.07),
+                  child: const Text(
+                    'create account',
+                    style: TextStyle(
+                        color: ColorRepository.secondaryDark,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

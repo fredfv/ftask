@@ -1,8 +1,8 @@
 import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key, required this.onPressed}) : super(key: key);
+class CreateAccountButton extends StatelessWidget {
+  const CreateAccountButton({Key? key, required this.onPressed}) : super(key: key);
 
   final VoidCallback onPressed;
 
@@ -15,15 +15,15 @@ class LoginButton extends StatelessWidget {
           onPressed: onPressed,
           style: ButtonStyle(
               overlayColor: MaterialStateColor.resolveWith(
-                  (states) => ColorRepository.shadow),
+                      (states) => ColorRepository.shadow),
               backgroundColor: MaterialStateColor.resolveWith(
-                  (states) => ColorRepository.primary),
+                      (states) => ColorRepository.primary),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                       side: const BorderSide(color: ColorRepository.shadow)))),
           child: Text(
-            'Login',
+            'Create',
             style: TextStyle(
                 color: ColorRepository.secondary,
                 fontSize: MediaQuery.of(context).size.width /

@@ -8,6 +8,11 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+          fontFamily: 'Sansation',
+          textSelectionTheme: const TextSelectionThemeData(
+              selectionColor: ColorRepository.selectedText,
+              selectionHandleColor: ColorRepository.selectedHandler)),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,
