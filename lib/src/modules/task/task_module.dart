@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/modules/task/controllers/task_controller.dart';
 import 'package:task/src/modules/task/repositories/task_repository_impl.dart';

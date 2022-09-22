@@ -1,3 +1,3 @@
 library local_storage_hive;
 
-export 'provider/hive.dart';
+export 'providers/hive.dart';

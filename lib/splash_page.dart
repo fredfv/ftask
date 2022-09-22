@@ -1,3 +1,4 @@
+import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/app_module.dart';
@@ -23,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white10,
+      color: ColorRepository.primary,
       child: const Center(
         child: CircularProgressIndicator(
         ),

@@ -5,11 +5,13 @@ class UserEntity extends EntityBase {
   String login;
   String secret;
   String name;
+  String token;
 
   UserEntity(
       {required this.login,
       required this.secret,
       required this.name,
+      required this.token,
       required String id,
       required DateTime created})
       : super(id: id, created: created);
@@ -20,6 +22,7 @@ class UserEntity extends EntityBase {
       'login': login,
       'secret': secret,
       'name': name,
+      'token': token,
       'id': id,
       'created': created
     };
@@ -32,6 +35,7 @@ class UserEntity extends EntityBase {
       login: map['login'] as String,
       secret: map['secret'] as String,
       name: map['name'] as String,
+      token: map['token'] as String,
     );
   }
 

@@ -1,5 +1,4 @@
-import 'package:core/domain/task_entity.dart';
-
+import '../task_entity.dart';
 import 'repository.dart';
 
 abstract class TaskRepository extends Repository<TaskEntity> {

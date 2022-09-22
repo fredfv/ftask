@@ -1,5 +1,5 @@
-name: local_storage_hive
-description: A module using hive as local storage.
+name: http_dio
+description: A http module using Dio.
 version: 0.0.1
 homepage:
 publish_to: 'none'
@@ -11,10 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  hive_flutter: ^1.1.0
-  path_provider: ^2.0.11
+  logger: ^1.1.0
+  dio: ^4.0.6
+  jwt_decoder: ^2.0.1
   core:
-    path : ../../core
+    path: ../../core
 
 dev_dependencies:
   flutter_test:

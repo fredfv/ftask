@@ -1,4 +1,4 @@
-import 'package:core/domain/entity_base.dart';
+import '../entity_base.dart';
 
 abstract class Repository<T extends EntityBase> {
   Future init(String path);

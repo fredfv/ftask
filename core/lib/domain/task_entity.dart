@@ -1,5 +1,5 @@
-import 'package:core/domain/entity_base.dart';
-import 'package:core/domain/map/mapper.dart';
+import 'entity_base.dart';
+import 'map/mapper.dart';
 
 class TaskEntity extends EntityBase {
   String description;

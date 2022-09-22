@@ -1,6 +1,6 @@
-import 'package:core/core.dart';
-import 'package:core/domain/user_entity.dart';
+import '../user_entity.dart';
+import 'repository.dart';
 
 abstract class UserRepository extends Repository<UserEntity>{
-  Future<bool> login(String login, String secret);
+  Future login(String login, String secret);
 }
