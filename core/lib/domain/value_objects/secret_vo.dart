@@ -10,7 +10,6 @@ class SecretVO implements ValueObject {
     if (_value.isEmpty) {
       return 'fill the field to submit';
     }
-
     return null;
   }
 
@@ -18,7 +17,6 @@ class SecretVO implements ValueObject {
     if(_value != passwordToMatch){
       return 'passwords do not match';
     }
-
     return null;
   }
 

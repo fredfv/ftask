@@ -28,7 +28,7 @@ class LoginEntry extends StatelessWidget {
           vertical: MediaQuery.of(context).size.height * 0.022),
       child: TextFormField(
         scrollPadding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).size.height * 0.3),
+            bottom: MediaQuery.of(context).size.height * 0.4),
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
         style: const TextStyle(

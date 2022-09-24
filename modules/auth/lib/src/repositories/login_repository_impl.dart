@@ -1,3 +1,4 @@
+import 'package:core/domain/application/create_account_dto.dart';
 import 'package:core/domain/application/http_request_methods.dart';
 import 'package:core/domain/repositories/user_repository.dart';
 import 'package:core/domain/services/http_service.dart';
@@ -26,17 +27,13 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements UserRepository {
   }
 
   @override
-  Future createAccount(String login, String secret, String name) async {
-    try {
-      await httpService.request(
-          baseUrl: 'http://192.168.15.3:5001',
-          endPoint: '/Person/createaccount',
-          method: HttpRequestMethods.post,
-          params: {"userName": login, "password": secret, "name": name},
-          receiveTimeout: 50000,
-          connectTimeout: 100000);
-    } catch (e) {
-      throw Exception(e);
-    }
+  Future createAccount(CreateAccountDTO newAccount) async {
+    return httpService.request(
+        baseUrl: 'http://192.168.15.3:5001',
+        endPoint: '/Person/createaccount',
+        method: HttpRequestMethods.post,
+        params: newAccount.toJson(),
+        receiveTimeout: 50000,
+        connectTimeout: 150000);
   }
 }

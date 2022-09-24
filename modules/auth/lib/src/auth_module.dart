@@ -9,15 +9,15 @@ import 'views/login_page.dart';
 class AuthModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => HttpServiceImpl()),
-        Bind.factory((i) => LoginRepositoryImpl(i())),
+        Bind.singleton((i) => HttpServiceImpl()),
+        Bind.singleton((i) => LoginRepositoryImpl(i())),
         Bind.singleton((i) => LoginBloc(i())),
-        Bind.singleton((i) => CreateAccountController(i()))
+        Bind.factory((i) => CreateAccountController(i()))
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const LoginPage(),),
-        ChildRoute('/createaccount', child: (context, args) => const CreateAccountPage()),
+        ChildRoute('/createaccount', child: (context, args) => CreateAccountPage()),
   ];
 }

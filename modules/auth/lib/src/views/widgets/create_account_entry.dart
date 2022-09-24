@@ -10,8 +10,8 @@ class CreateAccountEntry extends StatelessWidget {
   // final IconData icon;
   // final String hintText;
   // final String labeltext;
-  // final Function(String) onFieldSubmitted;
-  // final FocusNode? focusNode;
+  final Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   final String label;
   final String value;
@@ -31,8 +31,8 @@ class CreateAccountEntry extends StatelessWidget {
     // required this.icon,
     // required this.hintText,
     // required this.labeltext,
-    // required this.onFieldSubmitted,
-    // this.focusNode,
+    this.onFieldSubmitted,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -43,6 +43,8 @@ class CreateAccountEntry extends StatelessWidget {
         horizontal: MediaQuery.of(context).size.width * 0.01,
       ),
       child: TextFormField(
+        onFieldSubmitted: onFieldSubmitted,
+        focusNode: focusNode,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         inputFormatters: inputFormatters,
         initialValue: value.toString(),

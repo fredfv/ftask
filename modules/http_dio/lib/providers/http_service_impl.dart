@@ -33,7 +33,7 @@ class HttpServiceImpl implements HttpService {
         }
       }
     } on Exception catch (error) {
-      return error;
+      return Exception(error);
     } catch (error) {
       return Exception('Something really unknown');
     }

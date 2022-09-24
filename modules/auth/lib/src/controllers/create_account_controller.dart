@@ -1,36 +1,65 @@
+import 'package:auth/src/models/create_account_state.dart';
 import 'package:core/domain/application/create_account_dto.dart';
-import 'package:core/domain/value_objects/secret_vo.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http_dio/helpers/logger.dart';
 import '../repositories/login_repository_impl.dart';
 
-enum CreateAccountState {
-  error,
-  sucess,
-  idle,
-  loading,
-}
-
-class CreateAccountController extends ChangeNotifier {
+class CreateAccountController extends ValueNotifier<CreateAccountState> {
   final LoginRepositoryImpl loginRepository;
+  final newAccount = CreateAccountDTO.empty();
+  final formKey = GlobalKey<FormState>();
 
-  CreateAccountController(this.loginRepository);
+  FocusNode loginFocus = FocusNode();
+  FocusNode secretFocus = FocusNode();
+  FocusNode secretConfirmFocus = FocusNode();
 
-  var state = CreateAccountState.idle;
+  FormState get form => formKey.currentState!;
 
-  Future<void> createNewAccountExecute(CreateAccountDTO newUser) async {
-    state = CreateAccountState.loading;
-    try {
-      await loginRepository.createAccount(
-        newUser.login.toString(),
-        newUser.secret.toString(),
-        newUser.name.toString(),
-      );
-      state = CreateAccountState.sucess;
-    } catch (e) {
-      state = CreateAccountState.error;
+  CreateAccountController(this.loginRepository) : super(Idle());
+
+  void setLoginFocus(value) {
+    loginFocus.requestFocus();
+  }
+
+  void setSecretFocus(value) {
+    secretFocus.requestFocus();
+  }
+
+  void setSecretConfirmFocus(value) {
+    secretConfirmFocus.requestFocus();
+  }
+
+  createNewAccountExecute() {
+    value = Loading();
+    loginRepository.createAccount(newAccount).then((v) {
+      if (v is Exception) {
+        value = Error(v.toString());
+      } else {
+        Modular.to.pop();
+      }
+    }).catchError((e) {
+      value = Error(e);
+    });
+  }
+
+  void subimitExecute(BuildContext context) {
+    final valid = form.validate();
+    if (valid) {
+      createNewAccountExecute();
+    } else {
+      showSnackError(context, 'invalid fields', Colors.red);
     }
+  }
 
-    notifyListeners();
+  void showSnackError(BuildContext context, String msg, Color cor) {
+    var snackBar = SnackBar(
+      content: Text(msg),
+      backgroundColor: Colors.red,
+    );
+    Future.delayed(const Duration(milliseconds: 150), () {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 }

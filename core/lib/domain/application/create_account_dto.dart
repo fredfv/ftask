@@ -6,6 +6,7 @@ class CreateAccountDTO {
   NameVO _name;
   LoginVO _login;
   SecretVO _secret;
+  SecretVO _secretConfirm;
 
   NameVO get name => _name;
 
@@ -19,27 +20,35 @@ class CreateAccountDTO {
 
   void setSecret(String? value) => _secret = SecretVO(value ?? '');
 
+  SecretVO get secretConfirm => _secretConfirm;
+
+  void setSecretConfirm(String? value) =>
+      _secretConfirm = SecretVO(value ?? '');
+
   CreateAccountDTO({
     required String name,
     required String login,
     required String secret,
+    required String secretConfirm,
   })  : _name = NameVO(name),
         _login = LoginVO(login),
-        _secret = SecretVO(secret);
+        _secret = SecretVO(secret),
+        _secretConfirm = SecretVO(secretConfirm);
 
   factory CreateAccountDTO.empty() {
     return CreateAccountDTO(
       name: '',
       login: '',
       secret: '',
+      secretConfirm: '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'login': login,
-      'secret': secret,
+      'userName': login.toString(),
+      'password': secret.toString(),
+      'name': name.toString()
     };
   }
 
@@ -48,6 +57,7 @@ class CreateAccountDTO {
       name: data['name'],
       login: data['login'],
       secret: data['secret'],
+      secretConfirm: data['secretConfirm'],
     );
   }
 }

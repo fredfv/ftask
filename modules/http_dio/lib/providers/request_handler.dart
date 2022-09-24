@@ -100,7 +100,7 @@ class RequestHandler {
       throw Exception("${e.message}Bad response format");
     } on DioError catch (e) {
       fLog.e(e);
-      throw Exception(e.message);
+      throw Exception(e.response);
     } catch (e) {
       fLog.e(e);
       throw Exception("Something wen't wrong");
