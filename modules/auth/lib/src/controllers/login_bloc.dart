@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../repositories/login_repository_impl.dart';
 import 'events/login_event.dart';
-import 'states/login_state.dart';
+import '../models/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepositoryImpl loginRepository;

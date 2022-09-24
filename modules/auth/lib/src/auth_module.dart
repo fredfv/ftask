@@ -1,7 +1,7 @@
 import 'package:auth/src/controllers/create_account_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http_dio/providers/http_service_impl.dart';
-import 'blocs/login_bloc.dart';
+import 'controllers/login_bloc.dart';
 import 'repositories/login_repository_impl.dart';
 import 'views/create_account_page.dart';
 import 'views/login_page.dart';

@@ -8,8 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../blocs/events/login_event.dart';
-import '../blocs/login_bloc.dart';
-import '../blocs/states/login_state.dart';
+import '../controllers/login_bloc.dart';
+import '../models/login_state.dart';
 import 'widgets/login_button.dart';
 import 'widgets/login_entry.dart';
 

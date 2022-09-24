@@ -1,5 +1,5 @@
 import 'package:auth/src/models/create_account_state.dart';
-import 'package:core/domain/application/create_account_dto.dart';
+import 'package:core/domain/application/create_account_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,7 +8,7 @@ import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CreateAccountState> {
   final LoginRepositoryImpl loginRepository;
-  final newAccount = CreateAccountDTO.empty();
+  final newAccount = CreateAccountRequest.empty();
   final formKey = GlobalKey<FormState>();
 
   FocusNode loginFocus = FocusNode();

@@ -2,7 +2,7 @@ import 'package:core/domain/value_objects/login_vo.dart';
 import 'package:core/domain/value_objects/name_vo.dart';
 import 'package:core/domain/value_objects/secret_vo.dart';
 
-class CreateAccountDTO {
+class CreateAccountRequest {
   NameVO _name;
   LoginVO _login;
   SecretVO _secret;
@@ -25,7 +25,7 @@ class CreateAccountDTO {
   void setSecretConfirm(String? value) =>
       _secretConfirm = SecretVO(value ?? '');
 
-  CreateAccountDTO({
+  CreateAccountRequest({
     required String name,
     required String login,
     required String secret,
@@ -35,8 +35,8 @@ class CreateAccountDTO {
         _secret = SecretVO(secret),
         _secretConfirm = SecretVO(secretConfirm);
 
-  factory CreateAccountDTO.empty() {
-    return CreateAccountDTO(
+  factory CreateAccountRequest.empty() {
+    return CreateAccountRequest(
       name: '',
       login: '',
       secret: '',
@@ -52,8 +52,8 @@ class CreateAccountDTO {
     };
   }
 
-  static CreateAccountDTO fromJson(dynamic data) {
-    return CreateAccountDTO(
+  static CreateAccountRequest fromJson(dynamic data) {
+    return CreateAccountRequest(
       name: data['name'],
       login: data['login'],
       secret: data['secret'],
