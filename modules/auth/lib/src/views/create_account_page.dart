@@ -74,10 +74,10 @@ class CreateAccountPage extends StatelessWidget {
             ValueListenableBuilder(
               valueListenable: controller,
               builder: (_, state, child) {
-                if (state is Error) {
+                if (state is CreateAccountError) {
                   controller.showSnackError(context, state.message, Colors.red);
-                  controller.value = Idle();
-                } else if (state is Loading) {
+                  controller.value = CreateAccountIdle();
+                } else if (state is CreateAccountLoading) {
                   return Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: MediaQuery.of(context).size.width * 0.07,
@@ -87,7 +87,7 @@ class CreateAccountPage extends StatelessWidget {
                       color: ColorRepository.secondary,
                       size: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
-                          100,
+                          70,
                     ),
                   );
                 }

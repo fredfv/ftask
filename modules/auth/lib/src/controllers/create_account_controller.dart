@@ -17,7 +17,7 @@ class CreateAccountController extends ValueNotifier<CreateAccountState> {
 
   FormState get form => formKey.currentState!;
 
-  CreateAccountController(this.loginRepository) : super(Idle());
+  CreateAccountController(this.loginRepository) : super(CreateAccountIdle());
 
   void setLoginFocus(value) {
     loginFocus.requestFocus();
@@ -32,15 +32,15 @@ class CreateAccountController extends ValueNotifier<CreateAccountState> {
   }
 
   createNewAccountExecute() {
-    value = Loading();
+    value = CreateAccountLoading();
     loginRepository.createAccount(newAccount).then((v) {
       if (v is Exception) {
-        value = Error(v.toString());
+        value = CreateAccountError(v.toString());
       } else {
         Modular.to.pop();
       }
     }).catchError((e) {
-      value = Error(e);
+      value = CreateAccountError(e);
     });
   }
 

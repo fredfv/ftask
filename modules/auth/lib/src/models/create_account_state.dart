@@ -1,11 +1,11 @@
 abstract class CreateAccountState {}
 
-class Idle extends CreateAccountState {}
+class CreateAccountIdle extends CreateAccountState {}
 
-class Loading extends CreateAccountState {}
+class CreateAccountLoading extends CreateAccountState {}
 
-class Error extends CreateAccountState {
+class CreateAccountError extends CreateAccountState {
   final String message;
 
-  Error(this.message);
+  CreateAccountError(this.message);
 }
