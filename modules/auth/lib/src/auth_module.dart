@@ -1,5 +1,6 @@
 import 'package:auth/src/controllers/create_account_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'controllers/login_controller.dart';
 import 'repositories/login_repository_impl.dart';
 import 'views/create_account_page.dart';

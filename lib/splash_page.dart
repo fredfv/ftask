@@ -1,9 +1,7 @@
 import 'package:core/infra/color_outlet.dart';
-import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:local_storage_hive/providers/hive.dart';
 import 'package:task/app_module.dart';
 
 class SplashPage extends StatefulWidget {

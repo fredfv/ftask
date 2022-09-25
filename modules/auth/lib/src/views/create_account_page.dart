@@ -3,11 +3,13 @@ import 'package:auth/src/views/widgets/submit_account_button.dart';
 import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../models/create_account_state.dart';
 import 'widgets/create_account_entry.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
+
   const CreateAccountPage({Key? key, required this.controller})
       : super(key: key);
 

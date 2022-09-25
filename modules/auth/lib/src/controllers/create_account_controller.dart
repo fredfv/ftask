@@ -1,11 +1,11 @@
 import 'package:auth/src/models/create_account_state.dart';
 import 'package:core/domain/application/create_account_request.dart';
-import 'package:core/infra/color_outlet.dart';
 import 'package:core/domain/services/display_snackbar_service.dart';
 import 'package:core/domain/services/form_validade_service.dart';
-
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CreateAccountState> {

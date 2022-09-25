@@ -8,6 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart' as db;
 ///REPOSITORY IMPL
 class Hive<T extends EntityBase> implements Repository<T> {
   final Mapper<T> mapper;
+
   Hive(this.mapper);
 
   db.Box get box => db.Hive.box(T.toString());
