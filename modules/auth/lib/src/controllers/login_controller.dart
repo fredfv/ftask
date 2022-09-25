@@ -1,4 +1,5 @@
 import 'package:core/domain/application/login_request.dart';
+import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -30,9 +31,12 @@ class LoginController extends ValueNotifier<LoginState> {
         if (v is Exception) {
           value = LoginError(v.toString());
         } else {
-          displaySnackbar.show(context, 'welcome', Colors.green);
-          value = LoginSucces();
-          //Modular.to.pushNamed('/task/');
+          loginRepository.persistAuthLogin(v).then((l) {
+            value = LoginSucces('welcome ${v['person']['name']}');
+            Modular.to.pushNamed('/task/');
+          }).catchError((e){
+            value = LoginError(e.toString());
+          });
         }
       }).catchError((e) {
         value = LoginError(e);
@@ -46,7 +50,7 @@ class LoginController extends ValueNotifier<LoginState> {
     secretFocus.requestFocus();
   }
 
-  void goToCreateAccount(){
+  void goToCreateAccount() {
     Modular.to.pushNamed('./createaccount');
   }
 }

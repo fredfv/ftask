@@ -1,10 +1,9 @@
 import 'dart:io';
+import 'package:core/domain/application/custom_exception.dart';
 import 'package:core/domain/application/http_custom_configurations.dart';
 import 'package:core/domain/http_request_methods.dart';
+import 'package:core/infra/logger.dart';
 import 'package:dio/dio.dart';
-
-import '../helpers/logger.dart';
-
 
 class DioHandler {
   Dio? _dio;
@@ -27,8 +26,10 @@ class DioHandler {
     _dio = Dio(BaseOptions(
         baseUrl: baseUrl,
         headers: header,
-        connectTimeout: connectTimeout ?? HttpCustomConfigurations.connectTimeout,
-        receiveTimeout: receiveTimeout ?? HttpCustomConfigurations.receiveTimeout));
+        connectTimeout:
+            connectTimeout ?? HttpCustomConfigurations.connectTimeout,
+        receiveTimeout:
+            receiveTimeout ?? HttpCustomConfigurations.receiveTimeout));
   }
 
   void configureInterceptors() {
@@ -85,24 +86,39 @@ class DioHandler {
       if (response.statusCode == 200 || response.statusCode == 204) {
         return response;
       } else if (response.statusCode == 401) {
-        throw Exception("Unauthorized");
+        throw Exception("unauthorized");
       } else if (response.statusCode == 500) {
-        throw Exception("Server Error");
+        throw Exception("server error");
       } else {
-        throw Exception("Something does wen't wrong");
+        throw Exception("something does wen't wrong");
       }
     } on SocketException catch (e) {
       fLog.e(e);
-      throw Exception("${e.message}Not Internet Connection");
+      throw CustomException("no internet connection");
     } on FormatException catch (e) {
       fLog.e(e);
-      throw Exception("${e.message}Bad response format");
+      throw CustomException("bad response format");
     } on DioError catch (e) {
       fLog.e(e);
-      throw Exception(e.response);
+      if (e.type == DioErrorType.response) {
+        if (e.response != null &&
+            e.response?.data is Map<String, dynamic> &&
+            e.response?.data?['message'] != null) {
+          throw CustomException(e.response?.data['message']);
+        } else if (e.error.toString().contains('[500]')) {
+          throw CustomException("server error");
+        }
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw CustomException('timedout, check your connection');
+      } else if (e.type == DioErrorType.receiveTimeout) {
+        throw CustomException('timedout, unable to connect to the server');
+      } else if (e.type == DioErrorType.other) {
+        throw CustomException(e.error);
+      }
+      throw CustomException(e.message);
     } catch (e) {
       fLog.e(e);
-      throw Exception("Something wen't wrong");
+      throw CustomException("Something wen't wrong");
     }
   }
 }

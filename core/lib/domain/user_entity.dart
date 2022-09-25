@@ -60,7 +60,7 @@ class UserEntity extends EntityBase {
   }
 }
 
-class TaskMapper extends Mapper<UserEntity> {
+class UserMapper extends Mapper<UserEntity> {
   @override
   UserEntity? fromMap(Map<String, dynamic>? map) {
     if (map == null) return null;

@@ -57,7 +57,14 @@ class LoginPage extends StatelessWidget {
               child: ValueListenableBuilder(
                   valueListenable: controller,
                   builder: (_, state, child) {
-                    if (state is LoginLoading) {
+                    if (state is LoginError) {
+                      controller.displaySnackbar.show(context, state.message, ColorRepository.error);
+                      controller.value = LoginIdle();
+                    }else if(state is LoginSucces){
+                      controller.displaySnackbar.show(context, state.message, ColorRepository.accent);
+                      controller.value = LoginIdle();
+                    }
+                    else if (state is LoginLoading) {
                       return Center(
                         child: LoadingAnimationWidget.dotsTriangle(
                             color: ColorRepository.secondary,

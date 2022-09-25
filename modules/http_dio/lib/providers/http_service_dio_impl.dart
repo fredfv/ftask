@@ -1,3 +1,4 @@
+import 'package:core/domain/application/custom_exception.dart';
 import 'package:core/domain/http_request_methods.dart';
 import 'package:core/domain/services/http_service.dart';
 import 'package:dio/dio.dart';
@@ -33,9 +34,9 @@ class HttpServiceDioImpl implements HttpService {
         }
       }
     } on Exception catch (error) {
-      return Exception(error);
+      return CustomException(error.toString());
     } catch (error) {
-      return Exception('Something really unknown');
+      return CustomException('Something really unknown $error');
     }
   }
 }

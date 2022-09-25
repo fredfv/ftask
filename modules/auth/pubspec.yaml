@@ -15,10 +15,10 @@ dependencies:
   flutter_bloc: ^8.1.1
   loading_animation_widget: ^1.2.0+3
   flutter_svg: ^1.1.5
+  core:
+      path: ../../core
   local_storage_hive:
     path: ../local_storage_hive
-  core:
-    path: ../../core
   http_dio:
     path: ../http_dio
 

@@ -2,7 +2,11 @@ abstract class LoginState {}
 
 class LoginIdle implements LoginState {}
 
-class LoginSucces implements LoginState {}
+class LoginSucces implements LoginState {
+  final String message;
+
+  LoginSucces(this.message);
+}
 
 class LoginLoading implements LoginState {}
 
