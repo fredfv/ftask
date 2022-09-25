@@ -159,7 +159,7 @@ packages:
     source: hosted
     version: "1.1.0"
   http_dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "modules/http_dio"
       relative: true

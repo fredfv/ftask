@@ -1,13 +1,12 @@
 import 'dart:io';
-
 import 'package:core/domain/application/http_custom_configurations.dart';
-import 'package:core/domain/application/http_request_methods.dart';
+import 'package:core/domain/http_request_methods.dart';
 import 'package:dio/dio.dart';
 
 import '../helpers/logger.dart';
 
 
-class RequestHandler {
+class DioHandler {
   Dio? _dio;
 
   void configureHeader(

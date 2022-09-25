@@ -44,6 +44,9 @@ dependencies:
     path: modules/auth
   local_storage_hive:
     path: modules/local_storage_hive
+  http_dio:
+    path: modules/http_dio
+
 
 
 dev_dependencies:

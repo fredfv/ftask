@@ -2,6 +2,7 @@ import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:local_storage_hive/providers/hive.dart';
 import 'package:task/app_module.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(const Duration(seconds: 3)).then((_) async {
       await Modular.isModuleReady<AppModule>();
       Modular.to.navigate('/src/');

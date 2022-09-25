@@ -11,7 +11,7 @@ class TaskEntity extends EntityBase {
       : super(id: id, created: created);
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'description': description,
@@ -42,7 +42,7 @@ class TaskMapper extends Mapper<TaskEntity>{
 
   @override
   Map<String, dynamic> toMap(TaskEntity value) {
-    return value.toMap();
+    return value.toJson();
   }
 }
 

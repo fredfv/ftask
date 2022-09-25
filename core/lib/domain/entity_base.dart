@@ -4,5 +4,5 @@ abstract class EntityBase{
 
   EntityBase({required this.id, required this.created});
 
-  Map<String, dynamic> toMap();
+  Map<String, dynamic> toJson();
 }

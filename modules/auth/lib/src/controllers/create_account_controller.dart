@@ -1,23 +1,27 @@
 import 'package:auth/src/models/create_account_state.dart';
 import 'package:core/domain/application/create_account_request.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:http_dio/helpers/logger.dart';
 import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CreateAccountState> {
   final LoginRepositoryImpl loginRepository;
+  final FormsValidate formsValidate;
+  final DisplaySnackbar displaySnackbar;
+
   final newAccount = CreateAccountRequest.empty();
-  final formKey = GlobalKey<FormState>();
 
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
 
-  FormState get form => formKey.currentState!;
+  GlobalKey<FormState> get form => formsValidate.form;
 
-  CreateAccountController(this.loginRepository) : super(CreateAccountIdle());
+  CreateAccountController({
+    required this.loginRepository,
+    required this.formsValidate,
+    required this.displaySnackbar,
+  }) : super(CreateAccountIdle());
 
   void setLoginFocus(value) {
     loginFocus.requestFocus();
@@ -44,22 +48,46 @@ class CreateAccountController extends ValueNotifier<CreateAccountState> {
     });
   }
 
-  void subimitExecute(BuildContext context) {
-    final valid = form.validate();
-    if (valid) {
+  void executeSubimitCreateAccount(BuildContext context) {
+    if (formsValidate.validate()) {
       createNewAccountExecute();
     } else {
-      showSnackError(context, 'invalid fields', Colors.red);
+      displaySnackbar.show(context, 'invalid fields', Colors.red);
     }
   }
+}
 
-  void showSnackError(BuildContext context, String msg, Color cor) {
+abstract class DisplaySnackbar {
+  void show(BuildContext context, String msg, Color color);
+}
+
+class DisplaySnackbarImp implements DisplaySnackbar {
+  @override
+  void show(BuildContext context, String msg, Color color) {
     var snackBar = SnackBar(
       content: Text(msg),
-      backgroundColor: Colors.red,
+      backgroundColor: color,
     );
     Future.delayed(const Duration(milliseconds: 150), () {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
+  }
+}
+
+abstract class FormsValidate {
+  bool validate();
+
+  final form = GlobalKey<FormState>();
+}
+
+class FormsValidateImpl implements FormsValidate {
+  final _formValidate = GlobalKey<FormState>();
+
+  @override
+  GlobalKey<FormState> get form => _formValidate;
+
+  @override
+  bool validate() {
+    return form.currentState?.validate() ?? false;
   }
 }

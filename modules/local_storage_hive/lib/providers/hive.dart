@@ -10,38 +10,42 @@ class Hive<T extends EntityBase> implements Repository<T> {
   final Mapper<T> mapper;
   Hive(this.mapper);
 
-  db.Box box() {
-    var dbs = db.Hive.box(T.toString());
-    return dbs;
-  }
+  db.Box get box =>  db.Hive.box(T.toString());
 
   @override
   Future init(String path) async {
-    await db.Hive.initFlutter(path);
+    print(DateTime.now());
+    await db.Hive.initFlutter();
+    print(DateTime.now());
     await db.Hive.openBox(T.toString());
+    print(DateTime.now());
   }
 
   @override
   Future delete(String key) async {
-    box().delete(key);
+    await init('path');
+    box.delete(key);
   }
 
   @override
   Future<T?> get(String key) async {
-    Map<String, dynamic>? map = box().get(key);
+    await init('path');
+    Map<String, dynamic>? map = box.get(key);
     T? value = mapper.fromMap(map);
     return value;
   }
 
   @override
   Future<void> put(String key, T value) async {
+    await init('path');
     Map<String, dynamic> map = mapper.toMap(value);
-    await box().put(key, map);
+    await box.put(key, map);
   }
 
   @override
   Future<List<T>> getAll() async{
-    List list = box().values.toList();
+    await init('path');
+    List list = box.values.toList();
     List<T> result = list.map((e) => mapper.fromMap(e)!).toList();
     return result;
   }

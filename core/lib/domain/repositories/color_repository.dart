@@ -10,4 +10,6 @@ abstract class ColorRepository{
 
   static const Color selectedHandler = Color(0x66A9C7CF);
   static const Color textColorLight = Color(0xFFE6E6E6);
+
+  static const Color error = Color(0xFFDB0030);
 }

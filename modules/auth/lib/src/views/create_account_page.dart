@@ -2,14 +2,13 @@ import 'package:auth/src/controllers/create_account_controller.dart';
 import 'package:auth/src/views/widgets/submit_account_button.dart';
 import 'package:core/domain/repositories/color_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../models/create_account_state.dart';
 import 'widgets/create_account_entry.dart';
 
 class CreateAccountPage extends StatelessWidget {
-  CreateAccountPage({Key? key}) : super(key: key);
-  final controller = Modular.get<CreateAccountController>();
+  final CreateAccountController controller;
+  const CreateAccountPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class CreateAccountPage extends StatelessWidget {
                 35),
       ),
       body: Form(
-        key: controller.formKey,
+        key: controller.form,
         child: ListView(
           padding: EdgeInsets.symmetric(
             vertical: MediaQuery.of(context).size.width * 0.01,
@@ -75,7 +74,7 @@ class CreateAccountPage extends StatelessWidget {
               valueListenable: controller,
               builder: (_, state, child) {
                 if (state is CreateAccountError) {
-                  controller.showSnackError(context, state.message, Colors.red);
+                  controller.displaySnackbar.show(context, state.message, Colors.red);
                   controller.value = CreateAccountIdle();
                 } else if (state is CreateAccountLoading) {
                   return Padding(
@@ -98,7 +97,7 @@ class CreateAccountPage extends StatelessWidget {
                   ),
                   child: SubimitAccountButton(
                     onPressed: () {
-                      controller.subimitExecute(context);
+                      controller.executeSubimitCreateAccount(context);
                     },
                   ),
                 );

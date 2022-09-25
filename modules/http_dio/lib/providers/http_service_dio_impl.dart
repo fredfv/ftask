@@ -1,11 +1,11 @@
-import 'package:core/domain/application/http_request_methods.dart';
+import 'package:core/domain/http_request_methods.dart';
 import 'package:core/domain/services/http_service.dart';
 import 'package:dio/dio.dart';
 
-import 'request_handler.dart';
+import 'dio_handler.dart';
 
-class HttpServiceImpl implements HttpService {
-  final _requestHandler = RequestHandler();
+class HttpServiceDioImpl implements HttpService {
+  final _requestHandler = DioHandler();
 
   @override
   Future<dynamic> request({

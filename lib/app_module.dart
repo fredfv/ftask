@@ -1,12 +1,15 @@
 import 'package:auth/auth_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http_dio/providers/http_service_dio_impl.dart';
 import 'package:task/splash_page.dart';
 import 'package:task/src/modules/task/task_module.dart';
 
 class AppModule extends Module {
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+    Bind.lazySingleton((i) => HttpServiceDioImpl()),
+  ];
 
   @override
   List<ModularRoute> get routes => [
