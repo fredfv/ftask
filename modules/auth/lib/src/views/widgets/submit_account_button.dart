@@ -1,4 +1,4 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 
 class SubimitAccountButton extends StatelessWidget {
@@ -15,15 +15,15 @@ class SubimitAccountButton extends StatelessWidget {
       child: ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            overlayColor: MaterialStateColor.resolveWith(
-                (states) => ColorRepository.shadow),
-            backgroundColor: MaterialStateColor.resolveWith(
-                (states) => ColorRepository.primary),
+            overlayColor:
+                MaterialStateColor.resolveWith((states) => ColorOutlet.shadow),
+            backgroundColor:
+                MaterialStateColor.resolveWith((states) => ColorOutlet.primary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3),
                 side: const BorderSide(
-                  color: ColorRepository.shadow,
+                  color: ColorOutlet.shadow,
                 ),
               ),
             ),
@@ -31,7 +31,7 @@ class SubimitAccountButton extends StatelessWidget {
           child: Text(
             'Create',
             style: TextStyle(
-                color: ColorRepository.secondary,
+                color: ColorOutlet.secondary,
                 fontSize: MediaQuery.of(context).size.width /
                     MediaQuery.of(context).size.height *
                     30),

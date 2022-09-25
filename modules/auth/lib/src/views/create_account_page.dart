@@ -1,6 +1,6 @@
 import 'package:auth/src/controllers/create_account_controller.dart';
 import 'package:auth/src/views/widgets/submit_account_button.dart';
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../models/create_account_state.dart';
@@ -8,22 +8,23 @@ import 'widgets/create_account_entry.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
-  const CreateAccountPage({Key? key, required this.controller}) : super(key: key);
+  const CreateAccountPage({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorRepository.primary,
+      backgroundColor: ColorOutlet.primary,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Create new account'),
-        backgroundColor: ColorRepository.primary,
+        backgroundColor: ColorOutlet.primary,
         iconTheme: const IconThemeData(
-          color: ColorRepository.secondary,
+          color: ColorOutlet.secondary,
         ),
         titleTextStyle: TextStyle(
             fontFamily: 'Sansation',
-            color: ColorRepository.secondary,
+            color: ColorOutlet.secondary,
             fontSize: MediaQuery.of(context).size.width /
                 MediaQuery.of(context).size.height *
                 35),
@@ -74,7 +75,8 @@ class CreateAccountPage extends StatelessWidget {
               valueListenable: controller,
               builder: (_, state, child) {
                 if (state is CreateAccountError) {
-                  controller.displaySnackbar.show(context, state.message, Colors.red);
+                  controller.displaySnackbar
+                      .show(context, state.message, Colors.red);
                   controller.value = CreateAccountIdle();
                 } else if (state is CreateAccountLoading) {
                   return Padding(
@@ -83,7 +85,7 @@ class CreateAccountPage extends StatelessWidget {
                       horizontal: MediaQuery.of(context).size.height * 0.07,
                     ),
                     child: LoadingAnimationWidget.dotsTriangle(
-                      color: ColorRepository.secondary,
+                      color: ColorOutlet.secondary,
                       size: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
                           70,

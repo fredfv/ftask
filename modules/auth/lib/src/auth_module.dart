@@ -9,8 +9,6 @@ class AuthModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton((i) => LoginRepositoryImpl(i())),
-        Bind.factory((i) => FormsValidateImpl()),
-        Bind.factory((i) => DisplaySnackbarImp()),
         Bind.factory((i) => LoginController(
             displaySnackbar: i(), formsValidate: i(), loginRepository: i())),
         Bind.factory((i) => CreateAccountController(

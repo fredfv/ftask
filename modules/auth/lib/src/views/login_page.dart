@@ -1,6 +1,6 @@
 import 'package:auth/src/views/widgets/create_account_button.dart';
 import 'package:auth/src/views/widgets/create_account_entry.dart';
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorRepository.primary,
+      backgroundColor: ColorOutlet.primary,
       body: Form(
         key: controller.form,
         child: ListView(
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/ttlogo.svg',
-              color: ColorRepository.secondary,
+              color: ColorOutlet.secondary,
               width: MediaQuery.of(context).size.width * 0.7,
             ),
             CreateAccountEntry(
@@ -58,16 +58,17 @@ class LoginPage extends StatelessWidget {
                   valueListenable: controller,
                   builder: (_, state, child) {
                     if (state is LoginError) {
-                      controller.displaySnackbar.show(context, state.message, ColorRepository.error);
+                      controller.displaySnackbar
+                          .show(context, state.message, ColorOutlet.error);
                       controller.value = LoginIdle();
-                    }else if(state is LoginSucces){
-                      controller.displaySnackbar.show(context, state.message, ColorRepository.accent);
+                    } else if (state is LoginSucces) {
+                      controller.displaySnackbar
+                          .show(context, state.message, ColorOutlet.accent);
                       controller.value = LoginIdle();
-                    }
-                    else if (state is LoginLoading) {
+                    } else if (state is LoginLoading) {
                       return Center(
                         child: LoadingAnimationWidget.dotsTriangle(
-                            color: ColorRepository.secondary,
+                            color: ColorOutlet.secondary,
                             size: MediaQuery.of(context).size.width /
                                 MediaQuery.of(context).size.height *
                                 70),

@@ -1,4 +1,4 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -11,8 +11,8 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Sansation',
           textSelectionTheme: const TextSelectionThemeData(
-              selectionColor: ColorRepository.selectedText,
-              selectionHandleColor: ColorRepository.selectedHandler)),
+              selectionColor: ColorOutlet.selectedText,
+              selectionHandleColor: ColorOutlet.selectedHandler)),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,

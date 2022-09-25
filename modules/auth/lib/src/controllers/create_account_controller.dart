@@ -1,13 +1,17 @@
 import 'package:auth/src/models/create_account_state.dart';
 import 'package:core/domain/application/create_account_request.dart';
+import 'package:core/infra/color_outlet.dart';
+import 'package:core/domain/services/display_snackbar_service.dart';
+import 'package:core/domain/services/form_validade_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CreateAccountState> {
   final LoginRepositoryImpl loginRepository;
-  final FormsValidate formsValidate;
-  final DisplaySnackbar displaySnackbar;
+  final FormsValidateService formsValidate;
+  final DisplaySnackbarService displaySnackbar;
 
   final newAccount = CreateAccountRequest.empty();
 
@@ -52,43 +56,7 @@ class CreateAccountController extends ValueNotifier<CreateAccountState> {
     if (formsValidate.validate()) {
       createNewAccountExecute();
     } else {
-      displaySnackbar.show(context, 'invalid fields', Colors.red);
+      displaySnackbar.show(context, 'invalid fields', ColorOutlet.error);
     }
-  }
-}
-
-abstract class DisplaySnackbar {
-  void show(BuildContext context, String msg, Color color);
-}
-
-class DisplaySnackbarImp implements DisplaySnackbar {
-  @override
-  void show(BuildContext context, String msg, Color color) {
-    var snackBar = SnackBar(
-      content: Text(msg),
-      backgroundColor: color,
-      duration: const Duration(milliseconds: 1300),
-    );
-    Future.delayed(const Duration(milliseconds: 90), () {
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
-  }
-}
-
-abstract class FormsValidate {
-  bool validate();
-
-  final form = GlobalKey<FormState>();
-}
-
-class FormsValidateImpl implements FormsValidate {
-  final _formValidate = GlobalKey<FormState>();
-
-  @override
-  GlobalKey<FormState> get form => _formValidate;
-
-  @override
-  bool validate() {
-    return form.currentState?.validate() ?? false;
   }
 }

@@ -1,4 +1,4 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccountButton extends StatelessWidget {
@@ -15,13 +15,13 @@ class CreateAccountButton extends StatelessWidget {
       child: TextButton(
         style: ButtonStyle(
           overlayColor: MaterialStateColor.resolveWith(
-              (states) => ColorRepository.selectedText),
+              (states) => ColorOutlet.selectedText),
         ),
         onPressed: onPressed,
         child: const Text(
           'create account',
           style: TextStyle(
-              color: ColorRepository.secondaryDark,
+              color: ColorOutlet.secondaryDark,
               decoration: TextDecoration.underline),
         ),
       ),

@@ -1,4 +1,4 @@
-abstract class EntityBase{
+abstract class EntityBase {
   String id;
   DateTime created;
 

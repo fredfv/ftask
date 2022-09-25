@@ -1,4 +1,4 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
@@ -15,17 +15,17 @@ class LoginButton extends StatelessWidget {
           onPressed: onPressed,
           style: ButtonStyle(
               overlayColor: MaterialStateColor.resolveWith(
-                  (states) => ColorRepository.shadow),
+                  (states) => ColorOutlet.shadow),
               backgroundColor: MaterialStateColor.resolveWith(
-                  (states) => ColorRepository.primary),
+                  (states) => ColorOutlet.primary),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
-                      side: const BorderSide(color: ColorRepository.shadow)))),
+                      side: const BorderSide(color: ColorOutlet.shadow)))),
           child: Text(
             'Login',
             style: TextStyle(
-                color: ColorRepository.secondary,
+                color: ColorOutlet.secondary,
                 fontSize: MediaQuery.of(context).size.width /
                     MediaQuery.of(context).size.height *
                     30),

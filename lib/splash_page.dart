@@ -1,4 +1,5 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -25,10 +26,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorRepository.primary,
+      color: ColorOutlet.primary,
       child: Center(
         child: LoadingAnimationWidget.dotsTriangle(
-          color: ColorRepository.secondary,
+          color: ColorOutlet.secondary,
           size: MediaQuery.of(context).size.width /
               MediaQuery.of(context).size.height *
               250,

@@ -1,16 +1,17 @@
 import 'package:core/domain/application/login_request.dart';
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
+import 'package:core/domain/services/display_snackbar_service.dart';
+import 'package:core/domain/services/form_validade_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../repositories/login_repository_impl.dart';
 import '../models/login_state.dart';
-import 'create_account_controller.dart';
 
 class LoginController extends ValueNotifier<LoginState> {
   final LoginRepositoryImpl loginRepository;
-  final FormsValidate formsValidate;
-  final DisplaySnackbar displaySnackbar;
+  final FormsValidateService formsValidate;
+  final DisplaySnackbarService displaySnackbar;
 
   final FocusNode secretFocus = FocusNode();
   final loginRequest = LoginRequest.empty();
@@ -34,7 +35,7 @@ class LoginController extends ValueNotifier<LoginState> {
           loginRepository.persistAuthLogin(v).then((l) {
             value = LoginSucces('welcome ${v['person']['name']}');
             Modular.to.pushNamed('/task/');
-          }).catchError((e){
+          }).catchError((e) {
             value = LoginError(e.toString());
           });
         }
@@ -42,7 +43,7 @@ class LoginController extends ValueNotifier<LoginState> {
         value = LoginError(e);
       });
     } else {
-      displaySnackbar.show(context, 'invalid fields', Colors.red);
+      displaySnackbar.show(context, 'invalid fields', ColorOutlet.error);
     }
   }
 

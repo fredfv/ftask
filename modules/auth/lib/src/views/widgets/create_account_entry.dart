@@ -1,4 +1,4 @@
-import 'package:core/domain/repositories/color_repository.dart';
+import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -43,32 +43,30 @@ class CreateAccountEntry extends StatelessWidget {
         validator: validator,
         onChanged: onChanged,
         style: const TextStyle(
-          color: ColorRepository.secondary,
+          color: ColorOutlet.secondary,
         ),
-        cursorColor: ColorRepository.secondary,
+        cursorColor: ColorOutlet.secondary,
         obscureText: obscureText,
         obscuringCharacter: 'ж',
         decoration: InputDecoration(
-          errorStyle: const TextStyle(
-            color: ColorRepository.error
-          ),
+          errorStyle: const TextStyle(color: ColorOutlet.error),
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: ColorRepository.secondary,
+              color: ColorOutlet.secondary,
             ),
           ),
-          labelStyle: const TextStyle(color: ColorRepository.secondaryDark),
+          labelStyle: const TextStyle(color: ColorOutlet.secondaryDark),
           border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: ColorRepository.secondary,
+              color: ColorOutlet.secondary,
             ),
           ),
           focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-            color: ColorRepository.secondary,
+            color: ColorOutlet.secondary,
           )),
           labelText: label,
-          hintStyle: const TextStyle(color: ColorRepository.shadow),
+          hintStyle: const TextStyle(color: ColorOutlet.shadow),
         ),
       ),
     );

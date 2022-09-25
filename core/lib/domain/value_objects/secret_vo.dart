@@ -13,8 +13,8 @@ class SecretVO implements ValueObject {
     return null;
   }
 
-  String? secretMatches(String? passwordToMatch){
-    if(_value != passwordToMatch){
+  String? secretMatches(String? passwordToMatch) {
+    if (_value != passwordToMatch) {
       return 'passwords do not match';
     }
     return null;

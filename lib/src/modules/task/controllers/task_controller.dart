@@ -6,17 +6,18 @@ class TaskController {
 
   TaskController(this._taskRepository);
 
-  void set() async{
+  void set() async {
     //await _taskRepository.init('path');
     await _taskRepository.put(
         '2',
         TaskEntity(
+            dueDate: '',
             description: 'description',
             id: '3',
             created: DateTime.now().toUtc()));
   }
 
-  void get() async{
+  void get() async {
     await _taskRepository.init('path');
     print(await _taskRepository.get('3'));
     print(await _taskRepository.get('2'));

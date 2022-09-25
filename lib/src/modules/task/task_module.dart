@@ -7,9 +7,9 @@ import 'package:task/src/modules/task/views/task_page.dart';
 class TaskModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind.factory((i) => TaskRepositoryImpl()),
-    Bind.singleton((i) => TaskController(i()))
-  ];
+        Bind.factory((i) => TaskRepositoryImpl()),
+        Bind.singleton((i) => TaskController(i()))
+      ];
 
   @override
   List<ModularRoute> get routes => [

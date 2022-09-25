@@ -30,7 +30,7 @@ class UserEntity extends EntityBase {
     };
   }
 
-  factory UserEntity.fromMap(Map<String, dynamic> map) {
+  factory UserEntity.fromJson(Map<String, dynamic> map) {
     return UserEntity(
       id: map['id'] as String,
       created: map['created'] as DateTime,
@@ -62,13 +62,13 @@ class UserEntity extends EntityBase {
 
 class UserMapper extends Mapper<UserEntity> {
   @override
-  UserEntity? fromMap(Map<String, dynamic>? map) {
+  UserEntity? fromJson(Map<String, dynamic>? map) {
     if (map == null) return null;
-    return UserEntity.fromMap(map);
+    return UserEntity.fromJson(map);
   }
 
   @override
-  Map<String, dynamic> toMap(UserEntity value) {
+  Map<String, dynamic> toJson(UserEntity value) {
     return value.toJson();
   }
 }
