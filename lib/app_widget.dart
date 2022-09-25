@@ -1,4 +1,4 @@
-import 'package:core/infra/color_outlet.dart';
+import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

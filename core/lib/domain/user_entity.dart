@@ -1,5 +1,6 @@
 import 'package:core/domain/entity_base.dart';
-import 'package:core/domain/map/mapper.dart';
+
+import 'application/map/mapper.dart';
 
 class UserEntity extends EntityBase {
   String login;

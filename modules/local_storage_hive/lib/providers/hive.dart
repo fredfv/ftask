@@ -1,5 +1,5 @@
+import 'package:core/domain/application/map/mapper.dart';
 import 'package:core/domain/entity_base.dart';
-import 'package:core/domain/map/mapper.dart';
 import 'package:core/domain/repositories/repository.dart';
 import 'package:core/infra/logger.dart';
 import 'package:hive_flutter/adapters.dart';

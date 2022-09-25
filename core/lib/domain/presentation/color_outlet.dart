@@ -12,5 +12,5 @@ abstract class ColorOutlet {
   static const Color textColorLight = Color(0xFFE6E6E6);
 
   static const Color error = Color(0xFFBE0039);
-  static const Color accent = Color(0xFF0B734F);
+  static const Color success = Color(0xFF0B734F);
 }

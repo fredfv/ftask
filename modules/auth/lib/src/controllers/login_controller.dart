@@ -1,14 +1,14 @@
+import 'package:core/domain/application/common_state.dart';
 import 'package:core/domain/application/login_request.dart';
+import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:core/domain/services/display_snackbar_service.dart';
 import 'package:core/domain/services/form_validade_service.dart';
-import 'package:core/infra/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../models/login_state.dart';
 import '../repositories/login_repository_impl.dart';
 
-class LoginController extends ValueNotifier<LoginState> {
+class LoginController extends ValueNotifier<CommonState> {
   final LoginRepositoryImpl loginRepository;
   final FormsValidateService formsValidate;
   final DisplaySnackbarService displaySnackbar;
@@ -22,25 +22,26 @@ class LoginController extends ValueNotifier<LoginState> {
     required this.loginRepository,
     required this.formsValidate,
     required this.displaySnackbar,
-  }) : super(LoginIdle());
+  }) : super(IdleState());
 
   executeLogin(BuildContext context) {
     if (formsValidate.validate()) {
       secretFocus.unfocus();
-      value = LoginLoading();
+      value = LoadingState();
       loginRepository.login(loginRequest).then((v) {
         if (v is Exception) {
-          value = LoginError(v.toString());
+          value = ErrorState(v.toString());
         } else {
           loginRepository.persistAuthLogin(v).then((l) {
-            value = LoginSucces('welcome ${v['person']['name']}');
+            value = SuccessState<String>(
+                response: 'welcome ${v['person']['name']}');
             Modular.to.pushNamed('/task/');
           }).catchError((e) {
-            value = LoginError(e.toString());
+            value = ErrorState(e.toString());
           });
         }
       }).catchError((e) {
-        value = LoginError(e);
+        value = ErrorState(e);
       });
     } else {
       displaySnackbar.show(context, 'invalid fields', ColorOutlet.error);

@@ -1,11 +1,10 @@
 import 'package:auth/src/controllers/create_account_controller.dart';
-import 'package:auth/src/views/widgets/submit_account_button.dart';
-import 'package:core/infra/color_outlet.dart';
+import 'package:core/domain/presentation/widgets/common_text_form_field.dart';
+import 'package:core/domain/presentation/widgets/login_button.dart';
+import 'package:core/domain/application/common_state.dart';
+import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../models/create_account_state.dart';
-import 'widgets/create_account_entry.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
@@ -35,18 +34,19 @@ class CreateAccountPage extends StatelessWidget {
         key: controller.form,
         child: ListView(
           padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.width * 0.01,
-            horizontal: MediaQuery.of(context).size.height * 0.03,
+            vertical: MediaQuery.of(context).size.height * 0.03,
+            horizontal: MediaQuery.of(context).size.width * 0.05,
           ),
           children: [
-            CreateAccountEntry(
+            CommonTextFormField(
               onFieldSubmitted: controller.setLoginFocus,
               label: 'Name',
               value: controller.newAccount.name.toString(),
               validator: (v) => controller.newAccount.name.validator(),
               onChanged: controller.newAccount.setName,
             ),
-            CreateAccountEntry(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            CommonTextFormField(
               onFieldSubmitted: controller.setSecretFocus,
               focusNode: controller.loginFocus,
               label: 'Login',
@@ -55,7 +55,8 @@ class CreateAccountPage extends StatelessWidget {
               onChanged: controller.newAccount.setLogin,
               //inputFormatters: [CpfInputFormatter()],
             ),
-            CreateAccountEntry(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            CommonTextFormField(
               onFieldSubmitted: controller.setSecretConfirmFocus,
               focusNode: controller.secretFocus,
               label: 'Password',
@@ -64,7 +65,10 @@ class CreateAccountPage extends StatelessWidget {
               onChanged: controller.newAccount.setSecret,
               obscureText: true,
             ),
-            CreateAccountEntry(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            CommonTextFormField(
+              onFieldSubmitted: (value) =>
+                  controller.executeSubimitCreateAccount(context),
               focusNode: controller.secretConfirmFocus,
               label: 'Confirm password',
               value: controller.newAccount.secretConfirm.toString(),
@@ -73,39 +77,42 @@ class CreateAccountPage extends StatelessWidget {
               onChanged: controller.newAccount.setSecretConfirm,
               obscureText: true,
             ),
-            ValueListenableBuilder(
-              valueListenable: controller,
-              builder: (_, state, child) {
-                if (state is CreateAccountError) {
-                  controller.displaySnackbar
-                      .show(context, state.message, Colors.red);
-                  controller.value = CreateAccountIdle();
-                } else if (state is CreateAccountLoading) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.width * 0.07,
-                      horizontal: MediaQuery.of(context).size.height * 0.07,
-                    ),
-                    child: LoadingAnimationWidget.dotsTriangle(
-                      color: ColorOutlet.secondary,
-                      size: MediaQuery.of(context).size.width /
-                          MediaQuery.of(context).size.height *
-                          70,
-                    ),
-                  );
-                }
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.width * 0.07,
-                    horizontal: MediaQuery.of(context).size.height * 0.07,
-                  ),
-                  child: SubimitAccountButton(
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.05),
+              child: ValueListenableBuilder(
+                valueListenable: controller,
+                builder: (_, state, child) {
+                  if (state is LoadingState) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.07,
+                        horizontal: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                      child: LoadingAnimationWidget.dotsTriangle(
+                        color: ColorOutlet.secondary,
+                        size: MediaQuery.of(context).size.width /
+                            MediaQuery.of(context).size.height *
+                            70,
+                      ),
+                    );
+                  } else if (state is SuccessState) {
+                    controller.displaySnackbar
+                        .show(context, state.response, ColorOutlet.success);
+                    controller.value = IdleState();
+                  } else if (state is ErrorState) {
+                    controller.displaySnackbar
+                        .show(context, state.message, ColorOutlet.error);
+                    controller.value = IdleState();
+                  }
+                  return CommonButton(
+                    description: 'Subimit new account',
                     onPressed: () {
                       controller.executeSubimitCreateAccount(context);
                     },
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),

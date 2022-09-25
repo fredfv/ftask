@@ -1,13 +1,13 @@
-import 'package:auth/src/views/widgets/create_account_button.dart';
-import 'package:auth/src/views/widgets/create_account_entry.dart';
-import 'package:core/infra/color_outlet.dart';
+import 'package:core/domain/presentation/widgets/common_text_form_field.dart';
+import 'package:core/domain/presentation/widgets/login_button.dart';
+import 'package:core/domain/presentation/widgets/underline_button.dart';
+import 'package:core/domain/application/common_state.dart';
+import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../controllers/login_controller.dart';
-import '../models/login_state.dart';
-import 'widgets/login_button.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginController controller;
@@ -22,25 +22,25 @@ class LoginPage extends StatelessWidget {
         key: controller.form,
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(
-              MediaQuery.of(context).size.width * 0.05,
-              MediaQuery.of(context).size.height * 0.07,
-              MediaQuery.of(context).size.width * 0.05,
-              MediaQuery.of(context).size.height * 0.05),
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.03,
+            horizontal: MediaQuery.of(context).size.width * 0.05,
+          ),
           children: [
             SvgPicture.asset(
               'assets/ttlogo.svg',
               color: ColorOutlet.secondary,
               width: MediaQuery.of(context).size.width * 0.7,
             ),
-            CreateAccountEntry(
+            CommonTextFormField(
               onFieldSubmitted: controller.loginSubmitted,
               label: 'Login',
               value: controller.loginRequest.login.toString(),
               validator: (v) => controller.loginRequest.login.validator(),
               onChanged: controller.loginRequest.setLogin,
             ),
-            CreateAccountEntry(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            CommonTextFormField(
               onFieldSubmitted: (value) => controller.executeLogin(context),
               focusNode: controller.secretFocus,
               label: 'Password',
@@ -49,22 +49,13 @@ class LoginPage extends StatelessWidget {
               onChanged: controller.loginRequest.setSecret,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.03,
-                  left: MediaQuery.of(context).size.width * 0.13,
-                  right: MediaQuery.of(context).size.width * 0.13),
+              padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * 0.05,
+              ),
               child: ValueListenableBuilder(
                   valueListenable: controller,
                   builder: (_, state, child) {
-                    if (state is LoginError) {
-                      controller.displaySnackbar
-                          .show(context, state.message, ColorOutlet.error);
-                      controller.value = LoginIdle();
-                    } else if (state is LoginSucces) {
-                      controller.displaySnackbar
-                          .show(context, state.message, ColorOutlet.accent);
-                      controller.value = LoginIdle();
-                    } else if (state is LoginLoading) {
+                    if (state is LoadingState) {
                       return Center(
                         child: LoadingAnimationWidget.dotsTriangle(
                             color: ColorOutlet.secondary,
@@ -72,15 +63,26 @@ class LoginPage extends StatelessWidget {
                                 MediaQuery.of(context).size.height *
                                 70),
                       );
+                    } else if (state is SuccessState) {
+                      controller.displaySnackbar
+                          .show(context, state.response, ColorOutlet.success);
+                      controller.value = IdleState();
+                    } else if (state is ErrorState) {
+                      controller.displaySnackbar
+                          .show(context, state.message, ColorOutlet.error);
+                      controller.value = IdleState();
                     }
-
-                    return LoginButton(
-                        onPressed: () => controller.executeLogin(context));
+                    return CommonButton(
+                      description: 'Log in',
+                      onPressed: () => controller.executeLogin(context),
+                    );
                   }),
             ),
             Center(
-                child: CreateAccountButton(
-                    onPressed: () => controller.goToCreateAccount()))
+                child: UnderLineButton(
+              onPressed: () => controller.goToCreateAccount(),
+              description: 'create account',
+            ))
           ],
         ),
       ),

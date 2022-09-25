@@ -1,8 +1,8 @@
 import 'package:core/domain/value_objects/description_vo.dart';
 import 'package:core/domain/value_objects/due_date_vo.dart';
 
+import 'application/map/mapper.dart';
 import 'entity_base.dart';
-import 'map/mapper.dart';
 
 class TaskEntity extends EntityBase {
   DescriptionVO _description;

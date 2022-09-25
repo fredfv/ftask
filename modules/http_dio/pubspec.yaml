@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^4.0.6
-  jwt_decoder: ^2.0.1
   core:
     path: ../../core
 

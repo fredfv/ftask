@@ -1,5 +1,5 @@
 import 'package:core/domain/application/custom_exception.dart';
-import 'package:core/domain/http_request_methods.dart';
+import 'package:core/domain/application/http_request_methods.dart';
 import 'package:core/domain/services/http_service.dart';
 import 'package:dio/dio.dart';
 
