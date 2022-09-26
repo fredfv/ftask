@@ -29,46 +29,44 @@ class CommonTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      scrollPadding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
-      onFieldSubmitted: onFieldSubmitted,
-      focusNode: focusNode,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      inputFormatters: inputFormatters,
-      initialValue: value.toString(),
-      validator: validator,
-      onChanged: onChanged,
-      style: const TextStyle(
-        color: ColorOutlet.secondary,
-      ),
-      cursorColor: ColorOutlet.secondary,
-      obscureText: obscureText,
-      obscuringCharacter: 'ж',
-      decoration: InputDecoration(
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorOutlet.error,
-          ),
-        ),
-        errorStyle: const TextStyle(color: ColorOutlet.error),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorOutlet.secondary,
-          ),
-        ),
-        labelStyle: const TextStyle(color: ColorOutlet.secondaryDark),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorOutlet.secondary,
-          ),
-        ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-          color: ColorOutlet.secondary,
-        )),
-        labelText: label,
-        hintStyle: const TextStyle(color: ColorOutlet.shadow),
-      ),
+        scrollPadding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
+        onFieldSubmitted: onFieldSubmitted,
+        focusNode: focusNode,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        inputFormatters: inputFormatters,
+        initialValue: value.toString(),
+        validator: validator,
+        onChanged: onChanged,
+        style: const TextStyle(color: ColorOutlet.secondary),
+        cursorColor: ColorOutlet.secondary,
+        obscureText: obscureText,
+        obscuringCharacter: 'ж',
+        decoration: _inputDecoration());
+  }
+
+  InputDecoration _inputDecoration() {
+    return InputDecoration(
+      labelText: label,
+      focusedErrorBorder: _outlineInputBorderError(),
+      errorStyle: const TextStyle(color: ColorOutlet.error),
+      errorBorder: _outlineInputBorderError(),
+      labelStyle: const TextStyle(color: ColorOutlet.secondaryDark),
+      focusedBorder: _outlineInputBorderSecondary(),
+      hintStyle: const TextStyle(color: ColorOutlet.shadow),
+      border: _outlineInputBorderSecondary(),
+    );
+  }
+
+  OutlineInputBorder _outlineInputBorderSecondary() {
+    return const OutlineInputBorder(
+      borderSide: BorderSide(color: ColorOutlet.secondary),
+    );
+  }
+
+  OutlineInputBorder _outlineInputBorderError() {
+    return const OutlineInputBorder(
+      borderSide: BorderSide(color: ColorOutlet.error),
     );
   }
 }
