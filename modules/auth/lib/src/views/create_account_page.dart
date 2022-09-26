@@ -1,6 +1,6 @@
 import 'package:auth/src/controllers/create_account_controller.dart';
 import 'package:core/domain/presentation/widgets/common_text_form_field.dart';
-import 'package:core/domain/presentation/widgets/login_button.dart';
+import 'package:core/domain/presentation/widgets/common_button.dart';
 import 'package:core/domain/application/common_state.dart';
 import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';

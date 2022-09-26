@@ -51,13 +51,4 @@ class CreateAccountRequest {
       'name': name.toString()
     };
   }
-
-  static CreateAccountRequest fromJson(dynamic data) {
-    return CreateAccountRequest(
-      name: data['name'],
-      login: data['login'],
-      secret: data['secret'],
-      secretConfirm: data['secretConfirm'],
-    );
-  }
 }
