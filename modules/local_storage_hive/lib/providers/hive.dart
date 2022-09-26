@@ -15,11 +15,11 @@ class Hive<T extends EntityBase> implements Repository<T> {
 
   @override
   Future init(String path) async {
-    fLog.wtf(DateTime.now());
+    fLog.e('init s - ${DateTime.now()}');
     await db.Hive.initFlutter();
-    fLog.wtf(DateTime.now());
+    fLog.e('init f - ${DateTime.now()}');
     await db.Hive.openBox(T.toString());
-    fLog.wtf(DateTime.now());
+    fLog.e('open box - ${DateTime.now()}');
   }
 
   @override

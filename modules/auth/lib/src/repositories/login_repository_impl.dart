@@ -5,6 +5,7 @@ import 'package:core/domain/application/login_request.dart';
 import 'package:core/domain/repositories/login_repository.dart';
 import 'package:core/domain/services/http_service.dart';
 import 'package:core/domain/user_entity.dart';
+import 'package:core/infra/logger.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:local_storage_hive/providers/hive.dart';
 
@@ -56,8 +57,9 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements LoginRepository {
   @override
   Future<UserEntity> getLoggedUser() async{
       var allUsers = box.values.toList();
-      allUsers.sort((a, b) => a['timestamp'].compareTo(b['timestamp']));
-      allUsers.last.toString();
+      allUsers.sort((a, b) => a['created'].compareTo(b['created']));
+      fLog.wtf(allUsers.last.toString());
+      fLog.wtf(allUsers.first.toString());
       return UserEntity.fromJson(allUsers.last);
   }
 }
