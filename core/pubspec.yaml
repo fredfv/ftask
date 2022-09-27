@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   logger: ^1.1.0
   objectid: ^2.1.0
+  loading_animation_widget: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:

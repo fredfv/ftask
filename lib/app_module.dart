@@ -11,6 +11,7 @@ import 'src/infra/forms_validade_impl.dart';
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
+        Bind.lazySingleton((i) => LoginRepositoryImpl(i())),
         Bind.factory((i) => FormsValidateImpl()),
         Bind.factory((i) => DisplaySnackbarImp()),
         Bind.lazySingleton((i) => HttpServiceDioImpl()),
