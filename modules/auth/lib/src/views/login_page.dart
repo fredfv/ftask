@@ -17,6 +17,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorOutlet.primary,
+        shadowColor: Colors.transparent,
+      ),
       backgroundColor: ColorOutlet.primary,
       body: Form(
         key: controller.form,
@@ -26,7 +30,9 @@ class LoginPage extends StatelessWidget {
               vertical: MediaQuery.of(context).size.height * 0.03,
               horizontal: MediaQuery.of(context).size.width * 0.05),
           children: [
-            _svgPicture(context),
+            SvgPicture.asset('assets/ttlogo.svg',
+                color: ColorOutlet.secondary,
+                width: MediaQuery.of(context).size.width * 0.7),
             CommonTextFormField(
                 onFieldSubmitted: controller.loginSubmitted,
                 label: 'Login',

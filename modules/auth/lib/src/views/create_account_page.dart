@@ -5,7 +5,6 @@ import 'package:core/domain/presentation/widgets/common_button.dart';
 import 'package:core/domain/presentation/widgets/common_text_form_field.dart';
 import 'package:core/domain/presentation/widgets/common_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
@@ -76,7 +75,8 @@ class CreateAccountPage extends StatelessWidget {
                 valueListenable: controller,
                 builder: (_, state, child) {
                   if (state is LoadingState) {
-                    return CommonWidgets.loadingAnimationWidgetForButtons(context);
+                    return CommonWidgets.loadingAnimationWidgetForButtons(
+                        context);
                   } else if (state is SuccessState) {
                     controller.displaySnackbar
                         .show(context, state.response, ColorOutlet.success);
