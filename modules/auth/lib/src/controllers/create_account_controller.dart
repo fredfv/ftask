@@ -12,20 +12,19 @@ class CreateAccountController extends ValueNotifier<CommonState> {
   final LoginRepositoryImpl loginRepository;
   final FormsValidateService formsValidate;
   final DisplaySnackbarService displaySnackbar;
-
-  final newAccount = CreateAccountRequest.empty();
-
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
-
-  GlobalKey<FormState> get form => formsValidate.form;
 
   CreateAccountController({
     required this.loginRepository,
     required this.formsValidate,
     required this.displaySnackbar,
   }) : super(IdleState());
+
+  final newAccount = CreateAccountRequest.empty();
+
+  GlobalKey<FormState> get form => formsValidate.form;
 
   void setLoginFocus(value) {
     loginFocus.requestFocus();
@@ -39,7 +38,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     secretConfirmFocus.requestFocus();
   }
 
-  createNewAccountExecute() {
+  void createNewAccountExecute() {
     value = LoadingState();
     loginRepository.createAccount(newAccount).then((v) {
       if (v is Exception) {

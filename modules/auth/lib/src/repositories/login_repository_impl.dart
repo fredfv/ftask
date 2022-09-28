@@ -44,22 +44,22 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements LoginRepository {
   }
 
   @override
-  Future<bool> isAuthenticated(String? idLoggedUser) async{
-    if(idLoggedUser==null){
+  Future<bool> isAuthenticated(String? idLoggedUser) async {
+    if (idLoggedUser == null) {
       var lastUser = await getLoggedUser();
       idLoggedUser = lastUser.id;
     }
     var userToVerify = await get(idLoggedUser);
-    if(userToVerify == null ) throw CustomException('user not found');
+    if (userToVerify == null) throw CustomException('user not found');
     return JwtDecoder.isExpired(userToVerify.token);
   }
 
   @override
-  Future<UserEntity> getLoggedUser() async{
-      var allUsers = box.values.toList();
-      allUsers.sort((a, b) => a['created'].compareTo(b['created']));
-      fLog.wtf(allUsers.last.toString());
-      fLog.wtf(allUsers.first.toString());
-      return UserEntity.fromJson(allUsers.last);
+  Future<UserEntity> getLoggedUser() async {
+    var allUsers = box.values.toList();
+    allUsers.sort((a, b) => a['created'].compareTo(b['created']));
+    fLog.wtf(allUsers.last.toString());
+    fLog.wtf(allUsers.first.toString());
+    return UserEntity.fromJson(allUsers.last);
   }
 }

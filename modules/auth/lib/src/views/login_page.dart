@@ -17,10 +17,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorOutlet.primary,
-        shadowColor: Colors.transparent,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: ColorOutlet.primary,
+      //   shadowColor: Colors.transparent,
+      // ),
       backgroundColor: ColorOutlet.primary,
       body: Form(
         key: controller.form,

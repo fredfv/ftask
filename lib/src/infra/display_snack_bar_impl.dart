@@ -7,7 +7,7 @@ class DisplaySnackbarImp implements DisplaySnackbarService {
     var snackBar = SnackBar(
       content: Text(msg),
       backgroundColor: color,
-      duration: const Duration(milliseconds: 1300),
+      duration: const Duration(milliseconds: 1500),
     );
     Future.delayed(const Duration(milliseconds: 90), () {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
