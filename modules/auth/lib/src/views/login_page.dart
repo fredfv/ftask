@@ -1,10 +1,13 @@
 import 'package:core/domain/application/common_state.dart';
 import 'package:core/domain/presentation/color_outlet.dart';
+import 'package:core/domain/presentation/size_outlet.dart';
 import 'package:core/domain/presentation/widgets/common_button.dart';
+import 'package:core/domain/presentation/widgets/common_loading.dart';
+import 'package:core/domain/presentation/widgets/common_snackbar.dart';
 import 'package:core/domain/presentation/widgets/common_text_form_field.dart';
-import 'package:core/domain/presentation/widgets/common_widgets.dart';
 import 'package:core/domain/presentation/widgets/underline_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../controllers/login_controller.dart';
@@ -17,10 +20,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: ColorOutlet.primary,
-      //   shadowColor: Colors.transparent,
-      // ),
       backgroundColor: ColorOutlet.primary,
       body: Form(
         key: controller.form,
@@ -55,16 +54,23 @@ class LoginPage extends StatelessWidget {
                   valueListenable: controller,
                   builder: (_, state, child) {
                     if (state is LoadingState) {
-                      return CommonWidgets.loadingAnimationWidgetForButtons(
-                          context);
+                      return const CommonLoading(SizeOutlet.loadingForButtons);
                     } else if (state is SuccessState) {
-                      controller.displaySnackbar
-                          .show(context, state.response, ColorOutlet.success);
-                      controller.value = IdleState();
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            CommonSnackBar(
+                                content: Text(state.response.toString()),
+                                backgroundColor: ColorOutlet.success));
+                        controller.value = IdleState();
+                      });
                     } else if (state is ErrorState) {
-                      controller.displaySnackbar
-                          .show(context, state.message, ColorOutlet.error);
-                      controller.value = IdleState();
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            CommonSnackBar(
+                                content: Text(state.message),
+                                backgroundColor: ColorOutlet.error));
+                        controller.value = IdleState();
+                      });
                     }
                     return CommonButton(
                         description: 'Log in',
@@ -78,14 +84,6 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _svgPicture(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/ttlogo.svg',
-      color: ColorOutlet.secondary,
-      width: MediaQuery.of(context).size.width * 0.7,
     );
   }
 }

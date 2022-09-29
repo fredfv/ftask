@@ -1,7 +1,5 @@
 import 'package:core/domain/application/common_state.dart';
 import 'package:core/domain/application/create_account_request.dart';
-import 'package:core/domain/presentation/color_outlet.dart';
-import 'package:core/domain/services/display_snackbar_service.dart';
 import 'package:core/domain/services/form_validade_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,7 +9,6 @@ import '../repositories/login_repository_impl.dart';
 class CreateAccountController extends ValueNotifier<CommonState> {
   final LoginRepositoryImpl loginRepository;
   final FormsValidateService formsValidate;
-  final DisplaySnackbarService displaySnackbar;
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
@@ -19,7 +16,6 @@ class CreateAccountController extends ValueNotifier<CommonState> {
   CreateAccountController({
     required this.loginRepository,
     required this.formsValidate,
-    required this.displaySnackbar,
   }) : super(IdleState());
 
   final newAccount = CreateAccountRequest.empty();
@@ -57,7 +53,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     if (formsValidate.validate()) {
       createNewAccountExecute();
     } else {
-      displaySnackbar.show(context, 'invalid fields', ColorOutlet.error);
+      value = ErrorState('invalid fields');
     }
   }
 }

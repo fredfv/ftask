@@ -8,10 +8,10 @@ import 'views/login_page.dart';
 class AuthModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => LoginController(
-            displaySnackbar: i(), formsValidate: i(), loginRepository: i())),
-        Bind.factory((i) => CreateAccountController(
-            loginRepository: i(), formsValidate: i(), displaySnackbar: i()))
+        Bind.factory(
+            (i) => LoginController(formsValidate: i(), loginRepository: i())),
+        Bind.factory((i) =>
+            CreateAccountController(loginRepository: i(), formsValidate: i()))
       ];
 
   @override

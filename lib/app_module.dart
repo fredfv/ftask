@@ -5,7 +5,6 @@ import 'package:http_dio/providers/http_service_dio_impl.dart';
 import 'package:task/splash_page.dart';
 import 'package:task/src/modules/task/task_module.dart';
 
-import 'src/infra/display_snack_bar_impl.dart';
 import 'src/infra/forms_validade_impl.dart';
 
 class AppModule extends Module {
@@ -13,7 +12,6 @@ class AppModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton((i) => LoginRepositoryImpl(i())),
         Bind.factory((i) => FormsValidateImpl()),
-        Bind.factory((i) => DisplaySnackbarImp()),
         Bind.lazySingleton((i) => HttpServiceDioImpl()),
       ];
 
