@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../core/application/custom_exception.dart';
-import '../../core/infra/http_custom_configurations.dart';
-import '../../core/infra/http_request_methods.dart';
-import '../../core/infra/logger.dart';
+import '../../application/custom_exception.dart';
+import '../../infra/http_custom_configurations.dart';
+import '../../infra/http_request_methods.dart';
+import '../../infra/logger.dart';
 
 class DioHandler {
   Dio? _dio;

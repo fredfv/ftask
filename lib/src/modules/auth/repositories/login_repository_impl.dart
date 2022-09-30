@@ -9,7 +9,7 @@ import '../../../core/domain/user_entity.dart';
 import '../../../core/infra/http_request_methods.dart';
 import '../../../core/infra/logger.dart';
 import '../../../core/services/http_service.dart';
-import '../../local_storage/hive.dart';
+import '../../../core/services/local_storage/hive.dart';
 
 class LoginRepositoryImpl extends Hive<UserEntity> implements LoginRepository {
   final HttpService httpService;

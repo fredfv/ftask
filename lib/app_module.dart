@@ -3,11 +3,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/splash_page.dart';
 import 'package:task/src/modules/task/task_module.dart';
 
+import 'src/core/services/http/http_service_dio_impl.dart';
 import 'src/core/ui/services/forms_validade_impl.dart';
 import 'src/modules/auth/auth_module.dart';
 import 'src/modules/auth/guards/auth_guards.dart';
 import 'src/modules/auth/repositories/login_repository_impl.dart';
-import 'src/modules/http/http_service_dio_impl.dart';
 
 class AppModule extends Module {
   @override

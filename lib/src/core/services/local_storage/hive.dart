@@ -1,12 +1,11 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart' as db;
 
-import '../../core/application/mapping/mapper.dart';
-import '../../core/domain/entity_base.dart';
-import '../../core/domain/repositories/repository.dart';
-import '../../core/infra/logger.dart';
+import '../../application/mapping/mapper.dart';
+import '../../domain/entity_base.dart';
+import '../../domain/repositories/repository.dart';
+import '../../infra/logger.dart';
 
-///REPOSITORY IMPL
 class Hive<T extends EntityBase> implements Repository<T> {
   final Mapper<T> mapper;
 
