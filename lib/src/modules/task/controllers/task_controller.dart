@@ -1,5 +1,5 @@
-import 'package:core/domain/task_entity.dart';
-import 'package:task/src/modules/task/repositories/task_repository_impl.dart';
+import '../../../core/domain/task_entity.dart';
+import '../repositories/task_repository_impl.dart';
 
 class TaskController {
   final TaskRepositoryImpl _taskRepository;

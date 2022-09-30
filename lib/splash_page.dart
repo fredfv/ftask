@@ -1,8 +1,9 @@
-import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:task/app_module.dart';
+import 'package:task/src/core/ui/widgets/common_loading.dart';
+
+import 'src/core/ui/color_outlet.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -25,14 +26,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Container(
       color: ColorOutlet.primary,
-      child: Center(
-        child: LoadingAnimationWidget.dotsTriangle(
-          color: ColorOutlet.secondary,
-          size: MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              250,
-        ),
-      ),
+      child: const Center(child: CommonLoading(150)),
     );
   }
 }

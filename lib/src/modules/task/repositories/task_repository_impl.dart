@@ -1,6 +1,7 @@
-import 'package:core/domain/repositories/task_repository.dart';
-import 'package:core/domain/task_entity.dart';
-import 'package:local_storage_hive/providers/hive.dart';
+import '../../../core/application/mapping/task_mapper.dart';
+import '../../../core/domain/repositories/task_repository.dart';
+import '../../../core/domain/task_entity.dart';
+import '../../local_storage/hive.dart';
 
 class TaskRepositoryImpl extends Hive<TaskEntity> implements TaskRepository {
   TaskRepositoryImpl() : super(TaskMapper());

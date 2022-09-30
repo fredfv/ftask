@@ -1,11 +1,13 @@
-import 'package:auth/auth_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:http_dio/providers/http_service_dio_impl.dart';
 import 'package:task/splash_page.dart';
 import 'package:task/src/modules/task/task_module.dart';
 
-import 'src/infra/forms_validade_impl.dart';
+import 'src/core/ui/services/forms_validade_impl.dart';
+import 'src/modules/auth/auth_module.dart';
+import 'src/modules/auth/guards/auth_guards.dart';
+import 'src/modules/auth/repositories/login_repository_impl.dart';
+import 'src/modules/http/http_service_dio_impl.dart';
 
 class AppModule extends Module {
   @override

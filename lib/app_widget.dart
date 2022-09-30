@@ -1,6 +1,7 @@
-import 'package:core/domain/presentation/color_outlet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'src/core/ui/color_outlet.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);

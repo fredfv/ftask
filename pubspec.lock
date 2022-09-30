@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  auth:
-    dependency: "direct main"
-    description:
-      path: "modules/auth"
-      relative: true
-    source: path
-    version: "0.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -43,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
-  core:
-    dependency: "direct main"
-    description:
-      path: core
-      relative: true
-    source: path
-    version: "0.0.1"
   crypto:
     dependency: transitive
     description:
@@ -65,7 +51,7 @@ packages:
     source: hosted
     version: "1.0.5"
   dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
@@ -119,7 +105,7 @@ packages:
     source: hosted
     version: "0.0.2"
   flutter_svg:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_svg
       url: "https://pub.dartlang.org"
@@ -138,19 +124,12 @@ packages:
     source: hosted
     version: "2.2.3"
   hive_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: hive_flutter
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  http_dio:
-    dependency: "direct main"
-    description:
-      path: "modules/http_dio"
-      relative: true
-    source: path
-    version: "0.0.1"
   http_parser:
     dependency: transitive
     description:
@@ -159,7 +138,7 @@ packages:
     source: hosted
     version: "4.0.1"
   jwt_decoder:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: jwt_decoder
       url: "https://pub.dartlang.org"
@@ -179,15 +158,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0+3"
-  local_storage_hive:
-    dependency: "direct main"
-    description:
-      path: "modules/local_storage_hive"
-      relative: true
-    source: path
-    version: "0.0.1"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
       url: "https://pub.dartlang.org"
@@ -229,7 +201,7 @@ packages:
     source: hosted
     version: "2.0.2"
   objectid:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: objectid
       url: "https://pub.dartlang.org"
@@ -257,7 +229,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -416,5 +388,5 @@ packages:
     source: hosted
     version: "6.1.0"
 sdks:
-  dart: ">=2.18.1 <3.0.0"
+  dart: ">=2.18.0 <3.0.0"
   flutter: ">=3.0.0"
