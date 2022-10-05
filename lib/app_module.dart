@@ -29,4 +29,5 @@ class AppModule extends Module {
                 )))
         //RedirectRoute('/redir', to: '/auth/')
       ];
+
 }
