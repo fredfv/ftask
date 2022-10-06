@@ -1,38 +1,79 @@
 import 'package:signalr_core/signalr_core.dart';
+import 'package:task/src/core/infra/logger.dart';
 
-class SignalRHelper{
+import '../hub_service.dart';
 
-  final connection = HubConnectionBuilder().withUrl('https://localhost:7142/chatHub',
-      HttpConnectionOptions(
-        logging: (level, message) => print(message),
-      )).build();
+class SignalRHelper implements HubService {
+  HubConnection? connection;
 
+  @override
+  Future<void> initConnection() async {
+    fLog.w('[SIGNALR CONNECTION CREATED]');
+    connection = HubConnectionBuilder()
+        .withUrl(
+            'http://192.168.15.3:5002/chatHub',
+            HttpConnectionOptions(
+              logging: (level, message) => print(message),
+            ))
+        .build();
+    connection?.serverTimeoutInMilliseconds = 30;
+    fLog.w('[SIGNALR CONNECTION CREATED]');
+    await connection?.start();
+    fLog.w('[SIGNALR CONNECTION STARTED]');
 
+    connection?.onclose((_) {
+      yellsOnClose();
+    });
+    fLog.w('[SIGNALR CONNECTION ON CLOSE REGISTRED]');
 
-  // SignalRHelper(){
-  //   connection = HubConnectionBuilder()
-  //       .withUrl(
-  //       hubBaseURL,
-  //       HttpConnectionOptions(
-  //         logging: (level, message)
-  //         => print(message),
-  //       )
-  //   ).build();
-  // }
-  //
-  // initiateConnection(BuildContext context) async {
-  //   await connection.start();
-  //
-  //   connection.on("ReceiveMessage", (arguments){
-  //     print(arguments);
-  //     //Do what needs to be done
-  //   });
-  // }
-  //
-  // closeConnection(BuildContext context) async {
-  //   if(connection.state == HubConnectionState.connected)
-  //   {
-  //     await connection.stop();
-  //   }
-  // }
+    connection?.onreconnecting((_) {
+      yellsOnReconecting();
+    });
+    fLog.w('[SIGNALR CONNECTION ON RECONECTING REGISTRED]');
+
+    connection?.onreconnected((_) {
+      yellsOnReconected();
+    });
+    fLog.w('[SIGNALR CONNECTION ON RECONECTED REGISTRED]');
+
+    connection?.on('ReceiveMessage', (message) {
+      yellsOnMessage(message);
+    });
+    fLog.w('[SIGNALR CONNECTION ON MESSAGE REGISTRED]');
+  }
+
+  @override
+  Future<void> sendMessage() async {
+    await connection?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
+    fLog.w('[SIGNALR SEND MESSAGE]');
+  }
+
+  @override
+  Future<void> closeConnection() async {
+    await connection?.stop();
+    fLog.w('[SIGNALR ON CLOSE CONNECTION CALLED]');
+  }
+
+  @override
+  void yellsOnClose() {
+    fLog.w('[SIGNALR ON CLOSE YELLED]');
+  }
+
+  dynamic yellsOnReconected() {
+    fLog.w('[SIGNALR ON RECONECTED YELLED]');
+  }
+
+  dynamic yellsOnReconecting() {
+    fLog.w('[SIGNALR ON RECONECTING YELLED]');
+  }
+
+  @override
+  dynamic yellsOnMessage(dynamic data) {
+    fLog.w('[SIGNALR ON MESSAGE YELLED]');
+    fLog.v(data.toString());
+  }
+
+  void checkStatus(){
+    fLog.e(connection?.state);
+  }
 }

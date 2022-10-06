@@ -4,6 +4,7 @@ import 'package:task/splash_page.dart';
 import 'package:task/src/modules/task/task_module.dart';
 
 import 'src/core/services/http/http_service_dio_impl.dart';
+import 'src/core/services/websocket/signalr_helper.dart';
 import 'src/core/ui/services/forms_validade_impl.dart';
 import 'src/modules/auth/auth_module.dart';
 import 'src/modules/auth/guards/auth_guards.dart';
@@ -15,6 +16,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => LoginRepositoryImpl(i())),
         Bind.factory((i) => FormsValidateImpl()),
         Bind.lazySingleton((i) => HttpServiceDioImpl()),
+        Bind.lazySingleton((i) => SignalRHelper())
       ];
 
   @override

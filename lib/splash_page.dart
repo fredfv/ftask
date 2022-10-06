@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/app_module.dart';
 import 'package:task/src/core/ui/widgets/common_loading.dart';
 
+import 'src/core/services/websocket/signalr_helper.dart';
 import 'src/core/ui/color_outlet.dart';
 
 class SplashPage extends StatefulWidget {
@@ -18,6 +19,9 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((_) async {
       await Modular.isModuleReady<AppModule>();
+
+      await Modular.get<SignalRHelper>().initConnection();
+
       Modular.to.navigate('/src/');
     });
   }
