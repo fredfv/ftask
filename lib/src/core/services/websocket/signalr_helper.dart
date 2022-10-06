@@ -43,13 +43,12 @@ class SignalRHelper extends ValueNotifier<String> implements HubService {
       value = message.toString();
     });
     fLog.w('[SIGNALR CONNECTION ON MESSAGE REGISTRED]');
-
   }
-
 
   @override
   Future<void> sendMessage() async {
-    await connection?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
+    await connection
+        ?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
     fLog.w('[SIGNALR SEND MESSAGE]');
   }
 
@@ -78,7 +77,7 @@ class SignalRHelper extends ValueNotifier<String> implements HubService {
     fLog.v(data.toString());
   }
 
-  void checkStatus(){
+  void checkStatus() {
     fLog.e(connection?.state);
   }
 }

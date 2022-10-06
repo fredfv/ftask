@@ -14,12 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {}
-
-  @override
-  void dispose() {}
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorOutlet.primary,
@@ -34,10 +28,15 @@ class _HomePageState extends State<HomePage> {
               fontSize: MediaQuery.of(context).size.width /
                   MediaQuery.of(context).size.height *
                   35)),
-      body: AnimatedBuilder(
-          animation: widget.controller.hub,
-          builder: (context, child) {
-            return Text(widget.controller.hub.value, style: TextStyle(color: Colors.white),);
+      body: ValueListenableBuilder(
+          valueListenable: widget.controller.hub,
+          builder: (_, state, child) {
+            return Center(
+              child: Text(
+                state,
+                style: TextStyle(color: ColorOutlet.textColorLight),
+              ),
+            );
           }),
     );
   }
