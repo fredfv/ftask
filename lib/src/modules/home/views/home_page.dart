@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/domain/dictionary.dart';
 import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 import 'package:task/src/modules/home/controllers/home_controller.dart';
@@ -18,8 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: Dictionary.homePage,
-      navBar: AnimatedBuilder(
+      bottonNavBar: AnimatedBuilder(
         animation: widget.controller,
         builder: (BuildContext context, Widget? child) {
           return BottomNavigationBar(
@@ -33,12 +30,24 @@ class _HomePageState extends State<HomePage> {
             },
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
-              BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks')
+              BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks'),
+              BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
             ],
           );
         },
       ),
-      child: const RouterOutlet(),
+      body: AnimatedBuilder(
+        animation: widget.controller,
+        builder: (BuildContext context, Widget? child) {
+          return PageView(
+            controller: widget.controller.pageController,
+            onPageChanged: (index) {
+              widget.controller.changePage(index);
+            },
+            children: widget.controller.pages,
+          );
+        },
+      ),
     );
   }
 }

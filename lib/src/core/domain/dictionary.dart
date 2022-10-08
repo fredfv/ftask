@@ -3,6 +3,8 @@ abstract class Dictionary {
   static const String homePage = 'Home';
   static const String tasksPage = 'Tasks';
   static const String taskPage = 'Task';
+
+  static const String chatsPage = 'chatsPage';
 }
 
 //todo implementar change

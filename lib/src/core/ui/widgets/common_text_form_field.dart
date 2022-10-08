@@ -29,8 +29,7 @@ class CommonTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        scrollPadding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
+        scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
         onFieldSubmitted: onFieldSubmitted,
         focusNode: focusNode,
         autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -22,8 +22,7 @@ class CreateAccountRequest {
 
   SecretVO get secretConfirm => _secretConfirm;
 
-  void setSecretConfirm(String? value) =>
-      _secretConfirm = SecretVO(value ?? '');
+  void setSecretConfirm(String? value) => _secretConfirm = SecretVO(value ?? '');
 
   CreateAccountRequest({
     required String name,
@@ -45,10 +44,6 @@ class CreateAccountRequest {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'userName': login.toString(),
-      'password': secret.toString(),
-      'name': name.toString()
-    };
+    return {'userName': login.toString(), 'password': secret.toString(), 'name': name.toString()};
   }
 }

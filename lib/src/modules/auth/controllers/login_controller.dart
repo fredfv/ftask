@@ -29,9 +29,8 @@ class LoginController extends ValueNotifier<CommonState> {
           value = ErrorState(v.toString());
         } else {
           loginRepository.persistAuthLogin(v).then((l) {
-            value = SuccessState<String>(
-                response: 'welcome ${v['person']['name']}');
-            Modular.to.pushNamed('/home/');
+            value = SuccessState<String>(response: 'welcome ${v['person']['name']}');
+            Modular.to.navigate('/home/');
           }).catchError((e) {
             value = ErrorState(e.toString());
           });

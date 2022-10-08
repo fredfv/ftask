@@ -1,25 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/infra/logger.dart';
 
 import '../../../core/services/websocket/signalr_helper.dart';
+import '../views/chat_page.dart';
+import '../views/list_task_page.dart';
+import '../views/task_page.dart';
 
 class HomeController extends ChangeNotifier {
   int pageSelectedIndex = 0;
 
   final SignalRHelper hub;
+  final PageController pageController = PageController(initialPage: 0, keepPage: true);
+  final List<Widget> pages = const [TaskPage(), ListTaskPage(), ChatPage()];
+
   HomeController({required this.hub});
 
   changePage(int index) {
-    fLog.i('$index - [TAB SELECTED]');
+    pageController.jumpToPage(index);
     pageSelectedIndex = index;
-
-    if (index == 0) {
-      Modular.to.navigate('/task');
-    } else {
-      Modular.to.navigate('./tasks');
-    }
-
     notifyListeners();
   }
 }

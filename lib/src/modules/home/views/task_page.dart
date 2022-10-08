@@ -9,8 +9,8 @@ class TaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CommonScaffold(
-      title: Dictionary.tasksPage,
-      child: Center(
+      title: Dictionary.taskPage,
+      body: Center(
         child: Text(
           'Minhas tasks',
           style: TextStyle(color: ColorOutlet.secondary),

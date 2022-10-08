@@ -21,7 +21,7 @@ class AppModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const SplashPage()),
-        ModuleRoute('/src', module: AuthModule(), transition: TransitionType.leftToRight),
+        ModuleRoute('/src', module: AuthModule(), transition: TransitionType.size),
         ModuleRoute('/home', module: HomeModule(), transition: TransitionType.downToUp),
         WildcardRoute(
           child: (_, __) => const WildcardPage(),
