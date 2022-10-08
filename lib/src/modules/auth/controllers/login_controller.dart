@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/login_request.dart';
@@ -32,7 +31,7 @@ class LoginController extends ValueNotifier<CommonState> {
           loginRepository.persistAuthLogin(v).then((l) {
             value = SuccessState<String>(
                 response: 'welcome ${v['person']['name']}');
-            Modular.to.pushNamed('/task/');
+            Modular.to.pushNamed('/home/');
           }).catchError((e) {
             value = ErrorState(e.toString());
           });
@@ -49,8 +48,7 @@ class LoginController extends ValueNotifier<CommonState> {
     secretFocus.requestFocus();
   }
 
-  void goToCreateAccount() async{
-    Modular.get<SignalRHelper>().checkStatus();
-    //Modular.to.pushNamed('./createaccount');
+  void goToCreateAccount() async {
+    Modular.to.pushNamed('./createaccount');
   }
 }

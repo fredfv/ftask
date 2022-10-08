@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3)).then((_) async {
+    Future.delayed(const Duration(seconds: 2)).then((_) async {
       await Modular.isModuleReady<AppModule>();
 
       await Modular.get<SignalRHelper>().initConnection();

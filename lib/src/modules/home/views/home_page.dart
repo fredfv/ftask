@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/core/domain/dictionary.dart';
+import 'package:task/src/core/ui/color_outlet.dart';
+import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 import 'package:task/src/modules/home/controllers/home_controller.dart';
-
-import '../../../core/ui/color_outlet.dart';
 
 class HomePage extends StatefulWidget {
   final HomeController controller;
@@ -15,29 +17,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorOutlet.primary,
-      appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Create new account'),
-          backgroundColor: ColorOutlet.primary,
-          iconTheme: const IconThemeData(color: ColorOutlet.secondary),
-          titleTextStyle: TextStyle(
-              fontFamily: 'Sansation',
-              color: ColorOutlet.secondary,
-              fontSize: MediaQuery.of(context).size.width /
-                  MediaQuery.of(context).size.height *
-                  35)),
-      body: ValueListenableBuilder(
-          valueListenable: widget.controller.hub,
-          builder: (_, state, child) {
-            return Center(
-              child: Text(
-                state,
-                style: TextStyle(color: ColorOutlet.textColorLight),
-              ),
-            );
-          }),
+    return CommonScaffold(
+      title: Dictionary.homePage,
+      navBar: AnimatedBuilder(
+        animation: widget.controller,
+        builder: (BuildContext context, Widget? child) {
+          return BottomNavigationBar(
+            backgroundColor: ColorOutlet.navBar,
+            showSelectedLabels: true,
+            type: BottomNavigationBarType.fixed,
+            fixedColor: ColorOutlet.secondary,
+            currentIndex: widget.controller.pageSelectedIndex,
+            onTap: (index) {
+              widget.controller.changePage(index);
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
+              BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks')
+            ],
+          );
+        },
+      ),
+      child: const RouterOutlet(),
     );
   }
 }
