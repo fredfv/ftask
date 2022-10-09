@@ -20,7 +20,11 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(milliseconds: 900)).then((_) async {
       await Modular.isModuleReady<AppModule>();
 
-      await Modular.get<SignalRHelper>().initConnection();
+      try {
+        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 2));
+      } catch (e) {
+        print(e);
+      }
 
       Modular.to.navigate('/src/');
     });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/core/domain/repositories/login_repository.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/create_account_request.dart';
@@ -7,7 +8,7 @@ import '../../../core/services/form_validate_service.dart';
 import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
-  final LoginRepositoryImpl loginRepository;
+  final LoginRepository loginRepository;
   final FormsValidateService formsValidate;
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
@@ -34,14 +35,13 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     secretConfirmFocus.requestFocus();
   }
 
-  void createNewAccountExecute() {
+  Future createNewAccountExecute() async {
     value = LoadingState();
     loginRepository.createAccount(newAccount).then((v) {
       if (v is Exception) {
         value = ErrorState(v.toString());
       } else {
-        value = SuccessState<String>(
-            response: 'account created! now login to start your tasks!');
+        value = SuccessState<String>(response: 'account created! now login to start your tasks!');
         Modular.to.pop();
       }
     }).catchError((e) {

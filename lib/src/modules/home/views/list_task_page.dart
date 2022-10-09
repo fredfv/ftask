@@ -25,23 +25,23 @@ class ListTaskPage extends StatelessWidget {
           if (state is LoadingState) {
             return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
           } else if (state is SuccessState) {
-            return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: controller.list.length,
-                itemBuilder: (BuildContext ctx, index) {
-                  return TaskTile(taskItem: controller.list[index]);
-                });
-
-            // return ListView.builder(
+            // return GridView.builder(
+            //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            //       maxCrossAxisExtent: 200,
+            //       childAspectRatio: 1,
+            //       crossAxisSpacing: 1,
+            //       mainAxisSpacing: 10,
+            //     ),
             //     itemCount: controller.list.length,
-            //     itemBuilder: (BuildContext context, int index) {
+            //     itemBuilder: (BuildContext ctx, index) {
             //       return TaskTile(taskItem: controller.list[index]);
             //     });
+
+            return ListView.builder(
+                itemCount: controller.list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TaskTile(taskItem: controller.list[index]);
+                });
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               ScaffoldMessenger.of(context)
