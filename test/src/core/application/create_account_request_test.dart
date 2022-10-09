@@ -82,6 +82,11 @@ void main() {
     expect(createAccountRequest.secretConfirm.validator(), null);
   });
 
+  test('implements toJson', () {
+    final createAccountRequest = CreateAccountRequest.empty();
+    expect(createAccountRequest.toJson(), isA<Map<String, dynamic>>());
+  });
+
   test('should return a json with the values of the fields', () {
     createAccountRequest.setName('test test');
     createAccountRequest.setLogin('test');
