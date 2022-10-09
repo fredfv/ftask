@@ -1,4 +1,5 @@
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:task/src/core/services/object_id_service.dart';
 
 import '../../../core/application/create_account_request.dart';
 import '../../../core/application/custom_exception.dart';
@@ -14,7 +15,13 @@ import '../../../core/services/local_storage/hive.dart';
 class LoginRepositoryImpl extends Hive<UserEntity> implements LoginRepository {
   final HttpService httpService;
 
-  LoginRepositoryImpl(this.httpService) : super(UserMapper());
+  LoginRepositoryImpl({
+    required this.httpService,
+    required ObjectIdService objectIdService,
+  }) : super(
+          mapper: UserMapper(),
+          objectId: objectIdService,
+        );
 
   @override
   Future login(LoginRequest loginRequest) async {

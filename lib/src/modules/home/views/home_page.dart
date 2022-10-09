@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 import 'package:task/src/modules/home/controllers/home_controller.dart';
+
+import '../../../core/ui/color_outlet.dart';
 
 class HomePage extends StatefulWidget {
   final HomeController controller;
@@ -20,10 +21,10 @@ class _HomePageState extends State<HomePage> {
         animation: widget.controller,
         builder: (BuildContext context, Widget? child) {
           return BottomNavigationBar(
-            backgroundColor: ColorOutlet.navBar,
-            showSelectedLabels: true,
+            backgroundColor: ColorOutlet.bottomNavBarBackground,
+            unselectedItemColor: ColorOutlet.bottomNavBarItemUnselected,
+            selectedItemColor: ColorOutlet.bottomNavBarItemSelected,
             type: BottomNavigationBarType.fixed,
-            fixedColor: ColorOutlet.secondary,
             currentIndex: widget.controller.pageSelectedIndex,
             onTap: (index) {
               widget.controller.changePage(index);

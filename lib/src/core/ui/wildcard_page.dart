@@ -24,13 +24,17 @@ class WildcardPage extends StatelessWidget {
             Center(
               child: Text(
                 '404',
-                style: TextStyle(color: ColorOutlet.error, fontSize: MediaQuery.of(context).size.height * 0.1),
+                style: TextStyle(
+                    color: ColorOutlet.error,
+                    fontSize: MediaQuery.of(context).size.height * 0.1),
               ),
             ),
             Center(
               child: Text(
                 'ops! I hope you are using the web page. F',
-                style: TextStyle(color: ColorOutlet.secondary, fontSize: MediaQuery.of(context).size.height * 0.02),
+                style: TextStyle(
+                    color: ColorOutlet.secondary,
+                    fontSize: MediaQuery.of(context).size.height * 0.02),
               ),
             ),
           ],

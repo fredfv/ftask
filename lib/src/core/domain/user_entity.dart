@@ -19,7 +19,14 @@ class UserEntity extends EntityBase {
 
   @override
   Map<String, dynamic> toJson() {
-    return {'login': login, 'secret': secret, 'name': name, 'token': token, 'id': id, 'created': created};
+    return {
+      'login': login,
+      'secret': secret,
+      'name': name,
+      'token': token,
+      'id': id,
+      'created': created
+    };
   }
 
   factory UserEntity.fromJson(Map<String, dynamic> map) {

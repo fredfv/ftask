@@ -5,7 +5,7 @@ abstract class Repository<T extends EntityBase> {
 
   Future<T?> get(String key);
 
-  Future<void> put(String key, T value);
+  Future<dynamic> put(String? key, T value);
 
   Future delete(String key);
 

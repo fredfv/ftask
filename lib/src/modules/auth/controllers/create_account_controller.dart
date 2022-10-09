@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/create_account_request.dart';
-import '../../../core/services/form_validade_service.dart';
+import '../../../core/services/form_validate_service.dart';
 import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
@@ -40,7 +40,8 @@ class CreateAccountController extends ValueNotifier<CommonState> {
       if (v is Exception) {
         value = ErrorState(v.toString());
       } else {
-        value = SuccessState<String>(response: 'account created! now login to start your tasks!');
+        value = SuccessState<String>(
+            response: 'account created! now login to start your tasks!');
         Modular.to.pop();
       }
     }).catchError((e) {
@@ -48,7 +49,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     });
   }
 
-  void executeSubimitCreateAccount(BuildContext context) {
+  void executeSubmitCreateAccount(BuildContext context) {
     if (formsValidate.validate()) {
       createNewAccountExecute();
     } else {

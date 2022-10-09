@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/login_request.dart';
-import '../../../core/services/form_validade_service.dart';
+import '../../../core/services/form_validate_service.dart';
 import '../repositories/login_repository_impl.dart';
 
 class LoginController extends ValueNotifier<CommonState> {
@@ -29,7 +29,8 @@ class LoginController extends ValueNotifier<CommonState> {
           value = ErrorState(v.toString());
         } else {
           loginRepository.persistAuthLogin(v).then((l) {
-            value = SuccessState<String>(response: 'welcome ${v['person']['name']}');
+            value = SuccessState<String>(
+                response: 'welcome ${v['person']['name']}');
             Modular.to.navigate('/home/');
           }).catchError((e) {
             value = ErrorState(e.toString());

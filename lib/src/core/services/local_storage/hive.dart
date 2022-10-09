@@ -1,5 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart' as db;
+import 'package:task/src/core/services/object_id_service.dart';
 
 import '../../application/mapping/mapper.dart';
 import '../../domain/entity_base.dart';
@@ -8,8 +9,9 @@ import '../../infra/logger.dart';
 
 class Hive<T extends EntityBase> implements Repository<T> {
   final Mapper<T> mapper;
+  final ObjectIdService objectId;
 
-  Hive(this.mapper);
+  Hive({required this.mapper, required this.objectId});
 
   db.Box get box => db.Hive.box(T.toString());
 
@@ -37,8 +39,13 @@ class Hive<T extends EntityBase> implements Repository<T> {
   }
 
   @override
-  Future<void> put(String key, T value) async {
+  Future<dynamic> put(String? key, T value) async {
     await init('path');
+    if (key == null) {
+      key ??= objectId.generate();
+      value.id = key;
+    }
+
     Map<String, dynamic> map = mapper.toJson(value);
     await box.put(key, map);
   }

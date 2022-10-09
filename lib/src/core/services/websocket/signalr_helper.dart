@@ -16,8 +16,8 @@ class SignalRHelper extends ValueNotifier<String> implements HubService {
         .withUrl(
             'http://192.168.15.3:5002/chatHub',
             HttpConnectionOptions(
-              logging: (level, message) => print(message),
-            ))
+                //logging: (level, message) => print(message),
+                ))
         .build();
     fLog.w('[SIGNALR CONNECTION CREATED]');
     await connection?.start();
@@ -47,7 +47,8 @@ class SignalRHelper extends ValueNotifier<String> implements HubService {
 
   @override
   Future<void> sendMessage() async {
-    await connection?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
+    await connection
+        ?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
     fLog.w('[SIGNALR SEND MESSAGE]');
   }
 

@@ -11,7 +11,9 @@ class CommonLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingAnimationWidget.dotsTriangle(
       color: ColorOutlet.secondary,
-      size: MediaQuery.of(context).size.width / MediaQuery.of(context).size.height * size,
+      size: MediaQuery.of(context).size.width /
+          MediaQuery.of(context).size.height *
+          size,
     );
   }
 }

@@ -13,7 +13,8 @@ import '../controllers/create_account_controller.dart';
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
 
-  const CreateAccountPage({Key? key, required this.controller}) : super(key: key);
+  const CreateAccountPage({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class CreateAccountPage extends StatelessWidget {
           titleTextStyle: TextStyle(
               fontFamily: 'Sansation',
               color: ColorOutlet.secondary,
-              fontSize: MediaQuery.of(context).size.width / MediaQuery.of(context).size.height * 35)),
+              fontSize: MediaQuery.of(context).size.width /
+                  MediaQuery.of(context).size.height *
+                  35)),
       body: Form(
         key: controller.form,
         child: ListView(
@@ -60,16 +63,18 @@ class CreateAccountPage extends StatelessWidget {
                 obscureText: true),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CommonTextFormField(
-                onFieldSubmitted: (value) => controller.executeSubimitCreateAccount(context),
+                onFieldSubmitted: (value) =>
+                    controller.executeSubmitCreateAccount(context),
                 focusNode: controller.secretConfirmFocus,
                 label: 'Confirm password',
                 value: controller.newAccount.secretConfirm.toString(),
-                validator: (v) =>
-                    controller.newAccount.secretConfirm.secretMatches(controller.newAccount.secret.toString()),
+                validator: (v) => controller.newAccount.secretConfirm
+                    .secretMatches(controller.newAccount.secret.toString()),
                 onChanged: controller.newAccount.setSecretConfirm,
                 obscureText: true),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.05),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
@@ -78,20 +83,22 @@ class CreateAccountPage extends StatelessWidget {
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
+                          content: Text(state.response.toString()),
+                          backgroundColor: ColorOutlet.success));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                          content: Text(state.message),
+                          backgroundColor: ColorOutlet.error));
                       controller.value = IdleState();
                     });
                   }
                   return CommonButton(
                     description: 'Subimit new account',
                     onPressed: () {
-                      controller.executeSubimitCreateAccount(context);
+                      controller.executeSubmitCreateAccount(context);
                     },
                   );
                 },

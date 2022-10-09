@@ -3,7 +3,7 @@ import 'mapper.dart';
 
 class TaskMapper extends Mapper<TaskEntity> {
   @override
-  TaskEntity? fromJson(Map<String, dynamic>? map) {
+  TaskEntity? fromJson(dynamic map) {
     if (map == null) return null;
     return TaskEntity.fromJson(map);
   }
