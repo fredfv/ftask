@@ -43,7 +43,7 @@ class Hive<T extends EntityBase> implements Repository<T> {
     await init('path');
     if (key == null) {
       key ??= objectId.generate();
-      value.id = key;
+      value.setId(key);
     }
 
     Map<String, dynamic> map = mapper.toJson(value);

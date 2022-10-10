@@ -18,6 +18,10 @@ void main() {
 
   LoginRequest loginRequest = LoginRequest.empty();
 
+  test('should implements a toString', () {
+    expect(loginRequest.toString(), isA<String>());
+  });
+
   test('should be a instance of LoginRequest', () {
     expect(loginRequest, isA<LoginRequest>());
   });

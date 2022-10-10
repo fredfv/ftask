@@ -13,20 +13,24 @@ import '../repositories/login_repository_impl_test.dart';
 class BuildContextMock extends Mock implements BuildContext {}
 
 class FormsValidateServiceMock extends Mock implements FormsValidateService {
+  FormsValidateServiceMock({required this.validateMock});
+
   @override
   GlobalKey<FormState> get form => GlobalKey<FormState>();
 
+  final bool validateMock;
+
   @override
   bool validate() {
-    return true;
+    return validateMock;
   }
 }
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   final createAccountController = CreateAccountController(
     loginRepository: LoginRepositoryMock(HttpServiceMock()),
-    formsValidate: FormsValidateServiceMock(),
+    formsValidate: FormsValidateServiceMock(validateMock: true),
   );
 
   test('should be a instance of CreateAccountController', () {
@@ -72,6 +76,24 @@ void main() {
     });
   });
 
+  test('should enter in the loading state, after calling executeSubmitCreateAccount passing a true validadeMock', () {
+    CreateAccountController createAccountController = CreateAccountController(
+      loginRepository: LoginRepositoryMock(HttpServiceMock()),
+      formsValidate: FormsValidateServiceMock(validateMock: true),
+    );
+    createAccountController.executeSubmitCreateAccount();
+    expect(createAccountController.value, isA<LoadingState>());
+  });
+
+  test('should enter in the error state, after calling executeSubmitCreateAccount passing a false validadeMock', () {
+    CreateAccountController createAccountController = CreateAccountController(
+      loginRepository: LoginRepositoryMock(HttpServiceMock()),
+      formsValidate: FormsValidateServiceMock(validateMock: false),
+    );
+    createAccountController.executeSubmitCreateAccount();
+    expect(createAccountController.value, isA<ErrorState>());
+  });
+
   test('should return success when execute createNewAccountExecute passing Login as test', () async {
     createAccountController.newAccount.setLogin('test');
     createAccountController.newAccount.setName('test');
@@ -84,16 +106,6 @@ void main() {
 
   test('should return error when execute createNewAccountExecute passing Login as test2', () async {
     createAccountController.newAccount.setLogin('test2');
-    createAccountController.newAccount.setName('test');
-    createAccountController.newAccount.setSecret('test');
-    createAccountController.newAccount.setSecretConfirm('test');
-    createAccountController.createNewAccountExecute().then((value) {
-      expect(createAccountController.value, isA<ErrorState>());
-    });
-  });
-
-  test('should return error when execute createNewAccountExecute passing Login as test3', () async {
-    createAccountController.newAccount.setLogin('test3');
     createAccountController.newAccount.setName('test');
     createAccountController.newAccount.setSecret('test');
     createAccountController.newAccount.setSecretConfirm('test');

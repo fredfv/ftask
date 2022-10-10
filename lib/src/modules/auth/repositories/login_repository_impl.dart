@@ -48,7 +48,7 @@ class LoginRepositoryImpl extends Hive<UserEntity> implements LoginRepository {
   @override
   Future persistAuthLogin(Map<String, dynamic> response) async {
     UserEntity user = UserEntity.fromAuth(response);
-    user.created = DateTime.now().toUtc();
+    user.setCreated(DateTime.now().toUtc());
     await put(user.id, user);
   }
 

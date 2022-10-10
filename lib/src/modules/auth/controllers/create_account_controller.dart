@@ -49,7 +49,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     });
   }
 
-  void executeSubmitCreateAccount(BuildContext context) {
+  void executeSubmitCreateAccount() {
     if (formsValidate.validate()) {
       createNewAccountExecute();
     } else {

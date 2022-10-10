@@ -1,21 +1,38 @@
 import 'entity_base.dart';
 
 class UserEntity extends EntityBase {
-  String login;
-  String secret;
-  String name;
-  String role;
-  String token;
+  String _login;
+  String _secret;
+  String _name;
+  String _role;
+  String _token;
+
+  String get login => _login;
+  String get secret => _secret;
+  String get name => _name;
+  String get role => _role;
+  String get token => _token;
+
+  void setLogin(String? value) => _login = value ?? '';
+  void setSecret(String? value) => _secret = value ?? '';
+  void setName(String? value) => _name = value ?? '';
+  void setRole(String? value) => _role = value ?? '';
+  void setToken(String? value) => _token = value ?? '';
 
   UserEntity({
-    required this.login,
-    required this.secret,
-    required this.name,
-    required this.token,
-    required this.role,
+    required String login,
+    required String secret,
+    required String name,
+    required String role,
+    required String token,
     required String id,
     required DateTime created,
-  }) : super(id: id, created: created);
+  })  : _login = login,
+        _secret = secret,
+        _name = name,
+        _role = role,
+        _token = token,
+        super(id: id, created: created);
 
   @override
   Map<String, dynamic> toJson() {
@@ -25,7 +42,8 @@ class UserEntity extends EntityBase {
       'name': name,
       'token': token,
       'id': id,
-      'created': created
+      'created': created,
+      'role': role,
     };
   }
 
@@ -37,7 +55,7 @@ class UserEntity extends EntityBase {
       secret: map['secret'] as String,
       name: map['name'] as String,
       token: map['token'] as String,
-      role: map['token'] as String,
+      role: map['role'] as String,
     );
   }
 

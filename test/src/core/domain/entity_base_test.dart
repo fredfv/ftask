@@ -9,14 +9,12 @@ void main() {
     expect(MockEntity(), isA<EntityBase>());
   });
 
-  //test if the method toJson is implemented
   test('implements toJson', () {
     final entity = MockEntity();
     when(() => entity.toJson()).thenReturn({});
     expect(entity.toJson(), isA<Map<String, dynamic>>());
   });
 
-  //test a instance of a new MockEntity is created
   test('create a new instance', () {
     final entity = MockEntity();
     expect(entity, isA<MockEntity>());

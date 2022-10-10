@@ -24,6 +24,10 @@ void main() {
 
   CreateAccountRequest createAccountRequest = CreateAccountRequest.empty();
 
+  test('should implements a toString', () {
+    expect(createAccountRequest.toString(), isA<String>());
+  });
+
   test('should be a instance of CreateAccountRequest', () {
     expect(createAccountRequest, isA<CreateAccountRequest>());
   });
