@@ -3,7 +3,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/mapping/mapper.dart';
 import 'package:task/src/core/domain/entity_base.dart';
 import 'package:task/src/core/domain/repositories/repository.dart';
-import 'package:task/src/core/services/local_storage/hive.dart';
 import 'package:task/src/core/services/object_id_service.dart';
 
 class MockObjectId extends Mock implements ObjectIdService {}

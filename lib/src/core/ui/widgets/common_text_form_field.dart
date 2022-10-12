@@ -10,39 +10,42 @@ class CommonTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
 
   final String label;
-  final String value;
+  final String? initialValue;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final TextEditingController? controller;
 
-  const CommonTextFormField({
-    Key? key,
-    required this.label,
-    required this.value,
-    this.onChanged,
-    this.validator,
-    this.obscureText = false,
-    this.inputFormatters,
-    this.onFieldSubmitted,
-    this.focusNode,
-  }) : super(key: key);
+  const CommonTextFormField(
+      {Key? key,
+      required this.label,
+      this.initialValue,
+      this.onChanged,
+      this.validator,
+      this.obscureText = false,
+      this.inputFormatters,
+      this.onFieldSubmitted,
+      this.focusNode,
+      this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        scrollPadding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
-        onFieldSubmitted: onFieldSubmitted,
-        focusNode: focusNode,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        inputFormatters: inputFormatters,
-        initialValue: value.toString(),
-        validator: validator,
-        onChanged: onChanged,
-        style: const TextStyle(color: ColorOutlet.secondary),
-        cursorColor: ColorOutlet.secondary,
-        obscureText: obscureText,
-        obscuringCharacter: 'ж',
-        decoration: _inputDecoration());
+      scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
+      onFieldSubmitted: onFieldSubmitted,
+      focusNode: focusNode,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      inputFormatters: inputFormatters,
+      initialValue: initialValue?.toString(),
+      validator: validator,
+      onChanged: onChanged,
+      style: const TextStyle(color: ColorOutlet.secondary),
+      cursorColor: ColorOutlet.secondary,
+      obscureText: obscureText,
+      obscuringCharacter: 'ж',
+      decoration: _inputDecoration(),
+      controller: controller,
+    );
   }
 
   InputDecoration _inputDecoration() {

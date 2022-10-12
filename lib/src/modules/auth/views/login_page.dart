@@ -30,26 +30,24 @@ class LoginPage extends StatelessWidget {
               horizontal: MediaQuery.of(context).size.width * 0.05),
           children: [
             SvgPicture.asset('assets/ttlogo.svg',
-                color: ColorOutlet.secondary,
-                width: MediaQuery.of(context).size.width * 0.7),
+                color: ColorOutlet.secondary, width: MediaQuery.of(context).size.width * 0.7),
             CommonTextFormField(
                 onFieldSubmitted: controller.loginSubmitted,
                 label: 'Login',
-                value: controller.loginRequest.login.toString(),
+                initialValue: controller.loginRequest.login.toString(),
                 validator: (v) => controller.loginRequest.login.validator(),
                 onChanged: controller.loginRequest.setLogin),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CommonTextFormField(
                 onFieldSubmitted: (value) => controller.executeLogin(context),
                 label: 'Password',
-                value: controller.loginRequest.secret.toString(),
+                initialValue: controller.loginRequest.secret.toString(),
                 validator: (v) => controller.loginRequest.secret.validator(),
                 onChanged: controller.loginRequest.setSecret,
                 focusNode: controller.secretFocus,
                 obscureText: true),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
               child: ValueListenableBuilder(
                   valueListenable: controller,
                   builder: (_, state, child) {
@@ -57,30 +55,22 @@ class LoginPage extends StatelessWidget {
                       return const CommonLoading(SizeOutlet.loadingForButtons);
                     } else if (state is SuccessState) {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            CommonSnackBar(
-                                content: Text(state.response.toString()),
-                                backgroundColor: ColorOutlet.success));
+                        ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                            content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                         controller.value = IdleState();
                       });
                     } else if (state is ErrorState) {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            CommonSnackBar(
-                                content: Text(state.message),
-                                backgroundColor: ColorOutlet.error));
+                            CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
                         controller.value = IdleState();
                       });
                     }
-                    return CommonButton(
-                        description: 'Log in',
-                        onPressed: () => controller.executeLogin(context));
+                    return CommonButton(description: 'Log in', onPressed: () => controller.executeLogin(context));
                   }),
             ),
             Center(
-                child: UnderLineButton(
-                    onPressed: () => controller.goToCreateAccount(),
-                    description: 'create account'))
+                child: UnderLineButton(onPressed: () => controller.goToCreateAccount(), description: 'create account'))
           ],
         ),
       ),

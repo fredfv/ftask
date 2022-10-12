@@ -4,22 +4,21 @@ import 'value_objects/due_date_vo.dart';
 import 'value_objects/title_vo.dart';
 
 class TaskEntity extends EntityBase {
-  DescriptionVO _description;
-  TitleVO _title;
-  DueDateVO _dueDate;
+  String _description;
+  String _title;
+  String _dueDate;
 
-  DescriptionVO get description => _description;
+  String get description => _description;
 
-  void setDescription(String? value) =>
-      _description = DescriptionVO(value ?? '');
+  void setDescription(String? value) => _description = value ?? '';
 
-  DueDateVO get dueDate => _dueDate;
+  String get dueDate => _dueDate;
 
-  void setDueDate(String? value) => _dueDate = DueDateVO(value ?? '');
+  void setDueDate(String? value) => _dueDate = value ?? '';
 
-  TitleVO get title => _title;
+  String get title => _title;
 
-  void setTitle(String? value) => _title = TitleVO(value ?? '');
+  void setTitle(String? value) => _title = value ?? '';
 
   TaskEntity(
       {required String description,
@@ -27,9 +26,9 @@ class TaskEntity extends EntityBase {
       required String id,
       required DateTime created,
       required String title})
-      : _description = DescriptionVO(description),
-        _dueDate = DueDateVO(dueDate),
-        _title = TitleVO(title),
+      : _description = description,
+        _dueDate = dueDate,
+        _title = title,
         super(
           id: id,
           created: created,
@@ -48,11 +47,11 @@ class TaskEntity extends EntityBase {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'description': description.toString(),
-      'dueDate': dueDate.toString(),
+      'description': description,
+      'dueDate': dueDate,
       'id': id,
       'created': created,
-      'title': title.toString()
+      'title': title,
     };
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:task/src/core/domain/dictionary.dart';
+import 'package:task/src/core/domain/value_objects/title_vo.dart';
 import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 import 'package:task/src/modules/home/controllers/create_task_controller.dart';
@@ -30,9 +31,8 @@ class TaskPage extends StatelessWidget {
             CommonTextFormField(
               onFieldSubmitted: controller.setDescriptionFocus,
               label: 'Title',
-              value: controller.newTask.title.toString(),
-              validator: (v) => controller.newTask.title.validator(),
-              onChanged: controller.newTask.setTitle,
+              validator: (v) => TitleVO(v).validator(),
+              controller: controller.titleController,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
@@ -41,9 +41,8 @@ class TaskPage extends StatelessWidget {
               onFieldSubmitted: controller.setDueDateFocus,
               focusNode: controller.descriptionFocus,
               label: 'Due date',
-              value: controller.newTask.dueDate.toString(),
-              validator: (v) => controller.newTask.dueDate.validator(),
-              onChanged: controller.newTask.setDueDate,
+              validator: (v) => TitleVO(v).validator(),
+              controller: controller.dueDateController,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
@@ -51,13 +50,11 @@ class TaskPage extends StatelessWidget {
             CommonTextFormField(
               focusNode: controller.dueDateFocus,
               label: 'Description',
-              value: controller.newTask.description.toString(),
-              validator: (v) => controller.newTask.description.validator(),
-              onChanged: controller.newTask.setDescription,
+              validator: (v) => TitleVO(v).validator(),
+              controller: controller.descriptionController,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
@@ -66,22 +63,20 @@ class TaskPage extends StatelessWidget {
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()),
-                          backgroundColor: ColorOutlet.success));
+                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.message),
-                          backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
                       controller.value = IdleState();
                     });
                   }
                   return CommonButton(
                     description: 'Create new task',
                     onPressed: () {
-                      controller.executeAddNewTask(context);
+                      controller.executeAddNewTask();
                     },
                   );
                 },

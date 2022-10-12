@@ -12,12 +12,14 @@ class CreateTaskController extends ValueNotifier<CommonState> {
   FocusNode dueDateFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
 
+  TextEditingController titleController = TextEditingController();
+  TextEditingController dueDateController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   CreateTaskController({
     required this.taskRepository,
     required this.formsValidate,
   }) : super(IdleState());
-
-  TaskEntity newTask = TaskEntity.empty();
 
   GlobalKey<FormState> get form => formsValidate.form;
 
@@ -29,16 +31,26 @@ class CreateTaskController extends ValueNotifier<CommonState> {
     dueDateFocus.requestFocus();
   }
 
-  void executeAddNewTask(BuildContext context) {
+  void executeAddNewTask() {
     if (formsValidate.validate()) {
+      TaskEntity newTask = TaskEntity(
+        title: titleController.text,
+        description: descriptionController.text,
+        dueDate: dueDateController.text,
+        id: '',
+        created: DateTime.fromMillisecondsSinceEpoch(0),
+      );
       value = LoadingState();
       taskRepository.put(null, newTask).then((v) {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
+          titleController.clear();
+          descriptionController.clear();
+          dueDateController.clear();
+          formsValidate.form.currentState?.reset();
           value = SuccessState<String>(response: 'new task added');
         }
-        newTask = TaskEntity.empty();
       }).onError((error, stackTrace) {
         value = ErrorState(error.toString());
       });

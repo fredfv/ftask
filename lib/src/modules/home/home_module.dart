@@ -9,13 +9,10 @@ import 'views/home_page.dart';
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.lazySingleton(
-            (i) => TaskRepositoryImpl(httpService: i(), objectIdService: i())),
+        Bind.lazySingleton((i) => TaskRepositoryImpl(httpService: i(), objectIdService: i())),
         Bind.lazySingleton((i) => ListTaskController(taskRepository: i())),
-        Bind.lazySingleton((i) =>
-            CreateTaskController(taskRepository: i(), formsValidate: i())),
-        Bind.lazySingleton((i) => HomeController(
-            hub: i(), taskPageController: i(), listTaskController: i())),
+        Bind.lazySingleton((i) => CreateTaskController(taskRepository: i(), formsValidate: i())),
+        Bind.lazySingleton((i) => HomeController(hub: i(), taskPageController: i(), listTaskController: i())),
       ];
 
   @override
