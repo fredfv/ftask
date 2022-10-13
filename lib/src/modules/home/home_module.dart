@@ -10,9 +10,9 @@ class HomeModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton((i) => TaskRepositoryImpl(httpService: i(), objectIdService: i())),
-        Bind.lazySingleton((i) => ListTaskController(taskRepository: i())),
-        Bind.lazySingleton((i) => CreateTaskController(taskRepository: i(), formsValidate: i())),
-        Bind.lazySingleton((i) => HomeController(hub: i(), taskPageController: i(), listTaskController: i())),
+        Bind.factory((i) => ListTaskController(taskRepository: i(), hub: i())),
+        Bind.factory((i) => CreateTaskController(taskRepository: i(), formsValidate: i(), hub: i())),
+        Bind.factory((i) => HomeController(hub: i(), taskPageController: i(), listTaskController: i())),
       ];
 
   @override

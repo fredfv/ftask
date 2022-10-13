@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:task/src/core/infra/logger.dart';
 
 import '../hub_service.dart';
 
-class SignalRHelper extends ValueNotifier<String> implements HubService {
+//class SignalRHelper extends ValueNotifier<String> implements HubService {
+class SignalRHelper implements HubService {
   HubConnection? connection;
+  final StreamController<String> _streamController = StreamController<String>.broadcast();
+  get stream => _streamController.stream;
 
-  SignalRHelper() : super('');
+  SignalRHelper();
 
   @override
   Future<void> initConnection() async {
@@ -40,15 +45,16 @@ class SignalRHelper extends ValueNotifier<String> implements HubService {
 
     connection?.on('ReceiveMessage', (message) {
       yellsOnMessage(message);
-      value = message.toString();
+      //value = message.toString();
+      _streamController.add(message.toString());
+      //notifyListeners();
     });
     fLog.w('[SIGNALR CONNECTION ON MESSAGE REGISTRED]');
   }
 
   @override
   Future<void> sendMessage() async {
-    await connection
-        ?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
+    await connection?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
     fLog.w('[SIGNALR SEND MESSAGE]');
   }
 

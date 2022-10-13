@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/application/common_state.dart';
 import 'package:task/src/core/domain/task_entity.dart';
+import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
 import '../../../core/services/form_validate_service.dart';
 import '../repositories/task_repository_impl.dart';
@@ -11,6 +12,7 @@ class CreateTaskController extends ValueNotifier<CommonState> {
   FocusNode descriptionFocus = FocusNode();
   FocusNode dueDateFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
+  SignalRHelper hub;
 
   TextEditingController titleController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
@@ -19,7 +21,12 @@ class CreateTaskController extends ValueNotifier<CommonState> {
   CreateTaskController({
     required this.taskRepository,
     required this.formsValidate,
-  }) : super(IdleState());
+    required this.hub,
+  }) : super(IdleState()) {
+    hub.stream.listen((event) {
+      print(event.toString() + 'Escutei da create');
+    });
+  }
 
   GlobalKey<FormState> get form => formsValidate.form;
 
