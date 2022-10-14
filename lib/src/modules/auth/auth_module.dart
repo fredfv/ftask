@@ -12,7 +12,6 @@ class AuthModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton((i) => CreateAccountUsecaseImpl(
               httpService: i(),
-              repositoryFactory: i(),
             )),
         Bind.lazySingleton((i) => LoginUseCaseImpl(
               httpService: i(),

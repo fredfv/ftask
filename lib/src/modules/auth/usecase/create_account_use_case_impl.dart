@@ -1,4 +1,3 @@
-import '../../../core/domain/repositories/repository_factory.dart';
 import '../../../core/domain/services/http_service.dart';
 import '../../../core/domain/usecases/create_account_usecase.dart';
 import '../../../core/infra/application/create_account_request.dart';
@@ -7,9 +6,8 @@ import '../../../core/infra/application/logger.dart';
 
 class CreateAccountUsecaseImpl implements CreateAccountUsecase {
   final HttpService httpService;
-  final RepositoryFactory repositoryFactory;
 
-  CreateAccountUsecaseImpl({required this.httpService, required this.repositoryFactory});
+  CreateAccountUsecaseImpl({required this.httpService});
 
   @override
   Future<bool> call(CreateAccountRequest request) async {
