@@ -2,14 +2,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/modules/home/controllers/create_task_controller.dart';
 import 'package:task/src/modules/home/controllers/home_controller.dart';
 import 'package:task/src/modules/home/controllers/list_task_controller.dart';
-import 'package:task/src/modules/home/use_cases/update_tasks_from_cloud_use_case_impl.dart';
+import 'package:task/src/modules/home/use_cases/update_tasks_from_cloud_usecase_impl.dart';
 
 import 'views/home_page.dart';
 
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => UpdateTasksFromCloudUseCaseImpl(
+        Bind.factory((i) => UpdateTasksFromCloudUsecaseImpl(
               httpService: i(),
               repositoryFactory: i(),
             )),

@@ -1,4 +1,4 @@
-import '../../domain/user_entity.dart';
+import '../../domain/entities/user_entity.dart';
 import 'mapper.dart';
 
 class UserMapper extends Mapper<UserEntity> {

@@ -1,7 +1,7 @@
-import 'package:task/src/core/domain/task_entity.dart';
+import 'package:task/src/core/domain/entities/task_entity.dart';
 
-import '../../domain/entity_base.dart';
-import '../../domain/user_entity.dart';
+import '../../domain/entities/entity_base.dart';
+import '../../domain/entities/user_entity.dart';
 import 'mapper.dart';
 import 'task_mapper.dart';
 import 'user_mapper.dart';

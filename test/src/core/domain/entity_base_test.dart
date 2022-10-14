@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:task/src/core/domain/entity_base.dart';
+import 'package:task/src/core/domain/entities/entity_base.dart';
 
 class MockEntity extends Mock implements EntityBase {}
 

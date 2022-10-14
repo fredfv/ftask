@@ -2,17 +2,17 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/domain/repositories/repository.dart';
 import '../../../core/domain/repositories/repository_factory.dart';
-import '../../../core/domain/task_entity.dart';
-import '../../../core/domain/use_cases/update_tasks_from_cloud_use_case.dart';
-import '../../../core/domain/user_entity.dart';
+import '../../../core/domain/entities/task_entity.dart';
+import '../../../core/domain/entities/user_entity.dart';
+import '../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
 import '../../../core/infra/http_request_methods.dart';
 import '../../../core/services/http_service.dart';
 
-class UpdateTasksFromCloudUseCaseImpl implements UpdateTasksFromCloudUseCase {
+class UpdateTasksFromCloudUsecaseImpl implements UpdateTasksFromCloudUsecase {
   final HttpService httpService;
   final RepositoryFactory repositoryFactory;
 
-  UpdateTasksFromCloudUseCaseImpl({required this.httpService, required this.repositoryFactory});
+  UpdateTasksFromCloudUsecaseImpl({required this.httpService, required this.repositoryFactory});
 
   @override
   Future<bool> call() async {

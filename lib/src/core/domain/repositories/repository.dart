@@ -1,4 +1,4 @@
-import '../entity_base.dart';
+import '../entities/entity_base.dart';
 
 abstract class Repository<T extends EntityBase> {
   Future<T?> get(String key);

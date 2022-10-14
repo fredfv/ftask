@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/core/domain/dictionary.dart';
+import 'package:task/src/core/infra/dictionary.dart';
 import 'package:task/src/core/domain/value_objects/title_vo.dart';
 import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/core/domain/dictionary.dart';
+import 'package:task/src/core/infra/dictionary.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 import 'package:task/src/modules/home/controllers/list_task_controller.dart';
 

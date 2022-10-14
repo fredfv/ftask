@@ -1,4 +1,4 @@
-import '../../domain/task_entity.dart';
+import '../../domain/entities/task_entity.dart';
 import 'mapper.dart';
 
 class TaskMapper extends Mapper<TaskEntity> {

@@ -4,7 +4,7 @@ import 'package:task/src/core/services/local_storage/hive_repository_factory.dar
 import 'package:task/src/core/ui/wildcard_page.dart';
 import 'package:task/src/modules/home/home_module.dart';
 
-import 'src/core/domain/user_entity.dart';
+import 'src/core/domain/entities/user_entity.dart';
 import 'src/core/infra/object_id.dart';
 import 'src/core/services/http/http_service_dio_impl.dart';
 import 'src/core/services/websocket/signalr_helper.dart';

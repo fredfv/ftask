@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:task/src/core/domain/user_entity.dart';
+import 'package:task/src/core/domain/entities/user_entity.dart';
 
 class MockUserFromAuth extends Mock {
   final Map<String, dynamic> authData = {

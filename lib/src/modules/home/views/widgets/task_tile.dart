@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/core/domain/spacing_type.dart';
-import 'package:task/src/core/domain/task_entity.dart';
+import 'package:task/src/core/infra/spacing_type.dart';
+import 'package:task/src/core/domain/entities/task_entity.dart';
 import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/size_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_spacing.dart';

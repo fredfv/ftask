@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/core/domain/dictionary.dart';
+import 'package:task/src/core/infra/dictionary.dart';
 import 'package:task/src/core/ui/color_outlet.dart';
 import 'package:task/src/core/ui/widgets/common_scaffold.dart';
 

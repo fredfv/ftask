@@ -1,4 +1,4 @@
-import 'package:task/src/core/domain/entity_base.dart';
+import 'package:task/src/core/domain/entities/entity_base.dart';
 import 'package:task/src/core/domain/repositories/repository_factory.dart';
 
 import '../../application/mapping/entity_mapper_factory.dart';

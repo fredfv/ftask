@@ -4,15 +4,15 @@ import 'package:task/src/core/domain/repositories/repository_factory.dart';
 import 'package:task/src/core/services/http_service.dart';
 import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
-import '../../../core/domain/task_entity.dart';
-import '../../../core/domain/use_cases/update_tasks_from_cloud_use_case.dart';
+import '../../../core/domain/entities/task_entity.dart';
+import '../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
 
 class ListTaskController extends ValueNotifier<CommonState> {
   final HttpService httpService;
   final RepositoryFactory repositoryFactory;
   final SignalRHelper hub;
   final List<TaskEntity> list = [];
-  final UpdateTasksFromCloudUseCase updateTasksFromCloudUseCase;
+  final UpdateTasksFromCloudUsecase updateTasksFromCloudUseCase;
 
   ListTaskController({
     required this.httpService,

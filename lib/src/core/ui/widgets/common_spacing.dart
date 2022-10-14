@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/core/domain/spacing_type.dart';
+import 'package:task/src/core/infra/spacing_type.dart';
 
 class CommonSpacing extends StatelessWidget {
   ///dont pass zero

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/application/common_state.dart';
 import 'package:task/src/core/domain/repositories/repository_factory.dart';
-import 'package:task/src/core/domain/task_entity.dart';
+import 'package:task/src/core/domain/entities/task_entity.dart';
 import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
 import '../../../core/services/form_validate_service.dart';
