@@ -16,18 +16,22 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: ColorOutlet.secondaryDark,
+      elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 10, top: 10),
         child: Row(
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText(
-                  text: taskItem.title.toString(),
-                  fontSize: SizeOutlet.textSizeLarge,
-                  fontColor: ColorOutlet.textColorTitle,
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: CommonText(
+                    text: taskItem.title.toString(),
+                    fontSize: SizeOutlet.textSizeExtraLarge,
+                    fontColor: ColorOutlet.textColorTitle,
+                  ),
                 ),
                 const CommonSpacing(SpacingType.height),
                 Row(
@@ -37,8 +41,12 @@ class TaskTile extends StatelessWidget {
                       color: ColorOutlet.iconColor,
                     ),
                     const CommonSpacing(SpacingType.width),
-                    CommonText(
-                      text: taskItem.description.toString(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: CommonText(
+                        fontSize: SizeOutlet.textSizeMedium,
+                        text: taskItem.description.toString(),
+                      ),
                     ),
                   ],
                 ),
@@ -50,8 +58,12 @@ class TaskTile extends StatelessWidget {
                       color: ColorOutlet.iconColor,
                     ),
                     const CommonSpacing(SpacingType.width),
-                    CommonText(
-                      text: taskItem.dueDate.toString(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: CommonText(
+                        fontSize: SizeOutlet.textSizeMedium,
+                        text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
+                      ),
                     ),
                   ],
                 ),

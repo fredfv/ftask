@@ -9,8 +9,14 @@ class CommonText extends StatelessWidget {
   final FontStyle? fontStyle;
   final double? fontSize;
 
-  const CommonText({Key? key, required this.text, this.fontColor, this.fontWeight, this.fontStyle, this.fontSize})
-      : super(key: key);
+  const CommonText({
+    Key? key,
+    required this.text,
+    this.fontColor,
+    this.fontWeight,
+    this.fontStyle,
+    this.fontSize,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
