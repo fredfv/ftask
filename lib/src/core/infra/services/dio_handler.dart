@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../application/custom_exception.dart';
-import '../../infra/http_custom_configurations.dart';
-import '../../infra/http_request_methods.dart';
-import '../../infra/logger.dart';
+import '../http_custom_configurations.dart';
+import '../http_request_methods.dart';
+import '../logger.dart';
 
 // class MyHttpOverrides extends HttpOverrides {
 //   @override
@@ -38,18 +38,15 @@ class DioHandler {
     _dio = Dio(BaseOptions(
         baseUrl: baseUrl,
         headers: header,
-        connectTimeout:
-            connectTimeout ?? HttpCustomConfigurations.connectTimeout,
-        receiveTimeout:
-            receiveTimeout ?? HttpCustomConfigurations.receiveTimeout));
+        connectTimeout: connectTimeout ?? HttpCustomConfigurations.connectTimeout,
+        receiveTimeout: receiveTimeout ?? HttpCustomConfigurations.receiveTimeout));
   }
 
   void configureInterceptors() {
     _dio!.interceptors.add(
       InterceptorsWrapper(
         onRequest: (requestOptions, handler) {
-          fLog.w(
-              "REQUEST[${requestOptions.method}] => PATH: ${requestOptions.path}"
+          fLog.w("REQUEST[${requestOptions.method}] => PATH: ${requestOptions.path}"
               "=> REQUEST VALUES: ${requestOptions.queryParameters} => HEADERS: ${requestOptions.headers}");
           "REQUEST[${requestOptions.method}] => PATH: ${requestOptions.path}"
               "=> REQUEST VALUES: ${requestOptions.queryParameters}";
@@ -113,9 +110,7 @@ class DioHandler {
     } on DioError catch (e) {
       fLog.e(e);
       if (e.type == DioErrorType.response) {
-        if (e.response != null &&
-            e.response?.data is Map<String, dynamic> &&
-            e.response?.data?['message'] != null) {
+        if (e.response != null && e.response?.data is Map<String, dynamic> && e.response?.data?['message'] != null) {
           throw CustomException(e.response?.data['message']);
         } else if (e.error.toString().contains('[500]')) {
           throw CustomException("server error");

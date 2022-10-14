@@ -1,16 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/modules/auth/controllers/create_account_controller.dart';
-import 'package:task/src/modules/auth/controllers/login_controller.dart';
-import 'package:task/src/modules/auth/use_cases/create_account_use_case_impl.dart';
 
-import 'use_cases/login_use_case_impl.dart';
-import 'views/create_account_page.dart';
-import 'views/login_page.dart';
+import 'presenter/create_account_page/create_account_controller.dart';
+import 'presenter/create_account_page/create_account_page.dart';
+import 'presenter/login_page/login_controller.dart';
+import 'presenter/login_page/login_page.dart';
+import 'usecase/create_account_use_case_impl.dart';
+import 'usecase/login_usecase_impl.dart';
 
 class AuthModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.lazySingleton((i) => CreateAccountUseCaseImpl(
+        Bind.lazySingleton((i) => CreateAccountUsecaseImpl(
               httpService: i(),
               repositoryFactory: i(),
             )),

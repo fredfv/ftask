@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'src/core/ui/color_outlet.dart';
+import 'src/core/presenter/theme/color_outlet.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -12,8 +12,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Sansation',
           textSelectionTheme: const TextSelectionThemeData(
-              selectionColor: ColorOutlet.selectedText,
-              selectionHandleColor: ColorOutlet.selectedHandler)),
+              selectionColor: ColorOutlet.selectedText, selectionHandleColor: ColorOutlet.selectedHandler)),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,

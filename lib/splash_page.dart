@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/app_module.dart';
-import 'package:task/src/core/ui/widgets/common_loading.dart';
 
-import 'src/core/services/websocket/signalr_helper.dart';
-import 'src/core/ui/color_outlet.dart';
+import 'src/core/infra/services/signalr_helper.dart';
+import 'src/core/presenter/shared/common_loading.dart';
+import 'src/core/presenter/theme/color_outlet.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

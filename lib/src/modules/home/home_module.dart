@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/modules/home/controllers/create_task_controller.dart';
-import 'package:task/src/modules/home/controllers/home_controller.dart';
-import 'package:task/src/modules/home/controllers/list_task_controller.dart';
-import 'package:task/src/modules/home/use_cases/update_tasks_from_cloud_usecase_impl.dart';
+import 'package:task/src/modules/home/presenter/create_task_page/create_task_controller.dart';
+import 'package:task/src/modules/home/presenter/home_page/home_controller.dart';
+import 'package:task/src/modules/home/presenter/list_task_page/list_task_controller.dart';
+import 'package:task/src/modules/home/usecases/update_tasks_from_cloud_usecase_impl.dart';
 
-import 'views/home_page.dart';
+import 'presenter/home_page/home_page.dart';
 
 class HomeModule extends Module {
   @override

@@ -1,6 +1,6 @@
 import 'package:objectid/objectid.dart' as oi;
 
-import '../services/object_id_service.dart';
+import '../../domain/services/object_id_service.dart';
 
 class ObjectId implements ObjectIdService {
   @override

@@ -3,7 +3,7 @@ import 'package:task/src/core/domain/repositories/repository_factory.dart';
 
 import '../../application/mapping/entity_mapper_factory.dart';
 import '../../domain/repositories/repository.dart';
-import '../object_id_service.dart';
+import '../../domain/services/object_id_service.dart';
 import 'hive_repository.dart';
 
 class HiveRepositoryFactory extends RepositoryFactory {
