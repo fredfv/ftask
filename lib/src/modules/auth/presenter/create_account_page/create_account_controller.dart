@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/domain/repositories/repository_factory.dart';
-import 'package:task/src/core/domain/services/http_service.dart';
 
-import '../../../../core/application/common_state.dart';
-import '../../../../core/application/create_account_request.dart';
+import '../../../../core/domain/repositories/repository_factory.dart';
 import '../../../../core/domain/services/form_validate_service.dart';
+import '../../../../core/domain/services/http_service.dart';
 import '../../../../core/domain/usecases/create_account_usecase.dart';
+import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/application/create_account_request.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
   final HttpService httpService;

@@ -6,6 +6,7 @@ class CommonSpacing extends StatelessWidget {
   ///dont pass zero
   final double factor;
   final SpacingType type;
+
   const CommonSpacing(this.type, {Key? key, this.factor = 1}) : super(key: key);
 
   @override

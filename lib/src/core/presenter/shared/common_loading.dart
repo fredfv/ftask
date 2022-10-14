@@ -5,6 +5,7 @@ import '../theme/color_outlet.dart';
 
 class CommonLoading extends StatelessWidget {
   final int size;
+
   const CommonLoading(this.size, {Key? key}) : super(key: key);
 
   @override

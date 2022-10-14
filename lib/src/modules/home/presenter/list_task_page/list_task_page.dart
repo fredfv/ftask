@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:task/src/modules/home/presenter/list_task_page/list_task_controller.dart';
 
-import '../../../../core/application/common_state.dart';
+import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
@@ -13,6 +13,7 @@ import '../shared/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
   final ListTaskController controller;
+
   const ListTaskPage({Key? key, required this.controller}) : super(key: key);
 
   @override

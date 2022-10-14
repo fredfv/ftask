@@ -1,13 +1,13 @@
 import 'dart:async';
-
 import 'package:signalr_core/signalr_core.dart';
-import 'package:task/src/core/infra/logger.dart';
 
 import '../../domain/services/hub_service.dart';
+import '../application/logger.dart';
 
 class SignalRHelper implements HubService {
   HubConnection? connection;
   final StreamController<String> _streamController = StreamController<String>.broadcast();
+
   get stream => _streamController.stream;
 
   SignalRHelper();

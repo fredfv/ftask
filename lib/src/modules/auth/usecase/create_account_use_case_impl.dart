@@ -1,10 +1,9 @@
-import 'package:task/src/core/application/create_account_request.dart';
-import 'package:task/src/core/infra/logger.dart';
-
 import '../../../core/domain/repositories/repository_factory.dart';
 import '../../../core/domain/services/http_service.dart';
 import '../../../core/domain/usecases/create_account_usecase.dart';
-import '../../../core/infra/http_request_methods.dart';
+import '../../../core/infra/application/create_account_request.dart';
+import '../../../core/infra/application/http_request_methods.dart';
+import '../../../core/infra/application/logger.dart';
 
 class CreateAccountUsecaseImpl implements CreateAccountUsecase {
   final HttpService httpService;

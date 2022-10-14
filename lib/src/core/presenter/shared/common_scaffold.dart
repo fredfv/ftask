@@ -13,6 +13,7 @@ class CommonScaffold extends StatelessWidget {
   /// Scaffold (in which case, without the Builder, the context wouldn't be able to see the Scaffold,
   /// since it would refer to an ancestor of that widget).
   final Widget? leading;
+
   const CommonScaffold({Key? key, this.title, required this.body, this.bottonNavBar, this.leading}) : super(key: key);
 
   @override

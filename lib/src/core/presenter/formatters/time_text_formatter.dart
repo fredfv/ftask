@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 class TimeTextInputFormatter extends TextInputFormatter {
   late RegExp pattern;
+
   TimeTextInputFormatter() {
     pattern = RegExp(r'^[0-9:]+$');
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/core/domain/services/validators/title_vo.dart';
-import 'package:task/src/modules/home/presenter/create_task_page/create_task_controller.dart';
 
-import '../../../../core/application/common_state.dart';
+import '../../../../core/domain/services/validators/title_vo.dart';
+import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
@@ -12,9 +11,11 @@ import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
+import 'create_task_controller.dart';
 
 class TaskPage extends StatelessWidget {
   final CreateTaskController controller;
+
   const TaskPage({Key? key, required this.controller}) : super(key: key);
 
   @override

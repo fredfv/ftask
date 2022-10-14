@@ -1,4 +1,4 @@
-import '../../infra/http_request_methods.dart';
+import '../../infra/application/http_request_methods.dart';
 
 abstract class HttpService {
   Future<dynamic> request({

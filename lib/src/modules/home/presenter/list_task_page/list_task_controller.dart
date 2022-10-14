@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:task/src/core/application/common_state.dart';
-import 'package:task/src/core/domain/repositories/repository_factory.dart';
-import 'package:task/src/core/domain/services/http_service.dart';
-import 'package:task/src/core/infra/services/signalr_helper.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
+import '../../../../core/domain/repositories/repository_factory.dart';
+import '../../../../core/domain/services/http_service.dart';
 import '../../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
+import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/services/signalr_helper.dart';
 
 class ListTaskController extends ValueNotifier<CommonState> {
   final HttpService httpService;

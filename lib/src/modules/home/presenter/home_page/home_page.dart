@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/modules/home/presenter/home_page/home_controller.dart';
 
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final HomeController controller;

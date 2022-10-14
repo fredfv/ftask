@@ -3,8 +3,11 @@ abstract class EntityBase {
   DateTime _created;
 
   String get id => _id;
+
   DateTime get created => _created;
+
   void setId(String? value) => _id = value ?? '';
+
   void setCreated(DateTime? value) => _created = value ?? DateTime.now();
 
   EntityBase({required String id, required DateTime created})

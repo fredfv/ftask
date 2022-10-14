@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/domain/repositories/repository_factory.dart';
 
-import '../../../../core/application/common_state.dart';
-import '../../../../core/application/login_request.dart';
+import '../../../../core/domain/repositories/repository_factory.dart';
 import '../../../../core/domain/services/form_validate_service.dart';
 import '../../../../core/domain/services/http_service.dart';
 import '../../../../core/domain/usecases/login_usecase.dart';
+import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/application/login_request.dart';
 
 class LoginController extends ValueNotifier<CommonState> {
   final HttpService httpService;

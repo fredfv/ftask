@@ -3,7 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/create_account_request.dart';
 import 'package:task/src/core/application/custom_exception.dart';
 import 'package:task/src/core/domain/services/http_service.dart';
-import 'package:task/src/core/infra/http_request_methods.dart';
+import 'package:task/src/core/infra/application/http_request_methods.dart';
 
 import '../../../core/services/http/http_service_dio_impl_test.dart';
 

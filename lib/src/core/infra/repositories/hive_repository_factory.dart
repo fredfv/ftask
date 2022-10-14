@@ -1,9 +1,8 @@
-import 'package:task/src/core/domain/entities/entity_base.dart';
-import 'package:task/src/core/domain/repositories/repository_factory.dart';
-
-import '../../application/mapping/entity_mapper_factory.dart';
+import '../../domain/entities/entity_base.dart';
 import '../../domain/repositories/repository.dart';
+import '../../domain/repositories/repository_factory.dart';
 import '../../domain/services/object_id_service.dart';
+import '../mappers/entity_mapper_factory.dart';
 import 'hive_repository.dart';
 
 class HiveRepositoryFactory extends RepositoryFactory {

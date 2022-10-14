@@ -8,15 +8,23 @@ class UserEntity extends EntityBase {
   String _token;
 
   String get login => _login;
+
   String get secret => _secret;
+
   String get name => _name;
+
   String get role => _role;
+
   String get token => _token;
 
   void setLogin(String? value) => _login = value ?? '';
+
   void setSecret(String? value) => _secret = value ?? '';
+
   void setName(String? value) => _name = value ?? '';
+
   void setRole(String? value) => _role = value ?? '';
+
   void setToken(String? value) => _token = value ?? '';
 
   UserEntity({

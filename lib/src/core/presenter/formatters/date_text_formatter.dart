@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/services.dart';
 
 class DateTextFormatter extends TextInputFormatter {

@@ -2,20 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../application/custom_exception.dart';
-import '../http_custom_configurations.dart';
-import '../http_request_methods.dart';
-import '../logger.dart';
-
-// class MyHttpOverrides extends HttpOverrides {
-//   @override
-//   HttpClient createHttpClient(SecurityContext context) {
-//     HttpClient client = super.createHttpClient(context);
-//     client.badCertificateCallback =
-//         (X509Certificate cert, String host, int port) => true;
-//     return client;
-//   }
-// }
+import '../application/custom_exception.dart';
+import '../application/http_custom_configurations.dart';
+import '../application/http_request_methods.dart';
+import '../application/logger.dart';
 
 class DioHandler {
   Dio? _dio;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/presenter/shared/common_scaffold.dart';
-import 'package:task/src/core/presenter/theme/color_outlet.dart';
-import 'package:task/src/core/presenter/theme/dictionary.dart';
+
+import '../shared/common_scaffold.dart';
+import '../theme/color_outlet.dart';
+import '../theme/dictionary.dart';
 
 class WildcardPage extends StatelessWidget {
   const WildcardPage({Key? key}) : super(key: key);
