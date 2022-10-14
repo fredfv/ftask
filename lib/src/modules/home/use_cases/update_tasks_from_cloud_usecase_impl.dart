@@ -6,7 +6,7 @@ import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
 import '../../../core/infra/http_request_methods.dart';
-import '../../../core/services/http_service.dart';
+import '../../../core/domain/services/http_service.dart';
 
 class UpdateTasksFromCloudUsecaseImpl implements UpdateTasksFromCloudUsecase {
   final HttpService httpService;

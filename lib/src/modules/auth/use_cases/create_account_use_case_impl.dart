@@ -4,7 +4,7 @@ import 'package:task/src/core/infra/logger.dart';
 import '../../../core/domain/repositories/repository_factory.dart';
 import '../../../core/domain/use_cases/create_account_usecase.dart';
 import '../../../core/infra/http_request_methods.dart';
-import '../../../core/services/http_service.dart';
+import '../../../core/domain/services/http_service.dart';
 
 class CreateAccountUseCaseImpl implements CreateAccountUseCase {
   final HttpService httpService;

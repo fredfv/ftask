@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../application/custom_exception.dart';
 import '../../infra/http_request_methods.dart';
-import '../http_service.dart';
+import '../../domain/services/http_service.dart';
 import 'dio_handler.dart';
 
 class HttpServiceDioImpl implements HttpService {

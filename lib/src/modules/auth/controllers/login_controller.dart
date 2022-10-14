@@ -6,7 +6,7 @@ import 'package:task/src/core/domain/use_cases/login_usecase.dart';
 import '../../../core/application/common_state.dart';
 import '../../../core/application/login_request.dart';
 import '../../../core/services/form_validate_service.dart';
-import '../../../core/services/http_service.dart';
+import '../../../core/domain/services/http_service.dart';
 
 class LoginController extends ValueNotifier<CommonState> {
   final HttpService httpService;

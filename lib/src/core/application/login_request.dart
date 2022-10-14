@@ -1,5 +1,5 @@
-import '../domain/value_objects/login_vo.dart';
-import '../domain/value_objects/secret_vo.dart';
+import '../domain/services/validators/login_vo.dart';
+import '../domain/services/validators/secret_vo.dart';
 
 class LoginRequest {
   LoginVO _login;

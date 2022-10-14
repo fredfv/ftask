@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/custom_exception.dart';
 import 'package:task/src/core/infra/http_request_methods.dart';
-import 'package:task/src/core/services/http_service.dart';
+import 'package:task/src/core/domain/services/http_service.dart';
 
 class HttpServiceMock extends Mock implements HttpService {
   @override

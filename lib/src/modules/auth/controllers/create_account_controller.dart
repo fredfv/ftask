@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/core/domain/repositories/repository_factory.dart';
 import 'package:task/src/core/domain/use_cases/create_account_usecase.dart';
-import 'package:task/src/core/services/http_service.dart';
+import 'package:task/src/core/domain/services/http_service.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/create_account_request.dart';

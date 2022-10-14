@@ -7,7 +7,7 @@ import '../../../core/domain/use_cases/login_usecase.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/infra/http_request_methods.dart';
 import '../../../core/infra/logger.dart';
-import '../../../core/services/http_service.dart';
+import '../../../core/domain/services/http_service.dart';
 
 class LoginUseCaseImpl implements LoginUseCase {
   final HttpService httpService;

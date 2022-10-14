@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:task/src/core/infra/logger.dart';
 
-import '../hub_service.dart';
+import '../../domain/services/hub_service.dart';
 
-//class SignalRHelper extends ValueNotifier<String> implements HubService {
 class SignalRHelper implements HubService {
   HubConnection? connection;
   final StreamController<String> _streamController = StreamController<String>.broadcast();
