@@ -3,6 +3,7 @@ import 'package:task/splash_page.dart';
 import 'package:task/src/core/infra/repositories/hive_repository_factory.dart';
 
 import 'src/core/domain/entities/user_entity.dart';
+import 'src/core/infra/services/broadcast_controller.dart';
 import 'src/core/infra/services/http_service_dio_impl.dart';
 import 'src/core/infra/services/object_id.dart';
 import 'src/core/infra/services/signalr_helper.dart';
@@ -19,7 +20,8 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => HiveRepositoryFactory(objectId: i(), path: 'path')),
         Bind.factory((i) => FormsValidateImpl()),
         Bind.lazySingleton((i) => HttpServiceDioImpl()),
-        Bind.lazySingleton((i) => SignalRHelper())
+        Bind.singleton((i) => BroadcastController()),
+        Bind.singleton((i) => SignalRHelper(broadcastController: i())),
       ];
 
   @override

@@ -1,16 +1,19 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:signalr_core/signalr_core.dart';
 
 import '../../domain/services/hub_service.dart';
+import '../application/broadcast_message.dart';
 import '../application/logger.dart';
+import 'broadcast_controller.dart';
 
 class SignalRHelper implements HubService {
   HubConnection? connection;
-  final StreamController<String> _streamController = StreamController<String>.broadcast();
+  BroadcastController broadcastController;
+  //final StreamController<String> _streamController = StreamController<String>.broadcast();
+  //get stream => _streamController.stream;
 
-  get stream => _streamController.stream;
-
-  SignalRHelper();
+  SignalRHelper({required this.broadcastController});
 
   @override
   Future<void> initConnection() async {
@@ -22,66 +25,22 @@ class SignalRHelper implements HubService {
                 //logging: (level, message) => print(message),
                 ))
         .build();
-    fLog.w('[SIGNALR CONNECTION CREATED]');
+
     await connection?.start();
-    fLog.w('[SIGNALR CONNECTION STARTED]');
 
-    connection?.onclose((_) {
-      yellsOnClose();
-    });
-    fLog.w('[SIGNALR CONNECTION ON CLOSE REGISTRED]');
+    connection?.onclose((_) {});
 
-    connection?.onreconnecting((_) {
-      yellsOnReconecting();
-    });
-    fLog.w('[SIGNALR CONNECTION ON RECONECTING REGISTRED]');
+    connection?.onreconnecting((_) {});
 
-    connection?.onreconnected((_) {
-      yellsOnReconected();
-    });
-    fLog.w('[SIGNALR CONNECTION ON RECONECTED REGISTRED]');
+    connection?.onreconnected((_) {});
 
     connection?.on('ReceiveMessage', (message) {
-      yellsOnMessage(message);
-      //value = message.toString();
-      _streamController.add(message.toString());
-      //notifyListeners();
+      forwardMessage(message);
     });
-    fLog.w('[SIGNALR CONNECTION ON MESSAGE REGISTRED]');
   }
 
   @override
-  Future<void> sendMessage() async {
-    await connection?.invoke('SendMessage', args: ['Bob', 'Eu estou bem e vc?']);
-    fLog.w('[SIGNALR SEND MESSAGE]');
-  }
-
-  @override
-  Future<void> closeConnection() async {
-    await connection?.stop();
-    fLog.w('[SIGNALR ON CLOSE CONNECTION CALLED]');
-  }
-
-  @override
-  void yellsOnClose() {
-    fLog.w('[SIGNALR ON CLOSE YELLED]');
-  }
-
-  dynamic yellsOnReconected() {
-    fLog.w('[SIGNALR ON RECONECTED YELLED]');
-  }
-
-  dynamic yellsOnReconecting() {
-    fLog.w('[SIGNALR ON RECONECTING YELLED]');
-  }
-
-  @override
-  dynamic yellsOnMessage(dynamic data) {
-    fLog.w('[SIGNALR ON MESSAGE YELLED]');
-    fLog.v(data.toString());
-  }
-
-  void checkStatus() {
-    fLog.e(connection?.state);
+  void forwardMessage(message) {
+    broadcastController.onEvent(message);
   }
 }

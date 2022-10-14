@@ -13,7 +13,6 @@ class CreateTaskController extends ValueNotifier<CommonState> {
   FocusNode descriptionFocus = FocusNode();
   FocusNode dueDateFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
-  SignalRHelper hub;
 
   TextEditingController titleController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
@@ -22,12 +21,7 @@ class CreateTaskController extends ValueNotifier<CommonState> {
   CreateTaskController({
     required this.taskRepository,
     required this.formsValidate,
-    required this.hub,
-  }) : super(IdleState()) {
-    hub.stream.listen((event) {
-      fLog.i('${event}Escutei da create');
-    });
-  }
+  }) : super(IdleState());
 
   GlobalKey<FormState> get form => formsValidate.form;
 

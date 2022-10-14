@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/app_module.dart';
 import 'package:task/src/core/infra/application/logger.dart';
+import 'package:task/src/core/infra/services/broadcast_controller.dart';
 
 import 'src/core/infra/services/signalr_helper.dart';
 import 'src/core/presenter/shared/common_loading.dart';
@@ -22,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
       await Modular.isModuleReady<AppModule>();
 
       try {
-        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 2));
+        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 5));
       } catch (e) {
         fLog.e(e);
       }
