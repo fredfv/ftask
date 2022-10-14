@@ -71,6 +71,27 @@ class UserEntity extends EntityBase {
     );
   }
 
+  factory UserEntity.empty() {
+    return UserEntity(
+      id: '',
+      created: DateTime.now(),
+      login: '',
+      secret: '',
+      name: '',
+      token: '',
+      role: '',
+    );
+  }
+
+  //update this UserEntity based in another UserEntity
+  void setAuthUser(UserEntity user) {
+    setLogin(user.login);
+    setSecret(user.secret);
+    setName(user.name);
+    setRole(user.role);
+    setToken(user.token);
+  }
+
   @override
   String toString() {
     return 'UserEntity{login: $login, secret: $secret, name: $name, id: $id, created: $created} ,  token: $token';

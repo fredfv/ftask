@@ -29,7 +29,7 @@ class FormsValidateServiceMock extends Mock implements FormsValidateService {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final createAccountController = CreateAccountController(
-    loginRepository: LoginRepositoryMock(HttpServiceMock()),
+    repositoryFactory: LoginRepositoryMock(HttpServiceMock()),
     formsValidate: FormsValidateServiceMock(validateMock: true),
   );
 
@@ -42,7 +42,7 @@ void main() {
   });
 
   test('should be a instance of LoginRepository', () {
-    expect(createAccountController.loginRepository, isA<LoginRepository>());
+    expect(createAccountController.repositoryFactory, isA<LoginRepository>());
   });
 
   test('should be a instance of FormsValidateService', () {
@@ -78,7 +78,7 @@ void main() {
 
   test('should enter in the loading state, after calling executeSubmitCreateAccount passing a true validadeMock', () {
     CreateAccountController createAccountController = CreateAccountController(
-      loginRepository: LoginRepositoryMock(HttpServiceMock()),
+      repositoryFactory: LoginRepositoryMock(HttpServiceMock()),
       formsValidate: FormsValidateServiceMock(validateMock: true),
     );
     createAccountController.executeSubmitCreateAccount();
@@ -87,7 +87,7 @@ void main() {
 
   test('should enter in the error state, after calling executeSubmitCreateAccount passing a false validadeMock', () {
     CreateAccountController createAccountController = CreateAccountController(
-      loginRepository: LoginRepositoryMock(HttpServiceMock()),
+      repositoryFactory: LoginRepositoryMock(HttpServiceMock()),
       formsValidate: FormsValidateServiceMock(validateMock: false),
     );
     createAccountController.executeSubmitCreateAccount();

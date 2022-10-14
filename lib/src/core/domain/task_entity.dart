@@ -1,7 +1,4 @@
 import 'entity_base.dart';
-import 'value_objects/description_vo.dart';
-import 'value_objects/due_date_vo.dart';
-import 'value_objects/title_vo.dart';
 
 class TaskEntity extends EntityBase {
   String _description;
@@ -62,6 +59,16 @@ class TaskEntity extends EntityBase {
       dueDate: map['dueDate'] as String,
       id: map['id'] as String,
       created: map['created'] as DateTime,
+      title: map['title'] ?? '',
+    );
+  }
+
+  factory TaskEntity.fromApi(dynamic map) {
+    return TaskEntity(
+      description: map['description'] as String,
+      dueDate: map['dueDate'] as String,
+      id: map['id'] as String,
+      created: DateTime.parse(map['insertDate']),
       title: map['title'] ?? '',
     );
   }

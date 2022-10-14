@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/application/common_state.dart';
+import 'package:task/src/core/domain/repositories/repository_factory.dart';
 import 'package:task/src/core/domain/task_entity.dart';
 import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
@@ -7,7 +8,7 @@ import '../../../core/services/form_validate_service.dart';
 import '../repositories/task_repository_impl.dart';
 
 class CreateTaskController extends ValueNotifier<CommonState> {
-  final TaskRepositoryImpl taskRepository;
+  final RepositoryFactory taskRepository;
   final FormsValidateService formsValidate;
   FocusNode descriptionFocus = FocusNode();
   FocusNode dueDateFocus = FocusNode();
@@ -48,16 +49,18 @@ class CreateTaskController extends ValueNotifier<CommonState> {
         created: DateTime.fromMillisecondsSinceEpoch(0),
       );
       value = LoadingState();
-      taskRepository.put(null, newTask).then((v) {
-        if (v is Exception) {
-          value = ErrorState(v.toString());
-        } else {
-          titleController.clear();
-          descriptionController.clear();
-          dueDateController.clear();
-          formsValidate.form.currentState?.reset();
-          value = SuccessState<String>(response: 'new task added');
-        }
+      taskRepository.get<TaskEntity>().then((hiveRepository) async {
+        hiveRepository.put(null, newTask).then((v) {
+          if (v is Exception) {
+            value = ErrorState(v.toString());
+          } else {
+            titleController.clear();
+            descriptionController.clear();
+            dueDateController.clear();
+            formsValidate.form.currentState?.reset();
+            value = SuccessState<String>(response: 'new task added');
+          }
+        });
       }).onError((error, stackTrace) {
         value = ErrorState(error.toString());
       });

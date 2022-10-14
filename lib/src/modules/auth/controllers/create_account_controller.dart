@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/domain/repositories/login_repository.dart';
+import 'package:task/src/core/domain/repositories/repository_factory.dart';
+import 'package:task/src/core/domain/use_cases/create_account_use_case.dart';
+import 'package:task/src/core/services/http_service.dart';
 
 import '../../../core/application/common_state.dart';
 import '../../../core/application/create_account_request.dart';
 import '../../../core/services/form_validate_service.dart';
-import '../repositories/login_repository_impl.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
-  final LoginRepository loginRepository;
+  final HttpService httpService;
+  final RepositoryFactory repositoryFactory;
   final FormsValidateService formsValidate;
+  final CreateAccountUseCase createAccountUseCase;
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
 
   CreateAccountController({
-    required this.loginRepository,
+    required this.httpService,
+    required this.repositoryFactory,
     required this.formsValidate,
+    required this.createAccountUseCase,
   }) : super(IdleState());
 
   final newAccount = CreateAccountRequest.empty();
@@ -37,8 +42,8 @@ class CreateAccountController extends ValueNotifier<CommonState> {
 
   Future createNewAccountExecute() async {
     value = LoadingState();
-    loginRepository.createAccount(newAccount).then((v) {
-      if (v is Exception) {
+    createAccountUseCase.call(newAccount).then((v) {
+      if (v is Exception || v == false) {
         value = ErrorState(v.toString());
       } else {
         value = SuccessState<String>(response: 'account created! now login to start your tasks!');
