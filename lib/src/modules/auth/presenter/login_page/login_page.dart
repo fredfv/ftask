@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task/src/core/domain/services/validators/secret_vo.dart';
 
+import '../../../../core/domain/services/validators/login_vo.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
@@ -32,18 +34,17 @@ class LoginPage extends StatelessWidget {
             SvgPicture.asset('assets/ttlogo.svg',
                 color: ColorOutlet.secondary, width: MediaQuery.of(context).size.width * 0.7),
             CommonTextFormField(
-                onFieldSubmitted: controller.loginSubmitted,
-                label: 'Login',
-                initialValue: controller.loginRequest.login.toString(),
-                validator: (v) => controller.loginRequest.login.validator(),
-                onChanged: controller.loginRequest.setLogin),
+              onFieldSubmitted: controller.loginSubmitted,
+              label: 'Login',
+              validator: (v) => LoginVO(v).validator(),
+              controller: controller.emailController,
+            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             CommonTextFormField(
                 onFieldSubmitted: (value) => controller.executeLogin(context),
                 label: 'Password',
-                initialValue: controller.loginRequest.secret.toString(),
-                validator: (v) => controller.loginRequest.secret.validator(),
-                onChanged: controller.loginRequest.setSecret,
+                validator: (v) => SecretVO(v).validator(),
+                controller: controller.secretController,
                 focusNode: controller.secretFocus,
                 obscureText: true),
             Padding(

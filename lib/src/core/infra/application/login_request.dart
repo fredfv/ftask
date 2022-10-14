@@ -1,23 +1,20 @@
-import '../../domain/services/validators/login_vo.dart';
-import '../../domain/services/validators/secret_vo.dart';
-
 class LoginRequest {
-  LoginVO _login;
-  SecretVO _secret;
+  String _login;
+  String _secret;
 
-  LoginVO get login => _login;
+  String get login => _login;
 
-  void setLogin(String? value) => _login = LoginVO(value ?? '');
+  set login(String? value) => _login = value ?? '';
 
-  SecretVO get secret => _secret;
+  String get secret => _secret;
 
-  void setSecret(String? value) => _secret = SecretVO(value ?? '');
+  set secret(String? value) => _secret = value ?? '';
 
   LoginRequest({
     required String login,
     required String secret,
-  })  : _login = LoginVO(login),
-        _secret = SecretVO(secret);
+  })  : _login = login,
+        _secret = secret;
 
   factory LoginRequest.empty() {
     return LoginRequest(

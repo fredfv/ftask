@@ -1,13 +1,13 @@
 import 'value_object.dart';
 
 class SecretVO implements ValueObject {
-  final String _value;
+  final String? _value;
 
   SecretVO(this._value);
 
   @override
   String? validator() {
-    if (_value.isEmpty) {
+    if (_value?.isEmpty ?? true) {
       return 'fill the field to submit';
     }
     return null;
@@ -19,7 +19,4 @@ class SecretVO implements ValueObject {
     }
     return null;
   }
-
-  @override
-  String toString() => _value;
 }

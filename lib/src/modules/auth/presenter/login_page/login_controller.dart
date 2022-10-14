@@ -15,7 +15,9 @@ class LoginController extends ValueNotifier<CommonState> {
   final LoginUsecase loginUseCase;
 
   final FocusNode secretFocus = FocusNode();
-  final loginRequest = LoginRequest.empty();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController secretController = TextEditingController();
 
   GlobalKey<FormState> get form => formsValidate.form;
 
@@ -30,7 +32,11 @@ class LoginController extends ValueNotifier<CommonState> {
     if (formsValidate.validate()) {
       secretFocus.unfocus();
       value = LoadingState();
-      loginUseCase.call(loginRequest).then((userEntity) {
+      LoginRequest loginRequest = LoginRequest(
+        login: emailController.text,
+        secret: secretController.text,
+      );
+      loginUseCase(loginRequest).then((userEntity) {
         if (value is Exception || userEntity == null) {
           value = ErrorState(value.toString());
         } else {
@@ -41,21 +47,6 @@ class LoginController extends ValueNotifier<CommonState> {
       }).catchError((e) {
         value = ErrorState(e.toString());
       });
-
-      // loginRepository.login(loginRequest).then((v) {
-      //   if (v is Exception) {
-      //     value = ErrorState(v.toString());
-      //   } else {
-      //     loginRepository.persistAuthLogin(v).then((l) {
-      //       value = SuccessState<String>(response: 'welcome ${v['person']['name']}');
-      //       Modular.to.navigate('/home/');
-      //     }).catchError((e) {
-      //       value = ErrorState(e.toString());
-      //     });
-      //   }
-      // }).catchError((e) {
-      //   value = ErrorState(e);
-      // });
     } else {
       value = ErrorState('invalid fields');
     }
