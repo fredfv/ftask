@@ -4,7 +4,7 @@ import 'package:task/src/core/infra/repositories/hive_repository_factory.dart';
 
 import 'src/core/domain/entities/user_entity.dart';
 import 'src/core/infra/services/broadcast_controller.dart';
-import 'src/core/infra/services/http_service_dio_impl.dart';
+import 'src/core/infra/services/http_service.dart';
 import 'src/core/infra/services/object_id.dart';
 import 'src/core/infra/services/signalr_helper.dart';
 import 'src/core/presenter/pages/wildcard_page.dart';
@@ -18,8 +18,8 @@ class AppModule extends Module {
         Bind.singleton((i) => UserEntity.empty()),
         Bind.lazySingleton((i) => ObjectId()),
         Bind.lazySingleton((i) => HiveRepositoryFactory(objectId: i(), path: 'path')),
-        Bind.factory((i) => FormsValidateImpl()),
-        Bind.lazySingleton((i) => HttpServiceDioImpl()),
+        Bind.factory((i) => FormsValidate()),
+        Bind.lazySingleton((i) => HttpService()),
         Bind.singleton((i) => BroadcastController()),
         Bind.singleton((i) => SignalRHelper(broadcastController: i())),
       ];

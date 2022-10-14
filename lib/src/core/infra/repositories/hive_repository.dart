@@ -1,14 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart' as db;
 
 import '../../domain/entities/entity_base.dart';
-import '../../domain/repositories/repository.dart';
-import '../../domain/services/object_id_service.dart';
+import '../../domain/repositories/i_repository.dart';
+import '../../domain/services/I_object_id_service.dart';
 import '../application/logger.dart';
 import '../mappers/mapper.dart';
 
-class HiveReposiotry<T extends EntityBase> implements Repository<T> {
+class HiveReposiotry<T extends EntityBase> implements IRepository<T> {
   final Mapper<T> mapper;
-  final ObjectIdService objectId;
+  final IObjectIdService objectId;
 
   HiveReposiotry({required this.mapper, required this.objectId});
 

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/common_state.dart';
 import 'package:task/src/core/application/create_account_request.dart';
-import 'package:task/src/core/domain/services/form_validate_service.dart';
+import 'package:task/src/core/domain/services/i_form_validate_service.dart';
 import 'package:task/src/modules/auth/presenter/create_account_page/create_account_controller.dart';
 
 import '../../../core/services/http/http_service_dio_impl_test.dart';
@@ -11,7 +11,7 @@ import '../repositories/login_repository_impl_test.dart';
 
 class BuildContextMock extends Mock implements BuildContext {}
 
-class FormsValidateServiceMock extends Mock implements FormsValidateService {
+class FormsValidateServiceMock extends Mock implements IFormsValidateService {
   FormsValidateServiceMock({required this.validateMock});
 
   @override
@@ -45,7 +45,7 @@ void main() {
   });
 
   test('should be a instance of FormsValidateService', () {
-    expect(createAccountController.formsValidate, isA<FormsValidateService>());
+    expect(createAccountController.formsValidate, isA<IFormsValidateService>());
   });
 
   test('should be a instance of FocusNode', () {

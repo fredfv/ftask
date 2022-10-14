@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class FormsValidateService {
+abstract class IFormsValidateService {
   bool validate();
 
   final form = GlobalKey<FormState>();

@@ -10,7 +10,7 @@ import 'usecase/login_usecase_impl.dart';
 class AuthModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.lazySingleton((i) => CreateAccountUsecaseImpl(
+        Bind.lazySingleton((i) => CreateAccountUsecase(
               httpService: i(),
             )),
         Bind.lazySingleton((i) => LoginUseCaseImpl(

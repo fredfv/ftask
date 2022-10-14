@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/domain/entities/entity_base.dart';
-import 'package:task/src/core/domain/repositories/repository.dart';
-import 'package:task/src/core/domain/services/object_id_service.dart';
+import 'package:task/src/core/domain/repositories/i_repository.dart';
+import 'package:task/src/core/domain/services/I_object_id_service.dart';
 import 'package:task/src/core/infra/mappers/mapper.dart';
 
-class MockObjectId extends Mock implements ObjectIdService {}
+class MockObjectId extends Mock implements IObjectIdService {}
 
 class MockEntity extends EntityBase {
   MockEntity({required super.id, required super.created});
@@ -31,7 +31,7 @@ class MockMapper extends Mapper<MockEntity> {
   }
 }
 
-class MockRepository<T extends EntityBase> extends Mock implements Repository<T> {
+class MockRepository<T extends EntityBase> extends Mock implements IRepository<T> {
   String get box => T.toString();
 
   Future init(String path) async {}

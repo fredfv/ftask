@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/custom_exception.dart';
-import 'package:task/src/core/domain/services/http_service.dart';
+import 'package:task/src/core/domain/services/i_http_service.dart';
 import 'package:task/src/core/infra/application/http_request_methods.dart';
 
-class HttpServiceMock extends Mock implements HttpService {
+class HttpServiceMock extends Mock implements IHttpService {
   @override
   Future<dynamic> request({
     required String baseUrl,
@@ -27,7 +27,7 @@ void main() {
   final httpService = HttpServiceMock();
 
   test('should be a instance of HttpService', () {
-    expect(httpService, isA<HttpService>());
+    expect(httpService, isA<IHttpService>());
   });
 
   test('should return a response', () async {

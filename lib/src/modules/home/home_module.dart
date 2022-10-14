@@ -11,7 +11,7 @@ import 'presenter/home_page/home_page.dart';
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => UpdateTasksFromCloudUsecaseImpl(
+        Bind.factory((i) => UpdateTasksFromCloudUsecase(
               httpService: i(),
               repositoryFactory: i(),
             )),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/services/form_validate_service.dart';
+import '../../domain/services/i_form_validate_service.dart';
 
-class FormsValidateImpl implements FormsValidateService {
+class FormsValidate implements IFormsValidateService {
   final _formValidate = GlobalKey<FormState>();
 
   @override

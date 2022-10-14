@@ -1,13 +1,13 @@
-import '../../../core/domain/services/http_service.dart';
-import '../../../core/domain/usecases/create_account_usecase.dart';
+import '../../../core/domain/services/i_http_service.dart';
+import '../../../core/domain/usecases/i_create_account_usecase.dart';
 import '../../../core/infra/application/create_account_request.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/logger.dart';
 
-class CreateAccountUsecaseImpl implements CreateAccountUsecase {
-  final HttpService httpService;
+class CreateAccountUsecase implements ICreateAccountUsecase {
+  final IHttpService httpService;
 
-  CreateAccountUsecaseImpl({required this.httpService});
+  CreateAccountUsecase({required this.httpService});
 
   @override
   Future<bool> call(CreateAccountRequest request) async {

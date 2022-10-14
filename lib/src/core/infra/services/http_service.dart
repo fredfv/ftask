@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 
-import '../../domain/services/http_service.dart';
+import '../../domain/services/i_http_service.dart';
 import '../application/custom_exception.dart';
 import '../application/http_request_methods.dart';
 import 'dio_handler.dart';
 
-class HttpServiceDioImpl implements HttpService {
+class HttpService implements IHttpService {
   final _requestHandler = DioHandler();
 
   @override

@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:task/src/core/infra/application/broadcast_message.dart';
 import 'package:task/src/core/infra/services/broadcast_controller.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
-import '../../../../core/domain/repositories/repository_factory.dart';
-import '../../../../core/domain/services/http_service.dart';
-import '../../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
+import '../../../../core/domain/repositories/i_repository_factory.dart';
+import '../../../../core/domain/services/i_http_service.dart';
+import '../../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 
 class ListTaskController extends ValueNotifier<CommonState> {
-  final HttpService httpService;
-  final RepositoryFactory repositoryFactory;
+  final IHttpService httpService;
+  final IRepositoryFactory repositoryFactory;
   final List<TaskEntity> list = [];
-  final UpdateTasksFromCloudUsecase updateTasksFromCloudUseCase;
+  final IUpdateTasksFromCloudUsecase updateTasksFromCloudUseCase;
   final BroadcastController broadcastController;
 
   ListTaskController(

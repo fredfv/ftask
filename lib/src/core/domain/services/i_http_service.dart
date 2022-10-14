@@ -1,6 +1,6 @@
 import '../../infra/application/http_request_methods.dart';
 
-abstract class HttpService {
+abstract class IHttpService {
   Future<dynamic> request({
     required String baseUrl,
     required String endPoint,

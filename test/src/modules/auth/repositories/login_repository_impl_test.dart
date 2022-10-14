@@ -2,13 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/create_account_request.dart';
 import 'package:task/src/core/application/custom_exception.dart';
-import 'package:task/src/core/domain/services/http_service.dart';
+import 'package:task/src/core/domain/services/i_http_service.dart';
 import 'package:task/src/core/infra/application/http_request_methods.dart';
 
 import '../../../core/services/http/http_service_dio_impl_test.dart';
 
 class LoginRepositoryMock extends Mock implements LoginRepository {
-  final HttpService httpService;
+  final IHttpService httpService;
 
   LoginRepositoryMock(this.httpService);
 

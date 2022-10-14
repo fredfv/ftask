@@ -2,17 +2,17 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
-import '../../../core/domain/repositories/repository.dart';
-import '../../../core/domain/repositories/repository_factory.dart';
-import '../../../core/domain/services/http_service.dart';
-import '../../../core/domain/usecases/update_tasks_from_cloud_usecase.dart';
+import '../../../core/domain/repositories/i_repository.dart';
+import '../../../core/domain/repositories/i_repository_factory.dart';
+import '../../../core/domain/services/i_http_service.dart';
+import '../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 
-class UpdateTasksFromCloudUsecaseImpl implements UpdateTasksFromCloudUsecase {
-  final HttpService httpService;
-  final RepositoryFactory repositoryFactory;
+class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
+  final IHttpService httpService;
+  final IRepositoryFactory repositoryFactory;
 
-  UpdateTasksFromCloudUsecaseImpl({required this.httpService, required this.repositoryFactory});
+  UpdateTasksFromCloudUsecase({required this.httpService, required this.repositoryFactory});
 
   @override
   Future<bool> call() async {
@@ -26,7 +26,7 @@ class UpdateTasksFromCloudUsecaseImpl implements UpdateTasksFromCloudUsecase {
         receiveTimeout: 5000,
         connectTimeout: 10000);
 
-    Repository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
+    IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
     List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromApi(e)).toList();
     await repository.putMany(listTask);
     return true;

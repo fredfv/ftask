@@ -1,6 +1,6 @@
 import '../entities/entity_base.dart';
 
-abstract class Repository<T extends EntityBase> {
+abstract class IRepository<T extends EntityBase> {
   Future<T?> get(String key);
 
   Future<List<T>> getAll();

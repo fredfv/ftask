@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:signalr_core/signalr_core.dart';
 
-import '../../domain/services/hub_service.dart';
-import '../application/broadcast_message.dart';
+import '../../domain/services/i_hub_service.dart';
 import '../application/logger.dart';
 import 'broadcast_controller.dart';
 
-class SignalRHelper implements HubService {
+class SignalRHelper implements IHubService {
   HubConnection? connection;
   BroadcastController broadcastController;
   //final StreamController<String> _streamController = StreamController<String>.broadcast();

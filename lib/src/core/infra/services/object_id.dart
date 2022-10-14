@@ -1,8 +1,8 @@
 import 'package:objectid/objectid.dart' as oi;
 
-import '../../domain/services/object_id_service.dart';
+import '../../domain/services/I_object_id_service.dart';
 
-class ObjectId implements ObjectIdService {
+class ObjectId implements IObjectIdService {
   @override
   String generate() => oi.ObjectId().hexString;
 }

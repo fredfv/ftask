@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/domain/repositories/repository_factory.dart';
-import '../../../../core/domain/services/form_validate_service.dart';
-import '../../../../core/domain/services/http_service.dart';
-import '../../../../core/domain/usecases/create_account_usecase.dart';
+import '../../../../core/domain/repositories/i_repository_factory.dart';
+import '../../../../core/domain/services/i_form_validate_service.dart';
+import '../../../../core/domain/services/i_http_service.dart';
+import '../../../../core/domain/usecases/i_create_account_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/application/create_account_request.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
-  final HttpService httpService;
-  final RepositoryFactory repositoryFactory;
-  final FormsValidateService formsValidate;
-  final CreateAccountUsecase createAccountUseCase;
+  final IHttpService httpService;
+  final IRepositoryFactory repositoryFactory;
+  final IFormsValidateService formsValidate;
+  final ICreateAccountUsecase createAccountUseCase;
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
