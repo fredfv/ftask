@@ -10,7 +10,6 @@ import 'src/core/services/http/http_service_dio_impl.dart';
 import 'src/core/services/websocket/signalr_helper.dart';
 import 'src/core/ui/services/forms_validade_impl.dart';
 import 'src/modules/auth/auth_module.dart';
-import 'src/modules/auth/repositories/login_repository_impl.dart';
 
 class AppModule extends Module {
   @override
@@ -18,7 +17,6 @@ class AppModule extends Module {
         Bind.singleton((i) => UserEntity.empty()),
         Bind.lazySingleton((i) => ObjectId()),
         Bind.lazySingleton((i) => HiveRepositoryFactory(objectId: i(), path: 'path')),
-        //Bind.lazySingleton((i) => LoginRepositoryImpl(httpService: i(), objectIdService: i())),
         Bind.factory((i) => FormsValidateImpl()),
         Bind.lazySingleton((i) => HttpServiceDioImpl()),
         Bind.lazySingleton((i) => SignalRHelper())

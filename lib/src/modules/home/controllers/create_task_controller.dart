@@ -5,7 +5,6 @@ import 'package:task/src/core/domain/task_entity.dart';
 import 'package:task/src/core/services/websocket/signalr_helper.dart';
 
 import '../../../core/services/form_validate_service.dart';
-import '../repositories/task_repository_impl.dart';
 
 class CreateTaskController extends ValueNotifier<CommonState> {
   final RepositoryFactory taskRepository;

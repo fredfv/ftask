@@ -1,5 +1,6 @@
-import 'package:flutter/services.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/services.dart';
 
 class TimeTextInputFormatter extends TextInputFormatter {
   late RegExp pattern;

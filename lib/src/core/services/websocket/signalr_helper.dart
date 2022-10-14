@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:task/src/core/infra/logger.dart';
 
