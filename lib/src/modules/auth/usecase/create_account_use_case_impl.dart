@@ -15,7 +15,7 @@ class CreateAccountUsecaseImpl implements CreateAccountUsecase {
   @override
   Future<bool> call(CreateAccountRequest request) async {
     try {
-      var response = httpService.request(
+      await httpService.request(
           baseUrl: 'http://192.168.15.3:5001',
           endPoint: '/Person/createaccount',
           method: HttpRequestMethods.post,

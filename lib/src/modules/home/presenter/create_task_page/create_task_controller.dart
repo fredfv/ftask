@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/application/common_state.dart';
 import 'package:task/src/core/domain/entities/task_entity.dart';
 import 'package:task/src/core/domain/repositories/repository_factory.dart';
+import 'package:task/src/core/infra/logger.dart';
 import 'package:task/src/core/infra/services/signalr_helper.dart';
 
 import '../../../../core/domain/services/form_validate_service.dart';
@@ -24,7 +25,7 @@ class CreateTaskController extends ValueNotifier<CommonState> {
     required this.hub,
   }) : super(IdleState()) {
     hub.stream.listen((event) {
-      print(event.toString() + 'Escutei da create');
+      fLog.i('${event}Escutei da create');
     });
   }
 

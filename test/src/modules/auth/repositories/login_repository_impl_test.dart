@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/src/core/application/create_account_request.dart';
 import 'package:task/src/core/application/custom_exception.dart';
-import 'package:task/src/core/domain/repositories/login_repository.dart';
 import 'package:task/src/core/domain/services/http_service.dart';
 import 'package:task/src/core/infra/http_request_methods.dart';
 
@@ -16,7 +15,6 @@ class LoginRepositoryMock extends Mock implements LoginRepository {
   /// Mock the request calling it passing a login as param with value of 'test
   /// and return a response with value of 'ok'
   /// If not pass a login param, return a exception
-  @override
   Future createAccount(CreateAccountRequest newAccount) async {
     return httpService.request(
       baseUrl: 'https://www.google.com',

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/core/domain/repositories/repository_factory.dart';
-import 'package:task/src/core/domain/use_cases/login_usecase.dart';
 
 import '../../../../core/application/common_state.dart';
 import '../../../../core/application/login_request.dart';
 import '../../../../core/domain/services/form_validate_service.dart';
 import '../../../../core/domain/services/http_service.dart';
+import '../../../../core/domain/usecases/login_usecase.dart';
 
 class LoginController extends ValueNotifier<CommonState> {
   final HttpService httpService;
   final RepositoryFactory repositoryFactory;
   final FormsValidateService formsValidate;
-  final LoginUseCase loginUseCase;
+  final LoginUsecase loginUseCase;
 
   final FocusNode secretFocus = FocusNode();
   final loginRequest = LoginRequest.empty();

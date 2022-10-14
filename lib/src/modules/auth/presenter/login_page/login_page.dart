@@ -3,13 +3,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/application/common_state.dart';
-import '../../../../core/ui/color_outlet.dart';
-import '../../../../core/ui/size_outlet.dart';
-import '../../../../core/ui/widgets/common_button.dart';
-import '../../../../core/ui/widgets/common_loading.dart';
-import '../../../../core/ui/widgets/common_snackbar.dart';
-import '../../../../core/ui/widgets/common_text_form_field.dart';
-import '../../../../core/ui/widgets/underline_button.dart';
+import '../../../../core/presenter/shared/common_button.dart';
+import '../../../../core/presenter/shared/common_loading.dart';
+import '../../../../core/presenter/shared/common_snackbar.dart';
+import '../../../../core/presenter/shared/common_text_form_field.dart';
+import '../../../../core/presenter/shared/underline_button.dart';
+import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/size_outlet.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatelessWidget {

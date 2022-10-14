@@ -6,6 +6,7 @@ import 'package:task/src/core/application/create_account_request.dart';
 import 'package:task/src/core/domain/repositories/login_repository.dart';
 import 'package:task/src/core/domain/services/form_validate_service.dart';
 import 'package:task/src/modules/auth/presenter/create_account/create_account_controller.dart';
+import 'package:task/src/modules/auth/presenter/create_account_page/create_account_controller.dart';
 
 import '../../../core/services/http/http_service_dio_impl_test.dart';
 import '../repositories/login_repository_impl_test.dart';

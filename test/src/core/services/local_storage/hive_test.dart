@@ -34,7 +34,6 @@ class MockMapper extends Mapper<MockEntity> {
 class MockRepository<T extends EntityBase> extends Mock implements Repository<T> {
   String get box => T.toString();
 
-  @override
   Future init(String path) async {}
 }
 
