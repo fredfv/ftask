@@ -1,6 +1,6 @@
-import '../../domain/services/validators/login_vo.dart';
-import '../../domain/services/validators/name_vo.dart';
-import '../../domain/services/validators/secret_vo.dart';
+import '../validators/login_vo.dart';
+import '../validators/name_vo.dart';
+import '../validators/secret_vo.dart';
 
 class CreateAccountRequest {
   NameVO _name;

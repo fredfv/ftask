@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:task/src/core/domain/services/validators/i_broadcast_controller.dart';
+import 'package:task/src/core/infra/validators/i_broadcast_controller.dart';
 
 import '../application/broadcast_message.dart';
 

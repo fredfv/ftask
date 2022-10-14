@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task/src/core/domain/services/validators/secret_vo.dart';
+import 'package:task/src/core/infra/validators/secret_vo.dart';
 
-import '../../../../core/domain/services/validators/login_vo.dart';
+import '../../../../core/infra/validators/login_vo.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
