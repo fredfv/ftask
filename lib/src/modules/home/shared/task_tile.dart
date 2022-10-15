@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:task/src/modules/home/models/task_tile_model.dart';
 import 'package:task/src/modules/home/shared/task_due_state_color_converter.dart';
 
-import '../../../../../core/presenter/shared/common_spacing.dart';
-import '../../../../../core/presenter/shared/common_text.dart';
-import '../../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../../core/presenter/theme/size_outlet.dart';
-import '../../../../../core/presenter/theme/spacing_type.dart';
+import '../../../core/presenter/shared/common_spacing.dart';
+import '../../../core/presenter/shared/common_text.dart';
+import '../../../core/presenter/theme/color_outlet.dart';
+import '../../../core/presenter/theme/size_outlet.dart';
+import '../../../core/presenter/theme/spacing_type.dart';
 
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;
   final ChangeNotifier controller;
 
-  const TaskTile({Key? key, required this.taskItem, required this.controller}) : super(key: key);
+  const TaskTile({Key? key, required this.taskItem, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,8 @@ class TaskTile extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.35,
                   child: CommonText(
                     fontSize: SizeOutlet.textSizeMedium,
-                    text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
+                    text:
+                        '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
                   ),
                 ),
               ],
@@ -83,7 +85,8 @@ class TaskTile extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: CommonText(
-                        fontColor: TaskDueStateColorConverter.get(taskItem.dueState),
+                        fontColor:
+                            TaskDueStateColorConverter.get(taskItem.dueState),
                         fontSize: SizeOutlet.textSizeMedium,
                         text: taskItem.timeElapsed,
                       ),

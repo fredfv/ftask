@@ -26,7 +26,9 @@ void main() {
     expect(loginRequest, isA<LoginRequest>());
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
     expect(loginRequest.login.validator(), 'fill the field to submit');
   });
 
@@ -35,7 +37,9 @@ void main() {
     expect(loginRequest.login.validator(), null);
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
     expect(loginRequest.secret.validator(), 'fill the field to submit');
   });
 
@@ -56,12 +60,14 @@ void main() {
   });
 
   test('implements fromJson', () {
-    final loginRequest = LoginRequest.fromJson({'login': 'login', 'secret': 'secret'});
+    final loginRequest =
+        LoginRequest.fromJson({'login': 'login', 'secret': 'secret'});
     expect(loginRequest, isA<LoginRequest>());
   });
 
   test('should return a class with the values of the json', () {
-    final loginRequest = LoginRequest.fromJson({'login': 'login', 'secret': 'secret'});
+    final loginRequest =
+        LoginRequest.fromJson({'login': 'login', 'secret': 'secret'});
     expect(loginRequest.login.toString(), 'login');
     expect(loginRequest.secret.toString(), 'secret');
   });

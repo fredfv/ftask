@@ -14,7 +14,13 @@ class CommonScaffold extends StatelessWidget {
   /// since it would refer to an ancestor of that widget).
   final Widget? leading;
 
-  const CommonScaffold({Key? key, this.title, required this.body, this.bottonNavBar, this.leading}) : super(key: key);
+  const CommonScaffold(
+      {Key? key,
+      this.title,
+      required this.body,
+      this.bottonNavBar,
+      this.leading})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,9 @@ class CommonScaffold extends StatelessWidget {
               titleTextStyle: TextStyle(
                   fontFamily: 'Sansation',
                   color: ColorOutlet.secondary,
-                  fontSize: MediaQuery.of(context).size.width / MediaQuery.of(context).size.height * 35)),
+                  fontSize: MediaQuery.of(context).size.width /
+                      MediaQuery.of(context).size.height *
+                      35)),
       body: body,
       bottomNavigationBar: bottonNavBar,
     );

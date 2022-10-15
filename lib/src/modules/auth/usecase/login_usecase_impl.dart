@@ -13,7 +13,8 @@ class LoginUseCaseImpl implements ILoginUsecase {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
 
-  LoginUseCaseImpl({required this.httpService, required this.repositoryFactory});
+  LoginUseCaseImpl(
+      {required this.httpService, required this.repositoryFactory});
 
   @override
   Future<UserEntity?> call(LoginRequest loginRequest) async {
@@ -26,7 +27,8 @@ class LoginUseCaseImpl implements ILoginUsecase {
           receiveTimeout: 5000,
           connectTimeout: 10000);
 
-      IRepository<UserEntity> repository = await repositoryFactory.get<UserEntity>();
+      IRepository<UserEntity> repository =
+          await repositoryFactory.get<UserEntity>();
       UserEntity userAuthModel = UserEntity.fromAuth(authUser);
       await repository.put(userAuthModel.id, userAuthModel);
       Modular.get<UserEntity>().setAuthUser(userAuthModel);

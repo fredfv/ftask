@@ -12,7 +12,8 @@ class GetByIdFromCloudUsecase implements IGetByIdFromCloudUsecase {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
 
-  GetByIdFromCloudUsecase({required this.httpService, required this.repositoryFactory});
+  GetByIdFromCloudUsecase(
+      {required this.httpService, required this.repositoryFactory});
 
   @override
   Future<bool> call(String id) async {
@@ -27,7 +28,8 @@ class GetByIdFromCloudUsecase implements IGetByIdFromCloudUsecase {
         receiveTimeout: 5000,
         connectTimeout: 10000);
 
-    IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
+    IRepository<TaskEntity> repository =
+        await repositoryFactory.get<TaskEntity>();
     TaskEntity task = TaskEntity.fromCloud(entity);
     await repository.put(task.id, task);
     return true;

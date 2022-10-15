@@ -1,3 +1,3 @@
 abstract class IUpdateTasksFromCloudUsecase {
-  Future<void> call();
+  Future<bool> call();
 }

@@ -34,10 +34,12 @@ class AuthModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/',
-            child: (context, args) => LoginPage(controller: Modular.get<LoginController>()),
+            child: (context, args) =>
+                LoginPage(controller: Modular.get<LoginController>()),
             transition: TransitionType.rightToLeft),
         ChildRoute('/createaccount',
-            child: (context, args) => CreateAccountPage(controller: Modular.get<CreateAccountController>()),
+            child: (context, args) => CreateAccountPage(
+                controller: Modular.get<CreateAccountController>()),
             transition: TransitionType.leftToRight),
       ];
 }

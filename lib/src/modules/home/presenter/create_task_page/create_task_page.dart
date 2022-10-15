@@ -55,7 +55,8 @@ class TaskPage extends StatelessWidget {
               controller: controller.descriptionController,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.05),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
@@ -64,13 +65,15 @@ class TaskPage extends StatelessWidget {
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
+                          content: Text(state.response.toString()),
+                          backgroundColor: ColorOutlet.success));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                          content: Text(state.message),
+                          backgroundColor: ColorOutlet.error));
                       controller.value = IdleState();
                     });
                   }

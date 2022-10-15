@@ -97,7 +97,9 @@ class HiveRepository<T extends EntityBase> implements IRepository<T> {
 
   @override
   Future<List<T>> query(bool onBoard) async {
-    Iterable list = box.values.where((t) => t['deleted'] == null && t['onBoard'] == onBoard).toList();
+    Iterable list = box.values
+        .where((t) => t['deleted'] == null && t['onBoard'] == onBoard)
+        .toList();
     List<T> result = list.map((e) => mapper.fromJson(e)!).toList();
     return result;
   }

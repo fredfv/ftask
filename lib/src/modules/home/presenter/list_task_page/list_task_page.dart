@@ -8,8 +8,8 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
+import '../../shared/task_tile.dart';
 import 'list_task_controller.dart';
-import 'widgets/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
   final ListTaskController controller;

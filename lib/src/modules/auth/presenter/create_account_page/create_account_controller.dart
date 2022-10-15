@@ -46,7 +46,8 @@ class CreateAccountController extends ValueNotifier<CommonState> {
       if (v is Exception || v == false) {
         value = ErrorState(v.toString());
       } else {
-        value = SuccessState<String>(response: 'account created! now login to start your tasks!');
+        value = SuccessState<String>(
+            response: 'account created! now login to start your tasks!');
         Modular.to.pop();
       }
     }).catchError((e) {

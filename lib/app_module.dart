@@ -17,7 +17,8 @@ class AppModule extends Module {
   List<Bind> get binds => [
         Bind.singleton((i) => UserEntity.empty()),
         Bind.lazySingleton((i) => ObjectId()),
-        Bind.lazySingleton((i) => HiveRepositoryFactory(objectId: i(), path: 'path')),
+        Bind.lazySingleton(
+            (i) => HiveRepositoryFactory(objectId: i(), path: 'path')),
         Bind.factory((i) => FormsValidate()),
         Bind.lazySingleton((i) => HttpService()),
         Bind.singleton((i) => BroadcastController()),
@@ -27,8 +28,10 @@ class AppModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const SplashPage()),
-        ModuleRoute('/src', module: AuthModule(), transition: TransitionType.size),
-        ModuleRoute('/home', module: HomeModule(), transition: TransitionType.downToUp),
+        ModuleRoute('/src',
+            module: AuthModule(), transition: TransitionType.size),
+        ModuleRoute('/home',
+            module: HomeModule(), transition: TransitionType.downToUp),
         WildcardRoute(
           child: (_, __) => const WildcardPage(),
         ),

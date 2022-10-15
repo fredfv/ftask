@@ -68,14 +68,17 @@ void main() {
     expect(createAccountController.form, isA<GlobalKey<FormState>>());
   });
 
-  test('should return error because no fields are filled in newaccount  when execute createNewAccountExecute',
+  test(
+      'should return error because no fields are filled in newaccount  when execute createNewAccountExecute',
       () async {
     createAccountController.createNewAccountExecute().then((value) {
       expect(createAccountController.value, isA<ErrorState>());
     });
   });
 
-  test('should enter in the loading state, after calling executeSubmitCreateAccount passing a true validadeMock', () {
+  test(
+      'should enter in the loading state, after calling executeSubmitCreateAccount passing a true validadeMock',
+      () {
     CreateAccountController createAccountController = CreateAccountController(
       repositoryFactory: LoginRepositoryMock(HttpServiceMock()),
       formsValidate: FormsValidateServiceMock(validateMock: true),
@@ -84,7 +87,9 @@ void main() {
     expect(createAccountController.value, isA<LoadingState>());
   });
 
-  test('should enter in the error state, after calling executeSubmitCreateAccount passing a false validadeMock', () {
+  test(
+      'should enter in the error state, after calling executeSubmitCreateAccount passing a false validadeMock',
+      () {
     CreateAccountController createAccountController = CreateAccountController(
       repositoryFactory: LoginRepositoryMock(HttpServiceMock()),
       formsValidate: FormsValidateServiceMock(validateMock: false),
@@ -93,7 +98,9 @@ void main() {
     expect(createAccountController.value, isA<ErrorState>());
   });
 
-  test('should return success when execute createNewAccountExecute passing Login as test', () async {
+  test(
+      'should return success when execute createNewAccountExecute passing Login as test',
+      () async {
     createAccountController.newAccount.setLogin('test');
     createAccountController.newAccount.setName('test');
     createAccountController.newAccount.setSecret('test');
@@ -103,7 +110,9 @@ void main() {
     });
   });
 
-  test('should return error when execute createNewAccountExecute passing Login as test2', () async {
+  test(
+      'should return error when execute createNewAccountExecute passing Login as test2',
+      () async {
     createAccountController.newAccount.setLogin('test2');
     createAccountController.newAccount.setName('test');
     createAccountController.newAccount.setSecret('test');

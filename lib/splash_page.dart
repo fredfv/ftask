@@ -22,7 +22,9 @@ class _SplashPageState extends State<SplashPage> {
       await Modular.isModuleReady<AppModule>();
 
       try {
-        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 3));
+        await Modular.get<SignalRHelper>()
+            .initConnection()
+            .timeout(const Duration(seconds: 3));
       } catch (e) {
         fLog.e(e);
       }

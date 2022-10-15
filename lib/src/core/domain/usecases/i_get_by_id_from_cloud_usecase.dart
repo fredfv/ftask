@@ -1,3 +1,3 @@
 abstract class IGetByIdFromCloudUsecase {
-  call(String id);
+  Future<bool> call(String id);
 }

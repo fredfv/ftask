@@ -31,7 +31,8 @@ class MockMapper extends Mapper<MockEntity> {
   }
 }
 
-class MockRepository<T extends EntityBase> extends Mock implements IRepository<T> {
+class MockRepository<T extends EntityBase> extends Mock
+    implements IRepository<T> {
   String get box => T.toString();
 
   Future init(String path) async {}

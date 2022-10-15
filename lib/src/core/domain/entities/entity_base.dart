@@ -20,7 +20,11 @@ abstract class EntityBase {
 
   void setDeleted(DateTime? value) => _deleted = value;
 
-  EntityBase({required String id, required DateTime created, required DateTime persisted, DateTime? deleted})
+  EntityBase(
+      {required String id,
+      required DateTime created,
+      required DateTime persisted,
+      DateTime? deleted})
       : _id = id,
         _created = created,
         _persisted = persisted,

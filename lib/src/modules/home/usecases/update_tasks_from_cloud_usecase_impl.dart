@@ -12,7 +12,8 @@ class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
 
-  UpdateTasksFromCloudUsecase({required this.httpService, required this.repositoryFactory});
+  UpdateTasksFromCloudUsecase(
+      {required this.httpService, required this.repositoryFactory});
 
   @override
   Future<bool> call() async {
@@ -26,8 +27,10 @@ class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
         receiveTimeout: 5000,
         connectTimeout: 10000);
 
-    IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
-    List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
+    IRepository<TaskEntity> repository =
+        await repositoryFactory.get<TaskEntity>();
+    List<TaskEntity> listTask =
+        list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
     await repository.putMany(listTask);
     return true;
   }

@@ -37,7 +37,8 @@ void main() {
       method: HttpRequestMethods.get,
       params: {'test': 'test'},
     );
-    expect(result, {'response': 'ok'}, reason: 'Pass a param and return a response');
+    expect(result, {'response': 'ok'},
+        reason: 'Pass a param and return a response');
   });
 
   test('should return a exception', () async {
@@ -46,6 +47,7 @@ void main() {
       endPoint: 'test',
       method: HttpRequestMethods.get,
     );
-    expect(result, isA<CustomException>(), reason: 'Not pass a param and return a exception');
+    expect(result, isA<CustomException>(),
+        reason: 'Not pass a param and return a exception');
   });
 }

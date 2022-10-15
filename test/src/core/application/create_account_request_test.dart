@@ -32,11 +32,15 @@ void main() {
     expect(createAccountRequest, isA<CreateAccountRequest>());
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
     expect(createAccountRequest.name.validator(), 'fill the field to submit');
   });
 
-  test('should return a error showing what is wrong in the field when pass a value but only one word', () {
+  test(
+      'should return a error showing what is wrong in the field when pass a value but only one word',
+      () {
     createAccountRequest.setName('test');
     expect(createAccountRequest.name.validator(), 'fill it with full name');
   });
@@ -46,7 +50,9 @@ void main() {
     expect(createAccountRequest.name.validator(), null);
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
     expect(createAccountRequest.login.validator(), 'fill the field to submit');
   });
 
@@ -55,7 +61,9 @@ void main() {
     expect(createAccountRequest.login.validator(), null);
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
     expect(createAccountRequest.secret.validator(), 'fill the field to submit');
   });
 
@@ -64,8 +72,11 @@ void main() {
     expect(createAccountRequest.secret.validator(), null);
   });
 
-  test('should return a error showing what is wrong in the field when not pass a value', () {
-    expect(createAccountRequest.secretConfirm.validator(), 'fill the field to submit');
+  test(
+      'should return a error showing what is wrong in the field when not pass a value',
+      () {
+    expect(createAccountRequest.secretConfirm.validator(),
+        'fill the field to submit');
   });
 
   test('should return null when pass a value with one word', () {
@@ -73,10 +84,14 @@ void main() {
     expect(createAccountRequest.secretConfirm.validator(), null);
   });
 
-  test('should return a error showing what is wrong in the field when pass a value but not match with secret', () {
+  test(
+      'should return a error showing what is wrong in the field when pass a value but not match with secret',
+      () {
     createAccountRequest.setSecret('test');
     createAccountRequest.setSecretConfirm('test2');
-    expect(createAccountRequest.secretConfirm.secretMatches(createAccountRequest.secret.toString()),
+    expect(
+        createAccountRequest.secretConfirm
+            .secretMatches(createAccountRequest.secret.toString()),
         'passwords do not match');
   });
 
@@ -96,6 +111,7 @@ void main() {
     createAccountRequest.setLogin('test');
     createAccountRequest.setSecret('test');
     createAccountRequest.setSecretConfirm('test');
-    expect(createAccountRequest.toJson(), {'userName': 'test', 'password': 'test', 'name': 'test test'});
+    expect(createAccountRequest.toJson(),
+        {'userName': 'test', 'password': 'test', 'name': 'test test'});
   });
 }

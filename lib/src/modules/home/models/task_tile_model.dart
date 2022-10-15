@@ -30,7 +30,8 @@ class TaskTileModel {
 
     dueState = timeElapsed == null
         ? TaskDueState.error
-        : timeElapsed.inSeconds > TaskDueTime.late && timeElapsed.inSeconds < TaskDueTime.veryLate
+        : timeElapsed.inSeconds > TaskDueTime.late &&
+                timeElapsed.inSeconds < TaskDueTime.veryLate
             ? TaskDueState.late
             : timeElapsed.inSeconds > TaskDueTime.veryLate
                 ? TaskDueState.veryLate
@@ -42,7 +43,8 @@ class TaskTileModel {
             ? timeElapsed * -1
             : timeElapsed;
 
-    this.timeElapsed = timeElapsed == null ? '' : timeElapsed.toString().substring(0, 7);
+    this.timeElapsed =
+        timeElapsed == null ? '' : timeElapsed.toString().substring(0, 7);
   }
 
   factory TaskTileModel.fromEntity(TaskEntity entity) {
@@ -55,7 +57,8 @@ class TaskTileModel {
     }
     final dueState = timeElapsed == null
         ? TaskDueState.error
-        : timeElapsed.inSeconds > TaskDueTime.late && timeElapsed.inSeconds <= TaskDueTime.veryLate
+        : timeElapsed.inSeconds > TaskDueTime.late &&
+                timeElapsed.inSeconds <= TaskDueTime.veryLate
             ? TaskDueState.late
             : timeElapsed.inSeconds > TaskDueTime.veryLate
                 ? TaskDueState.veryLate
@@ -73,7 +76,8 @@ class TaskTileModel {
       description: entity.description,
       dueDate: dueDate,
       dueState: dueState,
-      timeElapsed: timeElapsed == null ? '' : timeElapsed.toString().substring(0, 7),
+      timeElapsed:
+          timeElapsed == null ? '' : timeElapsed.toString().substring(0, 7),
     );
   }
 }

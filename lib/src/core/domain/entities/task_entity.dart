@@ -91,7 +91,9 @@ class TaskEntity extends EntityBase {
       id: map['id'] as String,
       created: DateTime.parse(map['insertDate']),
       persisted: DateTime.parse(map['persistenceDate']),
-      deleted: map['deletionDate'] == null ? null : DateTime.tryParse(map['deletionDate']),
+      deleted: map['deletionDate'] == null
+          ? null
+          : DateTime.tryParse(map['deletionDate']),
     );
   }
 
