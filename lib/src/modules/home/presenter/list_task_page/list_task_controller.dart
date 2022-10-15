@@ -59,7 +59,7 @@ class ListTaskController extends ValueNotifier<CommonState> {
 
   void putTaskBroadcastExecute(Map entity) {
     value = LoadingState();
-    TaskEntity taskEntity = TaskEntity.fromApi(entity);
+    TaskEntity taskEntity = TaskEntity.fromCloud(entity);
     list.add(TaskTileModel.fromEntity(taskEntity));
     value = SuccessState();
   }
@@ -77,7 +77,11 @@ class ListTaskController extends ValueNotifier<CommonState> {
           value = ErrorState(v.toString());
         } else {
           value = SuccessState();
-          list.add(TaskTileModel.fromEntity(v));
+          if (v.deleted == null) {
+            list.add(TaskTileModel.fromEntity(v));
+          } else {
+            list.removeWhere((element) => element.id == v.id);
+          }
           notifyListeners();
         }
       });

@@ -12,4 +12,6 @@ abstract class IRepository<T extends EntityBase> {
   Future<bool> delete(String key);
 
   Future<bool> deleteMany(List<String> keys);
+
+  Future<List<T>> query(bool deleted);
 }

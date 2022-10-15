@@ -4,6 +4,7 @@ import 'package:task/src/modules/home/models/task_due_time.dart';
 import '../../../core/domain/entities/task_entity.dart';
 
 class TaskTileModel {
+  final String id;
   final String title;
   final String description;
   final String dueDate;
@@ -11,6 +12,7 @@ class TaskTileModel {
   final String timeElapsed;
 
   TaskTileModel({
+    required this.id,
     required this.title,
     required this.description,
     required this.dueDate,
@@ -21,7 +23,7 @@ class TaskTileModel {
   factory TaskTileModel.fromEntity(TaskEntity entity) {
     final dueDate = entity.dueDate;
     final dueDateParsed = DateTime.tryParse(dueDate);
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now();
     Duration? timeElapsed;
     if (dueDateParsed != null) {
       timeElapsed = now.difference(dueDateParsed);
@@ -35,6 +37,7 @@ class TaskTileModel {
                 : TaskDueState.ontime;
 
     return TaskTileModel(
+      id: entity.id,
       title: entity.title,
       description: entity.description,
       dueDate: dueDate,

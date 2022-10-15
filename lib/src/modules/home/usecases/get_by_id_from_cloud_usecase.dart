@@ -28,7 +28,7 @@ class GetByIdFromCloudUsecase implements IGetByIdFromCloudUsecase {
         connectTimeout: 10000);
 
     IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
-    TaskEntity task = TaskEntity.fromApi(entity);
+    TaskEntity task = TaskEntity.fromCloud(entity);
     await repository.put(task.id, task);
     return true;
   }

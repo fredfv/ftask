@@ -27,7 +27,7 @@ class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
         connectTimeout: 10000);
 
     IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
-    List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromApi(e)).toList();
+    List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
     await repository.putMany(listTask);
     return true;
   }

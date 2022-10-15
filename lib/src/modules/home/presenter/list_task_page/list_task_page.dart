@@ -26,19 +26,20 @@ class ListTaskPage extends StatelessWidget {
           if (state is LoadingState) {
             return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
           } else if (state is SuccessState) {
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 400,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 1,
-                    mainAxisSpacing: 1,
-                  ),
-                  itemCount: controller.list.length,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return TaskTile(taskItem: controller.list[index]);
-                  }),
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Wrap(
+                children: [
+                  for (final task in controller.list)
+                    Container(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.22,
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: TaskTile(taskItem: task),
+                    )
+                ],
+              ),
             );
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {

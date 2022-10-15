@@ -30,6 +30,7 @@ class TaskEntity extends EntityBase {
     required String id,
     required DateTime created,
     required DateTime persisted,
+    DateTime? deleted,
   })  : _description = description,
         _dueDate = dueDate,
         _title = title,
@@ -38,6 +39,7 @@ class TaskEntity extends EntityBase {
           id: id,
           created: created,
           persisted: persisted,
+          deleted: deleted,
         );
 
   factory TaskEntity.empty() {
@@ -56,11 +58,13 @@ class TaskEntity extends EntityBase {
   Map<String, dynamic> toJson() {
     return {
       'description': description,
-      'dueDate': dueDate,
       'title': title,
+      'dueDate': dueDate,
       'onBoard': onBoard,
       'id': id,
       'created': created,
+      'persisted': persisted,
+      'deleted': deleted,
     };
   }
 
@@ -74,10 +78,11 @@ class TaskEntity extends EntityBase {
       id: map['id'] as String,
       created: map['created'] as DateTime,
       persisted: map['persisted'] as DateTime,
+      deleted: map['deleted'] as DateTime?,
     );
   }
 
-  factory TaskEntity.fromApi(dynamic map) {
+  factory TaskEntity.fromCloud(dynamic map) {
     return TaskEntity(
       description: map['description'] as String,
       title: map['title'] ?? '',
@@ -86,11 +91,12 @@ class TaskEntity extends EntityBase {
       id: map['id'] as String,
       created: DateTime.parse(map['insertDate']),
       persisted: DateTime.parse(map['persistenceDate']),
+      deleted: map['deletionDate'] == null ? null : DateTime.tryParse(map['deletionDate']),
     );
   }
 
   @override
   String toString() {
-    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted)';
+    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted)';
   }
 }

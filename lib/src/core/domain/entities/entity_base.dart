@@ -2,6 +2,7 @@ abstract class EntityBase {
   String _id;
   DateTime _created;
   DateTime _persisted;
+  DateTime? _deleted;
 
   String get id => _id;
 
@@ -9,16 +10,21 @@ abstract class EntityBase {
 
   DateTime get persisted => _persisted;
 
-  void setId(String? value) => _id = value ?? '';
+  DateTime? get deleted => _deleted;
 
-  void setCreated(DateTime? value) => _created = value ?? DateTime.now();
+  void setId(String value) => _id = value;
 
-  void setPersisted(DateTime? value) => _persisted = value ?? DateTime.now();
+  void setCreated(DateTime value) => _created = value;
 
-  EntityBase({required String id, required DateTime created, required DateTime persisted})
+  void setPersisted(DateTime value) => _persisted = value;
+
+  void setDeleted(DateTime? value) => _deleted = value;
+
+  EntityBase({required String id, required DateTime created, required DateTime persisted, DateTime? deleted})
       : _id = id,
         _created = created,
-        _persisted = persisted;
+        _persisted = persisted,
+        _deleted = deleted;
 
   Map<String, dynamic> toJson();
 }

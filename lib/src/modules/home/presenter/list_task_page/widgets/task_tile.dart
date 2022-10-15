@@ -19,12 +19,11 @@ class TaskTile extends StatelessWidget {
       color: ColorOutlet.secondaryDark,
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.only(left: 10, top: 10),
+        padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.35,
               child: CommonText(
                 text: taskItem.title.toString(),
@@ -32,7 +31,10 @@ class TaskTile extends StatelessWidget {
                 fontColor: ColorOutlet.textColorTitle,
               ),
             ),
-            const CommonSpacing(SpacingType.height),
+            const CommonSpacing(
+              SpacingType.height,
+              factor: 2,
+            ),
             Row(
               children: [
                 const Icon(
@@ -53,7 +55,7 @@ class TaskTile extends StatelessWidget {
             Row(
               children: [
                 const Icon(
-                  Icons.timer_outlined,
+                  Icons.more_time_outlined,
                   color: ColorOutlet.iconColor,
                 ),
                 const CommonSpacing(SpacingType.width),
@@ -66,12 +68,24 @@ class TaskTile extends StatelessWidget {
                 ),
               ],
             ),
-            CommonText(text: taskItem.timeElapsed),
-            Container(
-              width: 10,
-              height: 10,
-              color: TaskDueStateColorConverter.get(taskItem.dueState),
-            )
+            const CommonSpacing(SpacingType.height),
+            Row(
+              children: [
+                Icon(
+                  Icons.av_timer_outlined,
+                  color: TaskDueStateColorConverter.get(taskItem.dueState),
+                ),
+                const CommonSpacing(SpacingType.width),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: CommonText(
+                    fontColor: TaskDueStateColorConverter.get(taskItem.dueState),
+                    fontSize: SizeOutlet.textSizeMedium,
+                    text: taskItem.timeElapsed,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

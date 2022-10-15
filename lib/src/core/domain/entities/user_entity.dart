@@ -36,12 +36,18 @@ class UserEntity extends EntityBase {
     required String id,
     required DateTime created,
     required DateTime persisted,
+    DateTime? deleted,
   })  : _login = login,
         _secret = secret,
         _name = name,
         _role = role,
         _token = token,
-        super(id: id, created: created, persisted: persisted);
+        super(
+          id: id,
+          created: created,
+          persisted: persisted,
+          deleted: deleted,
+        );
 
   @override
   Map<String, dynamic> toJson() {
@@ -53,6 +59,8 @@ class UserEntity extends EntityBase {
       'id': id,
       'created': created,
       'role': role,
+      'persisted': persisted,
+      'deleted': deleted,
     };
   }
 
@@ -66,6 +74,7 @@ class UserEntity extends EntityBase {
       token: map['token'] as String,
       role: map['role'] as String,
       persisted: map['persisted'] as DateTime,
+      deleted: map['deleted'] as DateTime?,
     );
   }
 
@@ -105,6 +114,6 @@ class UserEntity extends EntityBase {
 
   @override
   String toString() {
-    return 'UserEntity(login: $login, secret: $secret, name: $name, role: $role, token: $token, id: $id, created: $created, persisted: $persisted)';
+    return 'UserEntity(login: $login, secret: $secret, name: $name, role: $role, token: $token, id: $id, created: $created, persisted: $persisted, deleted: $deleted)';
   }
 }
