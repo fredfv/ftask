@@ -1,36 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:task/src/core/infra/services/broadcast_controller.dart';
-import 'package:task/src/modules/home/models/task_tile_model.dart';
-
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/infra/application/common_state.dart';
+import '../../models/task_tile_model.dart';
 
 class ListTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
-  final BroadcastController broadcastController;
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
   Timer? timer;
 
   ListTaskController({
     required this.repositoryFactory,
-    required this.broadcastController,
-  }) : super(IdleState()) {
-    getAllTasksFromLocal();
-    broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
-      getAllTasksFromLocal();
-    });
-    broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
-      addTaskToListFromBroadcast(broadcastController.putTaskBroadcastValueNotifier.value.entity);
-    });
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      updateTilesTimeElapsed();
-      timeElapsedChangeNotifier.notifyListeners();
-    });
-  }
+  }) : super(IdleState());
 
   void updateTilesTimeElapsed() {
     for (var element in list) {
@@ -38,9 +22,8 @@ class ListTaskController extends ValueNotifier<CommonState> {
     }
   }
 
-  void addTaskToListFromBroadcast(Map entity) {
+  void addTaskToListFromBroadcast(TaskEntity taskEntity) {
     value = LoadingState();
-    TaskEntity taskEntity = TaskEntity.fromCloud(entity);
     if (taskEntity.deleted == null) {
       list.add(TaskTileModel.fromEntity(taskEntity));
     } else {

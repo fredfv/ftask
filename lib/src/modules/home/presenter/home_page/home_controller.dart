@@ -22,8 +22,7 @@ class HomeController extends ChangeNotifier {
   final BroadcastController broadcastController;
 
   final SignalRHelper hub;
-  final PageController pageController =
-      PageController(initialPage: 0, keepPage: true);
+  final PageController pageController = PageController(initialPage: 0, keepPage: true);
   final List<Widget> pages;
 
   HomeController({
@@ -37,15 +36,18 @@ class HomeController extends ChangeNotifier {
   }) : pages = [
           TaskPage(controller: taskPageController),
           ListTaskPage(controller: listTaskController),
-          const ListTaskDonePage(),
+          ListTaskDonePage(controller: listTaskDoneController),
         ] {
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
       await updateTasksFromCloudUsecase();
+      listTaskController.getAllTasksFromLocal();
+      listTaskDoneController.getAllTasksFromLocal();
     });
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
-      TaskEntity taskEntity = TaskEntity.fromCloud(
-          broadcastController.putTaskBroadcastValueNotifier.value.entity);
-      putTaskFromBroadcastUsecase(taskEntity);
+      TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
+      await putTaskFromBroadcastUsecase(taskEntity);
+      listTaskController.addTaskToListFromBroadcast(taskEntity);
+      listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
     });
   }
 

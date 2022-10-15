@@ -10,10 +10,9 @@ import '../../../core/presenter/theme/spacing_type.dart';
 
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;
-  final ChangeNotifier controller;
+  final ChangeNotifier? controller;
 
-  const TaskTile({Key? key, required this.taskItem, required this.controller})
-      : super(key: key);
+  const TaskTile({Key? key, required this.taskItem, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,28 +64,44 @@ class TaskTile extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.35,
                   child: CommonText(
                     fontSize: SizeOutlet.textSizeMedium,
-                    text:
-                        '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
+                    text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
                   ),
                 ),
               ],
             ),
             const CommonSpacing(SpacingType.height),
+            if (controller == null)
+              Row(
+                children: [
+                  Icon(
+                    Icons.av_timer_outlined,
+                    color: TaskDueStateColorConverter.convert(taskItem.dueState),
+                  ),
+                  const CommonSpacing(SpacingType.width),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: CommonText(
+                      fontSize: SizeOutlet.textSizeMedium,
+                      text: taskItem.dueState.toString(),
+                      fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
+                    ),
+                  ),
+                ],
+              ),
             AnimatedBuilder(
-              animation: controller,
+              animation: controller!,
               builder: (_, child) {
                 return Row(
                   children: [
                     Icon(
                       Icons.av_timer_outlined,
-                      color: TaskDueStateColorConverter.get(taskItem.dueState),
+                      color: TaskDueStateColorConverter.convert(taskItem.dueState),
                     ),
                     const CommonSpacing(SpacingType.width),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: CommonText(
-                        fontColor:
-                            TaskDueStateColorConverter.get(taskItem.dueState),
+                        fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
                         fontSize: SizeOutlet.textSizeMedium,
                         text: taskItem.timeElapsed,
                       ),

@@ -25,11 +25,9 @@ class HomeModule extends Module {
             )),
         Bind.factory((i) => ListTaskController(
               repositoryFactory: i(),
-              broadcastController: i(),
             )),
         Bind.factory((i) => ListTaskDoneController(
               repositoryFactory: i(),
-              broadcastController: i(),
             )),
         Bind.factory((i) => CreateTaskController(
               taskRepository: i(),
