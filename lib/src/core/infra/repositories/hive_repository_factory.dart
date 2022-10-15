@@ -15,7 +15,7 @@ class HiveRepositoryFactory extends IRepositoryFactory {
   @override
   Future<IRepository<T>> get<T extends EntityBase>() async {
     EntityMapperFactory mapperFactory = EntityMapperFactory();
-    HiveReposiotry<T> repository = HiveReposiotry<T>(
+    HiveRepository<T> repository = HiveRepository<T>(
       mapper: mapperFactory.get<T>(),
       objectId: objectId,
     );

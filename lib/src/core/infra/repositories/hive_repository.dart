@@ -6,11 +6,11 @@ import '../../domain/services/I_object_id_service.dart';
 import '../application/logger.dart';
 import '../mappers/mapper.dart';
 
-class HiveReposiotry<T extends EntityBase> implements IRepository<T> {
+class HiveRepository<T extends EntityBase> implements IRepository<T> {
   final Mapper<T> mapper;
   final IObjectIdService objectId;
 
-  HiveReposiotry({required this.mapper, required this.objectId});
+  HiveRepository({required this.mapper, required this.objectId});
 
   db.Box get box => db.Hive.box(T.toString());
 
@@ -40,7 +40,6 @@ class HiveReposiotry<T extends EntityBase> implements IRepository<T> {
     return result;
   }
 
-  //return id, true or false if was saved
   @override
   Future<bool> put(String? key, T value) async {
     try {

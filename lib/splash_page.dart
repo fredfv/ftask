@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
       await Modular.isModuleReady<AppModule>();
 
       try {
-        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 5));
+        await Modular.get<SignalRHelper>().initConnection().timeout(const Duration(seconds: 3));
       } catch (e) {
         fLog.e(e);
       }
@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Container(
       color: ColorOutlet.primary,
-      child: const Center(child: CommonLoading(150)),
+      child: const Center(child: CommonLoading(200)),
     );
   }
 }

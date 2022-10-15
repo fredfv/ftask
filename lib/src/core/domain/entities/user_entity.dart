@@ -35,12 +35,13 @@ class UserEntity extends EntityBase {
     required String token,
     required String id,
     required DateTime created,
+    required DateTime persisted,
   })  : _login = login,
         _secret = secret,
         _name = name,
         _role = role,
         _token = token,
-        super(id: id, created: created);
+        super(id: id, created: created, persisted: persisted);
 
   @override
   Map<String, dynamic> toJson() {
@@ -64,6 +65,7 @@ class UserEntity extends EntityBase {
       name: map['name'] as String,
       token: map['token'] as String,
       role: map['role'] as String,
+      persisted: map['persisted'] as DateTime,
     );
   }
 
@@ -76,22 +78,23 @@ class UserEntity extends EntityBase {
       name: map['person']['name'] as String,
       token: map['token'] as String,
       role: map['person']['role'] as String,
+      persisted: DateTime.tryParse(map['person']['insertDate']) as DateTime,
     );
   }
 
   factory UserEntity.empty() {
     return UserEntity(
       id: '',
-      created: DateTime.now(),
+      created: DateTime.fromMillisecondsSinceEpoch(0),
       login: '',
       secret: '',
       name: '',
       token: '',
       role: '',
+      persisted: DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 
-  //update this UserEntity based in another UserEntity
   void setAuthUser(UserEntity user) {
     setLogin(user.login);
     setSecret(user.secret);
@@ -102,6 +105,6 @@ class UserEntity extends EntityBase {
 
   @override
   String toString() {
-    return 'UserEntity{login: $login, secret: $secret, name: $name, id: $id, created: $created} ,  token: $token';
+    return 'UserEntity(login: $login, secret: $secret, name: $name, role: $role, token: $token, id: $id, created: $created, persisted: $persisted)';
   }
 }

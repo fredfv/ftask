@@ -4,40 +4,51 @@ class TaskEntity extends EntityBase {
   String _description;
   String _title;
   String _dueDate;
+  bool _onBoard;
 
   String get description => _description;
 
   void setDescription(String? value) => _description = value ?? '';
 
-  String get dueDate => _dueDate;
-
-  void setDueDate(String? value) => _dueDate = value ?? '';
-
   String get title => _title;
 
   void setTitle(String? value) => _title = value ?? '';
 
-  TaskEntity(
-      {required String description,
-      required String dueDate,
-      required String id,
-      required DateTime created,
-      required String title})
-      : _description = description,
+  String get dueDate => _dueDate;
+
+  void setDueDate(String? value) => _dueDate = value ?? '';
+
+  bool get onBoard => _onBoard;
+
+  void setOnBoard(bool value) => _onBoard = value;
+
+  TaskEntity({
+    required String description,
+    required String title,
+    required String dueDate,
+    required bool onBoard,
+    required String id,
+    required DateTime created,
+    required DateTime persisted,
+  })  : _description = description,
         _dueDate = dueDate,
         _title = title,
+        _onBoard = onBoard,
         super(
           id: id,
           created: created,
+          persisted: persisted,
         );
 
   factory TaskEntity.empty() {
     return TaskEntity(
       description: '',
+      title: '',
       dueDate: '',
+      onBoard: false,
       id: '',
       created: DateTime.fromMillisecondsSinceEpoch(0),
-      title: '',
+      persisted: DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 
@@ -46,9 +57,10 @@ class TaskEntity extends EntityBase {
     return {
       'description': description,
       'dueDate': dueDate,
+      'title': title,
+      'onBoard': onBoard,
       'id': id,
       'created': created,
-      'title': title,
     };
   }
 
@@ -56,25 +68,29 @@ class TaskEntity extends EntityBase {
   factory TaskEntity.fromJson(dynamic map) {
     return TaskEntity(
       description: map['description'] as String,
+      title: map['title'] ?? '',
       dueDate: map['dueDate'] as String,
+      onBoard: map['onBoard'] as bool,
       id: map['id'] as String,
       created: map['created'] as DateTime,
-      title: map['title'] ?? '',
+      persisted: map['persisted'] as DateTime,
     );
   }
 
   factory TaskEntity.fromApi(dynamic map) {
     return TaskEntity(
       description: map['description'] as String,
+      title: map['title'] ?? '',
       dueDate: map['dueDate'] as String,
+      onBoard: map['onBoard'] as bool,
       id: map['id'] as String,
       created: DateTime.parse(map['insertDate']),
-      title: map['title'] ?? '',
+      persisted: DateTime.parse(map['persistenceDate']),
     );
   }
 
   @override
   String toString() {
-    return 'TaskEntity{dueDate: $dueDate description: $description, id: $id, created: $created}';
+    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted)';
   }
 }
