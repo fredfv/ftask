@@ -9,7 +9,7 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
-import '../shared/task_tile.dart';
+import 'widgets/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
   final ListTaskController controller;
@@ -30,7 +30,7 @@ class ListTaskPage extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 300,
+                    maxCrossAxisExtent: 400,
                     childAspectRatio: 1,
                     crossAxisSpacing: 1,
                     mainAxisSpacing: 1,

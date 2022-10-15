@@ -18,7 +18,7 @@ dependencies:
   objectid: ^2.1.0
   #data services
   dio: ^4.0.6
-  hive_flutter:
+  hive_flutter: ^1.1.0
   #infra
   jwt_decoder: ^2.0.1
   path_provider: ^2.0.11
@@ -28,6 +28,8 @@ dependencies:
   #ver como trocar pelo custom paint
   flutter_svg: ^1.1.5
   loading_animation_widget: ^1.2.0+3
+  #date format
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

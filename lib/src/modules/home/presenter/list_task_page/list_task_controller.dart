@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/infra/services/broadcast_controller.dart';
+import 'package:task/src/modules/home/models/task_tile_model.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
@@ -10,7 +11,7 @@ import '../../../../core/infra/application/common_state.dart';
 class ListTaskController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
-  final List<TaskEntity> list = [];
+  final List<TaskTileModel> list = [];
   final IUpdateTasksFromCloudUsecase updateTasksFromCloudUseCase;
   final BroadcastController broadcastController;
 
@@ -26,6 +27,8 @@ class ListTaskController extends ValueNotifier<CommonState> {
     });
   }
 
+
+
   void listAll() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {
@@ -35,7 +38,7 @@ class ListTaskController extends ValueNotifier<CommonState> {
         } else {
           value = SuccessState();
           list.clear();
-          list.addAll(v);
+          list.addAll(v.map((e) => TaskTileModel.fromEntity(e)));
           notifyListeners();
         }
       });
