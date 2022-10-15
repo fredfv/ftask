@@ -9,9 +9,18 @@ class BroadcastController extends IBroadcastController {
   ValueNotifier<GetAllTasksBroadcastMessage> getAllTasksBroadcastValueNotifier =
       ValueNotifier(GetAllTasksBroadcastMessage());
 
+  ValueNotifier<PutTaskBroadcastMessage> putTaskBroadcastValueNotifier =
+      ValueNotifier(PutTaskBroadcastMessage(entity: {}));
+
+  ValueNotifier<GetByIdBroadcastMessage> getByIdBroadcastMessage = ValueNotifier(GetByIdBroadcastMessage(id: ''));
+
   void _notify(BroadcastMessage message) {
     if (message is GetAllTasksBroadcastMessage) {
       getAllTasksBroadcastValueNotifier.value = message;
+    } else if (message is PutTaskBroadcastMessage) {
+      putTaskBroadcastValueNotifier.value = message;
+    } else if (message is GetByIdBroadcastMessage) {
+      getByIdBroadcastMessage.value = message;
     }
   }
 

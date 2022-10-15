@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:task/src/core/domain/usecases/i_get_by_id_from_cloud_usecase.dart';
 import 'package:task/src/core/infra/services/broadcast_controller.dart';
 import 'package:task/src/modules/home/models/task_tile_model.dart';
 
@@ -12,22 +13,35 @@ class ListTaskController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
-  final IUpdateTasksFromCloudUsecase updateTasksFromCloudUseCase;
+  final IUpdateTasksFromCloudUsecase updateTasksFromCloudUsecase;
+  final IGetByIdFromCloudUsecase getByIdFromCloudUsecase;
   final BroadcastController broadcastController;
 
-  ListTaskController(
-      {required this.httpService,
-      required this.repositoryFactory,
-      required this.updateTasksFromCloudUseCase,
-      required this.broadcastController})
-      : super(IdleState()) {
+  ListTaskController({
+    required this.httpService,
+    required this.repositoryFactory,
+    required this.updateTasksFromCloudUsecase,
+    required this.broadcastController,
+    required this.getByIdFromCloudUsecase,
+  }) : super(IdleState()) {
+    updateTasksFromCloudExecute();
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
-      await updateTasksFromCloudUseCase();
-      listAll();
+      updateTasksFromCloudExecute();
+    });
+    broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
+      putTaskBroadcastExecute(broadcastController.putTaskBroadcastValueNotifier.value.entity);
+    });
+    broadcastController.getByIdBroadcastMessage.addListener(() async {
+      getByIdFromCloudExecute(broadcastController.getByIdBroadcastMessage.value.id);
     });
   }
 
-  void listAll() {
+  void updateTasksFromCloudExecute() async {
+    await updateTasksFromCloudUsecase();
+    getAllTasksBroadcastExecute();
+  }
+
+  void getAllTasksBroadcastExecute() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {
       taskRepository.getAll().then((v) {
@@ -37,6 +51,33 @@ class ListTaskController extends ValueNotifier<CommonState> {
           value = SuccessState();
           list.clear();
           list.addAll(v.map((e) => TaskTileModel.fromEntity(e)));
+          notifyListeners();
+        }
+      });
+    });
+  }
+
+  void putTaskBroadcastExecute(Map entity) {
+    value = LoadingState();
+    TaskEntity taskEntity = TaskEntity.fromApi(entity);
+    list.add(TaskTileModel.fromEntity(taskEntity));
+    value = SuccessState();
+  }
+
+  void getByIdFromCloudExecute(String id) async {
+    await getByIdFromCloudUsecase(id);
+    getByIdBroadcastMessage(id);
+  }
+
+  void getByIdBroadcastMessage(String id) {
+    value = LoadingState();
+    repositoryFactory.get<TaskEntity>().then((taskRepository) async {
+      taskRepository.get(id).then((v) {
+        if (v is Exception || v == null) {
+          value = ErrorState(v.toString());
+        } else {
+          value = SuccessState();
+          list.add(TaskTileModel.fromEntity(v));
           notifyListeners();
         }
       });

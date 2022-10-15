@@ -29,11 +29,6 @@ class HomeController extends ChangeNotifier {
   changePage(int index) {
     pageController.jumpToPage(index);
     pageSelectedIndex = index;
-
-    if (index == 1) {
-      listTaskController.listAll();
-    }
-
     notifyListeners();
   }
 }

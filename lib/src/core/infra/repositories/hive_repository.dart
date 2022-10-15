@@ -35,7 +35,7 @@ class HiveRepository<T extends EntityBase> implements IRepository<T> {
 
   @override
   Future<List<T>> getAll() async {
-    List list = box.values.toList();
+    Iterable list = box.values.toList();
     List<T> result = list.map((e) => mapper.fromJson(e)!).toList();
     return result;
   }
@@ -93,5 +93,12 @@ class HiveRepository<T extends EntityBase> implements IRepository<T> {
       fLog.e(e);
       return false;
     }
+  }
+
+  @override
+  Future<List<T>> query(bool deleted) async {
+    Iterable list = box.values.where((element) => element);
+    List<T> result = list.map((e) => mapper.fromJson(e)!).toList();
+    return result;
   }
 }
