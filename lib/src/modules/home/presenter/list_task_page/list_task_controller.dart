@@ -27,8 +27,6 @@ class ListTaskController extends ValueNotifier<CommonState> {
     });
   }
 
-
-
   void listAll() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {

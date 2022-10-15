@@ -1,6 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/infra/services/broadcast_controller.dart';
-import 'package:task/src/core/infra/services/signalr_helper.dart';
 import 'package:task/src/modules/home/presenter/create_task_page/create_task_controller.dart';
 import 'package:task/src/modules/home/presenter/home_page/home_controller.dart';
 import 'package:task/src/modules/home/presenter/list_task_page/list_task_controller.dart';

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:signalr_core/signalr_core.dart';
 
 import '../../domain/services/i_hub_service.dart';
@@ -8,6 +9,7 @@ import 'broadcast_controller.dart';
 class SignalRHelper implements IHubService {
   HubConnection? connection;
   BroadcastController broadcastController;
+
   //final StreamController<String> _streamController = StreamController<String>.broadcast();
   //get stream => _streamController.stream;
 

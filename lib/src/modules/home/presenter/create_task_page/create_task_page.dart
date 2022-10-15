@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../../../core/infra/validators/title_vo.dart';
 import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/validators/title_vo.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';

@@ -4,8 +4,6 @@ import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/services/i_form_validate_service.dart';
 import '../../../../core/infra/application/common_state.dart';
-import '../../../../core/infra/application/logger.dart';
-import '../../../../core/infra/services/signalr_helper.dart';
 
 class CreateTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory taskRepository;
