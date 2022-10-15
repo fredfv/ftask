@@ -8,8 +8,8 @@ class TaskTileModel {
   final String title;
   final String description;
   final String dueDate;
-  final TaskDueState dueState;
-  final String timeElapsed;
+  TaskDueState dueState;
+  String timeElapsed;
 
   TaskTileModel({
     required this.id,
@@ -19,6 +19,31 @@ class TaskTileModel {
     required this.dueState,
     required this.timeElapsed,
   });
+
+  updateTimeElapsed() {
+    final dueDateParsed = DateTime.tryParse(dueDate);
+    final now = DateTime.now();
+    Duration? timeElapsed;
+    if (dueDateParsed != null) {
+      timeElapsed = now.difference(dueDateParsed);
+    }
+
+    dueState = timeElapsed == null
+        ? TaskDueState.error
+        : timeElapsed.inSeconds > TaskDueTime.late && timeElapsed.inSeconds < TaskDueTime.veryLate
+            ? TaskDueState.late
+            : timeElapsed.inSeconds > TaskDueTime.veryLate
+                ? TaskDueState.veryLate
+                : TaskDueState.ontime;
+
+    timeElapsed = timeElapsed == null
+        ? null
+        : timeElapsed.inSeconds < 0
+            ? timeElapsed * -1
+            : timeElapsed;
+
+    this.timeElapsed = timeElapsed == null ? '' : timeElapsed.toString().substring(0, 7);
+  }
 
   factory TaskTileModel.fromEntity(TaskEntity entity) {
     final dueDate = entity.dueDate;
@@ -30,11 +55,17 @@ class TaskTileModel {
     }
     final dueState = timeElapsed == null
         ? TaskDueState.error
-        : timeElapsed.inSeconds > TaskDueTime.late && timeElapsed.inSeconds < TaskDueTime.veryLate
+        : timeElapsed.inSeconds > TaskDueTime.late && timeElapsed.inSeconds <= TaskDueTime.veryLate
             ? TaskDueState.late
             : timeElapsed.inSeconds > TaskDueTime.veryLate
                 ? TaskDueState.veryLate
                 : TaskDueState.ontime;
+
+    timeElapsed = timeElapsed == null
+        ? null
+        : timeElapsed.inSeconds < 0
+            ? timeElapsed * -1
+            : timeElapsed;
 
     return TaskTileModel(
       id: entity.id,

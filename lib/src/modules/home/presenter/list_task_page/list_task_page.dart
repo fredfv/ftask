@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/modules/home/presenter/list_task_page/list_task_controller.dart';
 
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
@@ -9,6 +8,7 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
+import 'list_task_controller.dart';
 import 'widgets/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
@@ -28,17 +28,20 @@ class ListTaskPage extends StatelessWidget {
           } else if (state is SuccessState) {
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Wrap(
-                children: [
-                  for (final task in controller.list)
-                    Container(
-                      constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height * 0.22,
-                      ),
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TaskTile(taskItem: task),
-                    )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Wrap(
+                  children: [
+                    for (final task in controller.list)
+                      Container(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.22,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: TaskTile(taskItem: task, controller: controller.timeElapsedChangeNotifier),
+                      )
+                  ],
+                ),
               ),
             );
           } else if (state is ErrorState) {

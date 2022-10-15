@@ -5,7 +5,7 @@ abstract class TaskDueStateColorConverter {
   static Color get(TaskDueState state) {
     switch (state) {
       case TaskDueState.ontime:
-        return Colors.transparent;
+        return Colors.white;
       case TaskDueState.late:
         return Colors.yellow;
       case TaskDueState.veryLate:

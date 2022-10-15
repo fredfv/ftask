@@ -10,8 +10,9 @@ import '../../../../../core/presenter/theme/spacing_type.dart';
 
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;
+  final ChangeNotifier controller;
 
-  const TaskTile({Key? key, required this.taskItem}) : super(key: key);
+  const TaskTile({Key? key, required this.taskItem, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,22 +70,27 @@ class TaskTile extends StatelessWidget {
               ],
             ),
             const CommonSpacing(SpacingType.height),
-            Row(
-              children: [
-                Icon(
-                  Icons.av_timer_outlined,
-                  color: TaskDueStateColorConverter.get(taskItem.dueState),
-                ),
-                const CommonSpacing(SpacingType.width),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: CommonText(
-                    fontColor: TaskDueStateColorConverter.get(taskItem.dueState),
-                    fontSize: SizeOutlet.textSizeMedium,
-                    text: taskItem.timeElapsed,
-                  ),
-                ),
-              ],
+            AnimatedBuilder(
+              animation: controller,
+              builder: (_, child) {
+                return Row(
+                  children: [
+                    Icon(
+                      Icons.av_timer_outlined,
+                      color: TaskDueStateColorConverter.get(taskItem.dueState),
+                    ),
+                    const CommonSpacing(SpacingType.width),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: CommonText(
+                        fontColor: TaskDueStateColorConverter.get(taskItem.dueState),
+                        fontSize: SizeOutlet.textSizeMedium,
+                        text: taskItem.timeElapsed,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),

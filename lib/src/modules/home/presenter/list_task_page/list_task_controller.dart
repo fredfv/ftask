@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:task/src/core/domain/usecases/i_get_by_id_from_cloud_usecase.dart';
 import 'package:task/src/core/infra/services/broadcast_controller.dart';
@@ -16,6 +18,8 @@ class ListTaskController extends ValueNotifier<CommonState> {
   final IUpdateTasksFromCloudUsecase updateTasksFromCloudUsecase;
   final IGetByIdFromCloudUsecase getByIdFromCloudUsecase;
   final BroadcastController broadcastController;
+  final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
+  Timer? timer;
 
   ListTaskController({
     required this.httpService,
@@ -34,6 +38,16 @@ class ListTaskController extends ValueNotifier<CommonState> {
     broadcastController.getByIdBroadcastMessage.addListener(() async {
       getByIdFromCloudExecute(broadcastController.getByIdBroadcastMessage.value.id);
     });
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      updateTilesTimeElapsed();
+      timeElapsedChangeNotifier.notifyListeners();
+    });
+  }
+
+  void updateTilesTimeElapsed() {
+    for (var element in list) {
+      element.updateTimeElapsed();
+    }
   }
 
   void updateTasksFromCloudExecute() async {
@@ -44,7 +58,7 @@ class ListTaskController extends ValueNotifier<CommonState> {
   void getAllTasksBroadcastExecute() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {
-      taskRepository.getAll().then((v) {
+      taskRepository.query(true).then((v) {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
