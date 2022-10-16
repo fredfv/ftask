@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:task/src/modules/home/presenter/list_task_done_page/list_task_done_controller.dart';
+import 'package:task/src/modules/home/presenter/list_task_done_page/widgets/task_done_tile.dart';
 
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
@@ -9,7 +10,7 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
-import '../../shared/task_tile.dart';
+import '../list_task_page/widgets/task_tile.dart';
 
 class ListTaskDonePage extends StatelessWidget {
   final ListTaskDoneController controller;
@@ -26,29 +27,25 @@ class ListTaskDonePage extends StatelessWidget {
           if (state is LoadingState) {
             return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
           } else if (state is SuccessState) {
-            return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Wrap(
-                  children: [
-                    for (final task in controller.list)
-                      Container(
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height * 0.3,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: TaskTile(
-                            taskItem: task,
-                            onLongPress: () {
-                              controller.setOnBoardStatusUsecaseExecute(task.id);
-                              ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                                  content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
-                            }),
-                      )
-                  ],
-                ),
-              ),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemCount: controller.list.length,
+                  itemBuilder: (context, index) {
+                    return TaskDoneTile(
+                      taskItem: controller.list[index],
+                      onLongPress: () {
+                        controller.setOnBoardStatusUsecaseExecute(controller.list[index].id);
+                        // ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                        //     content: Text('Task '), backgroundColor: ColorOutlet.success));
+                      },
+                    );
+                  }),
             );
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {

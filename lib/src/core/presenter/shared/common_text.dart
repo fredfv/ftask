@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import '../theme/color_outlet.dart';
 
@@ -8,6 +10,7 @@ class CommonText extends StatelessWidget {
   final FontWeight? fontWeight;
   final FontStyle? fontStyle;
   final double? fontSize;
+  final int flex;
 
   const CommonText({
     Key? key,
@@ -16,12 +19,18 @@ class CommonText extends StatelessWidget {
     this.fontWeight,
     this.fontStyle,
     this.fontSize,
+    this.flex = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       text,
+      maxLines: 3,
+      maxFontSize: SizeOutlet.textSizeExtraLarge,
+      minFontSize: SizeOutlet.textSizeSmall,
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: fontColor ?? ColorOutlet.textColorDefault,
         fontWeight: fontWeight,

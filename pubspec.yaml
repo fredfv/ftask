@@ -25,8 +25,9 @@ dependencies:
   logger: ^1.1.0
   signalr_core: ^1.1.1
   #ui
-  #ver como trocar pelo custom paint
+  #ver como trocar pelo custom paint(by edson)
   flutter_svg: ^1.1.5
+  auto_size_text: ^3.0.0
   loading_animation_widget: ^1.2.0+3
   #date format
   intl: ^0.17.0
