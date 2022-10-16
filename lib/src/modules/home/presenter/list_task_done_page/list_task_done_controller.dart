@@ -21,7 +21,7 @@ class ListTaskDoneController extends ValueNotifier<CommonState> {
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
     value = LoadingState();
-    if (taskEntity.deleted == null) {
+    if (taskEntity.deleted == null && taskEntity.onBoard == false) {
       list.add(TaskTileModel.fromEntity(taskEntity));
     } else {
       list.removeWhere((element) => element.id == taskEntity.id);

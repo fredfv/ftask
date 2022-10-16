@@ -13,8 +13,12 @@ class TaskTile extends StatelessWidget {
   final ChangeNotifier? controller;
   final VoidCallback onLongPress;
 
-  const TaskTile({Key? key, required this.taskItem, required this.controller, required this.onLongPress})
-      : super(key: key);
+  const TaskTile({
+    Key? key,
+    required this.taskItem,
+    required this.onLongPress,
+    this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,46 +78,46 @@ class TaskTile extends StatelessWidget {
                 ],
               ),
               const CommonSpacing(SpacingType.height),
-              if (controller == null)
-                Row(
-                  children: [
-                    Icon(
-                      Icons.av_timer_outlined,
-                      color: TaskDueStateColorConverter.convert(taskItem.dueState),
-                    ),
-                    const CommonSpacing(SpacingType.width),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      child: CommonText(
-                        fontSize: SizeOutlet.textSizeMedium,
-                        text: taskItem.dueState.toString(),
-                        fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
-                      ),
-                    ),
-                  ],
-                ),
-              AnimatedBuilder(
-                animation: controller!,
-                builder: (_, child) {
-                  return Row(
-                    children: [
-                      Icon(
-                        Icons.av_timer_outlined,
-                        color: TaskDueStateColorConverter.convert(taskItem.dueState),
-                      ),
-                      const CommonSpacing(SpacingType.width),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        child: CommonText(
-                          fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
-                          fontSize: SizeOutlet.textSizeMedium,
-                          text: taskItem.timeElapsed,
+              controller == null
+                  ? Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle_outline,
+                          color: TaskDueStateColorConverter.convert(taskItem.dueState),
                         ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                        const CommonSpacing(SpacingType.width),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          child: CommonText(
+                            fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
+                            fontSize: SizeOutlet.textSizeMedium,
+                            text: taskItem.timeElapsed,
+                          ),
+                        ),
+                      ],
+                    )
+                  : AnimatedBuilder(
+                      animation: controller!,
+                      builder: (_, child) {
+                        return Row(
+                          children: [
+                            Icon(
+                              Icons.av_timer_outlined,
+                              color: TaskDueStateColorConverter.convert(taskItem.dueState),
+                            ),
+                            const CommonSpacing(SpacingType.width),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              child: CommonText(
+                                fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
+                                fontSize: SizeOutlet.textSizeMedium,
+                                text: taskItem.timeElapsed,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
             ],
           ),
         ),

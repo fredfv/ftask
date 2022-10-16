@@ -25,18 +25,20 @@ class ListTaskController extends ValueNotifier<CommonState> {
   }
 
   void updateTilesTimeElapsed() {
+    //print data
     for (var element in list) {
       element.updateTimeElapsed();
     }
+    //print data
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, true);
+    await setOnBoardStatusUsecase(id, false);
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
     value = LoadingState();
-    if (taskEntity.deleted == null) {
+    if (taskEntity.deleted == null && taskEntity.onBoard == true) {
       list.add(TaskTileModel.fromEntity(taskEntity));
     } else {
       list.removeWhere((element) => element.id == taskEntity.id);
