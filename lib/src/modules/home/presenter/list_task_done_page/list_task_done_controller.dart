@@ -36,10 +36,9 @@ class ListTaskDoneController extends ValueNotifier<CommonState> {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
-          value = SuccessState();
           list.clear();
           list.addAll(v.map((e) => TaskTileModel.fromEntity(e)));
-          notifyListeners();
+          value = SuccessState();
         }
       });
     });

@@ -49,6 +49,7 @@ class HiveRepository<T extends EntityBase> implements IRepository<T> {
       }
       Map<String, dynamic> map = mapper.toJson(value);
       await box.put(key, map);
+      await box.flush();
       return true;
     } catch (e) {
       fLog.e(e);

@@ -18,18 +18,16 @@ class ListTaskController extends ValueNotifier<CommonState> {
     required this.repositoryFactory,
     required this.setOnBoardStatusUsecase,
   }) : super(IdleState()) {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      updateTilesTimeElapsed();
-      timeElapsedChangeNotifier.notifyListeners();
-    });
+    // timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    //   updateTilesTimeElapsed();
+    //   timeElapsedChangeNotifier.notifyListeners();
+    // });
   }
 
   void updateTilesTimeElapsed() {
-    //print data
     for (var element in list) {
       element.refresh();
     }
-    //print data
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
@@ -53,10 +51,9 @@ class ListTaskController extends ValueNotifier<CommonState> {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
-          value = SuccessState();
           list.clear();
           list.addAll(v.map((e) => TaskTileModel.fromEntity(e)));
-          notifyListeners();
+          value = SuccessState();
         }
       });
     });

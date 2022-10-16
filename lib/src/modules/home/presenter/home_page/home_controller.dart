@@ -45,7 +45,6 @@ class HomeController extends ChangeNotifier {
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
       await putTaskFromBroadcastUsecase(taskEntity);
-      //validar qual chamar
       listTaskController.addTaskToListFromBroadcast(taskEntity);
       listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
     });

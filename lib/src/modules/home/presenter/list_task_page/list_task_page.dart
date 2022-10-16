@@ -11,17 +11,21 @@ import '../../../../core/presenter/theme/size_outlet.dart';
 import 'widgets/task_tile.dart';
 import 'list_task_controller.dart';
 
-class ListTaskPage extends StatelessWidget {
+class ListTaskPage extends StatefulWidget {
   final ListTaskController controller;
-
   const ListTaskPage({Key? key, required this.controller}) : super(key: key);
 
+  @override
+  State<ListTaskPage> createState() => _ListTaskPageState();
+}
+
+class _ListTaskPageState extends State<ListTaskPage> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
       title: Dictionary.tasksPage,
       body: ValueListenableBuilder(
-        valueListenable: controller,
+        valueListenable: widget.controller,
         builder: (_, state, child) {
           if (state is LoadingState) {
             return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
@@ -34,13 +38,13 @@ class ListTaskPage extends StatelessWidget {
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                   ),
-                  itemCount: controller.list.length,
+                  itemCount: widget.controller.list.length,
                   itemBuilder: (context, index) {
                     return TaskTile(
-                      taskItem: controller.list[index],
-                      controller: controller.timeElapsedChangeNotifier,
+                      taskItem: widget.controller.list[index],
+                      controller: widget.controller.timeElapsedChangeNotifier,
                       onLongPress: () {
-                        controller.setOnBoardStatusUsecaseExecute(controller.list[index].id);
+                        widget.controller.setOnBoardStatusUsecaseExecute(widget.controller.list[index].id);
                         // ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
                         //     content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       },
@@ -51,7 +55,7 @@ class ListTaskPage extends StatelessWidget {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
-              controller.value = IdleState();
+              widget.controller.value = IdleState();
             });
           }
           return Container();
