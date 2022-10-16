@@ -26,11 +26,9 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
       entity.setOnBoard(onBoard);
       await repository.put(id, entity);
 
-      var a = entity.toCloud().toString();
-
       await httpService.request(
           baseUrl: 'http://192.168.15.3:5001',
-          endPoint: '/task/update',
+          endPoint: '/task/rule/upsertone',
           method: HttpRequestMethods.put,
           params: entity.toCloud(),
           token: loggedUser.token,

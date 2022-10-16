@@ -16,7 +16,7 @@ class ListTaskDoneController extends ValueNotifier<CommonState> {
   }) : super(IdleState());
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, false);
+    await setOnBoardStatusUsecase(id, true);
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {

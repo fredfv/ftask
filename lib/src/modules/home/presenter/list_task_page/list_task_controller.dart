@@ -61,27 +61,4 @@ class ListTaskController extends ValueNotifier<CommonState> {
       });
     });
   }
-  // void getByIdFromCloudExecute(String id) async {
-  //   await getByIdFromCloudUsecase(id);
-  //   getByIdBroadcastMessage(id);
-  // }
-  //
-  // void getByIdBroadcastMessage(String id) {
-  //   value = LoadingState();
-  //   repositoryFactory.get<TaskEntity>().then((taskRepository) async {
-  //     taskRepository.get(id).then((v) {
-  //       if (v is Exception || v == null) {
-  //         value = ErrorState(v.toString());
-  //       } else {
-  //         value = SuccessState();
-  //         if (v.deleted == null) {
-  //           list.add(TaskTileModel.fromEntity(v));
-  //         } else {
-  //           list.removeWhere((element) => element.id == v.id);
-  //         }
-  //         notifyListeners();
-  //       }
-  //     });
-  //   });
-  // }
 }
