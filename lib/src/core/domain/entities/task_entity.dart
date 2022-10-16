@@ -1,37 +1,35 @@
+import 'package:task/src/core/infra/extensions/date_time_extensions.dart';
+
 import 'entity_base.dart';
 
 class TaskEntity extends EntityBase {
   String _description;
   String _title;
-  String _dueDate;
   bool _onBoard;
+  int _dueDate;
 
   String get description => _description;
-
   void setDescription(String? value) => _description = value ?? '';
 
   String get title => _title;
-
   void setTitle(String? value) => _title = value ?? '';
 
-  String get dueDate => _dueDate;
-
-  void setDueDate(String? value) => _dueDate = value ?? '';
-
   bool get onBoard => _onBoard;
-
   void setOnBoard(bool value) => _onBoard = value;
+
+  int get dueDate => _dueDate;
+  void setDueDate(int value) => _dueDate;
 
   TaskEntity({
     required String description,
     required String title,
-    required String dueDate,
     required bool onBoard,
     required String id,
-    required DateTime created,
-    required DateTime persisted,
-    DateTime? deleted,
-    DateTime? updated,
+    required int created,
+    required int persisted,
+    required dueDate,
+    int? deleted,
+    int? updated,
   })  : _description = description,
         _dueDate = dueDate,
         _title = title,
@@ -48,11 +46,11 @@ class TaskEntity extends EntityBase {
     return TaskEntity(
       description: '',
       title: '',
-      dueDate: '',
+      dueDate: 0,
       onBoard: false,
       id: '',
-      created: DateTime.fromMillisecondsSinceEpoch(0),
-      persisted: DateTime.fromMillisecondsSinceEpoch(0),
+      created: 0,
+      persisted: 0,
     );
   }
 
@@ -74,28 +72,28 @@ class TaskEntity extends EntityBase {
   factory TaskEntity.fromJson(dynamic map) {
     return TaskEntity(
       description: map['description'] as String,
-      title: map['title'] ?? '',
-      dueDate: map['dueDate'] as String,
+      title: map['title'] as String,
+      dueDate: map['dueDate'] as int,
       onBoard: map['onBoard'] as bool,
       id: map['id'] as String,
-      created: map['created'] as DateTime,
-      persisted: map['persisted'] as DateTime,
-      deleted: map['deleted'] as DateTime?,
-      updated: map['updated'] as DateTime?,
+      created: map['created'] as int,
+      persisted: map['persisted'] as int,
+      deleted: map['deleted'] as int?,
+      updated: map['updated'] as int?,
     );
   }
 
   factory TaskEntity.fromCloud(dynamic map) {
     return TaskEntity(
       description: map['description'] as String,
-      title: map['title'] ?? '',
-      dueDate: map['dueDate'] as String,
+      title: map['title'] as String,
+      dueDate: DateTime.parse(map['dueDate']).millisecondsSinceEpoch,
       onBoard: map['onBoard'] as bool,
       id: map['id'] as String,
-      created: DateTime.parse(map['insertDate']),
-      persisted: DateTime.parse(map['persistenceDate']),
-      deleted: map['deletionDate'] == null ? null : DateTime.tryParse(map['deletionDate']),
-      updated: map['updateDate'] == null ? null : DateTime.tryParse(map['updateDate']),
+      created: DateTime.parse(map['insertDate']).millisecondsSinceEpoch,
+      persisted: DateTime.parse(map['persistenceDate']).millisecondsSinceEpoch,
+      deleted: map['deletionDate'] == null ? null : DateTime.tryParse(map['deletionDate'])?.millisecondsSinceEpoch,
+      updated: map['updateDate'] == null ? null : DateTime.tryParse(map['updateDate'])?.millisecondsSinceEpoch,
     );
   }
 
@@ -103,18 +101,18 @@ class TaskEntity extends EntityBase {
     return {
       'description': description,
       'title': title,
-      'dueDate': dueDate,
+      'dueDate': DateTime.fromMillisecondsSinceEpoch(dueDate).toCloud(),
       'onBoard': onBoard,
       'id': id,
-      'insertDate': created.toIso8601String(),
-      'persistenceDate': persisted.toIso8601String(),
-      'deletionDate': deleted?.toIso8601String(),
-      'updateDate': updated?.toIso8601String(),
+      'insertDate': DateTime.fromMillisecondsSinceEpoch(created).toCloud(),
+      'persistenceDate': DateTime.fromMillisecondsSinceEpoch(persisted).toCloud(),
+      'deletionDate': deleted == null ? null : DateTime.fromMillisecondsSinceEpoch(deleted!).toCloud(),
+      'updateDate': updated == null ? null : DateTime.fromMillisecondsSinceEpoch(updated!).toCloud(),
     };
   }
 
   @override
   String toString() {
-    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted)';
+    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted, updated: $updated)';
   }
 }

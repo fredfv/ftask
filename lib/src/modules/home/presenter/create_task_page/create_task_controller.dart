@@ -38,8 +38,8 @@ class CreateTaskController extends ValueNotifier<CommonState> {
         description: descriptionController.text,
         dueDate: dueDateController.text,
         id: '',
-        created: DateTime.fromMillisecondsSinceEpoch(0),
-        persisted: DateTime.fromMillisecondsSinceEpoch(0),
+        created: 0,
+        persisted: 0,
         onBoard: false,
       );
       value = LoadingState();

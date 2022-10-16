@@ -1,36 +1,31 @@
 abstract class EntityBase {
   String _id;
-  DateTime _created;
-  DateTime _persisted;
-  DateTime? _deleted;
-  DateTime? _updated;
+  int _created;
+  int _persisted;
+  int? _deleted;
+  int? _updated;
 
   String get id => _id;
-
-  DateTime get created => _created;
-
-  DateTime get persisted => _persisted;
-
-  DateTime? get deleted => _deleted;
-
-  DateTime? get updated => _updated;
-
   void setId(String value) => _id = value;
 
-  void setCreated(DateTime value) => _created = value;
+  int get created => _created;
+  void setCreated(int value) => _created = value;
 
-  void setPersisted(DateTime value) => _persisted = value;
+  int get persisted => _persisted;
+  void setPersisted(int value) => _persisted = value;
 
-  void setDeleted(DateTime? value) => _deleted = value;
+  int? get deleted => _deleted;
+  void setDeleted(int? value) => _deleted = value;
 
-  void setUpdated(DateTime? value) => _updated = value;
+  int? get updated => _updated;
+  void setUpdated(int? value) => _updated = value;
 
   EntityBase({
     required String id,
-    required DateTime created,
-    required DateTime persisted,
-    DateTime? deleted,
-    DateTime? updated,
+    required int created,
+    required int persisted,
+    int? deleted,
+    int? updated,
   })  : _id = id,
         _created = created,
         _persisted = persisted,

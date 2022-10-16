@@ -3,4 +3,5 @@ enum TaskDueState {
   late,
   veryLate,
   error,
+  none,
 }

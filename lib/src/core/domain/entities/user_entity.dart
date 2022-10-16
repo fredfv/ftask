@@ -34,9 +34,9 @@ class UserEntity extends EntityBase {
     required String role,
     required String token,
     required String id,
-    required DateTime created,
-    required DateTime persisted,
-    DateTime? deleted,
+    required int created,
+    required int persisted,
+    int? deleted,
   })  : _login = login,
         _secret = secret,
         _name = name,
@@ -67,40 +67,40 @@ class UserEntity extends EntityBase {
   factory UserEntity.fromJson(Map<String, dynamic> map) {
     return UserEntity(
       id: map['id'] as String,
-      created: map['created'] as DateTime,
+      created: map['created'] as int,
       login: map['login'] as String,
       secret: map['secret'] as String,
       name: map['name'] as String,
       token: map['token'] as String,
       role: map['role'] as String,
-      persisted: map['persisted'] as DateTime,
-      deleted: map['deleted'] as DateTime?,
+      persisted: map['persisted'] as int,
+      deleted: map['deleted'] as int?,
     );
   }
 
   factory UserEntity.fromAuth(Map<String, dynamic> map) {
     return UserEntity(
       id: map['person']['id'] as String,
-      created: DateTime.tryParse(map['person']['insertDate']) as DateTime,
+      created: DateTime.tryParse(map['person']['insertDate'])?.millisecondsSinceEpoch ?? 0,
       login: map['person']['username'] as String,
       secret: map['person']['password'] as String,
       name: map['person']['name'] as String,
       token: map['token'] as String,
       role: map['person']['role'] as String,
-      persisted: DateTime.tryParse(map['person']['insertDate']) as DateTime,
+      persisted: DateTime.tryParse(map['person']['insertDate'])?.millisecondsSinceEpoch ?? 0,
     );
   }
 
   factory UserEntity.empty() {
     return UserEntity(
       id: '',
-      created: DateTime.fromMillisecondsSinceEpoch(0),
+      created: 0,
       login: '',
       secret: '',
       name: '',
       token: '',
       role: '',
-      persisted: DateTime.fromMillisecondsSinceEpoch(0),
+      persisted: 0,
     );
   }
 

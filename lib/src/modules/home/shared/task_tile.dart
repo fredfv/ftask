@@ -72,7 +72,7 @@ class TaskTile extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: CommonText(
                       fontSize: SizeOutlet.textSizeMedium,
-                      text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
+                      text: taskItem.dueDateString,
                     ),
                   ),
                 ],

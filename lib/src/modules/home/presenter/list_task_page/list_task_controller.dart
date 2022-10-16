@@ -27,7 +27,7 @@ class ListTaskController extends ValueNotifier<CommonState> {
   void updateTilesTimeElapsed() {
     //print data
     for (var element in list) {
-      element.updateTimeElapsed();
+      element.refresh();
     }
     //print data
   }
