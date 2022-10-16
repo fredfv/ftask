@@ -38,7 +38,14 @@ class ListTaskDonePage extends StatelessWidget {
                           maxHeight: MediaQuery.of(context).size.height * 0.22,
                         ),
                         width: MediaQuery.of(context).size.width * 0.5,
-                        child: TaskTile(taskItem: task, controller: null),
+                        child: TaskTile(
+                            taskItem: task,
+                            controller: null,
+                            onLongPress: () {
+                              controller.setOnBoardStatusUsecaseExecute(task.id);
+                              ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                                  content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
+                            }),
                       )
                   ],
                 ),

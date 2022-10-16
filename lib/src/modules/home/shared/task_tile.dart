@@ -11,87 +11,71 @@ import '../../../core/presenter/theme/spacing_type.dart';
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;
   final ChangeNotifier? controller;
+  final VoidCallback onLongPress;
 
-  const TaskTile({Key? key, required this.taskItem, required this.controller}) : super(key: key);
+  const TaskTile({Key? key, required this.taskItem, required this.controller, required this.onLongPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: ColorOutlet.secondaryDark,
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.35,
-              child: CommonText(
-                text: taskItem.title.toString(),
-                fontSize: SizeOutlet.textSizeExtraLarge,
-                fontColor: ColorOutlet.textColorTitle,
+    return InkWell(
+      onLongPress: onLongPress,
+      child: Card(
+        color: ColorOutlet.secondaryDark,
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.35,
+                child: CommonText(
+                  text: taskItem.title.toString(),
+                  fontSize: SizeOutlet.textSizeExtraLarge,
+                  fontColor: ColorOutlet.textColorTitle,
+                ),
               ),
-            ),
-            const CommonSpacing(
-              SpacingType.height,
-              factor: 2,
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.description_outlined,
-                  color: ColorOutlet.iconColor,
-                ),
-                const CommonSpacing(SpacingType.width),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: CommonText(
-                    fontSize: SizeOutlet.textSizeMedium,
-                    text: taskItem.description.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const CommonSpacing(SpacingType.height),
-            Row(
-              children: [
-                const Icon(
-                  Icons.more_time_outlined,
-                  color: ColorOutlet.iconColor,
-                ),
-                const CommonSpacing(SpacingType.width),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: CommonText(
-                    fontSize: SizeOutlet.textSizeMedium,
-                    text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
-                  ),
-                ),
-              ],
-            ),
-            const CommonSpacing(SpacingType.height),
-            if (controller == null)
+              const CommonSpacing(
+                SpacingType.height,
+                factor: 2,
+              ),
               Row(
                 children: [
-                  Icon(
-                    Icons.av_timer_outlined,
-                    color: TaskDueStateColorConverter.convert(taskItem.dueState),
+                  const Icon(
+                    Icons.description_outlined,
+                    color: ColorOutlet.iconColor,
                   ),
                   const CommonSpacing(SpacingType.width),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: CommonText(
                       fontSize: SizeOutlet.textSizeMedium,
-                      text: taskItem.dueState.toString(),
-                      fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
+                      text: taskItem.description.toString(),
                     ),
                   ),
                 ],
               ),
-            AnimatedBuilder(
-              animation: controller!,
-              builder: (_, child) {
-                return Row(
+              const CommonSpacing(SpacingType.height),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.more_time_outlined,
+                    color: ColorOutlet.iconColor,
+                  ),
+                  const CommonSpacing(SpacingType.width),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: CommonText(
+                      fontSize: SizeOutlet.textSizeMedium,
+                      text: '${taskItem.dueDate.substring(0, 10)}\n${taskItem.dueDate.substring(11, 16)}',
+                    ),
+                  ),
+                ],
+              ),
+              const CommonSpacing(SpacingType.height),
+              if (controller == null)
+                Row(
                   children: [
                     Icon(
                       Icons.av_timer_outlined,
@@ -101,16 +85,37 @@ class TaskTile extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: CommonText(
-                        fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
                         fontSize: SizeOutlet.textSizeMedium,
-                        text: taskItem.timeElapsed,
+                        text: taskItem.dueState.toString(),
+                        fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
                       ),
                     ),
                   ],
-                );
-              },
-            ),
-          ],
+                ),
+              AnimatedBuilder(
+                animation: controller!,
+                builder: (_, child) {
+                  return Row(
+                    children: [
+                      Icon(
+                        Icons.av_timer_outlined,
+                        color: TaskDueStateColorConverter.convert(taskItem.dueState),
+                      ),
+                      const CommonSpacing(SpacingType.width),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: CommonText(
+                          fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
+                          fontSize: SizeOutlet.textSizeMedium,
+                          text: taskItem.timeElapsed,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

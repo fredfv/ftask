@@ -1,16 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
+import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../models/task_tile_model.dart';
 
 class ListTaskDoneController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
+  final ISetOnBoardStatusUsecase setOnBoardStatusUsecase;
 
   ListTaskDoneController({
     required this.repositoryFactory,
+    required this.setOnBoardStatusUsecase,
   }) : super(IdleState());
+
+  void setOnBoardStatusUsecaseExecute(String id) async {
+    await setOnBoardStatusUsecase(id, false);
+  }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
     value = LoadingState();

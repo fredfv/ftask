@@ -38,10 +38,9 @@ class HomeController extends ChangeNotifier {
           ListTaskPage(controller: listTaskController),
           ListTaskDonePage(controller: listTaskDoneController),
         ] {
+    callGetAllControllersFromLocal();
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
-      await updateTasksFromCloudUsecase();
-      listTaskController.getAllTasksFromLocal();
-      listTaskDoneController.getAllTasksFromLocal();
+      callGetAllControllersFromLocal();
     });
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
@@ -49,6 +48,12 @@ class HomeController extends ChangeNotifier {
       listTaskController.addTaskToListFromBroadcast(taskEntity);
       listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
     });
+  }
+
+  callGetAllControllersFromLocal() async {
+    await updateTasksFromCloudUsecase();
+    listTaskController.getAllTasksFromLocal();
+    listTaskDoneController.getAllTasksFromLocal();
   }
 
   changePage(int index) {

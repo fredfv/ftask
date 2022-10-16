@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:task/src/core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/infra/application/common_state.dart';
@@ -10,16 +11,27 @@ class ListTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
+  final ISetOnBoardStatusUsecase setOnBoardStatusUsecase;
   Timer? timer;
 
   ListTaskController({
     required this.repositoryFactory,
-  }) : super(IdleState());
+    required this.setOnBoardStatusUsecase,
+  }) : super(IdleState()) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      updateTilesTimeElapsed();
+      timeElapsedChangeNotifier.notifyListeners();
+    });
+  }
 
   void updateTilesTimeElapsed() {
     for (var element in list) {
       element.updateTimeElapsed();
     }
+  }
+
+  void setOnBoardStatusUsecaseExecute(String id) async {
+    await setOnBoardStatusUsecase(id, true);
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {

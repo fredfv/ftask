@@ -3,6 +3,7 @@ abstract class EntityBase {
   DateTime _created;
   DateTime _persisted;
   DateTime? _deleted;
+  DateTime? _updated;
 
   String get id => _id;
 
@@ -12,6 +13,8 @@ abstract class EntityBase {
 
   DateTime? get deleted => _deleted;
 
+  DateTime? get updated => _updated;
+
   void setId(String value) => _id = value;
 
   void setCreated(DateTime value) => _created = value;
@@ -20,15 +23,19 @@ abstract class EntityBase {
 
   void setDeleted(DateTime? value) => _deleted = value;
 
-  EntityBase(
-      {required String id,
-      required DateTime created,
-      required DateTime persisted,
-      DateTime? deleted})
-      : _id = id,
+  void setUpdated(DateTime? value) => _updated = value;
+
+  EntityBase({
+    required String id,
+    required DateTime created,
+    required DateTime persisted,
+    DateTime? deleted,
+    DateTime? updated,
+  })  : _id = id,
         _created = created,
         _persisted = persisted,
-        _deleted = deleted;
+        _deleted = deleted,
+        _updated = updated;
 
   Map<String, dynamic> toJson();
 }
