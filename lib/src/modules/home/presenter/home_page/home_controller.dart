@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
+import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
 import '../../../../core/infra/services/broadcast_controller.dart';
 import '../../../../core/infra/services/signalr_helper.dart';
@@ -47,6 +48,7 @@ class HomeController extends ChangeNotifier {
       await putTaskFromBroadcastUsecase(taskEntity);
       listTaskController.addTaskToListFromBroadcast(taskEntity);
       listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
+      notifyListeners();
     });
   }
 

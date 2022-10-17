@@ -28,7 +28,7 @@ class HiveRepository<T extends EntityBase> implements IRepository<T> {
 
   @override
   Future<T?> get(String key) async {
-    Map<String, dynamic>? map = box.get(key);
+    dynamic map = box.get(key);
     T? value = mapper.fromJson(map);
     return value;
   }

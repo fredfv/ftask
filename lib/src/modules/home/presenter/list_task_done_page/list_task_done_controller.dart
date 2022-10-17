@@ -16,7 +16,12 @@ class ListTaskDoneController extends ValueNotifier<CommonState> {
   }) : super(IdleState());
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, true);
+    await setOnBoardStatusUsecase(id, true).then((_) {
+      list.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }).onError((error, stackTrace) {
+      value = ErrorState(error.toString());
+    });
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {

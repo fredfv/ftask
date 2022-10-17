@@ -18,10 +18,10 @@ class ListTaskController extends ValueNotifier<CommonState> {
     required this.repositoryFactory,
     required this.setOnBoardStatusUsecase,
   }) : super(IdleState()) {
-    // timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-    //   updateTilesTimeElapsed();
-    //   timeElapsedChangeNotifier.notifyListeners();
-    // });
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      updateTilesTimeElapsed();
+      timeElapsedChangeNotifier.notifyListeners();
+    });
   }
 
   void updateTilesTimeElapsed() {
@@ -31,7 +31,12 @@ class ListTaskController extends ValueNotifier<CommonState> {
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, false);
+    await setOnBoardStatusUsecase(id, false).then((_) {
+      list.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }).onError((error, stackTrace) {
+      value = ErrorState(error.toString());
+    });
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
@@ -56,6 +61,8 @@ class ListTaskController extends ValueNotifier<CommonState> {
           value = SuccessState();
         }
       });
+    }).onError((error, stackTrace) {
+      value = ErrorState(error.toString());
     });
   }
 }
