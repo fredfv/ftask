@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:task/src/modules/home/models/task_tile_model.dart';
 import 'package:task/src/modules/home/shared/task_due_state_color_converter.dart';
@@ -8,16 +10,32 @@ import '../../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../../core/presenter/theme/size_outlet.dart';
 import '../../../../../core/presenter/theme/spacing_type.dart';
 
+// class TaskTile extends StatefulWidget {
+//   final TaskTileModel taskItem;
+//   final ChangeNotifier controller;
+//   final VoidCallback onLongPress;
+//
+//   const TaskTile({
+//     Key? key,
+//     required this.taskItem,
+//     required this.onLongPress,
+//     required this.controller,
+//   }) : super(key: key);
+//
+//   @override
+//   State<TaskTile> createState() => _TaskTileState();
+// }
+
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;
-  final ChangeNotifier? controller;
+  final ChangeNotifier controller;
   final VoidCallback onLongPress;
 
   const TaskTile({
     Key? key,
     required this.taskItem,
     required this.onLongPress,
-    this.controller,
+    required this.controller,
   }) : super(key: key);
 
   @override

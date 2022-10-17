@@ -25,15 +25,18 @@ class ListTaskController extends ValueNotifier<CommonState> {
   }
 
   void updateTilesTimeElapsed() {
-    //print data
     for (var element in list) {
       element.refresh();
     }
-    //print data
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, false);
+    await setOnBoardStatusUsecase(id, false).then((_) {
+      list.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }).onError((error, stackTrace) {
+      value = ErrorState(error.toString());
+    });
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
@@ -53,12 +56,13 @@ class ListTaskController extends ValueNotifier<CommonState> {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
-          value = SuccessState();
           list.clear();
           list.addAll(v.map((e) => TaskTileModel.fromEntity(e)));
-          notifyListeners();
+          value = SuccessState();
         }
       });
+    }).onError((error, stackTrace) {
+      value = ErrorState(error.toString());
     });
   }
 }

@@ -13,14 +13,14 @@ import 'presenter/home_page/home_page.dart';
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => UpdateTasksFromCloudUsecase(httpService: i(), repositoryFactory: i())),
-        Bind.factory((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i())),
-        Bind.factory((i) => PutTaskFromBroadcastUsecase(repositoryFactory: i())),
-        Bind.factory((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i())),
-        Bind.factory((i) => ListTaskController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
-        Bind.factory((i) => ListTaskDoneController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
-        Bind.factory((i) => CreateTaskController(taskRepository: i(), formsValidate: i())),
-        Bind.factory((i) => HomeController(
+        Bind.singleton((i) => UpdateTasksFromCloudUsecase(httpService: i(), repositoryFactory: i())),
+        Bind.singleton((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i())),
+        Bind.singleton((i) => PutTaskFromBroadcastUsecase(repositoryFactory: i())),
+        Bind.singleton((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i())),
+        Bind.singleton((i) => ListTaskController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
+        Bind.singleton((i) => ListTaskDoneController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
+        Bind.singleton((i) => CreateTaskController(taskRepository: i(), formsValidate: i())),
+        Bind.singleton((i) => HomeController(
               hub: i(),
               taskPageController: i(),
               listTaskController: i(),
