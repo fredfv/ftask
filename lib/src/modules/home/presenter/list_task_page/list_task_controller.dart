@@ -7,10 +7,19 @@ import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../models/task_tile_model.dart';
 
+class TaskTileDataNotifier {
+  final String id;
+  final double value;
+
+  TaskTileDataNotifier({required this.id, required this.value});
+}
+
 class ListTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
+  final ValueNotifier<TaskTileDataNotifier> taskTileDataNotifier =
+      ValueNotifier(TaskTileDataNotifier(id: '', value: 0));
   final ISetOnBoardStatusUsecase setOnBoardStatusUsecase;
   Timer? timer;
 
@@ -31,7 +40,8 @@ class ListTaskController extends ValueNotifier<CommonState> {
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    await setOnBoardStatusUsecase(id, false).then((_) {
+    taskTileDataNotifier.value = TaskTileDataNotifier(id: id, value: 1);
+    setOnBoardStatusUsecase(id, false).then((_) {
       list.removeWhere((element) => element.id == id);
       notifyListeners();
     }).onError((error, stackTrace) {

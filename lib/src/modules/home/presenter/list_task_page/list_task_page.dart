@@ -49,6 +49,7 @@ class _ListTaskPageState extends State<ListTaskPage> {
                         // ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
                         //     content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       },
+                      animatedValueNotifier: widget.controller.taskTileDataNotifier,
                     );
                   }),
             );
