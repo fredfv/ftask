@@ -15,7 +15,7 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
 
   @override
   Future<bool> call(String id, bool onBoard) async {
-    var loggedUser = Modular.get<UserEntity>();
+    //var loggedUser = Modular.get<UserEntity>();
 
     var repository = await repositoryFactory.get<TaskEntity>();
     var entity = await repository.get(id);
@@ -26,14 +26,14 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
       entity.setOnBoard(onBoard);
       await repository.put(id, entity);
 
-      await httpService.request(
-          baseUrl: 'http://192.168.15.3:5001',
-          endPoint: '/task/rule/upsertone',
-          method: HttpRequestMethods.put,
-          params: entity.toCloud(),
-          token: loggedUser.token,
-          receiveTimeout: 5000,
-          connectTimeout: 10000);
+      //await httpService.request(
+      //     baseUrl: 'http://192.168.15.3:5001',
+      //     endPoint: '/task/rule/upsertone',
+      //     method: HttpRequestMethods.put,
+      //     params: entity.toCloud(),
+      //     token: loggedUser.token,
+      //     receiveTimeout: 5000,
+      //     connectTimeout: 10000);
     }
     return true;
   }

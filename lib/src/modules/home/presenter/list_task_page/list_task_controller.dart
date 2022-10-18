@@ -18,8 +18,6 @@ class ListTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
-  final ValueNotifier<TaskTileDataNotifier> taskTileDataNotifier =
-      ValueNotifier(TaskTileDataNotifier(id: '', value: 0));
   final ISetOnBoardStatusUsecase setOnBoardStatusUsecase;
   Timer? timer;
 
@@ -40,23 +38,15 @@ class ListTaskController extends ValueNotifier<CommonState> {
   }
 
   void setOnBoardStatusUsecaseExecute(String id) async {
-    taskTileDataNotifier.value = TaskTileDataNotifier(id: id, value: 1);
     setOnBoardStatusUsecase(id, false).then((_) {
-      list.removeWhere((element) => element.id == id);
-      notifyListeners();
+      getAllTasksFromLocal();
     }).onError((error, stackTrace) {
       value = ErrorState(error.toString());
     });
   }
 
   void addTaskToListFromBroadcast(TaskEntity taskEntity) {
-    value = LoadingState();
-    if (taskEntity.deleted == null && taskEntity.onBoard == true) {
-      list.add(TaskTileModel.fromEntity(taskEntity));
-    } else {
-      list.removeWhere((element) => element.id == taskEntity.id);
-    }
-    value = SuccessState();
+    getAllTasksFromLocal();
   }
 
   void getAllTasksFromLocal() {

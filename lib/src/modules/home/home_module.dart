@@ -7,16 +7,18 @@ import 'package:task/src/modules/home/usecases/get_by_id_from_cloud_usecase.dart
 import 'package:task/src/modules/home/usecases/put_task_from_broadcast_usecase.dart';
 import 'package:task/src/modules/home/usecases/set_on_board_status_usecase.dart';
 import 'package:task/src/modules/home/usecases/update_tasks_from_cloud_usecase_impl.dart';
+import 'package:task/src/modules/home/usecases/upload_tasks_to_cloud_usecase.dart';
 
 import 'presenter/home_page/home_page.dart';
 
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.singleton((i) => UpdateTasksFromCloudUsecase(httpService: i(), repositoryFactory: i())),
-        Bind.singleton((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i())),
-        Bind.singleton((i) => PutTaskFromBroadcastUsecase(repositoryFactory: i())),
-        Bind.singleton((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i())),
+        Bind.factory((i) => UpdateTasksFromCloudUsecase(httpService: i(), repositoryFactory: i())),
+        Bind.factory((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i())),
+        Bind.factory((i) => PutTaskFromBroadcastUsecase(repositoryFactory: i())),
+        Bind.factory((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i())),
+        Bind.factory((i) => UploadTasksToCloudUsecase(repositoryFactory: i(), httpService: i())),
         Bind.singleton((i) => ListTaskController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
         Bind.singleton((i) => ListTaskDoneController(repositoryFactory: i(), setOnBoardStatusUsecase: i())),
         Bind.singleton((i) => CreateTaskController(taskRepository: i(), formsValidate: i())),
@@ -27,6 +29,7 @@ class HomeModule extends Module {
               listTaskDoneController: i(),
               updateTasksFromCloudUsecase: i(),
               putTaskFromBroadcastUsecase: i(),
+              uploadTasksToCloudUsecase: i(),
               broadcastController: i(),
             )),
       ];

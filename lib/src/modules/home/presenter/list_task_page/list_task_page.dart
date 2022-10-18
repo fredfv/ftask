@@ -45,11 +45,7 @@ class _ListTaskPageState extends State<ListTaskPage> {
                       controller: widget.controller.timeElapsedChangeNotifier,
                       onLongPress: () {
                         widget.controller.setOnBoardStatusUsecaseExecute(widget.controller.list[index].id);
-                        setState(() {});
-                        // ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                        //     content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       },
-                      animatedValueNotifier: widget.controller.taskTileDataNotifier,
                     );
                   }),
             );
