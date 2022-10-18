@@ -23,10 +23,10 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
       int date = DateTime.now().millisecondsSinceEpoch;
       entity.setPersisted(date);
       entity.setUpdated(date);
-      entity.setOnBoard(onBoard);
       entity.setPending(true);
       await repository.put(id, entity);
 
+      entity.setOnBoard(onBoard);
       var payload = {
         'userId': loggedUser.id,
         'value': entity.toCloud(),

@@ -52,7 +52,7 @@ class ListTaskController extends ValueNotifier<CommonState> {
   void getAllTasksFromLocal() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {
-      taskRepository.query(true).then((v) {
+      taskRepository.getWhere((t) => t.onBoard == true).then((v) {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {

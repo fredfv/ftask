@@ -37,7 +37,7 @@ class ListTaskDoneController extends ValueNotifier<CommonState> {
   void getAllTasksFromLocal() {
     value = LoadingState();
     repositoryFactory.get<TaskEntity>().then((taskRepository) async {
-      taskRepository.query(false).then((v) {
+      taskRepository.getWhere((t) => t.onBoard == false).then((v) {
         if (v is Exception) {
           value = ErrorState(v.toString());
         } else {
