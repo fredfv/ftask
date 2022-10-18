@@ -21,13 +21,17 @@ class UploadTasksToCloudUsecase implements IUploadTasksToCloudUsecase {
     IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
     List<TaskEntity> listTask = await repository.getAll();
     var listToCloud = listTask.map<Map<String, dynamic>>((e) => e.toCloud()).toList();
+    var payload = {
+      'userId': loggedUser.id,
+      'values': listToCloud,
+    };
 
     httpService.request(
         baseUrl: 'http://192.168.15.3:5001',
         endPoint: '/task/uploadall',
         method: HttpRequestMethods.put,
         token: loggedUser.token,
-        params: listToCloud,
+        params: payload,
         receiveTimeout: 5000,
         connectTimeout: 10000);
 

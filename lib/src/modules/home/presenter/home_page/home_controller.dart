@@ -3,7 +3,6 @@ import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.da
 
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
-import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
 import '../../../../core/infra/services/broadcast_controller.dart';
 import '../../../../core/infra/services/signalr_helper.dart';
@@ -43,17 +42,20 @@ class HomeController extends ChangeNotifier {
           ListTaskDonePage(controller: listTaskDoneController),
         ] {
     callGetAllTasksControllersFromLocal();
-    uploadAndGetAllFromCloudExecute();
+    //usage of way to sync
+    //uploadAndGetAllFromCloudExecute();
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
       callGetAllTasksControllersFromLocal();
     });
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
       await putTaskFromBroadcastUsecase(taskEntity);
-      // listTaskController.addTaskToListFromBroadcast(taskEntity);
-      // listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
-      await callGetAllTasksControllersFromLocal();
+      listTaskController.addTaskToListFromBroadcast(taskEntity);
+      listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
     });
+    // broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
+    //   callGetAllTasksControllersFromLocal();
+    // });
   }
 
   callGetAllTasksControllersFromLocal() async {

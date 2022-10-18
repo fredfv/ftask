@@ -36,11 +36,12 @@ class CreateTaskController extends ValueNotifier<CommonState> {
       TaskEntity newTask = TaskEntity(
         title: titleController.text,
         description: descriptionController.text,
-        dueDate: dueDateController.text,
+        dueDate: 0,
         id: '',
         created: 0,
         persisted: 0,
         onBoard: false,
+        pending: false,
       );
       value = LoadingState();
       taskRepository.get<TaskEntity>().then((hiveRepository) async {

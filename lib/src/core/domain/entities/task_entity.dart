@@ -6,6 +6,7 @@ class TaskEntity extends EntityBase {
   String _description;
   String _title;
   bool _onBoard;
+  bool _pending;
   int _dueDate;
 
   String get description => _description;
@@ -20,6 +21,9 @@ class TaskEntity extends EntityBase {
   int get dueDate => _dueDate;
   void setDueDate(int value) => _dueDate;
 
+  bool get pending => _pending;
+  void setPending(bool value) => _pending = value;
+
   TaskEntity({
     required String description,
     required String title,
@@ -27,13 +31,15 @@ class TaskEntity extends EntityBase {
     required String id,
     required int created,
     required int persisted,
-    required dueDate,
+    required int dueDate,
+    required bool pending,
     int? deleted,
     int? updated,
   })  : _description = description,
         _dueDate = dueDate,
         _title = title,
         _onBoard = onBoard,
+        _pending = pending,
         super(
           id: id,
           created: created,
@@ -51,6 +57,7 @@ class TaskEntity extends EntityBase {
       id: '',
       created: 0,
       persisted: 0,
+      pending: false,
     );
   }
 
@@ -66,6 +73,7 @@ class TaskEntity extends EntityBase {
       'persisted': persisted,
       'deleted': deleted,
       'updated': updated,
+      'pending': pending,
     };
   }
 
@@ -80,6 +88,7 @@ class TaskEntity extends EntityBase {
       persisted: map['persisted'] as int,
       deleted: map['deleted'] as int?,
       updated: map['updated'] as int?,
+      pending: map['pending'] as bool,
     );
   }
 
@@ -94,6 +103,7 @@ class TaskEntity extends EntityBase {
       persisted: DateTime.parse(map['persistenceDate']).millisecondsSinceEpoch,
       deleted: map['deletionDate'] == null ? null : DateTime.tryParse(map['deletionDate'])?.millisecondsSinceEpoch,
       updated: map['updateDate'] == null ? null : DateTime.tryParse(map['updateDate'])?.millisecondsSinceEpoch,
+      pending: map['pending'] as bool,
     );
   }
 
@@ -108,11 +118,12 @@ class TaskEntity extends EntityBase {
       'persistenceDate': DateTime.fromMillisecondsSinceEpoch(persisted).toCloud(),
       'deletionDate': deleted == null ? null : DateTime.fromMillisecondsSinceEpoch(deleted!).toCloud(),
       'updateDate': updated == null ? null : DateTime.fromMillisecondsSinceEpoch(updated!).toCloud(),
+      'pending': pending,
     };
   }
 
   @override
   String toString() {
-    return 'TaskEntity(description: $description, title: $title, dueDate: $dueDate, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted, updated: $updated)';
+    return 'TaskEntity(description: $description, title: $title, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted, updated: $updated, dueDate: $dueDate, pending: $pending)';
   }
 }

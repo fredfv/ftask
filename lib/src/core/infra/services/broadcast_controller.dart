@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/core/infra/validators/i_broadcast_controller.dart';
 
+import '../../domain/entities/user_entity.dart';
 import '../application/broadcast_message.dart';
 
 class BroadcastController extends IBroadcastController {
@@ -9,11 +11,12 @@ class BroadcastController extends IBroadcastController {
   ValueNotifier<GetAllTasksBroadcastMessage> getAllTasksBroadcastValueNotifier =
       ValueNotifier(GetAllTasksBroadcastMessage());
 
-  ValueNotifier<PutTaskBroadcastMessage> putTaskBroadcastValueNotifier =
-      ValueNotifier(PutTaskBroadcastMessage(entity: {}));
+  ValueNotifier<PutTaskBroadcastMessage> putTaskBroadcastValueNotifier = ValueNotifier(PutTaskBroadcastMessage.empty());
 
-  ValueNotifier<GetByIdBroadcastMessage> getByIdBroadcastMessage =
-      ValueNotifier(GetByIdBroadcastMessage(id: ''));
+  ValueNotifier<GetByIdBroadcastMessage> getByIdBroadcastMessage = ValueNotifier(GetByIdBroadcastMessage.empty());
+
+  ValueNotifier<UploadAllTasksBroadcastMessage> uploadAllTasksBroadcastMessage =
+      ValueNotifier(UploadAllTasksBroadcastMessage.empty());
 
   void _notify(BroadcastMessage message) {
     if (message is GetAllTasksBroadcastMessage) {
@@ -22,6 +25,9 @@ class BroadcastController extends IBroadcastController {
       putTaskBroadcastValueNotifier.value = message;
     } else if (message is GetByIdBroadcastMessage) {
       getByIdBroadcastMessage.value = message;
+    } else if (message is UploadAllTasksBroadcastMessage) {
+      var loggedUser = Modular.get<UserEntity>();
+      if (message.userId != loggedUser.id) uploadAllTasksBroadcastMessage.value = message;
     }
   }
 

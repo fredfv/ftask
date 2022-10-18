@@ -105,6 +105,8 @@ class UserEntity extends EntityBase {
   }
 
   void setAuthUser(UserEntity user) {
+    setId(user.id);
+    setCreated(user.created);
     setLogin(user.login);
     setSecret(user.secret);
     setName(user.name);
