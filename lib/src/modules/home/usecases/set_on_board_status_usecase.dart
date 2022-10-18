@@ -32,7 +32,7 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
         'value': entity.toCloud(),
       };
 
-      await httpService.request(
+      httpService.request(
           baseUrl: 'http://192.168.15.3:5001',
           endPoint: '/task/rule/upsertone',
           method: HttpRequestMethods.put,

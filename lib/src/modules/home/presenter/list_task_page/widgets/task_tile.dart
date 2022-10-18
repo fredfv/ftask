@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/shared/common_loading.dart';
 import 'package:task/src/modules/home/models/task_tile_model.dart';
 import 'package:task/src/modules/home/shared/task_due_state_color_converter.dart';
 
@@ -35,10 +36,20 @@ class TaskTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CommonText(
-                text: taskItem.title.toString(),
-                fontSize: SizeOutlet.textSizeExtraLarge,
-                fontColor: ColorOutlet.textColorTitle,
+              Row(
+                children: [
+                  Expanded(
+                    child: CommonText(
+                      text: taskItem.title.toString(),
+                      fontSize: SizeOutlet.textSizeExtraLarge,
+                      fontColor: ColorOutlet.textColorTitle,
+                    ),
+                  ),
+                  if (taskItem.pending) ...[
+                    const CommonSpacing(SpacingType.width),
+                    const CommonLoading(SizeOutlet.loadingForTaskTile)
+                  ]
+                ],
               ),
               const CommonSpacing(SpacingType.height),
               Row(
@@ -94,7 +105,6 @@ class TaskTile extends StatelessWidget {
                   ),
                 ],
               ),
-              const CommonSpacing(SpacingType.height),
             ],
           ),
         ),

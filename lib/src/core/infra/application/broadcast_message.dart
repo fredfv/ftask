@@ -4,7 +4,7 @@ abstract class BroadcastMessage {
     if (message[0] == 'upsertOne') return PutTaskBroadcastMessage.fromMessage(message);
     if (message[0] == 'getById') return GetByIdBroadcastMessage.fromMessage(message);
     if (message[0] == 'getAll') return GetAllTasksBroadcastMessage();
-    throw Exception('BroadcastMessage.fromMessage: message not found');
+    throw Exception('adapter not found');
   }
 }
 

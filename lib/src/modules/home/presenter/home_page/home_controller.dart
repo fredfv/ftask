@@ -3,7 +3,7 @@ import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.da
 
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
-import '../../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
+import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
 import '../../../../core/infra/services/broadcast_controller.dart';
 import '../../../../core/infra/services/signalr_helper.dart';
 import '../create_task_page/create_task_controller.dart';
@@ -18,7 +18,7 @@ class HomeController extends ChangeNotifier {
   final CreateTaskController taskPageController;
   final ListTaskController listTaskController;
   final ListTaskDoneController listTaskDoneController;
-  final IUpdateTasksFromCloudUsecase updateTasksFromCloudUsecase;
+  final IDownloadTasksFromCloudUsecase updateTasksFromCloudUsecase;
   final IPutTaskFromBroadcastUsecase putTaskFromBroadcastUsecase;
   final IUploadTasksToCloudUsecase uploadTasksToCloudUsecase;
   final BroadcastController broadcastController;
@@ -42,8 +42,7 @@ class HomeController extends ChangeNotifier {
           ListTaskDonePage(controller: listTaskDoneController),
         ] {
     callGetAllTasksControllersFromLocal();
-    //usage of way to sync
-    //uploadAndGetAllFromCloudExecute();
+    uploadAndGetAllFromCloudExecute();
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
       callGetAllTasksControllersFromLocal();
     });
@@ -53,13 +52,12 @@ class HomeController extends ChangeNotifier {
       listTaskController.addTaskToListFromBroadcast(taskEntity);
       listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
     });
-    // broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
-    //   callGetAllTasksControllersFromLocal();
-    // });
+    broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
+      callGetAllTasksControllersFromLocal();
+    });
   }
 
   callGetAllTasksControllersFromLocal() async {
-    await updateTasksFromCloudUsecase();
     listTaskController.getAllTasksFromLocal();
     listTaskDoneController.getAllTasksFromLocal();
     notifyListeners();

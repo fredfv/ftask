@@ -15,6 +15,7 @@ class TaskTileModel {
   String timeElapsed;
   final DateTime? _updated;
   final int _dueDate;
+  final bool pending;
 
   TaskTileModel({
     required this.id,
@@ -24,6 +25,7 @@ class TaskTileModel {
     required this.dueState,
     required this.timeElapsed,
     required this.onBoard,
+    required this.pending,
     required int dueDate,
     DateTime? updated,
   })  : _updated = updated,
@@ -67,6 +69,7 @@ class TaskTileModel {
           timeElapsed: 'No due date',
           onBoard: entity.onBoard,
           dueDate: entity.dueDate,
+          pending: entity.pending,
         );
       }
 
@@ -93,6 +96,7 @@ class TaskTileModel {
         timeElapsed: timeElapsed,
         onBoard: entity.onBoard,
         dueDate: entity.dueDate,
+        pending: entity.pending,
       );
     } catch (e) {
       fLog.e(e);
@@ -105,6 +109,7 @@ class TaskTileModel {
         onBoard: entity.onBoard,
         timeElapsed: 'An error occurred.',
         dueDate: 0,
+        pending: entity.pending,
       );
     }
   }

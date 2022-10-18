@@ -5,15 +5,14 @@ import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
-import '../../../core/domain/usecases/i_update_tasks_from_cloud_usecase.dart';
+import '../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 
-class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
+class DownloadTasksFromCloudUsecase implements IDownloadTasksFromCloudUsecase {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
 
-  UpdateTasksFromCloudUsecase(
-      {required this.httpService, required this.repositoryFactory});
+  DownloadTasksFromCloudUsecase({required this.httpService, required this.repositoryFactory});
 
   @override
   Future<bool> call() async {
@@ -27,10 +26,8 @@ class UpdateTasksFromCloudUsecase implements IUpdateTasksFromCloudUsecase {
         receiveTimeout: 5000,
         connectTimeout: 10000);
 
-    IRepository<TaskEntity> repository =
-        await repositoryFactory.get<TaskEntity>();
-    List<TaskEntity> listTask =
-        list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
+    IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
+    List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
     await repository.putMany(listTask);
     return true;
   }

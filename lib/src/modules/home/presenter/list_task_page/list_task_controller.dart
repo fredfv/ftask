@@ -7,13 +7,6 @@ import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../models/task_tile_model.dart';
 
-class TaskTileDataNotifier {
-  final String id;
-  final double value;
-
-  TaskTileDataNotifier({required this.id, required this.value});
-}
-
 class ListTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
