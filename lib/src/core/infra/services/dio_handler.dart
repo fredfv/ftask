@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../application/custom_exception.dart';
-import '../application/http_custom_configurations.dart';
+import '../application/http_timeout_configurations.dart';
 import '../application/http_request_methods.dart';
 import '../application/logger.dart';
 
@@ -28,8 +28,8 @@ class DioHandler {
     _dio = Dio(BaseOptions(
         baseUrl: baseUrl,
         headers: header,
-        connectTimeout: connectTimeout ?? HttpCustomConfigurations.connectTimeout,
-        receiveTimeout: receiveTimeout ?? HttpCustomConfigurations.receiveTimeout));
+        connectTimeout: connectTimeout ?? HttpTimeoutConfigurations.connectTimeout,
+        receiveTimeout: receiveTimeout ?? HttpTimeoutConfigurations.receiveTimeout));
   }
 
   void configureInterceptors() {
