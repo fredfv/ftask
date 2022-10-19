@@ -32,10 +32,7 @@ class ListTaskDonePage extends StatelessWidget {
                 onRefresh: controller.uploadAndGetAllFromCloudExecute,
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
+                        crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
                     itemCount: controller.list.length,
                     itemBuilder: (context, index) {
                       return TaskDoneTile(

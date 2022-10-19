@@ -36,10 +36,7 @@ class _ListTaskPageState extends State<ListTaskPage> {
                 onRefresh: widget.controller.uploadAndGetAllFromCloudExecute,
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
+                        crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
                     itemCount: widget.controller.list.length,
                     itemBuilder: (context, index) {
                       return TaskTile(
