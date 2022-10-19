@@ -15,19 +15,33 @@ class GetAllTasksBroadcastMessage extends BroadcastMessage {
 class PutTaskBroadcastMessage extends BroadcastMessage {
   final String userId;
   final Map entity;
-  PutTaskBroadcastMessage({required this.userId, required this.entity});
+  final String errorMessage;
+
+  PutTaskBroadcastMessage({
+    required this.userId,
+    required this.entity,
+    required this.errorMessage,
+  });
 
   factory PutTaskBroadcastMessage.empty() {
-    return PutTaskBroadcastMessage(userId: '', entity: {});
+    return PutTaskBroadcastMessage(
+      userId: '',
+      entity: {},
+      errorMessage: '',
+    );
   }
 
   factory PutTaskBroadcastMessage.fromMessage(dynamic message) {
-    return PutTaskBroadcastMessage(userId: message[1]['userId'], entity: message[1]['entity']);
+    return PutTaskBroadcastMessage(
+        userId: message[1]['userId'],
+        entity: message[1]['entity'],
+        errorMessage: message[1]['erroMessage']);
   }
 }
 
 class GetByIdBroadcastMessage extends BroadcastMessage {
   final String id;
+
   GetByIdBroadcastMessage({required this.id});
 
   factory GetByIdBroadcastMessage.empty() {
@@ -41,13 +55,22 @@ class GetByIdBroadcastMessage extends BroadcastMessage {
 
 class UploadAllTasksBroadcastMessage extends BroadcastMessage {
   final String userId;
-  UploadAllTasksBroadcastMessage({required this.userId});
+  final String errorMessage;
+
+  UploadAllTasksBroadcastMessage(
+      {required this.userId, required this.errorMessage});
 
   factory UploadAllTasksBroadcastMessage.empty() {
-    return UploadAllTasksBroadcastMessage(userId: '');
+    return UploadAllTasksBroadcastMessage(
+      userId: '',
+      errorMessage: '',
+    );
   }
 
   factory UploadAllTasksBroadcastMessage.fromMessage(dynamic message) {
-    return UploadAllTasksBroadcastMessage(userId: message[1]);
+    return UploadAllTasksBroadcastMessage(
+      userId: message[1]['userId'],
+      errorMessage: message[1]['errorMessage'],
+    );
   }
 }

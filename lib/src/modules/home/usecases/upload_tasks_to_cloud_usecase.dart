@@ -28,7 +28,7 @@ class UploadTasksToCloudUsecase implements IUploadTasksToCloudUsecase {
 
     httpService.request(
         baseUrl: 'http://192.168.15.3:5001',
-        endPoint: '/task/uploadall',
+        endPoint: '/task/rule/upsertall',
         method: HttpRequestMethods.put,
         token: loggedUser.token,
         params: payload,
