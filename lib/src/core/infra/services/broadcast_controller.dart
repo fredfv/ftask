@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/infra/validators/i_broadcast_controller.dart';
-
-import '../../domain/entities/user_entity.dart';
 import '../application/broadcast_message.dart';
 
-class BroadcastController extends IBroadcastController {
+class BroadcastController {
   BroadcastController();
 
   ValueNotifier<GetAllTasksBroadcastMessage> getAllTasksBroadcastValueNotifier =

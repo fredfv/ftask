@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../../../core/infra/application/common_state.dart';
-import '../../../../core/infra/validators/title_vo.dart';
+import '../../../../core/infra/validators/string_validator.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../core/presenter/theme/dictionary.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
 import 'create_task_controller.dart';
 
@@ -21,7 +22,7 @@ class TaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: Dictionary.taskPage,
+      title: Lexicon.taskPage,
       body: Form(
         key: controller.form,
         child: ListView(
@@ -32,7 +33,7 @@ class TaskPage extends StatelessWidget {
             CommonTextFormField(
               onFieldSubmitted: controller.setDescriptionFocus,
               label: 'Title',
-              validator: (v) => TitleVO(v).validator(),
+              validator: (v) => StringValidator(v).validate(),
               controller: controller.titleController,
             ),
             SizedBox(
@@ -42,7 +43,7 @@ class TaskPage extends StatelessWidget {
               onFieldSubmitted: controller.setDueDateFocus,
               focusNode: controller.descriptionFocus,
               label: 'Due date',
-              validator: (v) => TitleVO(v).validator(),
+              validator: (v) => StringValidator(v).validate(),
               controller: controller.dueDateController,
             ),
             SizedBox(
@@ -51,29 +52,26 @@ class TaskPage extends StatelessWidget {
             CommonTextFormField(
               focusNode: controller.dueDateFocus,
               label: 'Description',
-              validator: (v) => TitleVO(v).validator(),
+              validator: (v) => StringValidator(v).validate(),
               controller: controller.descriptionController,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
                   if (state is LoadingState) {
-                    return const CommonLoading(SizeOutlet.loadingForButtons);
+                    return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()),
-                          backgroundColor: ColorOutlet.success));
+                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.message),
-                          backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
                       controller.value = IdleState();
                     });
                   }

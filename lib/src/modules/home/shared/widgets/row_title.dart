@@ -4,6 +4,7 @@ import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
 import '../../../../core/presenter/theme/spacing_type.dart';
 import '../../models/task_tile_model.dart';
@@ -28,9 +29,7 @@ class RowTitle extends StatelessWidget {
         ),
         if (taskItem.pending) ...[
           const CommonSpacing(SpacingType.width),
-          const CommonLoading(
-            SizeOutlet.loadingForTaskTile,
-          )
+          CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForTaskTile)),
         ]
       ],
     );

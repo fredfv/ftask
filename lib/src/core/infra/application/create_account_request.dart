@@ -1,54 +1,29 @@
-import '../validators/login_vo.dart';
-import '../validators/name_vo.dart';
-import '../validators/secret_vo.dart';
-
 class CreateAccountRequest {
-  NameVO _name;
-  LoginVO _login;
-  SecretVO _secret;
-  SecretVO _secretConfirm;
+  String _name;
+  String _login;
+  String _secret;
 
-  NameVO get name => _name;
+  String get name => _name;
+  String get login => _login;
+  String get secret => _secret;
 
-  void setName(String? value) => _name = NameVO(value ?? '');
-
-  LoginVO get login => _login;
-
-  void setLogin(String? value) => _login = LoginVO(value ?? '');
-
-  SecretVO get secret => _secret;
-
-  void setSecret(String? value) => _secret = SecretVO(value ?? '');
-
-  SecretVO get secretConfirm => _secretConfirm;
-
-  void setSecretConfirm(String? value) =>
-      _secretConfirm = SecretVO(value ?? '');
+  void setName(String value) => _name = value;
+  void setLogin(String value) => _login = value;
+  void setSecret(String value) => _secret = value;
 
   CreateAccountRequest({
     required String name,
     required String login,
     required String secret,
-    required String secretConfirm,
-  })  : _name = NameVO(name),
-        _login = LoginVO(login),
-        _secret = SecretVO(secret),
-        _secretConfirm = SecretVO(secretConfirm);
+  })  : _name = name,
+        _login = login,
+        _secret = secret;
 
-  factory CreateAccountRequest.empty() {
-    return CreateAccountRequest(
-      name: '',
-      login: '',
-      secret: '',
-      secretConfirm: '',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toCloud() {
     return {
-      'userName': login.toString(),
-      'password': secret.toString(),
-      'name': name.toString()
+      'UserName': _name,
+      'Password': _login,
+      'Name': _secret,
     };
   }
 }

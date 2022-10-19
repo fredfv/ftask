@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../shared/common_scaffold.dart';
 import '../theme/color_outlet.dart';
-import '../theme/dictionary.dart';
+import '../theme/lexicon.dart';
 
 class WildcardPage extends StatelessWidget {
   const WildcardPage({Key? key}) : super(key: key);
@@ -18,24 +18,20 @@ class WildcardPage extends StatelessWidget {
           },
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
-        title: Dictionary.wildcardTitle,
+        title: Lexicon.wildcardTitle,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Text(
                 '404',
-                style: TextStyle(
-                    color: ColorOutlet.error,
-                    fontSize: MediaQuery.of(context).size.height * 0.1),
+                style: TextStyle(color: ColorOutlet.error, fontSize: MediaQuery.of(context).size.height * 0.1),
               ),
             ),
             Center(
               child: Text(
                 'ops! I hope you are using the web page. F',
-                style: TextStyle(
-                    color: ColorOutlet.secondary,
-                    fontSize: MediaQuery.of(context).size.height * 0.02),
+                style: TextStyle(color: ColorOutlet.secondary, fontSize: MediaQuery.of(context).size.height * 0.02),
               ),
             ),
           ],

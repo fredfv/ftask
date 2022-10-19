@@ -20,7 +20,7 @@ class CreateAccountUsecase implements ICreateAccountUsecase {
           baseUrl: ApiPath.baseUrl,
           endPoint: ApiEndpoints.createAccount,
           method: HttpRequestMethods.post,
-          params: request.toJson(),
+          params: request.toCloud(),
           receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecases,
           connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecases);
 

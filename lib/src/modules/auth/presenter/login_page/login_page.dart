@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task/src/core/infra/validators/secret_vo.dart';
+import 'package:task/src/core/infra/validators/secret_validator.dart';
+import 'package:task/src/core/infra/validators/string_validator.dart';
+import 'package:task/src/core/presenter/shared/common_spacing.dart';
 
 import '../../../../core/infra/application/common_state.dart';
-import '../../../../core/infra/validators/login_vo.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/shared/underline_button.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
+import '../../../../core/presenter/theme/spacing_type.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -27,61 +31,55 @@ class LoginPage extends StatelessWidget {
         key: controller.form,
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.03,
-              horizontal: MediaQuery.of(context).size.width * 0.05),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
           children: [
-            SvgPicture.asset('assets/ttlogo.svg',
-                color: ColorOutlet.secondary,
-                width: MediaQuery.of(context).size.width * 0.7),
+            SvgPicture.asset(
+              'assets/ttlogo.svg',
+              color: ColorOutlet.secondary,
+              width: ResponsiveOutlet.aspectRatioSizeable(context, SizeOutlet.sizeSmall),
+            ),
             CommonTextFormField(
               onFieldSubmitted: controller.loginSubmitted,
-              label: 'Login',
-              validator: (v) => LoginVO(v).validator(),
+              label: Lexicon.login,
+              validator: (v) => StringValidator(v).validate(),
               controller: controller.emailController,
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            const CommonSpacing(SpacingType.height),
             CommonTextFormField(
                 onFieldSubmitted: (value) => controller.executeLogin(context),
-                label: 'Password',
-                validator: (v) => SecretVO(v).validator(),
+                label: Lexicon.secret,
+                validator: (v) => StringValidator(v).validate(),
                 controller: controller.secretController,
                 focusNode: controller.secretFocus,
                 obscureText: true),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: ResponsiveOutlet.paddingSmall(context)),
               child: ValueListenableBuilder(
                   valueListenable: controller,
                   builder: (_, state, child) {
                     if (state is LoadingState) {
-                      return const CommonLoading(SizeOutlet.loadingForButtons);
+                      return CommonLoading(
+                          ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
                     } else if (state is SuccessState) {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            CommonSnackBar(
-                                content: Text(state.response.toString()),
-                                backgroundColor: ColorOutlet.success));
+                        ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                            content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                         controller.value = IdleState();
                       });
                     } else if (state is ErrorState) {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            CommonSnackBar(
-                                content: Text(state.message),
-                                backgroundColor: ColorOutlet.error));
+                            CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
                         controller.value = IdleState();
                       });
                     }
                     return CommonButton(
-                        description: 'Log in',
-                        onPressed: () => controller.executeLogin(context));
+                        description: Lexicon.loginAccount, onPressed: () => controller.executeLogin(context));
                   }),
             ),
             Center(
                 child: UnderLineButton(
-                    onPressed: () => controller.goToCreateAccount(),
-                    description: 'create account'))
+                    onPressed: () => controller.goToCreateAccount(), description: Lexicon.createAccount.toLowerCase()))
           ],
         ),
       ),

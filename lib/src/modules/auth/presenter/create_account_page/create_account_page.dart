@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:task/src/core/infra/validators/secret_validator.dart';
+import 'package:task/src/core/presenter/shared/common_spacing.dart';
+import 'package:task/src/core/presenter/theme/spacing_type.dart';
 
 import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/validators/string_validator.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/font_family_outlet.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
 import 'create_account_controller.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final CreateAccountController controller;
 
-  const CreateAccountPage({Key? key, required this.controller})
-      : super(key: key);
+  const CreateAccountPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,85 +28,72 @@ class CreateAccountPage extends StatelessWidget {
       backgroundColor: ColorOutlet.primary,
       appBar: AppBar(
           centerTitle: true,
-          title: const Text('Create new account'),
+          title: const Text(Lexicon.createAccount),
           backgroundColor: ColorOutlet.primary,
           iconTheme: const IconThemeData(color: ColorOutlet.secondary),
           titleTextStyle: TextStyle(
-              fontFamily: 'Sansation',
-              color: ColorOutlet.secondary,
-              fontSize: MediaQuery.of(context).size.width /
-                  MediaQuery.of(context).size.height *
-                  35)),
+            fontFamily: FontFamilyOutlet.sensation,
+            color: ColorOutlet.secondary,
+            fontSize: ResponsiveOutlet.textDefault(context),
+          )),
       body: Form(
         key: controller.form,
         child: ListView(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.03,
-              horizontal: MediaQuery.of(context).size.width * 0.05),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
           children: [
             CommonTextFormField(
                 onFieldSubmitted: controller.setLoginFocus,
-                label: 'Name',
-                initialValue: controller.newAccount.name.toString(),
-                validator: (v) => controller.newAccount.name.validator(),
-                onChanged: controller.newAccount.setName),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                label: Lexicon.name,
+                validator: (v) => StringValidator(v).validate(),
+                controller: controller.nameController),
+            const CommonSpacing(SpacingType.height),
             CommonTextFormField(
                 onFieldSubmitted: controller.setSecretFocus,
                 focusNode: controller.loginFocus,
-                label: 'Login',
-                initialValue: controller.newAccount.login.toString(),
-                validator: (v) => controller.newAccount.login.validator(),
-                onChanged: controller.newAccount.setLogin),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                label: Lexicon.login,
+                validator: (v) => StringValidator(v).validate(),
+                controller: controller.loginController),
+            const CommonSpacing(SpacingType.height),
             CommonTextFormField(
                 onFieldSubmitted: controller.setSecretConfirmFocus,
                 focusNode: controller.secretFocus,
-                label: 'Password',
-                initialValue: controller.newAccount.secret.toString(),
-                validator: (v) => controller.newAccount.secret.validator(),
-                onChanged: controller.newAccount.setSecret,
+                label: Lexicon.secret,
+                validator: (v) => StringValidator(v).validate(),
+                controller: controller.secretController,
                 obscureText: true),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            const CommonSpacing(SpacingType.height),
             CommonTextFormField(
-                onFieldSubmitted: (value) =>
-                    controller.executeSubmitCreateAccount(),
+                onFieldSubmitted: controller.executeSubmitCreateAccount,
                 focusNode: controller.secretConfirmFocus,
-                label: 'Confirm password',
-                initialValue: controller.newAccount.secretConfirm.toString(),
-                validator: (v) => controller.newAccount.secretConfirm
-                    .secretMatches(controller.newAccount.secret.toString()),
-                onChanged: controller.newAccount.setSecretConfirm,
+                label: Lexicon.secretConfirm,
+                validator: (v) => SecretValidator(v).validate(),
+                controller: controller.secretConfirmController,
                 obscureText: true),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: ResponsiveOutlet.paddingDefault(context)),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
                   if (state is LoadingState) {
-                    return const CommonLoading(SizeOutlet.loadingForButtons);
+                    return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()),
-                          backgroundColor: ColorOutlet.success));
+                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.message),
-                          backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
                       controller.value = IdleState();
                     });
                   }
                   return CommonButton(
-                    description: 'Subimit new account',
-                    onPressed: () {
-                      controller.executeSubmitCreateAccount();
-                    },
-                  );
+                      description: Lexicon.submitAccount,
+                      onPressed: () {
+                        controller.executeSubmitCreateAccount(null);
+                      });
                 },
               ),
             ),

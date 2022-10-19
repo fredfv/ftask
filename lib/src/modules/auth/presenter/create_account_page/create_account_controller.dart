@@ -17,14 +17,17 @@ class CreateAccountController extends ValueNotifier<CommonState> {
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController loginController = TextEditingController();
+  TextEditingController secretController = TextEditingController();
+  TextEditingController secretConfirmController = TextEditingController();
+
   CreateAccountController({
     required this.httpService,
     required this.repositoryFactory,
     required this.formsValidate,
     required this.createAccountUseCase,
   }) : super(IdleState());
-
-  final newAccount = CreateAccountRequest.empty();
 
   GlobalKey<FormState> get form => formsValidate.form;
 
@@ -40,14 +43,13 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     secretConfirmFocus.requestFocus();
   }
 
-  Future createNewAccountExecute() async {
+  Future createNewAccountExecute(CreateAccountRequest newAccount) async {
     value = LoadingState();
     createAccountUseCase.call(newAccount).then((v) {
       if (v is Exception || v == false) {
         value = ErrorState(v.toString());
       } else {
-        value = SuccessState<String>(
-            response: 'account created! now login to start your tasks!');
+        value = SuccessState<String>(response: 'account created! now login to start your tasks!');
         Modular.to.pop();
       }
     }).catchError((e) {
@@ -55,9 +57,14 @@ class CreateAccountController extends ValueNotifier<CommonState> {
     });
   }
 
-  void executeSubmitCreateAccount() {
+  void executeSubmitCreateAccount(value) {
     if (formsValidate.validate()) {
-      createNewAccountExecute();
+      CreateAccountRequest newAccount = CreateAccountRequest(
+        name: nameController.text,
+        login: loginController.text,
+        secret: secretController.text,
+      );
+      createNewAccountExecute(newAccount);
     } else {
       value = ErrorState('invalid fields');
     }

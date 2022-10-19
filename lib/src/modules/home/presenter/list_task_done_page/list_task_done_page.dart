@@ -6,7 +6,8 @@ import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../core/presenter/theme/dictionary.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
 import 'list_task_done_controller.dart';
 import 'widgets/task_done_tile.dart';
@@ -19,12 +20,12 @@ class ListTaskDonePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: Dictionary.tasksPage,
+      title: Lexicon.tasksPage,
       body: ValueListenableBuilder(
         valueListenable: controller,
         builder: (_, state, child) {
           if (state is LoadingState) {
-            return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
+            return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
           } else if (state is SuccessState) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
