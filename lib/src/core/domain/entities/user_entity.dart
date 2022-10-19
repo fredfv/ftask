@@ -64,7 +64,7 @@ class UserEntity extends EntityBase {
     };
   }
 
-  factory UserEntity.fromJson(Map<String, dynamic> map) {
+  factory UserEntity.fromJson(dynamic map) {
     return UserEntity(
       id: map['id'] as String,
       created: map['created'] as int,
