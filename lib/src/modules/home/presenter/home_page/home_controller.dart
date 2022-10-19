@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import 'package:task/src/core/infra/application/logger.dart';
 
@@ -25,6 +28,7 @@ class HomeController extends ChangeNotifier {
   final IUploadTasksToCloudUsecase uploadTasksToCloudUsecase;
   final IDownloadTasksFromCloudUsecase downloadTasksFromCloudUsecase;
   final BroadcastController broadcastController;
+  final ValueNotifier<String> homeStateValueListenable = ValueNotifier('');
 
   final SignalRHelper hub;
   final PageController pageController = PageController(initialPage: 0, keepPage: true);
@@ -46,9 +50,11 @@ class HomeController extends ChangeNotifier {
         ] {
     callGetAllTasksControllersFromLocal();
     uploadAndGetAllFromCloudExecute();
+
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
       callGetAllTasksControllersFromLocal();
     });
+
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
       String errorMessage = broadcastController.putTaskBroadcastValueNotifier.value.errorMessage;
@@ -61,7 +67,12 @@ class HomeController extends ChangeNotifier {
         fLog.e(error.toString());
       });
     });
+
     broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
+      var v = broadcastController.uploadAllTasksBroadcastMessage.value;
+      if (Modular.get<UserEntity>().id == v.userId) {
+        homeStateValueListenable.value = v.errorMessage;
+      }
       callGetAllTasksControllersFromLocal();
     });
   }

@@ -26,8 +26,7 @@ class BroadcastController extends IBroadcastController {
     } else if (message is GetByIdBroadcastMessage) {
       getByIdBroadcastMessage.value = message;
     } else if (message is UploadAllTasksBroadcastMessage) {
-      var loggedUser = Modular.get<UserEntity>();
-      if (message.userId != loggedUser.id) uploadAllTasksBroadcastMessage.value = message;
+      uploadAllTasksBroadcastMessage.value = message;
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presenter/shared/common_scaffold.dart';
+import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import 'home_controller.dart';
 
@@ -14,6 +15,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.homeStateValueListenable.addListener(() {
+      if (widget.controller.homeStateValueListenable.value != '') {
+        ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+            content: Text(widget.controller.homeStateValueListenable.value), backgroundColor: ColorOutlet.error));
+        widget.controller.homeStateValueListenable.value = '';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
