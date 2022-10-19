@@ -33,9 +33,10 @@ class PutTaskBroadcastMessage extends BroadcastMessage {
 
   factory PutTaskBroadcastMessage.fromMessage(dynamic message) {
     return PutTaskBroadcastMessage(
-        userId: message[1]['userId'],
-        entity: message[1]['entity'],
-        errorMessage: message[1]['erroMessage']);
+      userId: message[1]['userId'],
+      entity: message[1]['entity'],
+      errorMessage: message[1]['erroMessage'] ?? '',
+    );
   }
 }
 
@@ -57,8 +58,7 @@ class UploadAllTasksBroadcastMessage extends BroadcastMessage {
   final String userId;
   final String errorMessage;
 
-  UploadAllTasksBroadcastMessage(
-      {required this.userId, required this.errorMessage});
+  UploadAllTasksBroadcastMessage({required this.userId, required this.errorMessage});
 
   factory UploadAllTasksBroadcastMessage.empty() {
     return UploadAllTasksBroadcastMessage(

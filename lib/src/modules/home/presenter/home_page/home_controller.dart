@@ -29,6 +29,7 @@ class HomeController extends ChangeNotifier {
   final IDownloadTasksFromCloudUsecase downloadTasksFromCloudUsecase;
   final BroadcastController broadcastController;
   final ValueNotifier<String> homeStateValueListenable = ValueNotifier('');
+  final UserEntity user;
 
   final SignalRHelper hub;
   final PageController pageController = PageController(initialPage: 0, keepPage: true);
@@ -43,6 +44,7 @@ class HomeController extends ChangeNotifier {
     required this.uploadTasksToCloudUsecase,
     required this.downloadTasksFromCloudUsecase,
     required this.broadcastController,
+    required this.user,
   }) : pages = [
           TaskPage(controller: taskPageController),
           ListTaskPage(controller: listTaskController),
@@ -52,6 +54,7 @@ class HomeController extends ChangeNotifier {
     uploadAndGetAllFromCloudExecute();
 
     broadcastController.getAllTasksBroadcastValueNotifier.addListener(() async {
+      await downloadTasksFromCloudUsecase();
       callGetAllTasksControllersFromLocal();
     });
 
@@ -70,7 +73,7 @@ class HomeController extends ChangeNotifier {
 
     broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
       var v = broadcastController.uploadAllTasksBroadcastMessage.value;
-      if (Modular.get<UserEntity>().id == v.userId) {
+      if (user.id == v.userId) {
         homeStateValueListenable.value = v.errorMessage;
       }
       callGetAllTasksControllersFromLocal();
@@ -80,7 +83,6 @@ class HomeController extends ChangeNotifier {
   callGetAllTasksControllersFromLocal() async {
     listTaskController.getAllTasksFromLocal(onBoard: true);
     listTaskDoneController.getAllTasksFromLocal(onBoard: false);
-    notifyListeners();
   }
 
   void uploadAndGetAllFromCloudExecute() async {

@@ -8,7 +8,8 @@ import 'src/core/presenter/shared/common_loading.dart';
 import 'src/core/presenter/theme/color_outlet.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  final SignalRHelper signalRHelper;
+  const SplashPage({Key? key, required this.signalRHelper}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -22,9 +23,7 @@ class _SplashPageState extends State<SplashPage> {
       await Modular.isModuleReady<AppModule>();
 
       try {
-        await Modular.get<SignalRHelper>()
-            .initConnection()
-            .timeout(const Duration(seconds: 3));
+        await widget.signalRHelper.initConnection().timeout(const Duration(seconds: 3));
       } catch (e) {
         fLog.e(e);
       }

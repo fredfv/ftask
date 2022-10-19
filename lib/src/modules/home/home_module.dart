@@ -14,11 +14,11 @@ import 'presenter/home_page/home_page.dart';
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => DownloadTasksFromCloudUsecase(httpService: i(), repositoryFactory: i())),
-        Bind.factory((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i())),
+        Bind.factory((i) => DownloadTasksFromCloudUsecase(httpService: i(), repositoryFactory: i(), user: i())),
+        Bind.factory((i) => UploadTasksToCloudUsecase(repositoryFactory: i(), httpService: i(), user: i())),
+        Bind.factory((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i(), user: i())),
+        Bind.factory((i) => GetByIdFromCloudUsecase(httpService: i(), repositoryFactory: i(), user: i())),
         Bind.factory((i) => PutTaskFromBroadcastUsecase(repositoryFactory: i())),
-        Bind.factory((i) => SetOnBoardStatusUseCase(repositoryFactory: i(), httpService: i())),
-        Bind.factory((i) => UploadTasksToCloudUsecase(repositoryFactory: i(), httpService: i())),
         Bind.singleton((i) => ListTaskController(
             repositoryFactory: i(),
             setOnBoardStatusUsecase: i(),
@@ -39,6 +39,7 @@ class HomeModule extends Module {
               putTaskFromBroadcastUsecase: i(),
               uploadTasksToCloudUsecase: i(),
               broadcastController: i(),
+              user: i(),
             )),
       ];
 

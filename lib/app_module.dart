@@ -26,7 +26,7 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const SplashPage()),
+        ChildRoute('/', child: (context, args) => SplashPage(signalRHelper: Modular.get<SignalRHelper>())),
         ModuleRoute('/src', module: AuthModule(), transition: TransitionType.size),
         ModuleRoute('/home', module: HomeModule(), transition: TransitionType.downToUp),
         WildcardRoute(
