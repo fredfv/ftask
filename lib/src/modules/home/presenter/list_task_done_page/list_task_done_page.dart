@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/modules/home/presenter/list_task_done_page/list_task_done_controller.dart';
-import 'package:task/src/modules/home/presenter/list_task_done_page/widgets/task_done_tile.dart';
 
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
@@ -10,7 +8,8 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
-import '../list_task_page/widgets/task_tile.dart';
+import 'list_task_done_controller.dart';
+import 'widgets/task_done_tile.dart';
 
 class ListTaskDonePage extends StatelessWidget {
   final ListTaskDoneController controller;
@@ -29,23 +28,24 @@ class ListTaskDonePage extends StatelessWidget {
           } else if (state is SuccessState) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: controller.list.length,
-                  itemBuilder: (context, index) {
-                    return TaskDoneTile(
-                      taskItem: controller.list[index],
-                      onLongPress: () {
-                        controller.setOnBoardStatusUsecaseExecute(controller.list[index].id);
-                        // ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                        //     content: Text('Task '), backgroundColor: ColorOutlet.success));
-                      },
-                    );
-                  }),
+              child: RefreshIndicator(
+                onRefresh: controller.uploadAndGetAllFromCloudExecute,
+                child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemCount: controller.list.length,
+                    itemBuilder: (context, index) {
+                      return TaskDoneTile(
+                        taskItem: controller.list[index],
+                        onLongPress: () {
+                          controller.setOnBoardStatusUsecaseExecute(taskId: controller.list[index].id, onBoard: true);
+                        },
+                      );
+                    }),
+              ),
             );
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {

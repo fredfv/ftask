@@ -32,22 +32,26 @@ class _ListTaskPageState extends State<ListTaskPage> {
           } else if (state is SuccessState) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: widget.controller.list.length,
-                  itemBuilder: (context, index) {
-                    return TaskTile(
-                      taskItem: widget.controller.list[index],
-                      controller: widget.controller.timeElapsedChangeNotifier,
-                      onLongPress: () {
-                        widget.controller.setOnBoardStatusUsecaseExecute(widget.controller.list[index].id);
-                      },
-                    );
-                  }),
+              child: RefreshIndicator(
+                onRefresh: widget.controller.uploadAndGetAllFromCloudExecute,
+                child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemCount: widget.controller.list.length,
+                    itemBuilder: (context, index) {
+                      return TaskTile(
+                        taskItem: widget.controller.list[index],
+                        controller: widget.controller.timeElapsedChangeNotifier,
+                        onLongPress: () {
+                          widget.controller
+                              .setOnBoardStatusUsecaseExecute(taskId: widget.controller.list[index].id, onBoard: false);
+                        },
+                      );
+                    }),
+              ),
             );
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {

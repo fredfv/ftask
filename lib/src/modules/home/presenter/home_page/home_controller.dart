@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
+import 'package:task/src/core/infra/application/logger.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
@@ -18,9 +20,9 @@ class HomeController extends ChangeNotifier {
   final CreateTaskController taskPageController;
   final ListTaskController listTaskController;
   final ListTaskDoneController listTaskDoneController;
-  final IDownloadTasksFromCloudUsecase updateTasksFromCloudUsecase;
   final IPutTaskFromBroadcastUsecase putTaskFromBroadcastUsecase;
   final IUploadTasksToCloudUsecase uploadTasksToCloudUsecase;
+  final IDownloadTasksFromCloudUsecase downloadTasksFromCloudUsecase;
   final BroadcastController broadcastController;
 
   final SignalRHelper hub;
@@ -32,9 +34,9 @@ class HomeController extends ChangeNotifier {
     required this.taskPageController,
     required this.listTaskController,
     required this.listTaskDoneController,
-    required this.updateTasksFromCloudUsecase,
     required this.putTaskFromBroadcastUsecase,
     required this.uploadTasksToCloudUsecase,
+    required this.downloadTasksFromCloudUsecase,
     required this.broadcastController,
   }) : pages = [
           TaskPage(controller: taskPageController),
@@ -48,9 +50,12 @@ class HomeController extends ChangeNotifier {
     });
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
-      await putTaskFromBroadcastUsecase(taskEntity);
-      listTaskController.addTaskToListFromBroadcast(taskEntity);
-      listTaskDoneController.addTaskToListFromBroadcast(taskEntity);
+      await putTaskFromBroadcastUsecase(taskEntity).then((value) {
+        listTaskController.addTaskToListFromBroadcast(onBoard: true);
+        listTaskDoneController.addTaskToListFromBroadcast(onBoard: false);
+      }).onError((error, stackTrace) {
+        fLog.e(error.toString());
+      });
     });
     broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
       callGetAllTasksControllersFromLocal();
@@ -58,14 +63,14 @@ class HomeController extends ChangeNotifier {
   }
 
   callGetAllTasksControllersFromLocal() async {
-    listTaskController.getAllTasksFromLocal();
-    listTaskDoneController.getAllTasksFromLocal();
+    listTaskController.getAllTasksFromLocal(onBoard: true);
+    listTaskDoneController.getAllTasksFromLocal(onBoard: false);
     notifyListeners();
   }
 
-  uploadAndGetAllFromCloudExecute() async {
+  void uploadAndGetAllFromCloudExecute() async {
     await uploadTasksToCloudUsecase();
-    await updateTasksFromCloudUsecase();
+    await downloadTasksFromCloudUsecase();
   }
 
   changePage(int index) {

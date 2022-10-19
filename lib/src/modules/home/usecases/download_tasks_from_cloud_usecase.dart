@@ -26,6 +26,10 @@ class DownloadTasksFromCloudUsecase implements IDownloadTasksFromCloudUsecase {
         receiveTimeout: 5000,
         connectTimeout: 10000);
 
+    if (list is Exception) {
+      return false;
+    }
+
     IRepository<TaskEntity> repository = await repositoryFactory.get<TaskEntity>();
     List<TaskEntity> listTask = list.map<TaskEntity>((e) => TaskEntity.fromCloud(e)).toList();
     await repository.putMany(listTask);
