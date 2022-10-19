@@ -28,7 +28,13 @@ class TaskDoneTile extends StatelessWidget {
         const CommonSpacing(SpacingType.height),
         RowDueDate(text: taskItem.dueDateString),
         const CommonSpacing(SpacingType.height),
-        RowTime(text: taskItem.timeElapsed, dueState: taskItem.dueState)
+        RowTime(text: taskItem.timeElapsed, dueState: taskItem.dueState),
+        const CommonSpacing(SpacingType.height),
+        if (taskItem.errorMessage != null)
+          Text(
+            taskItem.errorMessage ?? '',
+            style: const TextStyle(color: Colors.orange),
+          ),
       ],
     );
   }

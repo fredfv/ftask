@@ -30,7 +30,13 @@ class TaskTile extends StatelessWidget {
         const CommonSpacing(SpacingType.height),
         RowDueDate(text: taskItem.dueDateString),
         const CommonSpacing(SpacingType.height),
-        RowTimeAnimated(taskItem: taskItem, controller: controller)
+        RowTimeAnimated(taskItem: taskItem, controller: controller),
+        const CommonSpacing(SpacingType.height),
+        if (taskItem.errorMessage != null)
+          Text(
+            taskItem.errorMessage ?? '',
+            style: const TextStyle(color: Colors.orange),
+          ),
       ],
     );
   }

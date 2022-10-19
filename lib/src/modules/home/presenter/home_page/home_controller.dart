@@ -8,6 +8,7 @@ import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart'
 import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
 import '../../../../core/infra/services/broadcast_controller.dart';
 import '../../../../core/infra/services/signalr_helper.dart';
+import '../../models/upsert_one_model.dart';
 import '../create_task_page/create_task_controller.dart';
 import '../create_task_page/create_task_page.dart';
 import '../list_task_done_page/list_task_done_controller.dart';
@@ -50,9 +51,12 @@ class HomeController extends ChangeNotifier {
     });
     broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
       TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
+      String errorMessage = broadcastController.putTaskBroadcastValueNotifier.value.errorMessage;
       await putTaskFromBroadcastUsecase(taskEntity).then((value) {
-        listTaskController.addTaskToListFromBroadcast(onBoard: true);
-        listTaskDoneController.addTaskToListFromBroadcast(onBoard: false);
+        UpsertOneModel? response =
+            errorMessage.isNotEmpty ? UpsertOneModel.fromMessage(errorMessage, taskEntity) : null;
+        listTaskController.addTaskToListFromBroadcast(onBoard: true, response: response);
+        listTaskDoneController.addTaskToListFromBroadcast(onBoard: false, response: response);
       }).onError((error, stackTrace) {
         fLog.e(error.toString());
       });

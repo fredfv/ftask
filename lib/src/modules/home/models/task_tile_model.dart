@@ -16,6 +16,7 @@ class TaskTileModel {
   final DateTime? _updated;
   final int _dueDate;
   final bool pending;
+  String? errorMessage;
 
   TaskTileModel({
     required this.id,

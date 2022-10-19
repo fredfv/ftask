@@ -12,7 +12,6 @@ import 'list_task_controller.dart';
 import 'widgets/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
-  final bool isOnBoard = true;
   final ListTaskController controller;
   const ListTaskPage({Key? key, required this.controller}) : super(key: key);
 
@@ -29,7 +28,7 @@ class ListTaskPage extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: RefreshIndicator(
-                onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: isOnBoard),
+                onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: true),
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
@@ -39,8 +38,7 @@ class ListTaskPage extends StatelessWidget {
                         taskItem: controller.list[index],
                         controller: controller.timeElapsedChangeNotifier,
                         onLongPress: () {
-                          controller.setOnBoardStatusUsecaseExecute(
-                              taskId: controller.list[index].id, onBoard: !isOnBoard);
+                          controller.setOnBoardStatusUsecaseExecute(taskId: controller.list[index].id, onBoard: false);
                         },
                       );
                     }),
