@@ -24,7 +24,7 @@ class ListTaskBaseController extends ValueNotifier<CommonState> {
 
   void setOnBoardStatusUsecaseExecute({required String taskId, required bool onBoard}) async {
     setOnBoardStatusUsecase(taskId, onBoard).then((_) {
-      getAllTasksFromLocal(onBoard: !onBoard);
+      getAllTasksFromLocal(onBoard: onBoard);
     }).onError((error, stackTrace) {
       value = ErrorState(error.toString());
     });
@@ -49,8 +49,9 @@ class ListTaskBaseController extends ValueNotifier<CommonState> {
     });
   }
 
-  Future<void> uploadAndGetAllFromCloudExecute() async {
+  Future<void> uploadAndGetAllFromCloudExecute({required bool onBoard}) async {
     await uploadTasksToCloudUsecase();
     await downloadTasksFromCloudUsecase();
+    getAllTasksFromLocal(onBoard: onBoard);
   }
 }

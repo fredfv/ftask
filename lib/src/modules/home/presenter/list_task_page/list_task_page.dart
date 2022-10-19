@@ -8,24 +8,20 @@ import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/dictionary.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
-import 'widgets/task_tile.dart';
 import 'list_task_controller.dart';
+import 'widgets/task_tile.dart';
 
-class ListTaskPage extends StatefulWidget {
+class ListTaskPage extends StatelessWidget {
+  final bool isOnBoard = true;
   final ListTaskController controller;
   const ListTaskPage({Key? key, required this.controller}) : super(key: key);
 
-  @override
-  State<ListTaskPage> createState() => _ListTaskPageState();
-}
-
-class _ListTaskPageState extends State<ListTaskPage> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
       title: Dictionary.tasksPage,
       body: ValueListenableBuilder(
-        valueListenable: widget.controller,
+        valueListenable: controller,
         builder: (_, state, child) {
           if (state is LoadingState) {
             return const Center(child: CommonLoading(SizeOutlet.loadingForButtons));
@@ -33,18 +29,18 @@ class _ListTaskPageState extends State<ListTaskPage> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: RefreshIndicator(
-                onRefresh: widget.controller.uploadAndGetAllFromCloudExecute,
+                onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: isOnBoard),
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
-                    itemCount: widget.controller.list.length,
+                    itemCount: controller.list.length,
                     itemBuilder: (context, index) {
                       return TaskTile(
-                        taskItem: widget.controller.list[index],
-                        controller: widget.controller.timeElapsedChangeNotifier,
+                        taskItem: controller.list[index],
+                        controller: controller.timeElapsedChangeNotifier,
                         onLongPress: () {
-                          widget.controller
-                              .setOnBoardStatusUsecaseExecute(taskId: widget.controller.list[index].id, onBoard: false);
+                          controller.setOnBoardStatusUsecaseExecute(
+                              taskId: controller.list[index].id, onBoard: !isOnBoard);
                         },
                       );
                     }),
@@ -54,7 +50,7 @@ class _ListTaskPageState extends State<ListTaskPage> {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
-              widget.controller.value = IdleState();
+              controller.value = IdleState();
             });
           }
           return Container();

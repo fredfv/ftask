@@ -12,6 +12,7 @@ import 'list_task_done_controller.dart';
 import 'widgets/task_done_tile.dart';
 
 class ListTaskDonePage extends StatelessWidget {
+  final bool isOnBoard = true;
   final ListTaskDoneController controller;
 
   const ListTaskDonePage({Key? key, required this.controller}) : super(key: key);
@@ -29,7 +30,7 @@ class ListTaskDonePage extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: RefreshIndicator(
-                onRefresh: controller.uploadAndGetAllFromCloudExecute,
+                onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: !isOnBoard),
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
@@ -38,7 +39,8 @@ class ListTaskDonePage extends StatelessWidget {
                       return TaskDoneTile(
                         taskItem: controller.list[index],
                         onLongPress: () {
-                          controller.setOnBoardStatusUsecaseExecute(taskId: controller.list[index].id, onBoard: true);
+                          controller.setOnBoardStatusUsecaseExecute(
+                              taskId: controller.list[index].id, onBoard: isOnBoard);
                         },
                       );
                     }),
