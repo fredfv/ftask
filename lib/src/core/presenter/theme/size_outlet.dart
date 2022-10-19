@@ -5,11 +5,11 @@ abstract class SizeOutlet {
   //#endregion
 
   //#region TextSize
-  static const double textSizeSmall = 10;
-  static const double textSizeDefault = 14;
-  static const double textSizeMedium = 16;
-  static const double textSizeLarge = 18;
-  static const double textSizeExtraLarge = 22;
+  static const double textSizeSmall = 24;
+  static const double textSizeDefault = 32;
+  static const double textSizeMedium = 40;
+  static const double textSizeLarge = 48;
+  static const double textSizeExtraLarge = 56;
   //#endregion
 
   //#region CommonSpacing
@@ -18,11 +18,11 @@ abstract class SizeOutlet {
   //#endregion
 
   //#region PaddingSize
-  static const double paddingSmall = 0.01;
-  static const double paddingDefault = 0.015;
-  static const double paddingMedium = 0.02;
-  static const double paddingLarge = 0.025;
-  static const double paddingExtraLarge = 0.03;
+  static const double paddingSmall = 10;
+  static const double paddingDefault = 15;
+  static const double paddingMedium = 20;
+  static const double paddingLarge = 25;
+  static const double paddingExtraLarge = 30;
   //#endregion
 
   //#region Sizes
@@ -31,5 +31,9 @@ abstract class SizeOutlet {
   static const double sizeMedium = 0.02;
   static const double sizeLarge = 0.025;
   static const double sizeExtraLarge = 0.03;
+  //#endregion
+
+  //#region ImageSize
+  static const double imageSize = 700;
   //#endregion
 }

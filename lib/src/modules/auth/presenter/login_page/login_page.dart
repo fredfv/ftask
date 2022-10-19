@@ -31,12 +31,12 @@ class LoginPage extends StatelessWidget {
         key: controller.form,
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingExtraLarge(context)),
           children: [
             SvgPicture.asset(
               'assets/ttlogo.svg',
               color: ColorOutlet.secondary,
-              width: ResponsiveOutlet.aspectRatioSizeable(context, SizeOutlet.sizeSmall),
+              width: ResponsiveOutlet.aspectRatioSizeable(context, SizeOutlet.imageSize),
             ),
             CommonTextFormField(
               onFieldSubmitted: controller.loginSubmitted,

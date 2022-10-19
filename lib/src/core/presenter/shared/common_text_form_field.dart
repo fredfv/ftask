@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 
 import '../theme/color_outlet.dart';
 
@@ -31,8 +32,6 @@ class CommonTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      scrollPadding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.35),
       onFieldSubmitted: onFieldSubmitted,
       focusNode: focusNode,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -40,24 +39,27 @@ class CommonTextFormField extends StatelessWidget {
       initialValue: initialValue?.toString(),
       validator: validator,
       onChanged: onChanged,
-      style: const TextStyle(color: ColorOutlet.secondary),
+      style: TextStyle(
+        fontSize: ResponsiveOutlet.textMedium(context),
+        color: ColorOutlet.secondary,
+      ),
       cursorColor: ColorOutlet.secondary,
       obscureText: obscureText,
       obscuringCharacter: 'ж',
-      decoration: _inputDecoration(),
+      decoration: _inputDecoration(context),
       controller: controller,
     );
   }
 
-  InputDecoration _inputDecoration() {
+  InputDecoration _inputDecoration(BuildContext context) {
     return InputDecoration(
       labelText: label,
       focusedErrorBorder: _outlineInputBorderError(),
-      errorStyle: const TextStyle(color: ColorOutlet.error),
+      errorStyle: TextStyle(color: ColorOutlet.error, fontSize: ResponsiveOutlet.textDefault(context)),
       errorBorder: _outlineInputBorderError(),
-      labelStyle: const TextStyle(color: ColorOutlet.secondaryDark),
+      labelStyle: TextStyle(color: ColorOutlet.secondaryDark, fontSize: ResponsiveOutlet.textMedium(context)),
       focusedBorder: _outlineInputBorderSecondary(),
-      hintStyle: const TextStyle(color: ColorOutlet.shadow),
+      hintStyle: TextStyle(color: ColorOutlet.shadow, fontSize: ResponsiveOutlet.textMedium(context)),
       border: _outlineInputBorderSecondary(),
     );
   }
