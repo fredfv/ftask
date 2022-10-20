@@ -1,6 +1,3 @@
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/infra/application/api_path.dart';
-
 import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository.dart';
@@ -8,6 +5,7 @@ import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
 import '../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
 import '../../../core/infra/application/api_endpoints.dart';
+import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
 
@@ -21,12 +19,12 @@ class DownloadTasksFromCloudUsecase implements IDownloadTasksFromCloudUsecase {
   @override
   Future<bool> call() async {
     var list = await httpService.request(
-        baseUrl: ApiPath.baseUrl,
+        baseUrl: AppSettings.baseApiUrl,
         endPoint: ApiEndpoints.getAll,
         method: HttpRequestMethods.get,
         token: user.token,
-        receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecases,
-        connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecases);
+        receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
+        connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
 
     if (list is Exception) {
       return false;

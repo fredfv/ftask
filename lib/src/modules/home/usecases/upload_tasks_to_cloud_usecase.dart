@@ -1,13 +1,11 @@
-import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
 import '../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
-import '../../../core/infra/application/api_path.dart';
 import '../../../core/infra/application/api_endpoints.dart';
+import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
 
@@ -29,13 +27,13 @@ class UploadTasksToCloudUsecase implements IUploadTasksToCloudUsecase {
     };
 
     httpService.request(
-        baseUrl: ApiPath.baseUrl,
+        baseUrl: AppSettings.baseApiUrl,
         endPoint: ApiEndpoints.upsertAll,
         method: HttpRequestMethods.put,
         token: user.token,
         params: payload,
-        receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecases,
-        connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecases);
+        receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
+        connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
 
     return true;
   }

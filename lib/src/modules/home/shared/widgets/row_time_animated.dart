@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/modules/home/models/task_due_state.dart';
 
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
-import '../../../../core/presenter/theme/size_outlet.dart';
-import '../../../../core/presenter/theme/spacing_type.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../models/task_tile_model.dart';
 import '../task_due_state_color_converter.dart';
 
 class RowTimeAnimated extends StatelessWidget {
   final TaskTileModel taskItem;
   final ChangeNotifier controller;
+
   const RowTimeAnimated({
     Key? key,
     required this.taskItem,
@@ -27,13 +26,13 @@ class RowTimeAnimated extends StatelessWidget {
             return Row(
               children: [
                 Icon(
-                  Icons.av_timer_outlined,
+                  Icons.access_time,
                   color: TaskDueStateColorConverter.convert(taskItem.dueState),
                 ),
-                const CommonSpacing(SpacingType.width),
+                CommonSpacing.width(),
                 CommonText(
                   fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
-                  fontSize: SizeOutlet.textSizeMedium,
+                  fontSize: ResponsiveOutlet.textDefault(context),
                   text: taskItem.timeElapsed,
                 ),
               ],

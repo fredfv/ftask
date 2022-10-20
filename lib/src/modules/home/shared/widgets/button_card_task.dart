@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/responsive_outlet.dart';
+import '../../../../core/presenter/theme/size_outlet.dart';
 
 class ButtonCardTask extends StatelessWidget {
   final List<Widget> children;
   final VoidCallback onLongPress;
+
   const ButtonCardTask({
     Key? key,
     required this.children,
@@ -17,9 +20,14 @@ class ButtonCardTask extends StatelessWidget {
       onLongPress: onLongPress,
       child: Card(
         color: ColorOutlet.secondaryDark,
-        elevation: 7,
+        elevation: SizeOutlet.elevationDefault,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeOutlet.cornerRadiusDefault),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(
+            ResponsiveOutlet.paddingSmall(context),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: children,

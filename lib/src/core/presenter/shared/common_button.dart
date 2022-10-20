@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
+import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import '../theme/color_outlet.dart';
 
@@ -13,13 +14,35 @@ class CommonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-            overlayColor: MaterialStateColor.resolveWith((states) => ColorOutlet.shadow),
-            backgroundColor: MaterialStateColor.resolveWith((states) => ColorOutlet.primary),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3), side: const BorderSide(color: ColorOutlet.shadow)))),
-        child: Text(description,
-            style: TextStyle(color: ColorOutlet.secondary, fontSize: ResponsiveOutlet.textDefault(context))));
+      onPressed: onPressed,
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(
+          EdgeInsets.all(
+            ResponsiveOutlet.paddingSmall(context),
+          ),
+        ),
+        overlayColor: MaterialStateColor.resolveWith(
+          (states) => ColorOutlet.secondaryDark,
+        ),
+        backgroundColor: MaterialStateColor.resolveWith(
+          (states) => ColorOutlet.primary,
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(SizeOutlet.cornerRadiusDefault),
+            side: const BorderSide(
+              color: ColorOutlet.shadow,
+            ),
+          ),
+        ),
+      ),
+      child: Text(
+        description,
+        style: TextStyle(
+          color: ColorOutlet.secondary,
+          fontSize: ResponsiveOutlet.textMedium(context),
+        ),
+      ),
+    );
   }
 }

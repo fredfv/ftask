@@ -11,7 +11,6 @@ class HiveRepositoryFactory extends IRepositoryFactory {
 
   HiveRepositoryFactory({required this.objectId, required this.path});
 
-  ///create a instance of repository and init it
   @override
   Future<IRepository<T>> get<T extends EntityBase>() async {
     EntityMapperFactory mapperFactory = EntityMapperFactory();

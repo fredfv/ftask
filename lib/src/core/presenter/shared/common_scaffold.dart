@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/font_family_outlet.dart';
+import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 
 import '../theme/color_outlet.dart';
 
@@ -14,13 +16,7 @@ class CommonScaffold extends StatelessWidget {
   /// since it would refer to an ancestor of that widget).
   final Widget? leading;
 
-  const CommonScaffold(
-      {Key? key,
-      this.title,
-      required this.body,
-      this.bottonNavBar,
-      this.leading})
-      : super(key: key);
+  const CommonScaffold({Key? key, this.title, required this.body, this.bottonNavBar, this.leading}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +36,11 @@ class CommonScaffold extends StatelessWidget {
               backgroundColor: ColorOutlet.primary,
               iconTheme: const IconThemeData(color: ColorOutlet.secondary),
               titleTextStyle: TextStyle(
-                  fontFamily: 'Sansation',
-                  color: ColorOutlet.secondary,
-                  fontSize: MediaQuery.of(context).size.width /
-                      MediaQuery.of(context).size.height *
-                      35)),
+                fontFamily: FontFamilyOutlet.sensation,
+                color: ColorOutlet.secondary,
+                fontSize: ResponsiveOutlet.textMedium(context),
+              ),
+            ),
       body: body,
       bottomNavigationBar: bottonNavBar,
     );

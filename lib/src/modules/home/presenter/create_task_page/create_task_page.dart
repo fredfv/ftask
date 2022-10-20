@@ -7,6 +7,7 @@ import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
+import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
@@ -22,64 +23,61 @@ class TaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: Lexicon.taskPage,
+      title: Lexicon.createTask,
       body: Form(
         key: controller.form,
         child: ListView(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.03,
-              horizontal: MediaQuery.of(context).size.width * 0.05),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingLarge(context)),
           children: [
             CommonTextFormField(
               onFieldSubmitted: controller.setDescriptionFocus,
-              label: 'Title',
+              label: Lexicon.title,
               validator: (v) => StringValidator(v).validate(),
               controller: controller.titleController,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
               onFieldSubmitted: controller.setDueDateFocus,
               focusNode: controller.descriptionFocus,
-              label: 'Due date',
+              label: Lexicon.dueDate,
               validator: (v) => StringValidator(v).validate(),
               controller: controller.dueDateController,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
               focusNode: controller.dueDateFocus,
               label: 'Description',
               validator: (v) => StringValidator(v).validate(),
               controller: controller.descriptionController,
             ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05),
+              padding: EdgeInsets.symmetric(vertical: ResponsiveOutlet.paddingDefault(context)),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
                   if (state is LoadingState) {
-                    return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
+                    return const CommonLoading(SizeOutlet.loadingForButtons);
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
+                        content: Text(state.response.toString()),
+                        backgroundColor: ColorOutlet.success,
+                      ));
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
+                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                        content: Text(state.message),
+                        backgroundColor: ColorOutlet.error,
+                      ));
                       controller.value = IdleState();
                     });
                   }
                   return CommonButton(
-                    description: 'Create new task',
-                    onPressed: () {
-                      controller.executeAddNewTask();
-                    },
+                    description: Lexicon.createNewTask,
+                    onPressed: controller.executeAddNewTask,
                   );
                 },
               ),

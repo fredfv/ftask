@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../core/presenter/theme/size_outlet.dart';
-import '../../../../core/presenter/theme/spacing_type.dart';
 
 class RowDueDate extends StatelessWidget {
   final String text;
+
   const RowDueDate({Key? key, required this.text}) : super(key: key);
 
   @override
@@ -18,9 +18,9 @@ class RowDueDate extends StatelessWidget {
           Icons.more_time_outlined,
           color: ColorOutlet.iconColor,
         ),
-        const CommonSpacing(SpacingType.width),
+        CommonSpacing.width(),
         CommonText(
-          fontSize: SizeOutlet.textSizeMedium,
+          fontSize: ResponsiveOutlet.textDefault(context),
           text: text,
         ),
       ],

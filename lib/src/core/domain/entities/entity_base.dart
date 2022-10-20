@@ -6,18 +6,23 @@ abstract class EntityBase {
   int? _updated;
 
   String get id => _id;
+
   void setId(String value) => _id = value;
 
   int get created => _created;
+
   void setCreated(int value) => _created = value;
 
   int get persisted => _persisted;
+
   void setPersisted(int value) => _persisted = value;
 
   int? get deleted => _deleted;
+
   void setDeleted(int? value) => _deleted = value;
 
   int? get updated => _updated;
+
   void setUpdated(int? value) => _updated = value;
 
   EntityBase({

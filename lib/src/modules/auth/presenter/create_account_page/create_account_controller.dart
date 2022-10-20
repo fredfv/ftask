@@ -7,6 +7,7 @@ import '../../../../core/domain/services/i_http_service.dart';
 import '../../../../core/domain/usecases/i_create_account_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/application/create_account_request.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
@@ -31,17 +32,11 @@ class CreateAccountController extends ValueNotifier<CommonState> {
 
   GlobalKey<FormState> get form => formsValidate.form;
 
-  void setLoginFocus(value) {
-    loginFocus.requestFocus();
-  }
+  void setLoginFocus(value) => loginFocus.requestFocus();
 
-  void setSecretFocus(value) {
-    secretFocus.requestFocus();
-  }
+  void setSecretFocus(value) => secretFocus.requestFocus();
 
-  void setSecretConfirmFocus(value) {
-    secretConfirmFocus.requestFocus();
-  }
+  void setSecretConfirmFocus(value) => secretConfirmFocus.requestFocus();
 
   Future createNewAccountExecute(CreateAccountRequest newAccount) async {
     value = LoadingState();
@@ -49,7 +44,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
       if (v is Exception || v == false) {
         value = ErrorState(v.toString());
       } else {
-        value = SuccessState<String>(response: 'account created! now login to start your tasks!');
+        value = SuccessState<String>(response: Lexicon.accountCreated);
         Modular.to.pop();
       }
     }).catchError((e) {
@@ -66,7 +61,7 @@ class CreateAccountController extends ValueNotifier<CommonState> {
       );
       createNewAccountExecute(newAccount);
     } else {
-      value = ErrorState('invalid fields');
+      value = ErrorState(Lexicon.invalidFields);
     }
   }
 }

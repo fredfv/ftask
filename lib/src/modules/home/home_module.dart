@@ -3,10 +3,10 @@ import 'package:task/src/modules/home/presenter/create_task_page/create_task_con
 import 'package:task/src/modules/home/presenter/home_page/home_controller.dart';
 import 'package:task/src/modules/home/presenter/list_task_done_page/list_task_done_controller.dart';
 import 'package:task/src/modules/home/presenter/list_task_page/list_task_controller.dart';
+import 'package:task/src/modules/home/usecases/download_tasks_from_cloud_usecase.dart';
 import 'package:task/src/modules/home/usecases/get_by_id_from_cloud_usecase.dart';
 import 'package:task/src/modules/home/usecases/put_task_from_broadcast_usecase.dart';
 import 'package:task/src/modules/home/usecases/set_on_board_status_usecase.dart';
-import 'package:task/src/modules/home/usecases/download_tasks_from_cloud_usecase.dart';
 import 'package:task/src/modules/home/usecases/upload_tasks_to_cloud_usecase.dart';
 
 import 'presenter/home_page/home_page.dart';
@@ -39,7 +39,7 @@ class HomeModule extends Module {
               putTaskFromBroadcastUsecase: i(),
               uploadTasksToCloudUsecase: i(),
               broadcastController: i(),
-              user: i(),
+              loggedUser: i(),
             )),
       ];
 

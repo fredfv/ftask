@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:task/src/core/infra/validators/secret_validator.dart';
 import 'package:task/src/core/presenter/shared/common_spacing.dart';
-import 'package:task/src/core/presenter/theme/spacing_type.dart';
 
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/validators/string_validator.dart';
@@ -39,53 +38,66 @@ class CreateAccountPage extends StatelessWidget {
       body: Form(
         key: controller.form,
         child: ListView(
-          padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingLarge(context)),
           children: [
             CommonTextFormField(
-                onFieldSubmitted: controller.setLoginFocus,
-                label: Lexicon.name,
-                validator: (v) => StringValidator(v).validate(),
-                controller: controller.nameController),
-            const CommonSpacing(SpacingType.height),
+              onFieldSubmitted: controller.setLoginFocus,
+              label: Lexicon.name,
+              validator: (v) => StringValidator(v).validate(),
+              controller: controller.nameController,
+            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
-                onFieldSubmitted: controller.setSecretFocus,
-                focusNode: controller.loginFocus,
-                label: Lexicon.login,
-                validator: (v) => StringValidator(v).validate(),
-                controller: controller.loginController),
-            const CommonSpacing(SpacingType.height),
+              onFieldSubmitted: controller.setSecretFocus,
+              focusNode: controller.loginFocus,
+              label: Lexicon.login,
+              validator: (v) => StringValidator(v).validate(),
+              controller: controller.loginController,
+            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
-                onFieldSubmitted: controller.setSecretConfirmFocus,
-                focusNode: controller.secretFocus,
-                label: Lexicon.secret,
-                validator: (v) => StringValidator(v).validate(),
-                controller: controller.secretController,
-                obscureText: true),
-            const CommonSpacing(SpacingType.height),
+              onFieldSubmitted: controller.setSecretConfirmFocus,
+              focusNode: controller.secretFocus,
+              label: Lexicon.secret,
+              validator: (v) => StringValidator(v).validate(),
+              controller: controller.secretController,
+              obscureText: true,
+            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
-                onFieldSubmitted: controller.executeSubmitCreateAccount,
-                focusNode: controller.secretConfirmFocus,
-                label: Lexicon.secretConfirm,
-                validator: (v) => SecretValidator(v).validate(),
-                controller: controller.secretConfirmController,
-                obscureText: true),
+              onFieldSubmitted: controller.executeSubmitCreateAccount,
+              focusNode: controller.secretConfirmFocus,
+              label: Lexicon.secretConfirm,
+              validator: (v) => SecretValidator(v).secretMatches(controller.secretController.text),
+              controller: controller.secretConfirmController,
+              obscureText: true,
+            ),
+            CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             Padding(
               padding: EdgeInsets.symmetric(vertical: ResponsiveOutlet.paddingDefault(context)),
               child: ValueListenableBuilder(
                 valueListenable: controller,
                 builder: (_, state, child) {
                   if (state is LoadingState) {
-                    return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
+                    return const CommonLoading(SizeOutlet.loadingForButtons);
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                          content: Text(state.response.toString()), backgroundColor: ColorOutlet.success));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        CommonSnackBar(
+                          content: Text(state.response.toString()),
+                          backgroundColor: ColorOutlet.success,
+                        ),
+                      );
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
+                        CommonSnackBar(
+                          content: Text(state.message),
+                          backgroundColor: ColorOutlet.error,
+                        ),
+                      );
                       controller.value = IdleState();
                     });
                   }

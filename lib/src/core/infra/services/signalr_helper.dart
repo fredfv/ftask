@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:signalr_core/signalr_core.dart';
+import 'package:task/src/core/infra/application/app_settings.dart';
 
 import '../../domain/services/i_hub_service.dart';
 import '../application/logger.dart';
@@ -10,9 +11,6 @@ class SignalRHelper implements IHubService {
   HubConnection? connection;
   BroadcastController broadcastController;
 
-  //final StreamController<String> _streamController = StreamController<String>.broadcast();
-  //get stream => _streamController.stream;
-
   SignalRHelper({required this.broadcastController});
 
   @override
@@ -20,7 +18,7 @@ class SignalRHelper implements IHubService {
     fLog.w('[SIGNALR CONNECTION CREATED]');
     connection = HubConnectionBuilder()
         .withUrl(
-            'http://192.168.15.3:5002/chatHub',
+            AppSettings.baseHubUrl,
             HttpConnectionOptions(
                 //logging: (level, message) => print(message),
                 ))

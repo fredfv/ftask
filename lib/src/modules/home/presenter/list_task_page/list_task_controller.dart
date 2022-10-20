@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:task/src/core/infra/application/app_settings.dart';
+
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
 import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
@@ -22,7 +24,7 @@ class ListTaskController extends ListTaskBaseController {
           uploadTasksToCloudUsecase: uploadTasksToCloudUsecase,
           downloadTasksFromCloudUsecase: downloadTasksFromCloudUsecase,
         ) {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: AppSettings.timerInterval), (timer) {
       updateTilesTimeElapsed();
       timeElapsedChangeNotifier.notifyListeners();
     });

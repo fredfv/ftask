@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 
 import '../shared/common_scaffold.dart';
 import '../theme/color_outlet.dart';
@@ -18,20 +19,26 @@ class WildcardPage extends StatelessWidget {
           },
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
-        title: Lexicon.wildcardTitle,
+        title: Lexicon.wildcard,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Text(
-                '404',
-                style: TextStyle(color: ColorOutlet.error, fontSize: MediaQuery.of(context).size.height * 0.1),
+                Lexicon.fourHundredFour,
+                style: TextStyle(
+                  color: ColorOutlet.error,
+                  fontSize: ResponsiveOutlet.textHuge(context),
+                ),
               ),
             ),
             Center(
               child: Text(
-                'ops! I hope you are using the web page. F',
-                style: TextStyle(color: ColorOutlet.secondary, fontSize: MediaQuery.of(context).size.height * 0.02),
+                Lexicon.wildcardMessage,
+                style: TextStyle(
+                  color: ColorOutlet.secondary,
+                  fontSize: ResponsiveOutlet.textDefault(context),
+                ),
               ),
             ),
           ],

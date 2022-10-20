@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import 'package:task/src/core/infra/application/logger.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
-import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
 import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
+import '../../../../core/domain/usecases/i_put_task_from_broadcast_usecase.dart';
 import '../../../../core/infra/services/broadcast_controller.dart';
 import '../../../../core/infra/services/signalr_helper.dart';
 import '../../models/upsert_one_model.dart';
@@ -29,7 +28,7 @@ class HomeController extends ChangeNotifier {
   final IDownloadTasksFromCloudUsecase downloadTasksFromCloudUsecase;
   final BroadcastController broadcastController;
   final ValueNotifier<String> homeStateValueListenable = ValueNotifier('');
-  final UserEntity user;
+  final UserEntity loggedUser;
 
   final SignalRHelper hub;
   final PageController pageController = PageController(initialPage: 0, keepPage: true);
@@ -44,7 +43,7 @@ class HomeController extends ChangeNotifier {
     required this.uploadTasksToCloudUsecase,
     required this.downloadTasksFromCloudUsecase,
     required this.broadcastController,
-    required this.user,
+    required this.loggedUser,
   }) : pages = [
           TaskPage(controller: taskPageController),
           ListTaskPage(controller: listTaskController),
@@ -73,7 +72,7 @@ class HomeController extends ChangeNotifier {
 
     broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
       var v = broadcastController.uploadAllTasksBroadcastMessage.value;
-      if (user.id == v.userId) {
+      if (loggedUser.id == v.userId) {
         homeStateValueListenable.value = v.errorMessage;
       }
       callGetAllTasksControllersFromLocal();

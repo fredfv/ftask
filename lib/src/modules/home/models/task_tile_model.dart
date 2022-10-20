@@ -4,6 +4,7 @@ import 'package:task/src/modules/home/models/task_due_time.dart';
 
 import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/infra/application/logger.dart';
+import '../../../core/presenter/theme/lexicon.dart';
 
 class TaskTileModel {
   final String id;
@@ -35,7 +36,7 @@ class TaskTileModel {
   refresh() {
     try {
       if (_dueDate == 0) {
-        timeElapsed = 'No due date';
+        timeElapsed = Lexicon.noDueDate;
         dueState = TaskDueState.none;
         return;
       }
@@ -47,13 +48,13 @@ class TaskTileModel {
           ? TaskDueState.late
           : tElapsed.inSeconds > TaskDueTime.veryLate
               ? TaskDueState.veryLate
-              : TaskDueState.ontime;
+              : TaskDueState.onTime;
 
       tElapsed = tElapsed.inSeconds < 0 ? tElapsed * -1 : tElapsed;
       timeElapsed = tElapsed.toString().substring(0, 7);
     } catch (e) {
       fLog.e(e);
-      timeElapsed = 'An error occurred.';
+      timeElapsed = Lexicon.anErrorOccurred;
       dueState = TaskDueState.error;
     }
   }
@@ -64,10 +65,10 @@ class TaskTileModel {
         return TaskTileModel(
           id: entity.id,
           title: entity.title,
-          dueDateString: 'No due date',
+          dueDateString: Lexicon.dueDate,
           description: entity.description,
           dueState: TaskDueState.none,
-          timeElapsed: 'No due date',
+          timeElapsed: Lexicon.noDueDate,
           onBoard: entity.onBoard,
           dueDate: entity.dueDate,
           pending: entity.pending,
@@ -81,7 +82,7 @@ class TaskTileModel {
           ? TaskDueState.late
           : tElapsed.inSeconds > TaskDueTime.veryLate
               ? TaskDueState.veryLate
-              : TaskDueState.ontime;
+              : TaskDueState.onTime;
 
       tElapsed = tElapsed.inSeconds < 0 ? tElapsed * -1 : tElapsed;
       final timeElapsed = tElapsed.toString().substring(0, 7);
@@ -108,7 +109,7 @@ class TaskTileModel {
         dueDateString: '???',
         dueState: TaskDueState.error,
         onBoard: entity.onBoard,
-        timeElapsed: 'An error occurred.',
+        timeElapsed: Lexicon.anErrorOccurred,
         dueDate: 0,
         pending: entity.pending,
       );

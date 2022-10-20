@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
-import '../../../../core/presenter/theme/spacing_type.dart';
 import '../../models/task_tile_model.dart';
 
 class RowTitle extends StatelessWidget {
   final TaskTileModel taskItem;
+
   const RowTitle({
     Key? key,
     required this.taskItem,
@@ -23,14 +23,14 @@ class RowTitle extends StatelessWidget {
         Expanded(
           child: CommonText(
             text: taskItem.title,
-            fontSize: SizeOutlet.textSizeExtraLarge,
+            fontSize: ResponsiveOutlet.textMedium(context),
             fontColor: ColorOutlet.textColorTitle,
           ),
         ),
         if (taskItem.pending) ...[
-          const CommonSpacing(SpacingType.width),
-          CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForTaskTile)),
-        ]
+          CommonSpacing.width(),
+          CommonLoading.responsive(SizeOutlet.loadingForTaskTile),
+        ],
       ],
     );
   }

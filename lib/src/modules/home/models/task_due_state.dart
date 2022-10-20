@@ -1,5 +1,5 @@
 enum TaskDueState {
-  ontime,
+  onTime,
   late,
   veryLate,
   error,

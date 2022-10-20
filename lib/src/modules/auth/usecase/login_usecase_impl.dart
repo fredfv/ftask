@@ -1,12 +1,10 @@
-import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
 import '../../../core/domain/usecases/i_login_usecase.dart';
-import '../../../core/infra/application/api_path.dart';
 import '../../../core/infra/application/api_endpoints.dart';
+import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
 import '../../../core/infra/application/logger.dart';
@@ -23,12 +21,12 @@ class LoginUseCaseImpl implements ILoginUsecase {
   Future<UserEntity?> call(LoginRequest loginRequest) async {
     try {
       var authUser = await httpService.request(
-          baseUrl: ApiPath.baseUrl,
+          baseUrl: AppSettings.baseApiUrl,
           endPoint: ApiEndpoints.auth,
           method: HttpRequestMethods.post,
           params: loginRequest.toJson(),
-          receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecases,
-          connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecases);
+          receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
+          connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
 
       IRepository<UserEntity> repository = await repositoryFactory.get<UserEntity>();
       UserEntity userAuthModel = UserEntity.fromAuth(authUser);

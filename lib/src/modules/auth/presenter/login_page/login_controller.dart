@@ -7,6 +7,7 @@ import '../../../../core/domain/services/i_http_service.dart';
 import '../../../../core/domain/usecases/i_login_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/application/login_request.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
 
 class LoginController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
@@ -48,7 +49,7 @@ class LoginController extends ValueNotifier<CommonState> {
         value = ErrorState(e.toString());
       });
     } else {
-      value = ErrorState('invalid fields');
+      value = ErrorState(Lexicon.invalidFields);
     }
   }
 

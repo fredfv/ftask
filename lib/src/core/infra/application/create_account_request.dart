@@ -4,11 +4,15 @@ class CreateAccountRequest {
   String _secret;
 
   String get name => _name;
+
   String get login => _login;
+
   String get secret => _secret;
 
   void setName(String value) => _name = value;
+
   void setLogin(String value) => _login = value;
+
   void setSecret(String value) => _secret = value;
 
   CreateAccountRequest({

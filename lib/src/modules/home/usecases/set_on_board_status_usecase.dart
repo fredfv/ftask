@@ -1,12 +1,10 @@
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:task/src/core/domain/entities/task_entity.dart';
-import 'package:task/src/core/domain/services/i_http_service.dart';
-import 'package:task/src/core/domain/usecases/i_set_on_board_status_usecase.dart';
-
+import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
-import '../../../core/infra/application/api_path.dart';
+import '../../../core/domain/services/i_http_service.dart';
+import '../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../core/infra/application/api_endpoints.dart';
+import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
 
@@ -35,13 +33,13 @@ class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
       };
 
       httpService.request(
-          baseUrl: ApiPath.baseUrl,
+          baseUrl: AppSettings.baseApiUrl,
           endPoint: ApiEndpoints.upsertOne,
           method: HttpRequestMethods.put,
           params: payload,
           token: user.token,
-          receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecases,
-          connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecases);
+          receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
+          connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
     }
     return true;
   }

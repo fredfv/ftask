@@ -3,8 +3,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:task/app_module.dart';
 import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/repositories/i_repository.dart';
+import 'package:task/src/core/infra/application/app_settings.dart';
 import 'package:task/src/core/infra/application/logger.dart';
-import 'package:task/src/core/infra/repositories/hive_repository_factory.dart';
+import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import 'src/core/domain/repositories/i_repository_factory.dart';
 import 'src/core/infra/services/signalr_helper.dart';
@@ -14,6 +15,7 @@ import 'src/core/presenter/theme/color_outlet.dart';
 class SplashPage extends StatefulWidget {
   final SignalRHelper signalRHelper;
   final IRepositoryFactory repositoryFactory;
+
   const SplashPage({
     Key? key,
     required this.signalRHelper,
@@ -35,7 +37,10 @@ class _SplashPageState extends State<SplashPage> {
     await Modular.isModuleReady<AppModule>();
     try {
       await Future.delayed(const Duration(milliseconds: 900));
-      await widget.signalRHelper.initConnection().timeout(const Duration(seconds: 3));
+      await widget.signalRHelper
+          .initConnection()
+          .timeout(const Duration(seconds: AppSettings.appHubConnectionTimeoutSeconds))
+          .onError((error, stackTrace) => fLog.e(error));
       IRepository<UserEntity> userRepo = await widget.repositoryFactory.get<UserEntity>();
       await userRepo.getAll().then((value) {
         if (value.isNotEmpty) {
@@ -50,6 +55,7 @@ class _SplashPageState extends State<SplashPage> {
       });
     } catch (e) {
       fLog.e(e);
+      Modular.to.pushReplacementNamed('/src/');
     }
   }
 
@@ -57,7 +63,9 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Container(
       color: ColorOutlet.primary,
-      child: const Center(child: CommonLoading(200)),
+      child: Center(
+        child: CommonLoading.responsive(SizeOutlet.loadingForSplash),
+      ),
     );
   }
 }

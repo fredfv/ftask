@@ -28,7 +28,7 @@ class CommonText extends StatelessWidget {
       text,
       maxLines: 3,
       maxFontSize: SizeOutlet.textSizeExtraLarge,
-      minFontSize: SizeOutlet.textSizeSmall,
+      minFontSize: SizeOutlet.textSizeBase,
       softWrap: true,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(

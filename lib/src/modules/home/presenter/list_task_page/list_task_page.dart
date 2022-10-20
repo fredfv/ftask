@@ -14,32 +14,39 @@ import 'widgets/task_tile.dart';
 
 class ListTaskPage extends StatelessWidget {
   final ListTaskController controller;
+
   const ListTaskPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: Lexicon.tasksPage,
+      title: Lexicon.tasks,
       body: ValueListenableBuilder(
         valueListenable: controller,
         builder: (_, state, child) {
           if (state is LoadingState) {
-            return CommonLoading(ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForButtons));
+            return CommonLoading.responsive(SizeOutlet.loadingForButtons);
           } else if (state is SuccessState) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
               child: RefreshIndicator(
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: true),
                 child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4, crossAxisSpacing: 8, mainAxisSpacing: 8),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
                     itemCount: controller.list.length,
                     itemBuilder: (context, index) {
                       return TaskTile(
                         taskItem: controller.list[index],
                         controller: controller.timeElapsedChangeNotifier,
                         onLongPress: () {
-                          controller.setOnBoardStatusUsecaseExecute(taskId: controller.list[index].id, onBoard: false);
+                          controller.setOnBoardStatusUsecaseExecute(
+                            taskId: controller.list[index].id,
+                            onBoard: false,
+                          );
                         },
                       );
                     }),
@@ -47,12 +54,14 @@ class ListTaskPage extends StatelessWidget {
             );
           } else if (state is ErrorState) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(CommonSnackBar(content: Text(state.message), backgroundColor: ColorOutlet.error));
+              ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
+                content: Text(state.message),
+                backgroundColor: ColorOutlet.error,
+              ));
               controller.value = IdleState();
             });
           }
-          return Container();
+          return const SizedBox();
         },
       ),
     );

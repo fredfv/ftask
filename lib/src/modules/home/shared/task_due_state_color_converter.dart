@@ -4,7 +4,7 @@ import 'package:task/src/modules/home/models/task_due_state.dart';
 abstract class TaskDueStateColorConverter {
   static Color convert(TaskDueState state) {
     switch (state) {
-      case TaskDueState.ontime:
+      case TaskDueState.onTime:
         return Colors.white;
       case TaskDueState.late:
         return Colors.yellow;

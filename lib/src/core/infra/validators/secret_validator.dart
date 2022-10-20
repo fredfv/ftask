@@ -13,6 +13,7 @@ class SecretValidator implements ValidationBase {
   }
 
   String? secretMatches(String? passwordToMatch) {
+    if (_value?.isEmpty ?? true) return Lexicon.fillTheFieldToSubmit;
     if (_value != passwordToMatch) return Lexicon.passwordsDoNotMatch;
     return null;
   }

@@ -10,18 +10,23 @@ class TaskEntity extends EntityBase {
   int _dueDate;
 
   String get description => _description;
+
   void setDescription(String? value) => _description = value ?? '';
 
   String get title => _title;
+
   void setTitle(String? value) => _title = value ?? '';
 
   bool get onBoard => _onBoard;
+
   void setOnBoard(bool value) => _onBoard = value;
 
   int get dueDate => _dueDate;
+
   void setDueDate(int value) => _dueDate;
 
   bool get pending => _pending;
+
   void setPending(bool value) => _pending = value;
 
   TaskEntity({

@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../presenter/theme/lexicon.dart';
 import '../application/custom_exception.dart';
-import '../application/http_timeout_configurations.dart';
 import '../application/http_request_methods.dart';
+import '../application/http_timeout_configurations.dart';
 import '../application/logger.dart';
 
 class DioHandler {
@@ -90,37 +91,37 @@ class DioHandler {
       if (response.statusCode == 200 || response.statusCode == 204) {
         return response;
       } else if (response.statusCode == 401) {
-        throw Exception("unauthorized");
+        throw Exception(Lexicon.unauthorized);
       } else if (response.statusCode == 500) {
-        throw Exception("server error");
+        throw Exception(Lexicon.internalServerError);
       } else {
-        throw Exception("something does wen't wrong");
+        throw Exception(Lexicon.unknownError);
       }
     } on SocketException catch (e) {
       fLog.e(e);
-      throw CustomException("no internet connection");
+      throw CustomException(Lexicon.noInternetConnection);
     } on FormatException catch (e) {
       fLog.e(e);
-      throw CustomException("bad response format");
+      throw CustomException(Lexicon.formatException);
     } on DioError catch (e) {
       fLog.e(e);
       if (e.type == DioErrorType.response) {
         if (e.response != null && e.response?.data is Map<String, dynamic> && e.response?.data?['message'] != null) {
           throw CustomException(e.response?.data['message']);
         } else if (e.error.toString().contains('[500]')) {
-          throw CustomException("server error");
+          throw CustomException(Lexicon.internalServerError);
         }
       } else if (e.type == DioErrorType.connectTimeout) {
-        throw CustomException('timedout, check your connection');
+        throw CustomException(Lexicon.connectTimeout);
       } else if (e.type == DioErrorType.receiveTimeout) {
-        throw CustomException('timedout, unable to connect to the server');
+        throw CustomException(Lexicon.receiveTimeout);
       } else if (e.type == DioErrorType.other) {
         throw CustomException(e.error);
       }
       throw CustomException(e.message);
     } catch (e) {
       fLog.e(e);
-      throw CustomException("Something wen't wrong");
+      throw CustomException(Lexicon.customException);
     }
   }
 }

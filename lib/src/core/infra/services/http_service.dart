@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../domain/services/i_http_service.dart';
+import '../../presenter/theme/lexicon.dart';
 import '../application/custom_exception.dart';
 import '../application/http_request_methods.dart';
 import 'dio_handler.dart';
@@ -36,7 +37,7 @@ class HttpService implements IHttpService {
     } on Exception catch (error) {
       return CustomException(error.toString());
     } catch (error) {
-      return CustomException('Something really unknown $error');
+      return CustomException('${Lexicon.customException} $error');
     }
   }
 }

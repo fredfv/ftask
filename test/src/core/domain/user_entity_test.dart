@@ -104,9 +104,7 @@ void main() {
     expect(userEntity.created, DateTime.fromMillisecondsSinceEpoch(1));
   });
 
-  test(
-      'should create a UserEntity using the values of the auth mocked at UserMockAuth',
-      () {
+  test('should create a UserEntity using the values of the auth mocked at UserMockAuth', () {
     final userMockAuth = MockUserFromAuth();
     userEntity = UserEntity.fromAuth(userMockAuth.authData);
     expect(userEntity.id, '1');

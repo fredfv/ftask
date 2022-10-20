@@ -23,4 +23,6 @@ abstract class ColorOutlet {
   static const Color bottomNavBarBackground = Color(0xFF191D1F);
   static const Color bottomNavBarItemSelected = Color(0xE4CB003C);
   static const Color bottomNavBarItemUnselected = Color(0x7394AAB0);
+
+  static const Color errorText = Color(0xFFBE6400);
 }

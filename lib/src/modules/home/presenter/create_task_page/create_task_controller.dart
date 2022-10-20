@@ -4,6 +4,7 @@ import '../../../../core/domain/entities/task_entity.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/services/i_form_validate_service.dart';
 import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
 
 class CreateTaskController extends ValueNotifier<CommonState> {
   final IRepositoryFactory taskRepository;
@@ -23,13 +24,9 @@ class CreateTaskController extends ValueNotifier<CommonState> {
 
   GlobalKey<FormState> get form => formsValidate.form;
 
-  void setDescriptionFocus(value) {
-    descriptionFocus.requestFocus();
-  }
+  void setDescriptionFocus(value) => descriptionFocus.requestFocus();
 
-  void setDueDateFocus(value) {
-    dueDateFocus.requestFocus();
-  }
+  void setDueDateFocus(value) => dueDateFocus.requestFocus();
 
   void executeAddNewTask() {
     if (formsValidate.validate()) {
@@ -53,14 +50,14 @@ class CreateTaskController extends ValueNotifier<CommonState> {
             descriptionController.clear();
             dueDateController.clear();
             formsValidate.form.currentState?.reset();
-            value = SuccessState<String>(response: 'new task added');
+            value = SuccessState<String>(response: Lexicon.taskCreated);
           }
         });
       }).onError((error, stackTrace) {
         value = ErrorState(error.toString());
       });
     } else {
-      value = ErrorState('invalid fields');
+      value = ErrorState(Lexicon.invalidFields);
     }
   }
 }

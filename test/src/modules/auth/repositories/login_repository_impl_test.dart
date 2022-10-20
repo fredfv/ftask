@@ -20,8 +20,7 @@ class LoginRepositoryMock extends Mock implements LoginRepository {
       baseUrl: 'https://www.google.com',
       endPoint: 'test',
       method: HttpRequestMethods.get,
-      params:
-          newAccount.login.toString() == 'test' ? newAccount.toJson() : null,
+      params: newAccount.login.toString() == 'test' ? newAccount.toJson() : null,
     );
   }
 }
@@ -34,17 +33,15 @@ void main() {
   });
 
   test('should return a response', () async {
-    final result = await repository.createAccount(CreateAccountRequest(
-        login: 'test', secret: 'test', name: 'test', secretConfirm: 'test'));
-    expect(result, {'response': 'ok'},
-        reason: 'Pass a param and return a response');
+    final result = await repository
+        .createAccount(CreateAccountRequest(login: 'test', secret: 'test', name: 'test', secretConfirm: 'test'));
+    expect(result, {'response': 'ok'}, reason: 'Pass a param and return a response');
   });
 
   test('should return a exception', () async {
-    final result = await repository.createAccount(CreateAccountRequest(
-        login: 'test2', secret: 'test', name: 'test', secretConfirm: 'test'));
+    final result = await repository
+        .createAccount(CreateAccountRequest(login: 'test2', secret: 'test', name: 'test', secretConfirm: 'test'));
     expect(result, isA<CustomException>(),
-        reason:
-            'Forcing not pass a param and return a exception, when login is not equal to test');
+        reason: 'Forcing not pass a param and return a exception, when login is not equal to test');
   });
 }

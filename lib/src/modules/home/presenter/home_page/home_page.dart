@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/lexicon.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,10 +43,25 @@ class _HomePageState extends State<HomePage> {
               onTap: (index) {
                 widget.controller.changePage(index);
               },
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
-                BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks'),
-                BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
+              items: [
+                BottomNavigationBarItem(
+                  icon: widget.controller.pageSelectedIndex == 0
+                      ? const Icon(Icons.task)
+                      : const Icon(Icons.task_outlined),
+                  label: Lexicon.task,
+                ),
+                BottomNavigationBarItem(
+                  icon: widget.controller.pageSelectedIndex == 1
+                      ? const Icon(Icons.format_list_bulleted)
+                      : const Icon(Icons.list_outlined),
+                  label: Lexicon.tasks,
+                ),
+                BottomNavigationBarItem(
+                  icon: widget.controller.pageSelectedIndex == 2
+                      ? const Icon(Icons.fact_check_rounded)
+                      : const Icon(Icons.fact_check_outlined),
+                  label: Lexicon.tasksDone,
+                ),
               ],
             );
           },
