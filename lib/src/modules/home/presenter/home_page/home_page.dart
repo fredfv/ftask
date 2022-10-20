@@ -34,39 +34,46 @@ class _HomePageState extends State<HomePage> {
         bottonNavBar: AnimatedBuilder(
           animation: widget.controller,
           builder: (BuildContext context, Widget? child) {
-            return BottomNavigationBar(
-              backgroundColor: ColorOutlet.bottomNavBarBackground,
-              unselectedItemColor: ColorOutlet.bottomNavBarItemUnselected,
-              selectedItemColor: ColorOutlet.bottomNavBarItemSelected,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: widget.controller.pageSelectedIndex,
-              onTap: (index) {
-                widget.controller.changePage(index);
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: widget.controller.pageSelectedIndex == 0
-                      ? const Icon(Icons.task)
-                      : const Icon(Icons.task_outlined),
-                  label: Lexicon.task,
-                ),
-                BottomNavigationBarItem(
-                  icon: widget.controller.pageSelectedIndex == 1
-                      ? const Icon(Icons.format_list_bulleted)
-                      : const Icon(Icons.list_outlined),
-                  label: Lexicon.tasks,
-                ),
-                BottomNavigationBarItem(
-                  icon: widget.controller.pageSelectedIndex == 2
-                      ? const Icon(Icons.fact_check_rounded)
-                      : const Icon(Icons.fact_check_outlined),
-                  label: Lexicon.tasksDone,
-                ),
-              ],
+            return Theme(
+              data: ThemeData(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+              ),
+              child: BottomNavigationBar(
+                backgroundColor: ColorOutlet.bottomNavBarBackground,
+                unselectedItemColor: ColorOutlet.bottomNavBarItemUnselected,
+                selectedItemColor: ColorOutlet.bottomNavBarItemSelected,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: widget.controller.pageSelectedIndex,
+                onTap: (index) {
+                  widget.controller.changePage(index);
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: widget.controller.pageSelectedIndex == 0
+                        ? const Icon(Icons.task)
+                        : const Icon(Icons.task_outlined),
+                    label: Lexicon.task,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: widget.controller.pageSelectedIndex == 1
+                        ? const Icon(Icons.format_list_bulleted)
+                        : const Icon(Icons.list_outlined),
+                    label: Lexicon.tasks,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: widget.controller.pageSelectedIndex == 2
+                        ? const Icon(Icons.fact_check_rounded)
+                        : const Icon(Icons.fact_check_outlined),
+                    label: Lexicon.tasksDone,
+                  ),
+                ],
+              ),
             );
           },
         ),
         body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: widget.controller.pageController,
           children: widget.controller.pages,
         ));
