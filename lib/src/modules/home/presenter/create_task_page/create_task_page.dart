@@ -46,7 +46,7 @@ class TaskPage extends StatelessWidget {
             CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
             CommonTextFormField(
               focusNode: controller.dueDateFocus,
-              label: 'Description',
+              label: Lexicon.description,
               validator: (v) => StringValidator(v).validate(),
               controller: controller.descriptionController,
             ),

@@ -20,6 +20,7 @@ abstract class Lexicon {
   static const String createTask = 'Create task';
   static const String title = 'Title';
   static const String dueDate = 'Due date';
+  static const String description = 'Description';
   static const String createNewTask = 'Create new task';
   static const String taskCreated = 'Task created successfully';
   static const String noDueDate = 'No due date';
