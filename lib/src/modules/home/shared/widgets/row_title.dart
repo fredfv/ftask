@@ -23,7 +23,7 @@ class RowTitle extends StatelessWidget {
         Expanded(
           child: CommonText(
             text: taskItem.title,
-            fontSize: ResponsiveOutlet.textMedium(context),
+            fontSize: ResponsiveOutlet.textLarge(context),
             fontColor: ColorOutlet.textColorTitle,
           ),
         ),

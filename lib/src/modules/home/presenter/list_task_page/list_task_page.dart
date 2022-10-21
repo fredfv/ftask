@@ -32,10 +32,11 @@ class ListTaskPage extends StatelessWidget {
               child: RefreshIndicator(
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: true),
                 child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: ResponsiveOutlet.cardRatio(context),
+                      crossAxisSpacing: ResponsiveOutlet.paddingSmall(context),
+                      mainAxisSpacing: ResponsiveOutlet.paddingSmall(context),
+                      childAspectRatio: ResponsiveOutlet.cardSliverRatio(context),
                     ),
                     itemCount: controller.list.length,
                     itemBuilder: (context, index) {

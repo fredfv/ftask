@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart' as db;
 
 import '../../domain/entities/entity_base.dart';
 import '../../domain/repositories/i_repository.dart';
-import '../../domain/services/I_object_id_service.dart';
+import '../../domain/services/i_object_id_service.dart';
 import '../application/logger.dart';
 import '../mappers/mapper.dart';
 
