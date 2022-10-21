@@ -58,5 +58,5 @@ abstract class Lexicon {
   //#Mapper
   static const String mapperErrorEntity = 'Entity';
   static const String mapperErrorNotFound = 'not found';
-//#endregion
+  //#endregion
 }
