@@ -47,6 +47,8 @@ abstract class ResponsiveOutlet {
 
   static double textHuge(BuildContext context) => aspectRatio(context) * SizeOutlet.textSizeHuge;
 
+  static double textMassive(BuildContext context) => aspectRatio(context) * SizeOutlet.textSizeMassive;
+
   //#endregion
 
   //#region PaddingResponsiveSize
@@ -59,5 +61,9 @@ abstract class ResponsiveOutlet {
   static double paddingLarge(BuildContext context) => aspectRatio(context) * SizeOutlet.paddingLarge;
 
   static double paddingExtraLarge(BuildContext context) => aspectRatio(context) * SizeOutlet.paddingExtraLarge;
+
+  static double paddingHuge(BuildContext context) => aspectRatio(context) * SizeOutlet.paddingHuge;
+
+  static double paddingMassive(BuildContext context) => aspectRatio(context) * SizeOutlet.paddingMassive;
 //#endregion
 }

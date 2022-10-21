@@ -5,4 +5,5 @@ abstract class AppSettings {
 
   static const String baseApiUrl = 'http://192.168.15.3:5001';
   static const String baseHubUrl = 'http://192.168.15.3:5002/chatHub';
+  static const String obscuringCharacter = 'ж';
 }

@@ -27,7 +27,7 @@ class TaskPage extends StatelessWidget {
       body: Form(
         key: controller.form,
         child: ListView(
-          padding: EdgeInsets.all(ResponsiveOutlet.paddingLarge(context)),
+          padding: EdgeInsets.all(ResponsiveOutlet.paddingExtraLarge(context)),
           children: [
             CommonTextFormField(
               onFieldSubmitted: controller.setDescriptionFocus,

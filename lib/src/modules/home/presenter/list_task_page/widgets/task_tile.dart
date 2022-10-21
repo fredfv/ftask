@@ -33,7 +33,7 @@ class TaskTile extends StatelessWidget {
         CommonSpacing.height(factor: SizeOutlet.spacingFactor),
         RowTimeAnimated(taskItem: taskItem, controller: controller),
         CommonSpacing.height(factor: SizeOutlet.spacingFactor),
-        TextTaskRequestError(taskItem: taskItem)
+        TextTaskRequestError(taskItem: taskItem),
       ],
     );
   }

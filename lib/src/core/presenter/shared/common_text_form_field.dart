@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:task/src/core/infra/application/app_settings.dart';
 import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
+import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import '../theme/color_outlet.dart';
 
-class CommonTextFormField extends StatelessWidget {
+class CommonTextFormField extends StatefulWidget {
   final bool obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onFieldSubmitted;
@@ -30,30 +32,60 @@ class CommonTextFormField extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<CommonTextFormField> createState() => _CommonTextFormFieldState();
+}
+
+class _CommonTextFormFieldState extends State<CommonTextFormField> {
+  bool _obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onFieldSubmitted: onFieldSubmitted,
-      focusNode: focusNode,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      focusNode: widget.focusNode,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      inputFormatters: inputFormatters,
-      initialValue: initialValue?.toString(),
-      validator: validator,
-      onChanged: onChanged,
+      inputFormatters: widget.inputFormatters,
+      initialValue: widget.initialValue?.toString(),
+      validator: widget.validator,
+      onChanged: widget.onChanged,
       style: TextStyle(
         fontSize: ResponsiveOutlet.textMedium(context),
         color: ColorOutlet.secondary,
       ),
       cursorColor: ColorOutlet.secondary,
-      obscureText: obscureText,
-      obscuringCharacter: 'ж',
+      obscureText: _obscureText,
+      obscuringCharacter: AppSettings.obscuringCharacter,
       decoration: _inputDecoration(context),
-      controller: controller,
+      controller: widget.controller,
     );
   }
 
   InputDecoration _inputDecoration(BuildContext context) {
     return InputDecoration(
-      labelText: label,
+      suffixIcon: widget.obscureText
+          ? IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              icon: Icon(
+                _obscureText ? Icons.visibility : Icons.visibility_off,
+                color: ColorOutlet.shadow,
+              ),
+              onPressed: () {
+                if (mounted && widget.obscureText) {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                }
+              },
+            )
+          : null,
+      labelText: widget.label,
       focusedErrorBorder: _outlineInputBorderError(),
       errorStyle: TextStyle(color: ColorOutlet.error, fontSize: ResponsiveOutlet.textDefault(context)),
       errorBorder: _outlineInputBorderError(),
@@ -67,12 +99,14 @@ class CommonTextFormField extends StatelessWidget {
   OutlineInputBorder _outlineInputBorderSecondary() {
     return const OutlineInputBorder(
       borderSide: BorderSide(color: ColorOutlet.secondary),
+      borderRadius: BorderRadius.all(Radius.circular(SizeOutlet.cornerRadiusDefault)),
     );
   }
 
   OutlineInputBorder _outlineInputBorderError() {
     return const OutlineInputBorder(
       borderSide: BorderSide(color: ColorOutlet.error),
+      borderRadius: BorderRadius.all(Radius.circular(SizeOutlet.cornerRadiusDefault)),
     );
   }
 }

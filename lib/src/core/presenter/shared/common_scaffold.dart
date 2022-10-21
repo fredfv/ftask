@@ -38,7 +38,7 @@ class CommonScaffold extends StatelessWidget {
               titleTextStyle: TextStyle(
                 fontFamily: FontFamilyOutlet.sensation,
                 color: ColorOutlet.secondary,
-                fontSize: ResponsiveOutlet.textMedium(context),
+                fontSize: ResponsiveOutlet.textHuge(context),
               ),
             ),
       body: body,

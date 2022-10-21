@@ -18,6 +18,7 @@ class TaskTileModel {
   final int _dueDate;
   final bool pending;
   String? errorMessage;
+  double progress;
 
   TaskTileModel({
     required this.id,
@@ -28,6 +29,7 @@ class TaskTileModel {
     required this.timeElapsed,
     required this.onBoard,
     required this.pending,
+    required this.progress,
     required int dueDate,
     DateTime? updated,
   })  : _updated = updated,
@@ -50,6 +52,8 @@ class TaskTileModel {
               ? TaskDueState.veryLate
               : TaskDueState.onTime;
 
+      int progressHelper = tElapsed.inSeconds > 1 ? tElapsed.inSeconds : 1;
+      progress = tElapsed.inSeconds < 0 ? 0.0 : tElapsed.inSeconds % 60;
       tElapsed = tElapsed.inSeconds < 0 ? tElapsed * -1 : tElapsed;
       timeElapsed = tElapsed.toString().substring(0, 7);
     } catch (e) {
@@ -72,6 +76,7 @@ class TaskTileModel {
           onBoard: entity.onBoard,
           dueDate: entity.dueDate,
           pending: entity.pending,
+          progress: 0,
         );
       }
 
@@ -84,6 +89,7 @@ class TaskTileModel {
               ? TaskDueState.veryLate
               : TaskDueState.onTime;
 
+      double progress = tElapsed.inSeconds < 0 ? 0.0 : tElapsed.inSeconds / TaskDueTime.veryLate;
       tElapsed = tElapsed.inSeconds < 0 ? tElapsed * -1 : tElapsed;
       final timeElapsed = tElapsed.toString().substring(0, 7);
       final dueDateDate = DateFormat('dd/MM/yyyy').format(dueDateParsed);
@@ -99,6 +105,7 @@ class TaskTileModel {
         onBoard: entity.onBoard,
         dueDate: entity.dueDate,
         pending: entity.pending,
+        progress: progress,
       );
     } catch (e) {
       fLog.e(e);
@@ -112,6 +119,7 @@ class TaskTileModel {
         timeElapsed: Lexicon.anErrorOccurred,
         dueDate: 0,
         pending: entity.pending,
+        progress: 0,
       );
     }
   }

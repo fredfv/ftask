@@ -14,7 +14,8 @@ abstract class SizeOutlet {
   static const double textSizeMedium = 40;
   static const double textSizeLarge = 48;
   static const double textSizeExtraLarge = 64;
-  static const double textSizeHuge = 256;
+  static const double textSizeHuge = 72;
+  static const double textSizeMassive = 256;
 
   //#endregion
 
@@ -24,7 +25,8 @@ abstract class SizeOutlet {
   static const double paddingMedium = 24;
   static const double paddingLarge = 32;
   static const double paddingExtraLarge = 40;
-
+  static const double paddingHuge = 48;
+  static const double paddingMassive = 64;
   //#endregion
 
   //#region ImageSize

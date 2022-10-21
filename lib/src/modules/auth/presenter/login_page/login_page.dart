@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.all(
-            ResponsiveOutlet.paddingLarge(
+            ResponsiveOutlet.paddingHuge(
               context,
             ),
           ),

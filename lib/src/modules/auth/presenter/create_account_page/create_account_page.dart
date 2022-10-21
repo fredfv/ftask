@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:task/src/core/infra/validators/secret_validator.dart';
-import 'package:task/src/core/presenter/shared/common_spacing.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:task/src/core/infra/validators/name_validator.dart';
+import 'package:task/src/core/presenter/shared/common_scaffold.dart';
 
 import '../../../../core/infra/application/common_state.dart';
+import '../../../../core/infra/validators/secret_validator.dart';
 import '../../../../core/infra/validators/string_validator.dart';
 import '../../../../core/presenter/shared/common_button.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
+import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/font_family_outlet.dart';
@@ -23,27 +26,22 @@ class CreateAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorOutlet.primary,
-      appBar: AppBar(
-          centerTitle: true,
-          title: const Text(Lexicon.createAccount),
-          backgroundColor: ColorOutlet.primary,
-          iconTheme: const IconThemeData(color: ColorOutlet.secondary),
-          titleTextStyle: TextStyle(
-            fontFamily: FontFamilyOutlet.sensation,
-            color: ColorOutlet.secondary,
-            fontSize: ResponsiveOutlet.textDefault(context),
-          )),
+    return CommonScaffold(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () => Modular.to.pop(),
+      ),
+      title: Lexicon.createAccount,
       body: Form(
         key: controller.form,
         child: ListView(
-          padding: EdgeInsets.all(ResponsiveOutlet.paddingLarge(context)),
+          padding: EdgeInsets.symmetric(
+              vertical: ResponsiveOutlet.paddingMassive(context), horizontal: ResponsiveOutlet.paddingHuge(context)),
           children: [
             CommonTextFormField(
               onFieldSubmitted: controller.setLoginFocus,
               label: Lexicon.name,
-              validator: (v) => StringValidator(v).validate(),
+              validator: (v) => NameValidator(v).validate(),
               controller: controller.nameController,
             ),
             CommonSpacing.height(factor: SizeOutlet.spacingFactor3),
