@@ -1,7 +1,7 @@
 import '../../domain/entities/entity_base.dart';
 import '../../domain/repositories/i_repository.dart';
 import '../../domain/repositories/i_repository_factory.dart';
-import '../../domain/services/I_object_id_service.dart';
+import '../../domain/services/i_object_id_service.dart';
 import '../mappers/entity_mapper_factory.dart';
 import 'hive_repository.dart';
 

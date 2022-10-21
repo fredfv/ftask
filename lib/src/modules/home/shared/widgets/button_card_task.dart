@@ -26,7 +26,7 @@ class ButtonCardTask extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(
-            ResponsiveOutlet.paddingSmall(context),
+            ResponsiveOutlet.paddingMedium(context),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
