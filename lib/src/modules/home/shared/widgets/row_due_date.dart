@@ -20,7 +20,7 @@ class RowDueDate extends StatelessWidget {
         ),
         CommonSpacing.width(),
         CommonText(
-          fontSize: ResponsiveOutlet.textDefault(context),
+          fontSize: ResponsiveOutlet.textMedium(context),
           text: text,
         ),
       ],

@@ -28,7 +28,7 @@ class ListTaskDonePage extends StatelessWidget {
             return CommonLoading.responsive(SizeOutlet.loadingForButtons);
           } else if (state is SuccessState) {
             return Padding(
-              padding: EdgeInsets.all(ResponsiveOutlet.paddingSmall(context)),
+              padding: EdgeInsets.all(ResponsiveOutlet.paddingDefault(context)),
               child: RefreshIndicator(
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: false),
                 child: GridView.builder(

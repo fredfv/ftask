@@ -26,7 +26,7 @@ class CommonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoSizeText(
       text,
-      maxLines: 3,
+      maxLines: 2,
       maxFontSize: SizeOutlet.textSizeExtraLarge,
       minFontSize: SizeOutlet.textSizeBase,
       softWrap: true,

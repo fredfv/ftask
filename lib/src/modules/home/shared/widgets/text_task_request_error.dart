@@ -18,7 +18,7 @@ class TextTaskRequestError extends StatelessWidget {
             style: TextStyle(
               fontFamily: FontFamilyOutlet.sensation,
               color: ColorOutlet.errorText,
-              fontSize: ResponsiveOutlet.textDefault(context),
+              fontSize: ResponsiveOutlet.textMedium(context),
             ),
           )
         : const SizedBox();

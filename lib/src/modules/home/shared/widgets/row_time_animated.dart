@@ -26,13 +26,13 @@ class RowTimeAnimated extends StatelessWidget {
             return Row(
               children: [
                 Icon(
-                  Icons.access_time,
+                  Icons.timer_sharp,
                   color: TaskDueStateColorConverter.convert(taskItem.dueState),
                 ),
                 CommonSpacing.width(),
                 CommonText(
                   fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
-                  fontSize: ResponsiveOutlet.textDefault(context),
+                  fontSize: ResponsiveOutlet.textMedium(context),
                   text: taskItem.timeElapsed,
                 ),
               ],

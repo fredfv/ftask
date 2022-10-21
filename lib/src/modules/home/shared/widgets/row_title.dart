@@ -27,10 +27,13 @@ class RowTitle extends StatelessWidget {
             fontColor: ColorOutlet.textColorTitle,
           ),
         ),
-        if (taskItem.pending) ...[
-          CommonSpacing.width(),
-          CommonLoading.responsive(SizeOutlet.loadingForTaskTile),
-        ],
+        CommonSpacing.width(),
+        taskItem.pending
+            ? CommonLoading.responsive(SizeOutlet.loadingForTaskTile, color: ColorOutlet.secondary)
+            : SizedBox(
+                width: ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForTaskTile),
+                height: ResponsiveOutlet.loadingResponsiveSize(context, SizeOutlet.loadingForTaskTile),
+              ),
       ],
     );
   }

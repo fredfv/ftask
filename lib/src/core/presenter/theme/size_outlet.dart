@@ -1,8 +1,8 @@
 abstract class SizeOutlet {
   //#region LoadingSize
-  static const int loadingForSplash = 400;
-  static const int loadingForButtons = 80;
-  static const int loadingForTaskTile = 60;
+  static const int loadingForSplash = 512;
+  static const int loadingForButtons = 128;
+  static const int loadingForTaskTile = 96;
 
   //#endregion
 
@@ -33,26 +33,26 @@ abstract class SizeOutlet {
   //#endregion
 
   //#region Widgets
-  static const double cornerRadiusDefault = 7;
-  static const double elevationDefault = 7;
+  static const double cornerRadiusDefault = 8;
+  static const double elevationDefault = 8;
 
   //#endregion
 
   //#region SpacingFactor
-  static const double spacingFactor = 0.015;
-  static const double spacingFactor2 = 0.02;
-  static const double spacingFactor3 = 0.03;
-  static const double spacingFactor4 = 0.04;
-  static const double spacingFactor5 = 0.05;
-  static const double spacingFactor6 = 0.06;
+  static const double spacingFactor = 0.008;
+  static const double spacingFactor2 = 0.016;
+  static const double spacingFactor3 = 0.024;
+  static const double spacingFactor4 = 0.032;
+  static const double spacingFactor5 = 0.040;
+  static const double spacingFactor6 = 0.048;
 
   //#endregion
 
   //#region CardRatio
   static const double cardSizeMobile = 0.5;
-  static const double cardSizeTablet = 0.3;
+  static const double cardSizeTablet = 0.33;
   static const double magicNumber = 550;
-  static const double sliverCardSizeMobile = 1.22;
+  static const double sliverCardSizeMobile = 1.33;
   static const double sliverCardSizeTablet = 1.11;
 
   //#endregion
