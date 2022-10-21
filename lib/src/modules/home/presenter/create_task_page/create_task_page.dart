@@ -9,7 +9,6 @@ import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
-import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
@@ -60,18 +59,16 @@ class TaskPage extends StatelessWidget {
                     return const CommonLoading(SizeOutlet.loadingForButtons);
                   } else if (state is SuccessState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                        content: Text(state.response.toString()),
-                        backgroundColor: ColorOutlet.success,
-                      ));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        CommonSnackBar.fromSuccess(Lexicon.taskCreated),
+                      );
                       controller.value = IdleState();
                     });
                   } else if (state is ErrorState) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-                        content: Text(state.message),
-                        backgroundColor: ColorOutlet.error,
-                      ));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        CommonSnackBar.fromError(state.message),
+                      );
                       controller.value = IdleState();
                     });
                   }

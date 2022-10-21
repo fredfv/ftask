@@ -5,12 +5,12 @@ import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/repositories/i_repository.dart';
 import 'package:task/src/core/infra/application/app_settings.dart';
 import 'package:task/src/core/infra/application/logger.dart';
+import 'package:task/src/core/presenter/shared/common_scaffold.dart';
 import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import 'src/core/domain/repositories/i_repository_factory.dart';
 import 'src/core/infra/services/signalr_helper.dart';
 import 'src/core/presenter/shared/common_loading.dart';
-import 'src/core/presenter/theme/color_outlet.dart';
 
 class SplashPage extends StatefulWidget {
   final SignalRHelper signalRHelper;
@@ -61,9 +61,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorOutlet.primary,
-      child: Center(
+    return CommonScaffold(
+      body: Center(
         child: CommonLoading.responsive(SizeOutlet.loadingForSplash),
       ),
     );

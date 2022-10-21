@@ -12,8 +12,6 @@ import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
-import '../../../../core/presenter/theme/color_outlet.dart';
-import '../../../../core/presenter/theme/font_family_outlet.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
@@ -79,31 +77,32 @@ class CreateAccountPage extends StatelessWidget {
                   if (state is LoadingState) {
                     return const CommonLoading(SizeOutlet.loadingForButtons);
                   } else if (state is SuccessState) {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        CommonSnackBar(
-                          content: Text(state.response.toString()),
-                          backgroundColor: ColorOutlet.success,
-                        ),
-                      );
-                      controller.value = IdleState();
-                    });
+                    SchedulerBinding.instance.addPostFrameCallback(
+                      (_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar.fromSuccess(
+                            state.response.toString(),
+                          ),
+                        );
+                        controller.value = IdleState();
+                      },
+                    );
                   } else if (state is ErrorState) {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        CommonSnackBar(
-                          content: Text(state.message),
-                          backgroundColor: ColorOutlet.error,
-                        ),
-                      );
-                      controller.value = IdleState();
-                    });
+                    SchedulerBinding.instance.addPostFrameCallback(
+                      (_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          CommonSnackBar.fromError(state.message.toString()),
+                        );
+                        controller.value = IdleState();
+                      },
+                    );
                   }
                   return CommonButton(
-                      description: Lexicon.submitAccount,
-                      onPressed: () {
-                        controller.executeSubmitCreateAccount(null);
-                      });
+                    description: Lexicon.submitAccount,
+                    onPressed: () {
+                      controller.executeSubmitCreateAccount(null);
+                    },
+                  );
                 },
               ),
             ),

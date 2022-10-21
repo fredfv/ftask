@@ -42,7 +42,7 @@ class LoginController extends ValueNotifier<CommonState> {
           value = ErrorState(value.toString());
         } else {
           value = SuccessState();
-          value = SuccessState<String>(response: 'welcome ${userEntity.name}');
+          value = SuccessState<String>(response: '${Lexicon.welcome} ${userEntity.name}');
           Modular.to.pushReplacementNamed('/home/');
         }
       }).catchError((e) {

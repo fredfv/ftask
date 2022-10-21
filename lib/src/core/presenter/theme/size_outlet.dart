@@ -27,6 +27,7 @@ abstract class SizeOutlet {
   static const double paddingExtraLarge = 40;
   static const double paddingHuge = 48;
   static const double paddingMassive = 64;
+
   //#endregion
 
   //#region ImageSize
@@ -52,7 +53,7 @@ abstract class SizeOutlet {
 
   //#region CardRatio
   static const double cardSizeMobile = 0.5;
-  static const double cardSizeTablet = 0.33;
+  static const double cardSizeTablet = 0.3;
   static const double magicNumber = 550;
   static const double sliverCardSizeMobile = 1.33;
   static const double sliverCardSizeTablet = 1.11;
