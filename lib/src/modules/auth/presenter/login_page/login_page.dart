@@ -11,6 +11,7 @@ import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
 import '../../../../core/presenter/shared/common_text_form_field.dart';
 import '../../../../core/presenter/shared/underline_button.dart';
+import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
@@ -36,6 +37,7 @@ class LoginPage extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/ttlogo.svg',
+              color: ColorOutlet.secondary,
               width: ResponsiveOutlet.aspectRatioSizeable(
                 context,
                 SizeOutlet.imageSize,

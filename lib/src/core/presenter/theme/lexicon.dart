@@ -9,6 +9,7 @@ abstract class Lexicon {
   static const String loginAccount = 'Login account';
   static const String invalidFields = 'Invalid fields';
   static const String accountCreated = 'Account created successfully';
+  static const String welcome = 'Welcome';
 
   //#endregion
 
@@ -58,5 +59,6 @@ abstract class Lexicon {
   //#Mapper
   static const String mapperErrorEntity = 'Entity';
   static const String mapperErrorNotFound = 'not found';
+
   //#endregion
 }

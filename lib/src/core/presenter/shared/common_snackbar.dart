@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/color_outlet.dart';
 
 class CommonSnackBar extends SnackBar {
   const CommonSnackBar({super.key, required super.content, required super.backgroundColor});
@@ -9,12 +10,12 @@ class CommonSnackBar extends SnackBar {
   factory CommonSnackBar.fromSuccess(String content, {Key? key}) => CommonSnackBar(
         key: key,
         content: Text(content),
-        backgroundColor: Colors.green,
+        backgroundColor: ColorOutlet.success,
       );
 
   factory CommonSnackBar.fromError(String content, {Key? key, required}) => CommonSnackBar(
         key: key,
         content: Text(content),
-        backgroundColor: Colors.red,
+        backgroundColor: ColorOutlet.error,
       );
 }
