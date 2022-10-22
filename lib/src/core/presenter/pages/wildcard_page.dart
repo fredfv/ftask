@@ -27,7 +27,7 @@ class WildcardPage extends StatelessWidget {
               child: Text(
                 Lexicon.fourHundredFour,
                 style: TextStyle(
-                  color: ColorOutlet.error,
+                  color: ColorOutlet.accent,
                   fontSize: ResponsiveOutlet.textHuge(context),
                 ),
               ),

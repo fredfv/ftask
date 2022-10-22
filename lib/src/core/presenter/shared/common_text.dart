@@ -32,7 +32,7 @@ class CommonText extends StatelessWidget {
       softWrap: true,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: fontColor ?? ColorOutlet.textColorDefault,
+        color: fontColor ?? ColorOutlet.secondary,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
         fontSize: fontSize,

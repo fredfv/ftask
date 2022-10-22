@@ -17,7 +17,7 @@ class TextTaskRequestError extends StatelessWidget {
             taskItem.errorMessage ?? '',
             style: TextStyle(
               fontFamily: FontFamilyOutlet.sensation,
-              color: ColorOutlet.errorText,
+              color: ColorOutlet.accent,
               fontSize: ResponsiveOutlet.textMedium(context),
             ),
           )

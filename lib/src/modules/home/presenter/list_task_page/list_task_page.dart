@@ -31,7 +31,7 @@ class ListTaskPage extends StatelessWidget {
               padding: EdgeInsets.all(ResponsiveOutlet.paddingDefault(context)),
               child: RefreshIndicator(
                 backgroundColor: ColorOutlet.primary,
-                color: ColorOutlet.error,
+                color: ColorOutlet.accent,
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: true),
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

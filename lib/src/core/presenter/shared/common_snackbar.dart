@@ -10,12 +10,12 @@ class CommonSnackBar extends SnackBar {
   factory CommonSnackBar.fromSuccess(String content, {Key? key}) => CommonSnackBar(
         key: key,
         content: Text(content),
-        backgroundColor: ColorOutlet.success,
+        backgroundColor: ColorOutlet.secondary,
       );
 
   factory CommonSnackBar.fromError(String content, {Key? key, required}) => CommonSnackBar(
         key: key,
         content: Text(content),
-        backgroundColor: ColorOutlet.error,
+        backgroundColor: ColorOutlet.accent,
       );
 }

@@ -23,7 +23,7 @@ class CommonButton extends StatelessWidget {
           ),
         ),
         overlayColor: MaterialStateColor.resolveWith(
-          (states) => ColorOutlet.secondaryDark,
+          (states) => ColorOutlet.secondary,
         ),
         backgroundColor: MaterialStateColor.resolveWith(
           (states) => ColorOutlet.primary,
@@ -32,7 +32,7 @@ class CommonButton extends StatelessWidget {
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeOutlet.cornerRadiusDefault),
             side: const BorderSide(
-              color: ColorOutlet.shadow,
+              color: ColorOutlet.secondary,
             ),
           ),
         ),

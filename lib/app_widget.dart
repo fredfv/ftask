@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Sansation',
           textSelectionTheme: const TextSelectionThemeData(
-              selectionColor: ColorOutlet.selectedText, selectionHandleColor: ColorOutlet.selectedHandler)),
+              selectionColor: ColorOutlet.secondary, selectionHandleColor: ColorOutlet.secondary)),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,

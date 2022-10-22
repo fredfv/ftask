@@ -74,7 +74,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
               highlightColor: Colors.transparent,
               icon: Icon(
                 _obscureText ? Icons.visibility : Icons.visibility_off,
-                color: ColorOutlet.shadow,
+                color: ColorOutlet.secondary,
               ),
               onPressed: () {
                 if (mounted && widget.obscureText) {
@@ -87,11 +87,11 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
           : null,
       labelText: widget.label,
       focusedErrorBorder: _outlineInputBorderError(),
-      errorStyle: TextStyle(color: ColorOutlet.error, fontSize: ResponsiveOutlet.textDefault(context)),
+      errorStyle: TextStyle(color: ColorOutlet.accent, fontSize: ResponsiveOutlet.textDefault(context)),
       errorBorder: _outlineInputBorderError(),
-      labelStyle: TextStyle(color: ColorOutlet.secondaryDark, fontSize: ResponsiveOutlet.textMedium(context)),
+      labelStyle: TextStyle(color: ColorOutlet.secondary, fontSize: ResponsiveOutlet.textMedium(context)),
       focusedBorder: _outlineInputBorderSecondary(),
-      hintStyle: TextStyle(color: ColorOutlet.shadow, fontSize: ResponsiveOutlet.textMedium(context)),
+      hintStyle: TextStyle(color: ColorOutlet.secondary, fontSize: ResponsiveOutlet.textMedium(context)),
       border: _outlineInputBorderSecondary(),
     );
   }
@@ -105,7 +105,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
 
   OutlineInputBorder _outlineInputBorderError() {
     return const OutlineInputBorder(
-      borderSide: BorderSide(color: ColorOutlet.error),
+      borderSide: BorderSide(color: ColorOutlet.accent),
       borderRadius: BorderRadius.all(Radius.circular(SizeOutlet.cornerRadiusDefault)),
     );
   }

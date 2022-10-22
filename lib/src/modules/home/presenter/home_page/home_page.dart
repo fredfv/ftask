@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     widget.controller.homeStateValueListenable.addListener(() {
       if (widget.controller.homeStateValueListenable.value != '') {
         ScaffoldMessenger.of(context).showSnackBar(CommonSnackBar(
-            content: Text(widget.controller.homeStateValueListenable.value), backgroundColor: ColorOutlet.error));
+            content: Text(widget.controller.homeStateValueListenable.value), backgroundColor: ColorOutlet.accent));
         widget.controller.homeStateValueListenable.value = '';
       }
     });
@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> {
                 highlightColor: Colors.transparent,
               ),
               child: BottomNavigationBar(
-                backgroundColor: ColorOutlet.bottomNavBarBackground,
-                unselectedItemColor: ColorOutlet.bottomNavBarItemUnselected,
-                selectedItemColor: ColorOutlet.bottomNavBarItemSelected,
+                backgroundColor: ColorOutlet.primary,
+                unselectedItemColor: ColorOutlet.secondary,
+                selectedItemColor: ColorOutlet.accent,
                 type: BottomNavigationBarType.fixed,
                 currentIndex: widget.controller.pageSelectedIndex,
                 onTap: (index) {

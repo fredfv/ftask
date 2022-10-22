@@ -13,13 +13,13 @@ class UnderLineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateColor.resolveWith((states) => ColorOutlet.selectedText),
+        overlayColor: MaterialStateColor.resolveWith((states) => ColorOutlet.secondary),
       ),
       onPressed: onPressed,
       child: Text(
         description,
         style: TextStyle(
-          color: ColorOutlet.secondaryDark,
+          color: ColorOutlet.secondary,
           decoration: TextDecoration.underline,
           fontSize: ResponsiveOutlet.textDefault(context),
         ),

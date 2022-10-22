@@ -17,7 +17,7 @@ class RowDueDate extends StatelessWidget {
       children: [
         const Icon(
           Icons.more_time_outlined,
-          color: ColorOutlet.textColorDefault,
+          color: ColorOutlet.secondary,
         ),
         CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
         CommonText(

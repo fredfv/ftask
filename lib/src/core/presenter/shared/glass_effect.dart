@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/color_outlet.dart';
 
 import '../theme/size_outlet.dart';
 
 class GlassEffect extends StatelessWidget {
-  final Color borderColor;
   final Widget child;
   final double start;
   final double end;
@@ -13,7 +13,6 @@ class GlassEffect extends StatelessWidget {
     required this.child,
     this.start = SizeOutlet.glassStart,
     this.end = SizeOutlet.glassEnd,
-    this.borderColor = Colors.transparent,
   }) : super(key: key);
 
   @override
@@ -32,11 +31,7 @@ class GlassEffect extends StatelessWidget {
               end: AlignmentDirectional.bottomEnd,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(SizeOutlet.cornerRadiusDefault)),
-            border: Border.all(
-                width: SizeOutlet.borderWidth,
-                color: borderColor.withOpacity(
-                  SizeOutlet.borderOpacity,
-                )),
+            //border: Border.all(width: SizeOutlet.borderWidth,color: borderColor.withOpacity(SizeOutlet.borderOpacity,)),
           ),
           child: child,
         ),

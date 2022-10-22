@@ -69,8 +69,8 @@ abstract class SizeOutlet {
   //#GlassMorphism configuration
   static const double blurSigmaX = 3;
   static const double blurSigmaY = 3;
-  static const double borderWidth = 0.7;
-  static const double borderOpacity = 0.7;
-  static const double glassStart = 0.013;
-  static const double glassEnd = 0.07;
+  static const double borderWidth = 3;
+  static const double borderOpacity = 0.5;
+  static const double glassStart = 0.07;
+  static const double glassEnd = 0.013;
 }
