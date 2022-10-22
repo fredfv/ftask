@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
+import '../../../../core/presenter/theme/size_outlet.dart';
 import '../../models/task_due_state.dart';
 import '../task_due_state_color_converter.dart';
 
@@ -24,7 +25,7 @@ class RowTime extends StatelessWidget {
           Icons.timer_off_outlined,
           color: TaskDueStateColorConverter.convert(dueState),
         ),
-        CommonSpacing.width(),
+        CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
         CommonText(
           fontColor: TaskDueStateColorConverter.convert(dueState),
           fontSize: ResponsiveOutlet.textMedium(context),

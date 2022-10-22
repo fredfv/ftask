@@ -63,6 +63,14 @@ abstract class SizeOutlet {
   //#region AppSizeTypes
   static const double appSizeMobile = 0.75;
   static const double appSizeTablet = 0.65;
-//#endregion
 
+  //#endregion
+
+  //#GlassMorphism configuration
+  static const double blurSigmaX = 3;
+  static const double blurSigmaY = 3;
+  static const double borderWidth = 0.7;
+  static const double borderOpacity = 0.7;
+  static const double glassStart = 0.013;
+  static const double glassEnd = 0.07;
 }

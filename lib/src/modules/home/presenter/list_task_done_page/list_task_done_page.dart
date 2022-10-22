@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:task/src/core/presenter/theme/color_outlet.dart';
 
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
@@ -29,12 +30,14 @@ class ListTaskDonePage extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.all(ResponsiveOutlet.paddingDefault(context)),
               child: RefreshIndicator(
+                backgroundColor: ColorOutlet.primary,
+                color: ColorOutlet.error,
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: false),
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: ResponsiveOutlet.cardRatio(context),
-                      crossAxisSpacing: ResponsiveOutlet.paddingSmall(context),
-                      mainAxisSpacing: ResponsiveOutlet.paddingSmall(context),
+                      crossAxisSpacing: ResponsiveOutlet.paddingDefault(context),
+                      mainAxisSpacing: ResponsiveOutlet.paddingDefault(context),
                       childAspectRatio: ResponsiveOutlet.cardSliverRatio(context),
                     ),
                     itemCount: controller.list.length,

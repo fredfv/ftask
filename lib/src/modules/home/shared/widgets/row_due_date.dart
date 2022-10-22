@@ -4,6 +4,7 @@ import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
+import '../../../../core/presenter/theme/size_outlet.dart';
 
 class RowDueDate extends StatelessWidget {
   final String text;
@@ -16,9 +17,9 @@ class RowDueDate extends StatelessWidget {
       children: [
         const Icon(
           Icons.more_time_outlined,
-          color: ColorOutlet.iconColor,
+          color: ColorOutlet.textColorDefault,
         ),
-        CommonSpacing.width(),
+        CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
         CommonText(
           fontSize: ResponsiveOutlet.textMedium(context),
           text: text,

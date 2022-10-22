@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presenter/shared/glass_effect.dart';
 import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
@@ -17,13 +18,11 @@ class ButtonCardTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(SizeOutlet.cornerRadiusDefault),
+      overlayColor: MaterialStateProperty.all(ColorOutlet.onSelection),
+      radius: 0,
       onLongPress: onLongPress,
-      child: Card(
-        color: ColorOutlet.secondaryDark,
-        elevation: SizeOutlet.elevationDefault,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(SizeOutlet.cornerRadiusDefault),
-        ),
+      child: GlassEffect(
         child: Padding(
           padding: EdgeInsets.all(
             ResponsiveOutlet.paddingMedium(context),

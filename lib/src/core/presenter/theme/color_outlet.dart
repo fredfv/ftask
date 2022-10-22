@@ -12,7 +12,6 @@ abstract class ColorOutlet {
   static const Color textColorLight = Color(0xFF95ACB8);
   static const Color textColorDark = Color(0xFF375A6B);
   static const Color textColorTitle = Color(0xFFC4D7EF);
-  static const Color iconColor = Color(0x57879A99);
 
   ///follow secondary schema
   static const Color textColorDefault = Color(0xFF91ACB3);
@@ -25,4 +24,11 @@ abstract class ColorOutlet {
   static const Color bottomNavBarItemUnselected = Color(0x7394AAB0);
 
   static const Color errorText = Color(0xFFBE6400);
+
+  static const Color taskOnTime = Color(0xFFC4D7EF);
+  static const Color taskLate = Color(0xFF81A418);
+  static const Color taskVeryLate = Color(0xFFFF4977);
+  static const Color taskError = Color(0xFF191D1F);
+
+  static const Color onSelection = Color(0xAFFFFFF);
 }

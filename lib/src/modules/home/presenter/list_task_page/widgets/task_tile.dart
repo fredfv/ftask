@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:task/src/core/presenter/theme/responsive_outlet.dart';
-import 'package:task/src/modules/home/models/task_tile_model.dart';
-import 'package:task/src/modules/home/shared/widgets/row_due_date.dart';
-import 'package:task/src/modules/home/shared/widgets/row_time_animated.dart';
-import 'package:task/src/modules/home/shared/widgets/text_task_request_error.dart';
 
 import '../../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../../core/presenter/theme/size_outlet.dart';
+import '../../../models/task_tile_model.dart';
+import '../../../shared/task_due_state_color_converter.dart';
 import '../../../shared/widgets/button_card_task.dart';
+import '../../../shared/widgets/row_due_date.dart';
+import '../../../shared/widgets/row_time_animated.dart';
 import '../../../shared/widgets/row_title.dart';
+import '../../../shared/widgets/text_task_request_error.dart';
 
 class TaskTile extends StatelessWidget {
   final TaskTileModel taskItem;

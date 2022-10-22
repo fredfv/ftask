@@ -5,6 +5,7 @@ import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/presenter/shared/common_loading.dart';
 import '../../../../core/presenter/shared/common_scaffold.dart';
 import '../../../../core/presenter/shared/common_snackbar.dart';
+import '../../../../core/presenter/theme/color_outlet.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
 import '../../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../../core/presenter/theme/size_outlet.dart';
@@ -29,12 +30,14 @@ class ListTaskPage extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.all(ResponsiveOutlet.paddingDefault(context)),
               child: RefreshIndicator(
+                backgroundColor: ColorOutlet.primary,
+                color: ColorOutlet.error,
                 onRefresh: () => controller.uploadAndGetAllFromCloudExecute(onBoard: true),
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: ResponsiveOutlet.cardRatio(context),
-                      crossAxisSpacing: ResponsiveOutlet.paddingSmall(context),
-                      mainAxisSpacing: ResponsiveOutlet.paddingSmall(context),
+                      crossAxisSpacing: ResponsiveOutlet.paddingDefault(context),
+                      mainAxisSpacing: ResponsiveOutlet.paddingDefault(context),
                       childAspectRatio: ResponsiveOutlet.cardSliverRatio(context),
                     ),
                     itemCount: controller.list.length,

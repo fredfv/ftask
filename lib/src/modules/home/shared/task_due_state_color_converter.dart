@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:task/src/modules/home/models/task_due_state.dart';
 
+import '../../../core/presenter/theme/color_outlet.dart';
+
 abstract class TaskDueStateColorConverter {
   static Color convert(TaskDueState state) {
     switch (state) {
       case TaskDueState.onTime:
-        return Colors.white;
+        return ColorOutlet.taskOnTime;
       case TaskDueState.late:
-        return Colors.yellow;
+        return ColorOutlet.taskLate;
       case TaskDueState.veryLate:
-        return Colors.red;
+        return ColorOutlet.taskVeryLate;
       case TaskDueState.error:
-        return Colors.black;
+        return ColorOutlet.taskError;
       default:
         return Colors.transparent;
     }
