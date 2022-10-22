@@ -11,7 +11,6 @@ import 'widgets/task_done_tile.dart';
 
 class ListTaskDoneController extends ListTaskBaseController {
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
-  Timer? timer;
 
   ListTaskDoneController({
     required IRepositoryFactory repositoryFactory,

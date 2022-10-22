@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task/src/core/presenter/theme/size_outlet.dart';
 
 import '../../../../core/presenter/shared/common_spacing.dart';
 import '../../../../core/presenter/shared/common_text.dart';
@@ -29,7 +30,7 @@ class RowTimeAnimated extends StatelessWidget {
                   Icons.timer_sharp,
                   color: TaskDueStateColorConverter.convert(taskItem.dueState),
                 ),
-                CommonSpacing.width(),
+                CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
                 CommonText(
                   fontColor: TaskDueStateColorConverter.convert(taskItem.dueState),
                   fontSize: ResponsiveOutlet.textMedium(context),
