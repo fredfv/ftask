@@ -23,12 +23,13 @@ class RowTime extends StatelessWidget {
       children: [
         Icon(
           Icons.timer_off_outlined,
+          size: ResponsiveOutlet.textMedium(context),
           color: TaskDueStateColorConverter.convert(dueState),
         ),
-        CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
+        CommonSpacing.width(factor: SizeOutlet.spacingFactor2),
         CommonText(
           fontColor: TaskDueStateColorConverter.convert(dueState),
-          fontSize: ResponsiveOutlet.textMedium(context),
+          fontSize: ResponsiveOutlet.textDefault(context),
           text: text,
         ),
       ],

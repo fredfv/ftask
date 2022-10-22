@@ -7,20 +7,23 @@ abstract class ResponsiveOutlet {
 
   static double height(BuildContext context) => MediaQuery.of(context).size.height;
 
-  static bool isTablet(BuildContext context) => MediaQuery.of(context).size.shortestSide < SizeOutlet.magicNumber;
+  static double _aspectFactor(BuildContext context) =>
+      height(context) > width(context) ? height(context) / width(context) : width(context) / height(context);
+
+  static bool isTablet(BuildContext context) => _aspectFactor(context) <= SizeOutlet.tabletRatioBreakpoint;
 
   static double aspectRatio(BuildContext context) => isTablet(context)
-      ? SizeOutlet.appSizeMobile * MediaQuery.of(context).size.aspectRatio
-      : SizeOutlet.appSizeTablet * MediaQuery.of(context).size.aspectRatio;
+      ? SizeOutlet.appSizeTablet * _aspectFactor(context)
+      : SizeOutlet.appSizeMobile * _aspectFactor(context);
 
-  static double aspectRatioSizeable(BuildContext context, double size) => width(context) / height(context) * size;
+  static double aspectRatioSizeable(BuildContext context, double size) => aspectRatio(context) * size;
 
   //#endregion
 
   //#CardResponsive
   static double cardRatio(BuildContext context) => isTablet(context)
-      ? SizeOutlet.cardSizeMobile * MediaQuery.of(context).size.shortestSide
-      : SizeOutlet.cardSizeTablet * MediaQuery.of(context).size.shortestSide;
+      ? SizeOutlet.cardSizeTablet * MediaQuery.of(context).size.shortestSide
+      : SizeOutlet.cardSizeMobile * MediaQuery.of(context).size.shortestSide;
 
   static double cardSliverRatio(BuildContext context) =>
       isTablet(context) ? SizeOutlet.sliverCardSizeMobile : SizeOutlet.sliverCardSizeTablet;

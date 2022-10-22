@@ -25,7 +25,7 @@ class ButtonCardTask extends StatelessWidget {
       child: GlassEffect(
         child: Padding(
           padding: EdgeInsets.all(
-            ResponsiveOutlet.paddingMedium(context),
+            ResponsiveOutlet.paddingDefault(context),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

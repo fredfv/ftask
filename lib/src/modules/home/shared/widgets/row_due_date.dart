@@ -15,13 +15,14 @@ class RowDueDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(
+        Icon(
           Icons.more_time_outlined,
           color: ColorOutlet.secondary,
+          size: ResponsiveOutlet.textMedium(context),
         ),
-        CommonSpacing.width(factor: SizeOutlet.spacingFactor3),
+        CommonSpacing.width(factor: SizeOutlet.spacingFactor2),
         CommonText(
-          fontSize: ResponsiveOutlet.textMedium(context),
+          fontSize: ResponsiveOutlet.textDefault(context),
           text: text,
         ),
       ],

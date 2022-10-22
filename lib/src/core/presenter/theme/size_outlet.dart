@@ -31,7 +31,7 @@ abstract class SizeOutlet {
   //#endregion
 
   //#region ImageSize
-  static const double imageSize = 600;
+  static const double imageSize = 1024;
 
   //#endregion
 
@@ -52,18 +52,19 @@ abstract class SizeOutlet {
   //#endregion
 
   //#region CardRatio
-  static const double cardSizeMobile = 0.5;
+  static const double cardSizeMobile = 0.4;
   static const double cardSizeTablet = 0.3;
   static const double magicNumber = 550;
-  static const double sliverCardSizeMobile = 1.33;
+  static const double sliverCardSizeMobile = 1.4;
   static const double sliverCardSizeTablet = 1.11;
 
   //#endregion
 
   //#region AppSizeTypes
-  static const double appSizeMobile = 0.75;
-  static const double appSizeTablet = 0.65;
+  static const double appSizeMobile = 0.15;
+  static const double appSizeTablet = 0.40;
 
+  static const double tabletRatioBreakpoint = 2;
   //#endregion
 
   //#region GlassMorphism configuration
