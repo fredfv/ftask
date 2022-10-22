@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
+import 'package:task/src/core/infra/application/app_settings.dart';
 import 'package:task/src/core/infra/application/logger.dart';
 
 import '../../../../core/domain/entities/task_entity.dart';
@@ -19,7 +20,7 @@ import '../list_task_page/list_task_controller.dart';
 import '../list_task_page/list_task_page.dart';
 
 class HomeController extends ChangeNotifier {
-  int pageSelectedIndex = 0;
+  int pageSelectedIndex = AppSettings.initialPageIndex;
   final CreateTaskController taskPageController;
   final ListTaskController listTaskController;
   final ListTaskDoneController listTaskDoneController;
@@ -31,7 +32,7 @@ class HomeController extends ChangeNotifier {
   final UserEntity loggedUser;
 
   final SignalRHelper hub;
-  final PageController pageController = PageController(initialPage: 0, keepPage: true);
+  final PageController pageController = PageController(initialPage: AppSettings.initialPageIndex, keepPage: true);
   final List<Widget> pages;
 
   HomeController({
@@ -57,31 +58,38 @@ class HomeController extends ChangeNotifier {
       callGetAllTasksControllersFromLocal();
     });
 
-    broadcastController.putTaskBroadcastValueNotifier.addListener(() async {
-      TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
-      String errorMessage = broadcastController.putTaskBroadcastValueNotifier.value.errorMessage;
-      await putTaskFromBroadcastUsecase(taskEntity).then((value) {
-        UpsertOneModel? response =
-            errorMessage.isNotEmpty ? UpsertOneModel.fromMessage(errorMessage, taskEntity) : null;
-        listTaskController.addTaskToListFromBroadcast(onBoard: true, response: response);
-        listTaskDoneController.addTaskToListFromBroadcast(onBoard: false, response: response);
-      }).onError((error, stackTrace) {
-        fLog.e(error.toString());
-      });
-    });
+    broadcastController.putTaskBroadcastValueNotifier.addListener(
+      () async {
+        TaskEntity taskEntity = TaskEntity.fromCloud(broadcastController.putTaskBroadcastValueNotifier.value.entity);
+        String errorMessage = broadcastController.putTaskBroadcastValueNotifier.value.errorMessage;
+        await putTaskFromBroadcastUsecase(taskEntity).then(
+          (value) {
+            UpsertOneModel? response =
+                errorMessage.isNotEmpty ? UpsertOneModel.fromMessage(errorMessage, taskEntity) : null;
+            callGetAllTasksControllersFromLocal(response: response);
+          },
+        ).onError(
+          (error, stackTrace) {
+            fLog.e(error.toString());
+          },
+        );
+      },
+    );
 
-    broadcastController.uploadAllTasksBroadcastMessage.addListener(() async {
-      var v = broadcastController.uploadAllTasksBroadcastMessage.value;
-      if (loggedUser.id == v.userId) {
-        homeStateValueListenable.value = v.errorMessage;
-      }
-      callGetAllTasksControllersFromLocal();
-    });
+    broadcastController.uploadAllTasksBroadcastMessage.addListener(
+      () async {
+        var v = broadcastController.uploadAllTasksBroadcastMessage.value;
+        if (loggedUser.id == v.userId) {
+          homeStateValueListenable.value = v.errorMessage;
+        }
+        callGetAllTasksControllersFromLocal();
+      },
+    );
   }
 
-  callGetAllTasksControllersFromLocal() async {
-    listTaskController.getAllTasksFromLocal(onBoard: true);
-    listTaskDoneController.getAllTasksFromLocal(onBoard: false);
+  callGetAllTasksControllersFromLocal({UpsertOneModel? response}) async {
+    listTaskController.getAllTasksFromLocal();
+    listTaskDoneController.getAllTasksFromLocal();
   }
 
   void uploadAndGetAllFromCloudExecute() async {

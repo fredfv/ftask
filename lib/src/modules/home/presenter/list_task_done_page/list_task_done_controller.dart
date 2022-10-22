@@ -7,6 +7,7 @@ import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dar
 import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import '../../shared/list_task_base_controller.dart';
+import 'widgets/task_done_tile.dart';
 
 class ListTaskDoneController extends ListTaskBaseController {
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
@@ -22,5 +23,21 @@ class ListTaskDoneController extends ListTaskBaseController {
           setOnBoardStatusUsecase: setOnBoardStatusUsecase,
           uploadTasksToCloudUsecase: uploadTasksToCloudUsecase,
           downloadTasksFromCloudUsecase: downloadTasksFromCloudUsecase,
+          onBoard: false,
         );
+
+  @override
+  Widget Function(BuildContext, int) itemBuilder() {
+    return (BuildContext context, int index) {
+      return TaskDoneTile(
+        taskItem: list[index],
+        onLongPress: () {
+          setOnBoardStatusUsecaseExecute(
+            taskId: list[index].id,
+            onBoard: true,
+          );
+        },
+      );
+    };
+  }
 }
