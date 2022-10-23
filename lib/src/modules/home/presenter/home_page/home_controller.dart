@@ -98,7 +98,7 @@ class HomeController extends ChangeNotifier {
   }
 
   changePage(int index) {
-    pageController.jumpToPage(index);
+    pageController.animateToPage(index, duration: const Duration(milliseconds: 700), curve: Curves.easeOutCubic);
     pageSelectedIndex = index;
     notifyListeners();
   }

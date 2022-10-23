@@ -18,9 +18,8 @@ class ListTaskBasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      title: Lexicon.tasks,
-      body: ValueListenableBuilder(
+    return SafeArea(
+      child: ValueListenableBuilder(
         valueListenable: controller,
         builder: (_, state, child) {
           if (state is LoadingState) {

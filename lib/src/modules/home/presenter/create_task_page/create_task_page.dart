@@ -21,9 +21,8 @@ class TaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      title: Lexicon.createTask,
-      body: Form(
+    return SafeArea(
+      child: Form(
         key: controller.form,
         child: ListView(
           padding: EdgeInsets.all(ResponsiveOutlet.paddingExtraLarge(context)),
