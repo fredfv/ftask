@@ -113,9 +113,4 @@ class UserEntity extends EntityBase {
     setRole(user.role);
     setToken(user.token);
   }
-
-  @override
-  String toString() {
-    return 'UserEntity(login: $login, secret: $secret, name: $name, role: $role, token: $token, id: $id, created: $created, persisted: $persisted, deleted: $deleted)';
-  }
 }

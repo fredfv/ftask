@@ -126,9 +126,4 @@ class TaskEntity extends EntityBase {
       'pending': pending,
     };
   }
-
-  @override
-  String toString() {
-    return 'TaskEntity(description: $description, title: $title, onBoard: $onBoard, id: $id, created: $created, persisted: $persisted, deleted: $deleted, updated: $updated, dueDate: $dueDate, pending: $pending)';
-  }
 }
