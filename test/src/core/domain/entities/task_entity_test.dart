@@ -112,9 +112,14 @@ void main() {
     expect(taskEntity.toJson(), {
       'description': '',
       'title': '',
-      'onBoard': false,
       'dueDate': 0,
-      'pending': false,
+      'onBoard': false,
+      'id': '',
+      'created': 0,
+      'persisted': 0,
+      'deleted': null,
+      'updated': null,
+      'pending': false
     });
   });
 
@@ -125,12 +130,22 @@ void main() {
       'onBoard': false,
       'dueDate': 0,
       'pending': false,
+      'id': '',
+      'created': 0,
+      'persisted': 0,
+      'deleted': null,
+      'updated': null,
     });
     expect(taskEntity.description, '');
     expect(taskEntity.title, '');
     expect(taskEntity.onBoard, false);
     expect(taskEntity.dueDate, 0);
     expect(taskEntity.pending, false);
+    expect(taskEntity.id, '');
+    expect(taskEntity.created, 0);
+    expect(taskEntity.persisted, 0);
+    expect(taskEntity.deleted, null);
+    expect(taskEntity.updated, null);
   });
 
   test('TaskEntity toCloud fromEmpty', () {

@@ -1,11 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:task/src/core/domain/entities/user_entity.dart';
 import 'package:task/src/core/domain/services/i_http_service.dart';
 import 'package:dio/dio.dart';
 import 'package:task/src/core/infra/application/api_endpoints.dart';
 import 'package:task/src/core/infra/application/app_settings.dart';
 import 'package:task/src/core/infra/application/custom_exception.dart';
 import 'package:task/src/core/infra/application/http_request_methods.dart';
+import 'package:task/src/core/infra/application/http_timeout_configurations.dart';
 import 'package:task/src/core/infra/services/http_service.dart';
 
 class HttpServiceMock extends Mock implements IHttpService {}
@@ -64,20 +66,39 @@ void main() {
     expect(result.message, equals(errorMsg['message']!));
   });
 
+  //integracao
   HttpService httpService = HttpService();
-  test('Should call httpservice passing valid credentials and return 200 also a authUser',() async{
+  test(tags: 'integration', 'Should call httpservice passing valid credentials and return 200 also a authUser',
+      () async {
     var authUser = await httpService.request(
         baseUrl: AppSettings.baseApiUrl,
         endPoint: ApiEndpoints.auth,
         method: HttpRequestMethods.post,
-        params: loginRequest.toJson(),
+        params: loginRequest,
         receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
         connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
 
+    expect(UserEntity.fromAuth(userAuth).runtimeType, equals(UserEntity));
+  });
+
+  test(
+      tags: 'integration',
+      'Should call httpservice passing invalid credentials and return 404 also a message of error', () async {
+    var authUser = await httpService.request(
+        baseUrl: AppSettings.baseApiUrl,
+        endPoint: ApiEndpoints.auth,
+        method: HttpRequestMethods.post,
+        params: loginRequestError,
+        receiveTimeout: HttpTimeoutConfigurations.receiveTimeoutUsecase,
+        connectTimeout: HttpTimeoutConfigurations.connectTimeoutUsecase);
+
+    expect(authUser is Exception, equals(true));
+    expect(authUser.message, equals(errorMsg['message']!));
   });
 }
 
-const loginRequest = {}
+const loginRequestError = {"password": "123", "username": "1223"};
+const loginRequest = {"password": "123", "username": "123"};
 
 const errorMsg = {"message": "User not found."};
 

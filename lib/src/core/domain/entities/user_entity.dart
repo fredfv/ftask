@@ -61,6 +61,7 @@ class UserEntity extends EntityBase {
       'role': role,
       'persisted': persisted,
       'deleted': deleted,
+      'updated': updated,
     };
   }
 

@@ -115,16 +115,15 @@ void main() {
 
   test('UserEntity fromAuth from empty Map<String, dyamic>', () {
     UserEntity userEntity = UserEntity.fromAuth({
-      'login': '',
-      'secret': '',
-      'name': '',
-      'role': '',
+      'person': {
+        'id': '',
+        'insertDate': '',
+        'username': '',
+        'password': '',
+        'name': '',
+        'role': '',
+      },
       'token': '',
-      'id': '',
-      'created': 0,
-      'persisted': 0,
-      'deleted': null,
-      'updated': null,
     });
     expect(userEntity.login, '');
     expect(userEntity.secret, '');

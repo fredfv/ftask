@@ -34,6 +34,7 @@ abstract class Lexicon {
   static const String fillTheFieldToSubmit = 'fill the field to submit';
   static const String fillWithFullName = 'fill with full name';
   static const String passwordsDoNotMatch = 'passwords do not match';
+  static const String nameTooLong = 'name too long';
 
   //#endregion
 
