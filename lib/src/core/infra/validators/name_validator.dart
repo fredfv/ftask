@@ -3,7 +3,6 @@ import 'validation_base.dart';
 
 class NameValidator implements ValidationBase {
   final String? _value;
-  //'/^[A-Za-z\x{00C0}-\x{00FF}][A-Za-z\x{00C0}-\x{00FF}\'\-]+([\ A-Za-z\x{00C0}-\x{00FF}][A-Za-z\x{00C0}-\x{00FF}\'\-]+)*/u'
   final RegExp rex = RegExp(r"^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)");
 
   NameValidator(this._value);
