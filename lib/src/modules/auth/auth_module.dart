@@ -4,7 +4,7 @@ import 'presenter/create_account_page/create_account_controller.dart';
 import 'presenter/create_account_page/create_account_page.dart';
 import 'presenter/login_page/login_controller.dart';
 import 'presenter/login_page/login_page.dart';
-import 'usecase/create_account_use_case_impl.dart';
+import 'usecase/create_account_use_case.dart';
 import 'usecase/login_usecase_impl.dart';
 
 class AuthModule extends Module {
