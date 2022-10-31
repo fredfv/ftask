@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
-import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
-import '../../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import '../../../../core/infra/application/app_settings.dart';
 import '../../shared/list_task_base_controller.dart';
+import '../../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
+import '../../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import 'widgets/task_tile.dart';
 
-class ListTaskController extends ListTaskBaseController {
+class ListTaskController extends ListTaskBaseStore {
   final ChangeNotifier timeElapsedChangeNotifier = ChangeNotifier();
   Timer? timer;
 

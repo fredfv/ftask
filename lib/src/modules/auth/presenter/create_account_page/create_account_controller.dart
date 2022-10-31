@@ -4,16 +4,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/services/i_form_validate_service.dart';
 import '../../../../core/domain/services/i_http_service.dart';
-import '../../../../core/domain/usecases/i_create_account_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/application/create_account_request.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
+import '../../usecases/create_account_use_case.dart';
 
 class CreateAccountController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
   final IFormsValidateService formsValidate;
-  final ICreateAccountUsecase createAccountUseCase;
+  final CreateAccountUsecase createAccountUseCase;
   FocusNode loginFocus = FocusNode();
   FocusNode secretFocus = FocusNode();
   FocusNode secretConfirmFocus = FocusNode();

@@ -3,11 +3,11 @@ import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
-import '../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import '../../../core/infra/application/api_endpoints.dart';
 import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
+import '../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 
 class UploadTasksToCloudUsecase implements IUploadTasksToCloudUsecase {
   final IHttpService httpService;

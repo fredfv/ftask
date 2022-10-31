@@ -24,6 +24,8 @@ dependencies:
   path_provider: ^2.0.11
   logger: ^1.1.0
   signalr_core: ^1.1.1
+  dartz: ^0.10.1
+  equatable: ^2.0.5
   #ui
   #ver como trocar pelo custom paint(by edson)
   flutter_svg: ^1.1.5

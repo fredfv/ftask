@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../../core/domain/services/i_form_validate_service.dart';
 import '../../../../core/domain/services/i_http_service.dart';
-import '../../../../core/domain/usecases/i_login_usecase.dart';
 import '../../../../core/infra/application/common_state.dart';
 import '../../../../core/infra/application/login_request.dart';
 import '../../../../core/presenter/theme/lexicon.dart';
@@ -13,7 +12,7 @@ class LoginController extends ValueNotifier<CommonState> {
   final IHttpService httpService;
   final IRepositoryFactory repositoryFactory;
   final IFormsValidateService formsValidate;
-  final ILoginUsecase loginUseCase;
+  final LoginUsecase loginUseCase;
 
   final FocusNode secretFocus = FocusNode();
 

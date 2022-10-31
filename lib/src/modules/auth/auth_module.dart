@@ -4,8 +4,8 @@ import 'presenter/create_account_page/create_account_controller.dart';
 import 'presenter/create_account_page/create_account_page.dart';
 import 'presenter/login_page/login_controller.dart';
 import 'presenter/login_page/login_page.dart';
-import 'usecase/create_account_use_case.dart';
-import 'usecase/login_usecase_impl.dart';
+import 'usecases/create_account_use_case.dart';
+import 'usecases/login_usecase.dart';
 
 class AuthModule extends Module {
   @override
@@ -13,7 +13,7 @@ class AuthModule extends Module {
         Bind.lazySingleton((i) => CreateAccountUsecase(
               httpService: i(),
             )),
-        Bind.lazySingleton((i) => LoginUseCaseImpl(
+        Bind.lazySingleton((i) => LoginUsecase(
               httpService: i(),
               repositoryFactory: i(),
               user: i(),

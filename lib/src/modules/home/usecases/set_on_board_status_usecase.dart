@@ -2,11 +2,11 @@ import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/entities/user_entity.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/services/i_http_service.dart';
-import '../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 import '../../../core/infra/application/api_endpoints.dart';
 import '../../../core/infra/application/app_settings.dart';
 import '../../../core/infra/application/http_request_methods.dart';
 import '../../../core/infra/application/http_timeout_configurations.dart';
+import '../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
 
 class SetOnBoardStatusUseCase implements ISetOnBoardStatusUsecase {
   final IHttpService httpService;

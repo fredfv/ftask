@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../core/domain/entities/task_entity.dart';
 import '../../../core/domain/repositories/i_repository_factory.dart';
 import '../../../core/domain/usecases/i_download_tasks_from_cloud_usecase.dart';
-import '../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
-import '../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 import '../../../core/infra/application/common_state.dart';
 import '../models/task_tile_model.dart';
 import '../models/upsert_one_model.dart';
-import '../presenter/list_task_done_page/widgets/task_done_tile.dart';
+import '../../../core/domain/usecases/i_set_on_board_status_usecase.dart';
+import '../../../core/domain/usecases/i_upload_tasks_to_cloud_usecase.dart';
 
-class ListTaskBaseController extends ValueNotifier<CommonState> {
+class ListTaskBaseStore extends ValueNotifier<CommonState> {
   final IRepositoryFactory repositoryFactory;
   final List<TaskTileModel> list = [];
   final ISetOnBoardStatusUsecase setOnBoardStatusUsecase;
@@ -18,7 +18,7 @@ class ListTaskBaseController extends ValueNotifier<CommonState> {
   final IDownloadTasksFromCloudUsecase downloadTasksFromCloudUsecase;
   final bool _onBoard;
 
-  ListTaskBaseController({
+  ListTaskBaseStore({
     required this.repositoryFactory,
     required this.setOnBoardStatusUsecase,
     required this.uploadTasksToCloudUsecase,

@@ -12,7 +12,7 @@ import '../../../core/presenter/theme/responsive_outlet.dart';
 import '../../../core/presenter/theme/size_outlet.dart';
 
 class ListTaskBasePage extends StatelessWidget {
-  final ListTaskBaseController controller;
+  final ListTaskBaseStore controller;
 
   const ListTaskBasePage({Key? key, required this.controller}) : super(key: key);
 
